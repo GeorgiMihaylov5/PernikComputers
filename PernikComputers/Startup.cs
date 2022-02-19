@@ -7,7 +7,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PernikComputers.Abstraction;
 using PernikComputers.Data;
+using PernikComputers.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +37,8 @@ namespace PernikComputers
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
+            services.AddTransient<IComputerService, ComputerService>();
+            services.AddTransient<IComponentsService, ComponentsService>();
 
             services.Configure<IdentityOptions>(option =>
             {
@@ -46,6 +50,8 @@ namespace PernikComputers
                 option.Password.RequiredUniqueChars = 0;
             }
             );
+            services.AddRazorPages();
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

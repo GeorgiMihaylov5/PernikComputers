@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using PernikComputers.Abstraction;
 using PernikComputers.Models;
 using System;
 using System.Collections.Generic;
@@ -12,10 +13,12 @@ namespace PernikComputers.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IComputerService service;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IComputerService service)
         {
             _logger = logger;
+            this.service = service;
         }
 
         public IActionResult Index()
