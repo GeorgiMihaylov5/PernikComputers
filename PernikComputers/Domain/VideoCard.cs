@@ -10,7 +10,7 @@ namespace PernikComputers.Domain
         public string TypeMemory { get; set; }
         public int MemoryFrequency { get; set; }
         public int CoreFrequency { get; set; }
-        public int CurrentProcessors { get; set; }
+        public int CurrentProcesses { get; set; }
         public int RailWidth { get; set; }
         public string SlotType { get; set; }
     }

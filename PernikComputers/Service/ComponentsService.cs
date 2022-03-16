@@ -86,7 +86,7 @@ namespace PernikComputers.Service
             return context.SaveChanges() != 0;
         }
 
-        public bool CreateVideoCard(ChipManufacturer chipManufacturer, string graphicProcessor, int sizeMemory, string typeMemory, int memoryFrequency, int coreFrequency, int currentProcessors, int railWidth, string slotType, string barcode, string manufacturer, string model, int warranty, decimal price, int quantity, string image)
+        public bool CreateVideoCard(ChipManufacturer chipManufacturer, string graphicProcessor, int sizeMemory, string typeMemory, int memoryFrequency, int coreFrequency, int currentProcesses, int railWidth, string slotType, string barcode, string manufacturer, string model, int warranty, decimal price, int quantity, string image)
         {
             var videoCard = new VideoCard 
             { 
@@ -96,7 +96,7 @@ namespace PernikComputers.Service
                 TypeMemory = typeMemory,
                 MemoryFrequency = memoryFrequency,
                 CoreFrequency = coreFrequency,  
-                CurrentProcessors = currentProcessors,
+                CurrentProcesses = currentProcesses,
                 RailWidth = railWidth,
                 SlotType = slotType,
                 Barcode = barcode,

@@ -135,7 +135,7 @@ namespace PernikComputers.Controllers
 
         public IActionResult AllVideoCards()
         {
-            List<ProductAllViewModel> motherboardVM = service.GetMotherboards()
+            List<ProductAllViewModel> videoCardVM = service.GetVideoCards()
                 .Select(x => new ProductAllViewModel
                 {
                     Id = x.Id,
@@ -147,7 +147,7 @@ namespace PernikComputers.Controllers
                 }).ToList();
 
 
-            return View("All", motherboardVM);
+            return View("All", videoCardVM);
         }
 
         public IActionResult CreateVideoCard()
@@ -156,16 +156,17 @@ namespace PernikComputers.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult CreateVideoCard(MotherboardCreateViewModel createVm)
+        public IActionResult CreateVideoCard(VideoCardCreateViewModel createVm)
         {
             if (ModelState.IsValid)
             {
-                var isCreated = service.CreateMotherboard(createVm.Socket, createVm.Chipset, createVm.TypeRam, createVm.RamSlotsCount, createVm.FormFactor,
+                var isCreated = service.CreateVideoCard(createVm.ChipManufacturer, createVm.GraphicProcessor, createVm.SizeMemory, createVm.TypeMemory, 
+                    createVm.MemoryFrequency, createVm.CoreFrequency, createVm.CurrentProcesses, createVm.RailWidth, createVm.SlotType, 
                     createVm.Barcode, createVm.Manufacturer, createVm.Model, createVm.Warranty, createVm.Price, createVm.Quantity, createVm.Image);
 
                 if (isCreated)
                 {
-                    return RedirectToAction("AllMotherboards");
+                    return RedirectToAction("AllVideoCards");
                 }
             }
             return View();

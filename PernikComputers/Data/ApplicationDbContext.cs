@@ -37,7 +37,5 @@ namespace PernikComputers.Data
             });
             base.OnModelCreating(builder);
         }
-
-        public DbSet<PernikComputers.Models.RamCreateViewModel> RamCreateViewModel { get; set; }
     }
 }
