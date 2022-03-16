@@ -1,16 +1,16 @@
-﻿@model PernikComputers.Models.VideoCardCreateViewModel
+﻿@model PernikComputers.Models.ComputerCaseCreateViewModel
 
 @{
-    ViewData["Title"] = "CreateVideoCard";
+    ViewData["Title"] = "CreateComputerCase";
 }
 
-<h1>CreateVideoCard</h1>
+<h1>CreateComputerCase</h1>
 
-<h4>VideoCardCreateViewModel</h4>
+<h4>ComputerCaseCreateViewModel</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="CreateVideoCard">
+        <form asp-action="CreateComputerCase">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Barcode" class="control-label"></label>
@@ -43,49 +43,24 @@
                 </label>
             </div>
             <div class="form-group">
-                <label asp-for="ChipManufacturer" class="control-label"></label>
-                <select asp-for="ChipManufacturer" class="form-control" asp-items="Html.GetEnumSelectList<ChipManufacturer>()"></select>
-                <span asp-validation-for="ChipManufacturer" class="text-danger"></span>
+                <label asp-for="CaseType" class="control-label"></label>
+                <input asp-for="CaseType" class="form-control" />
+                <span asp-validation-for="CaseType" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="GraphicProcessor" class="control-label"></label>
-                <input asp-for="GraphicProcessor" class="form-control" />
-                <span asp-validation-for="GraphicProcessor" class="text-danger"></span>
+                <label asp-for="FormFactor" class="control-label"></label>
+                <input asp-for="FormFactor" class="form-control" />
+                <span asp-validation-for="FormFactor" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SizeMemory" class="control-label"></label>
-                <input asp-for="SizeMemory" class="form-control" />
-                <span asp-validation-for="SizeMemory" class="text-danger"></span>
+                <label asp-for="CaseSize" class="control-label"></label>
+                <input asp-for="CaseSize" class="form-control" />
+                <span asp-validation-for="CaseSize" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TypeMemory" class="control-label"></label>
-                <input asp-for="TypeMemory" class="form-control" />
-                <span asp-validation-for="TypeMemory" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MemoryFrequency" class="control-label"></label>
-                <input asp-for="MemoryFrequency" class="form-control" />
-                <span asp-validation-for="MemoryFrequency" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CoreFrequency" class="control-label"></label>
-                <input asp-for="CoreFrequency" class="form-control" />
-                <span asp-validation-for="CoreFrequency" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CurrentProcesses" class="control-label"></label>
-                <input asp-for="CurrentProcesses" class="form-control" />
-                <span asp-validation-for="CurrentProcesses" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RailWidth" class="control-label"></label>
-                <input asp-for="RailWidth" class="form-control" />
-                <span asp-validation-for="RailWidth" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SlotType" class="control-label"></label>
-                <input asp-for="SlotType" class="form-control" />
-                <span asp-validation-for="SlotType" class="text-danger"></span>
+                <label asp-for="Color" class="control-label"></label>
+                <input asp-for="Color" class="form-control" />
+                <span asp-validation-for="Color" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Quantity" class="control-label"></label>

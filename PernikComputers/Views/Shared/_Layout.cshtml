@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/style.css" />
+
 </head>
 <body>
     <header>
@@ -22,18 +23,66 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Components" asp-action="AllProcessors">Processors</a>
-                        </li>
-                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Components" asp-action="AllMotherboards">Motherboards</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Components" asp-action="AllRams">Rams</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Components" asp-action="AllVideoCards">Video Cards</a>
-                        </li>
+                      <li class="pointer nav-item active">
+                          <div class="dropdown show">
+                               <a class="nav-link active dropdown-toggle" href="#"
+                                       id="dropdownMenuLink"
+                                       data-toggle="dropdown"
+                                       aria-haspopup="true"
+                                       aria-expanded="false">
+                                   Products
+                               </a>
+
+                               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                           
+                                   <li>
+                                       <a class="dropdown-item">
+                                           Components &raquo;
+                                       </a>
+                                       <ul class="dropdown-menu dropdown-submenu">
+                                           <li class="nav-item">
+                                                <a class="dropdown-item" asp-area="" asp-controller="Components" asp-action="AllProcessors">Processors</a>
+                                            </li>
+                                             <li class="nav-item">
+                                                <a class="dropdown-item" asp-area="" asp-controller="Components" asp-action="AllMotherboards">Motherboards</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="dropdown-item" asp-area="" asp-controller="Components" asp-action="AllRams">Rams</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="dropdown-item" asp-area="" asp-controller="Components" asp-action="AllVideoCards">Video Cards</a>
+                                            </li>
+                                              <li class="nav-item">
+                                                <a class="dropdown-item" asp-area="" asp-controller="Components" asp-action="AllPowerSupplies">Power Supplies</a>
+                                            </li>
+                                              <li class="nav-item">
+                                                <a class="dropdown-item" asp-area="" asp-controller="Components" asp-action="AllMemories">Memories</a>
+                                            </li>
+                                              <li class="nav-item">
+                                                <a class="dropdown-item" asp-area="" asp-controller="Components" asp-action="AllComputerCases">Computer Cases</a>
+                                            </li>
+                                       </ul>
+                                   </li>
+                                   <li>
+                                       <a class="dropdown-item">
+                                           Computers &raquo;
+                                       </a>
+                                       <ul class="dropdown-menu dropdown-submenu">
+                                               <li>
+                                                   <a class="dropdown-item" href="#">ddd1d</a>
+                                               </li>
+                                               <li>
+                                                   <a class="dropdown-item" href="#">d2ddd</a>
+                                               </li>
+                                               <li>
+                                                   <a class="dropdown-item" href="#">dd3dd</a>
+                                               </li>
+    
+                                       </ul>
+                                   </li>
+                               </ul>
+                           </div>
+                      </li>
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
@@ -54,6 +103,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://kit.fontawesome.com/7c0ea4aaab.js" crossorigin="anonymous"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

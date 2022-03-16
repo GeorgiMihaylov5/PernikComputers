@@ -1,49 +1,52 @@
-﻿@model IEnumerable<PernikComputers.Models.ProductAllViewModel>
+﻿@model IEnumerable<ProductAllViewModel>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1 class="title">Products</h1>
+<h1 class="page-title">Products</h1>
 <hr />
-
-<div class="bigDiv">
-    <div class="mainDiv col-3" id="filterDiv">
-    <form class="search row" asp-action="Index" method="get">
-       <div class="row" id="priceFilter">
-           <h4 class="filterTitles">Price</h4>
+@if (User.IsInRole("Administrator"))
+{
+    <p>
+        <a asp-action="Create">Create Product</a>
+    </p>
+}
+<div class="div-m-top">
+    <div class="b-inline-top col-3" id="filter-left">
+    <form class="filter-form row" asp-action="Index" method="get">
+       <div class="row" id="filter-price">
+           <h4 class="filter-titles">Price</h4>
             <input type="number" placeholder="Min price" min="0" name="minPrice"/> 
-            <span class="dash">-</span>
+            <span id="filter-dash">-</span>
             <input type="number" placeholder="Max price" min="0" name="maxPrice"/> 
             <button type="submit"><i class="fa fa-search"></i></button>
        </div>
-       <div class="row" id="categoryDiv">
-         @*  <select>
+       <div class="row" id="filter-categories">
+         @* <select>
                @foreach(var item in ViewBag.DropDownCategories)
                 {
                     <option>@item</option>
                 }
             </select>*@
+            <h4 class="filter-titles">Categories</h4>
        </div>
     </form>
 </div>
 
-<div class="mainDiv col-md-8" id="productsDiv">
-    <ul class="productsUl list-group">
+<div class="b-inline-top col-md-8" id="products">
+    <ul class="products-list list-group">
         @foreach(var item in Model)
         {
-            <li class="productsLi list-group-item col-md-4">
+            <li class="products-list-item list-group-item col-md-4">
                <div>
                     <a asp-action="Details" asp-route-id="@item.Id">
                         <img src="@item.Image" width="200" height="200">
                         <h5>@item.Manufacturer @item.Model</h5>
                     </a>
                </div>
-               <div style="text-align: center">
-                    <p>@item.IsPromotion</p>
-               </div>
-               <div id="priceDiv">
-                   <span class="s">@item.Price lv.</span>
+               <div id="item-price-container">
+                   <span>@item.Price lv.</span>
                    <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id">SEE MORE</a>
                </div>
             </li>
@@ -51,8 +54,6 @@
     </ul>
 </div>
 </div>
-
-
 
 
 @*@model IEnumerable<PernikComputers.Models.ProductAllViewModel>

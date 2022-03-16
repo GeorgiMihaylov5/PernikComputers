@@ -37,5 +37,11 @@ namespace PernikComputers.Data
             });
             base.OnModelCreating(builder);
         }
+
+        public DbSet<PernikComputers.Models.PowerSupplyCreateViewModel> PowerSupplyCreateViewModel { get; set; }
+
+        public DbSet<PernikComputers.Models.MemoryCreateViewModel> MemoryCreateViewModel { get; set; }
+
+        public DbSet<PernikComputers.Models.ComputerCaseCreateViewModel> ComputerCaseCreateViewModel { get; set; }
     }
 }

@@ -1,16 +1,16 @@
-﻿@model PernikComputers.Models.VideoCardCreateViewModel
+﻿@model PernikComputers.Models.MemoryCreateViewModel
 
 @{
-    ViewData["Title"] = "CreateVideoCard";
+    ViewData["Title"] = "CreateMemory";
 }
 
-<h1>CreateVideoCard</h1>
+<h1>CreateMemory</h1>
 
-<h4>VideoCardCreateViewModel</h4>
+<h4>MemoryCreateViewModel</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="CreateVideoCard">
+        <form asp-action="CreateMemory">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Barcode" class="control-label"></label>
@@ -43,49 +43,29 @@
                 </label>
             </div>
             <div class="form-group">
-                <label asp-for="ChipManufacturer" class="control-label"></label>
-                <select asp-for="ChipManufacturer" class="form-control" asp-items="Html.GetEnumSelectList<ChipManufacturer>()"></select>
-                <span asp-validation-for="ChipManufacturer" class="text-danger"></span>
+                <label asp-for="MemoryType" class="control-label"></label>
+                <select asp-for="MemoryType" class="form-control" asp-items="Html.GetEnumSelectList<MemoryType>()"></select>
+                <span asp-validation-for="MemoryType" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="GraphicProcessor" class="control-label"></label>
-                <input asp-for="GraphicProcessor" class="form-control" />
-                <span asp-validation-for="GraphicProcessor" class="text-danger"></span>
+                <label asp-for="FormFactor" class="control-label"></label>
+                <input asp-for="FormFactor" class="form-control" />
+                <span asp-validation-for="FormFactor" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SizeMemory" class="control-label"></label>
-                <input asp-for="SizeMemory" class="form-control" />
-                <span asp-validation-for="SizeMemory" class="text-danger"></span>
+                <label asp-for="Capacity" class="control-label"></label>
+                <input asp-for="Capacity" class="form-control" />
+                <span asp-validation-for="Capacity" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TypeMemory" class="control-label"></label>
-                <input asp-for="TypeMemory" class="form-control" />
-                <span asp-validation-for="TypeMemory" class="text-danger"></span>
+                <label asp-for="ReadSpeed" class="control-label"></label>
+                <input asp-for="ReadSpeed" class="form-control" />
+                <span asp-validation-for="ReadSpeed" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="MemoryFrequency" class="control-label"></label>
-                <input asp-for="MemoryFrequency" class="form-control" />
-                <span asp-validation-for="MemoryFrequency" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CoreFrequency" class="control-label"></label>
-                <input asp-for="CoreFrequency" class="form-control" />
-                <span asp-validation-for="CoreFrequency" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CurrentProcesses" class="control-label"></label>
-                <input asp-for="CurrentProcesses" class="form-control" />
-                <span asp-validation-for="CurrentProcesses" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RailWidth" class="control-label"></label>
-                <input asp-for="RailWidth" class="form-control" />
-                <span asp-validation-for="RailWidth" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SlotType" class="control-label"></label>
-                <input asp-for="SlotType" class="form-control" />
-                <span asp-validation-for="SlotType" class="text-danger"></span>
+                <label asp-for="WriteSpeed" class="control-label"></label>
+                <input asp-for="WriteSpeed" class="form-control" />
+                <span asp-validation-for="WriteSpeed" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Quantity" class="control-label"></label>
