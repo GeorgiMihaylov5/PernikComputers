@@ -4,6 +4,7 @@ using PernikComputers.Domain;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using PernikComputers.Models;
 
 namespace PernikComputers.Data
 {
@@ -20,7 +21,7 @@ namespace PernikComputers.Data
         public DbSet<VideoCard> VideoCards { get; set; }
         public DbSet<PowerSupply> PowerSupplies { get; set; }
         public DbSet<Memory> Memories { get; set; }
-        public DbSet<Case> Cases { get; set; }
+        public DbSet<ComputerCase> ComputerCases { get; set; }
 
 
         public DbSet<Product> Product { get; set; }
@@ -36,5 +37,7 @@ namespace PernikComputers.Data
             });
             base.OnModelCreating(builder);
         }
+
+        public DbSet<PernikComputers.Models.RamCreateViewModel> RamCreateViewModel { get; set; }
     }
 }

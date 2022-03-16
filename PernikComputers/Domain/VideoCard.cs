@@ -12,6 +12,6 @@ namespace PernikComputers.Domain
         public int CoreFrequency { get; set; }
         public int CurrentProcessors { get; set; }
         public int RailWidth { get; set; }
-        public string Slot { get; set; }
+        public string SlotType { get; set; }
     }
 }

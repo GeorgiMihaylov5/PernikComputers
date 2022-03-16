@@ -34,7 +34,7 @@ namespace PernikComputers
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+            services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddTransient<IComputerService, ComputerService>();
@@ -42,6 +42,7 @@ namespace PernikComputers
 
             services.Configure<IdentityOptions>(option =>
             {
+                option.SignIn.RequireConfirmedEmail = false;
                 option.Password.RequireDigit = false;
                 option.Password.RequiredLength = 5;
                 option.Password.RequireLowercase = false;
