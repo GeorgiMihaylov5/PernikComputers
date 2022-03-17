@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace PernikComputers.Abstraction
 {
-    public interface IComponentsService
+    public interface IComponentService
     {
         public bool CreateProcessor(string socket, double cpuSpeed, double cpuBoostSpeed, int cores, int threads, int cache, 
             string barcode, string manufacturer, string model, int warranty, decimal price, int quantity, string image);

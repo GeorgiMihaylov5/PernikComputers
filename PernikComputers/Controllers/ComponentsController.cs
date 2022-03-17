@@ -8,9 +8,9 @@ namespace PernikComputers.Controllers
 {
     public class ComponentsController : Controller
     {
-        private readonly IComponentsService service;
+        private readonly IComponentService service;
 
-        public ComponentsController(IComponentsService _service)
+        public ComponentsController(IComponentService _service)
         {
             this.service = _service;
         }

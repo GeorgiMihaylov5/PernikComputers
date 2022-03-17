@@ -4,8 +4,14 @@
     {
         Computer,
         Laptop,
-        Component,
         Periphery,
-        Accessories
+        Accessories,
+        Processor,
+        Motherboard,
+        Ram,
+        VideoCard,
+        PowerSupply,
+        Memory,
+        ComputerCase
     }
 }

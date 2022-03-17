@@ -8,7 +8,7 @@ using PernikComputers.Models;
 
 namespace PernikComputers.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -27,6 +27,10 @@ namespace PernikComputers.Data
         public DbSet<Product> Product { get; set; }
         public DbSet<Computer> Computers { get; set; }
 
+        //public DbSet<Order> Orders { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<Client> Clients { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Computer>().HasKey(x => new
@@ -37,11 +41,5 @@ namespace PernikComputers.Data
             });
             base.OnModelCreating(builder);
         }
-
-        public DbSet<PernikComputers.Models.PowerSupplyCreateViewModel> PowerSupplyCreateViewModel { get; set; }
-
-        public DbSet<PernikComputers.Models.MemoryCreateViewModel> MemoryCreateViewModel { get; set; }
-
-        public DbSet<PernikComputers.Models.ComputerCaseCreateViewModel> ComputerCaseCreateViewModel { get; set; }
     }
 }

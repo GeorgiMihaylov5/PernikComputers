@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace PernikComputers.Service
 {
-    public class ComponentsService : IComponentsService
+    public class ComponentsService : IComponentService
     {
         private readonly ApplicationDbContext context;
 
@@ -41,7 +41,7 @@ namespace PernikComputers.Service
             return context.SaveChanges() != 0;
         }
 
-        bool IComponentsService.CreateMotherboard(string socket, string chipset, TypeRam typeRam, int ramSlotsCount, string formFactor, string barcode, string manufacturer, string model, int warranty, decimal price, int quantity, string image)
+        bool IComponentService.CreateMotherboard(string socket, string chipset, TypeRam typeRam, int ramSlotsCount, string formFactor, string barcode, string manufacturer, string model, int warranty, decimal price, int quantity, string image)
         {
             var motherboard = new Motherboard
             {
@@ -64,7 +64,7 @@ namespace PernikComputers.Service
             return context.SaveChanges() != 0;
         }
 
-        bool IComponentsService.CreateRam(int size, TypeRam typeRam, int frequency, string timing, string barcode, string manufacturer, string model, int warranty, decimal price, int quantity, string image)
+        bool IComponentService.CreateRam(int size, TypeRam typeRam, int frequency, string timing, string barcode, string manufacturer, string model, int warranty, decimal price, int quantity, string image)
         {
             var ram = new Ram
             {

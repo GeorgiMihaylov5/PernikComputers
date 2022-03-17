@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PernikComputers.Abstraction;
 using PernikComputers.Data;
+using PernikComputers.Domain;
+using PernikComputers.Infrastructure;
 using PernikComputers.Service;
 using System;
 using System.Collections.Generic;
@@ -34,11 +36,17 @@ namespace PernikComputers
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddDefaultIdentity<ApplicationUser>()
+                  .AddRoles<IdentityRole>()
+                  .AddEntityFrameworkStores<ApplicationDbContext>()
+                  .AddDefaultTokenProviders();
+
             services.AddControllersWithViews();
+            services.AddRazorPages();
+            services.AddTransient<IComponentService, ComponentsService>();
             services.AddTransient<IComputerService, ComputerService>();
-            services.AddTransient<IComponentsService, ComponentsService>();
+            services.AddTransient<IEmployeeService, EmployeeService>();
+            services.AddTransient<IClientService, ClientService>();
 
             services.Configure<IdentityOptions>(option =>
             {
@@ -51,13 +59,12 @@ namespace PernikComputers
                 option.Password.RequiredUniqueChars = 0;
             }
             );
-            services.AddRazorPages();
-            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.PrepareDatabase().Wait();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
