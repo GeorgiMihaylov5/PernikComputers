@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using PernikComputers.Abstraction;
 using PernikComputers.Domain;
 using PernikComputers.Models;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PernikComputers.Controllers
@@ -19,9 +20,38 @@ namespace PernikComputers.Controllers
             this.service = _service;
         }
         // GET: EmployeeController
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+           //var employees = userManager.Users
+           //     .Select(x => new EmployeeListingModel
+           //     {
+           //         Id = x.Id,
+           //         UserName = x.UserName,
+           //         Email = x.Email
+           //     }).ToList();
+            var employees = service.GetEmployees()
+                .Select(x => new EmployeeListingModel
+                {
+                    Id = x.Id,
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    Phone = x.Phone,
+                    JobTitle = x.JobTitle,
+                    UserId = x.UserId,
+                    UserName = x.User.UserName,
+                    Email = x.User.Email
+                }).ToList();
+
+            var adminIds = (await userManager.GetUsersInRoleAsync("Administrator"))
+                .Select(x => x.Id).ToList();
+
+            foreach (var employee in employees)
+            {
+                employee.IsAdmin = adminIds.Contains(employee.Id);
+            }
+           
+            employees = employees.OrderByDescending(x => x.IsAdmin).ThenBy(x => x.UserName).ToList();
+            return View(employees);
         }
 
         // GET: EmployeeController/Details/5

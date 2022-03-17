@@ -72,6 +72,21 @@ namespace PernikComputers.Controllers
             return View();
         }
 
+        public IActionResult Manage()
+        {
+            return View();
+        }
+
+
+
+
+
+
+
+
+
+
+
         // GET: ClientsController/Edit/5
         public IActionResult Edit(int id)
         {
