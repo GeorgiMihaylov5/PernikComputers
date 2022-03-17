@@ -41,5 +41,7 @@ namespace PernikComputers.Data
             });
             base.OnModelCreating(builder);
         }
+
+        public DbSet<PernikComputers.Models.EmployeeCreateViewModel> EmployeeCreateViewModel { get; set; }
     }
 }

@@ -72,7 +72,7 @@ namespace PernikComputers.Controllers
             return View();
         }
 
-        public IActionResult Manage()
+        public IActionResult Profile()
         {
             return View();
         }

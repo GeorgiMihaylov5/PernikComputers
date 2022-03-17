@@ -20,7 +20,7 @@ namespace PernikComputers.Controllers
             this.service = _service;
         }
         // GET: EmployeeController
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> All()
         {
            //var employees = userManager.Users
            //     .Select(x => new EmployeeListingModel
@@ -112,7 +112,7 @@ namespace PernikComputers.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction();
             }
             catch
             {
@@ -133,7 +133,7 @@ namespace PernikComputers.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction();
             }
             catch
             {
