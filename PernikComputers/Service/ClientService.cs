@@ -19,7 +19,7 @@ namespace PernikComputers.Service
         {
             if (context.Clients.Any(x => x.UserId == userId))
             {
-                throw new InvalidOperationException("Client already exist.");
+                throw new InvalidOperationException("User already exist.");
             }
 
             Client client = new Client

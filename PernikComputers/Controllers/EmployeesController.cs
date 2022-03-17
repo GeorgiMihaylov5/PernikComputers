@@ -65,7 +65,7 @@ namespace PernikComputers.Controllers
                     }
                 }
             }
-            ModelState.AddModelError(string.Empty, "The employee exists.");
+            ModelState.AddModelError(string.Empty, "The user exists.");
             return View();
         }
 

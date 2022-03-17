@@ -68,7 +68,7 @@ namespace PernikComputers.Controllers
                     }
                 }
             }
-            ModelState.AddModelError(string.Empty, "The client exists.");
+            ModelState.AddModelError(string.Empty, "The user exists.");
             return View();
         }
 

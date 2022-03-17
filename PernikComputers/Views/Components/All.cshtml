@@ -40,14 +40,14 @@
         {
             <li class="products-list-item list-group-item col-md-4">
                <div>
-                    <a asp-action="Details" asp-route-id="@item.Id">
+                    <a asp-action="@item.DetailsAction" asp-route-id="@item.Id">
                         <img src="@item.Image" width="200" height="200">
                         <h5>@item.Manufacturer @item.Model</h5>
                     </a>
                </div>
                <div id="item-price-container">
                    <span>@item.Price lv.</span>
-                   <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id">SEE MORE</a>
+                   <a class="btn btn-primary" asp-action="@item.DetailsAction" asp-route-id="@item.Id">SEE MORE</a>
                </div>
             </li>
         }

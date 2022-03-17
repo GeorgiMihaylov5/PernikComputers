@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PernikComputers.Abstraction;
+using PernikComputers.Domain.Enum;
 using PernikComputers.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,8 @@ namespace PernikComputers.Controllers
                     Model = x.Model,
                     Price = x.Price,
                     IsPromotion = x.IsPromotion,
-                    Image = x.Image
+                    Image = x.Image,
+                    DetailsAction = "DetailsProcessor"
                 }).ToList();
 
             
@@ -51,6 +53,33 @@ namespace PernikComputers.Controllers
             }
             return View();
         }
+        public IActionResult DetailsProcessor(string id)
+        {
+            var x = service.GetProcessor(id);
+            ProductDetailsViewModel detailsViewModel = new ProductDetailsViewModel
+            {
+                Id = x.Id,
+                Barcode = x.Barcode,
+                Model = x.Model,
+                Manufacturer = x.Manufacturer,
+                IsPromotion = x.IsPromotion,
+                Description = new List<string>(),
+                Category = Category.Processor,
+                Price = x.Price,
+                Quantity = x.Quantity,
+                Image = x.Image,
+            };
+
+            detailsViewModel.Description.Add($"Socket: {x.Socket}");
+            detailsViewModel.Description.Add($"Operating frequency: {x.CPUSpeed} GHz");
+            detailsViewModel.Description.Add($"Turbo Boost: {x.CPUBoostSpeed} GHz");
+            detailsViewModel.Description.Add($"Cores: {x.Cores}");
+            detailsViewModel.Description.Add($"Threads: {x.Threads}");
+            detailsViewModel.Description.Add($"Cashe: {x.Cache} MB");
+            detailsViewModel.Description.Add($"Warranty: {x.Warranty} months");
+
+            return View("Details", detailsViewModel);
+        }
 
 
         //-------Motherboards-------------
@@ -65,7 +94,8 @@ namespace PernikComputers.Controllers
                     Model = x.Model,
                     Price = x.Price,
                     IsPromotion = x.IsPromotion,
-                    Image = x.Image
+                    Image = x.Image,
+                    DetailsAction = "DetailsMotherboard"
                 }).ToList();
 
 
@@ -92,6 +122,32 @@ namespace PernikComputers.Controllers
             }
             return View();
         }
+        public IActionResult DetailsMotherboard(string id)
+        {
+            var x = service.GetMotherboard(id);
+            ProductDetailsViewModel detailsViewModel = new ProductDetailsViewModel
+            {
+                Id = x.Id,
+                Barcode = x.Barcode,
+                Model = x.Model,
+                Manufacturer = x.Manufacturer,
+                IsPromotion = x.IsPromotion,
+                Category = Category.Processor,
+                Description = new List<string>(),
+                Price = x.Price,
+                Quantity = x.Quantity,
+                Image = x.Image,
+            };
+
+            detailsViewModel.Description.Add($"Socket: {x.Socket}");
+            detailsViewModel.Description.Add($"Chipset: {x.Chipset}");
+            detailsViewModel.Description.Add($"Supported memory: {x.TypeRam}");
+            detailsViewModel.Description.Add($"Number of memory slots: {x.RamSlotsCount}");
+            detailsViewModel.Description.Add($"Form factor: {x.FormFactor}");
+            detailsViewModel.Description.Add($"Warranty: {x.Warranty} months");
+
+            return View("Details", detailsViewModel);
+        }
 
         //--------Ram---------
         public IActionResult AllRams()
@@ -104,7 +160,8 @@ namespace PernikComputers.Controllers
                     Model = x.Model,
                     Price = x.Price,
                     IsPromotion = x.IsPromotion,
-                    Image = x.Image
+                    Image = x.Image,
+                    DetailsAction = "DetailsRam"
                 }).ToList();
 
 
@@ -130,6 +187,31 @@ namespace PernikComputers.Controllers
             }
             return View();
         }
+        public IActionResult DetailsRam(string id)
+        {
+            var x = service.GetRam(id);
+            ProductDetailsViewModel detailsViewModel = new ProductDetailsViewModel
+            {
+                Id = x.Id,
+                Barcode = x.Barcode,
+                Model = x.Model,
+                Manufacturer = x.Manufacturer,
+                IsPromotion = x.IsPromotion,
+                Category = Category.Processor,
+                Description = new List<string>(),
+                Price = x.Price,
+                Quantity = x.Quantity,
+                Image = x.Image,
+            };
+
+            detailsViewModel.Description.Add($"Capacity: {x.Size} GB");
+            detailsViewModel.Description.Add($"Type: {x.TypeRam}");
+            detailsViewModel.Description.Add($"Frequency: {x.Frequency} MHz");
+            detailsViewModel.Description.Add($"Timing: {x.Timing}");
+            detailsViewModel.Description.Add($"Warranty: {x.Warranty} months");
+
+            return View("Details", detailsViewModel);
+        }
 
         //-------VideoCard-------------
 
@@ -143,7 +225,8 @@ namespace PernikComputers.Controllers
                     Model = x.Model,
                     Price = x.Price,
                     IsPromotion = x.IsPromotion,
-                    Image = x.Image
+                    Image = x.Image,
+                    DetailsAction = "DetailsVideoCard"
                 }).ToList();
 
 
@@ -171,6 +254,37 @@ namespace PernikComputers.Controllers
             }
             return View();
         }
+
+        public IActionResult DetailsVideoCard(string id)
+        {
+            var x = service.GetVideoCard(id);
+            ProductDetailsViewModel detailsViewModel = new ProductDetailsViewModel
+            {
+                Id = x.Id,
+                Barcode = x.Barcode,
+                Model = x.Model,
+                Manufacturer = x.Manufacturer,
+                IsPromotion = x.IsPromotion,
+                Description = new List<string>(),
+                Category = Category.Processor,
+                Price = x.Price,
+                Quantity = x.Quantity,
+                Image = x.Image,
+            };
+
+            detailsViewModel.Description.Add($"Chip manufacturer: {x.ChipManufacturer }");
+            detailsViewModel.Description.Add($"Graphic Processor: {x.GraphicProcessor}");
+            detailsViewModel.Description.Add($"Memory capacity: {x.SizeMemory } GB");
+            detailsViewModel.Description.Add($"Memory type: {x.TypeMemory}");
+            detailsViewModel.Description.Add($"Memory Frequency: {x.MemoryFrequency} MHz");
+            detailsViewModel.Description.Add($"Core Frequency: {x.CoreFrequency} MHz");
+            detailsViewModel.Description.Add($"Current Processes: {x.CurrentProcesses}");
+            detailsViewModel.Description.Add($"Rail Width: {x.RailWidth} bit");
+            detailsViewModel.Description.Add($"Slot: {x.SlotType}");
+            detailsViewModel.Description.Add($"Warranty: {x.Warranty} months");
+
+            return View("Details", detailsViewModel);
+        }
         //-------PowerSupply-------------
 
         public IActionResult AllPowerSupplies()
@@ -183,7 +297,8 @@ namespace PernikComputers.Controllers
                     Model = x.Model,
                     Price = x.Price,
                     IsPromotion = x.IsPromotion,
-                    Image = x.Image
+                    Image = x.Image,
+                    DetailsAction = "DetailsPowerSupply"
                 }).ToList();
 
 
@@ -210,6 +325,31 @@ namespace PernikComputers.Controllers
             }
             return View();
         }
+
+        public IActionResult DetailsPowerSupply(string id)
+        {
+            var x = service.GetPowerSupply(id);
+            ProductDetailsViewModel detailsViewModel = new ProductDetailsViewModel
+            {
+                Id = x.Id,
+                Barcode = x.Barcode,
+                Model = x.Model,
+                Manufacturer = x.Manufacturer,
+                IsPromotion = x.IsPromotion,
+                Category = Category.Processor,
+                Description = new List<string>(),
+                Price = x.Price,
+                Quantity = x.Quantity,
+                Image = x.Image,
+            };
+
+            detailsViewModel.Description.Add($"Power: {x.Power} W");
+            detailsViewModel.Description.Add($"Form factor: {x.FormFactor}");
+            detailsViewModel.Description.Add($"Efficiency: {x.Efficiency}%");
+            detailsViewModel.Description.Add($"Warranty: {x.Warranty} months");
+
+            return View("Details", detailsViewModel);
+        }
         //-------Memory-------------
 
         public IActionResult AllMemories()
@@ -222,7 +362,8 @@ namespace PernikComputers.Controllers
                     Model = x.Model,
                     Price = x.Price,
                     IsPromotion = x.IsPromotion,
-                    Image = x.Image
+                    Image = x.Image,
+                    DetailsAction = "DetailsMemory"
                 }).ToList();
 
 
@@ -249,6 +390,33 @@ namespace PernikComputers.Controllers
             }
             return View();
         }
+        public IActionResult DetailsMemory(string id)
+        {
+            var x = service.GetMemory(id);
+            ProductDetailsViewModel detailsViewModel = new ProductDetailsViewModel
+            {
+                Id = x.Id,
+                Barcode = x.Barcode,
+                Model = x.Model,
+                Manufacturer = x.Manufacturer,
+                IsPromotion = x.IsPromotion,
+                Category = Category.Processor,
+                Price = x.Price,
+                Description = new List<string>(),
+                Quantity = x.Quantity,
+                Image = x.Image,
+            };
+
+            detailsViewModel.Description.Add($"Type: {x.MemoryType} W");
+            detailsViewModel.Description.Add($"Form factor: {x.FormFactor}");
+            detailsViewModel.Description.Add($"Capacity: {x.Capacity} GB");
+            detailsViewModel.Description.Add($"Reading speed: {x.ReadSpeed} MB/s");
+            detailsViewModel.Description.Add($"Recording speed: {x.WriteSpeed} MB/s");
+            detailsViewModel.Description.Add($"Warranty: {x.Warranty} months");
+
+            return View("Details", detailsViewModel);
+        }
+
         //-------ComputerCase-------------
 
         public IActionResult AllComputerCases()
@@ -261,7 +429,8 @@ namespace PernikComputers.Controllers
                     Model = x.Model,
                     Price = x.Price,
                     IsPromotion = x.IsPromotion,
-                    Image = x.Image
+                    Image = x.Image,
+                    DetailsAction = "DetailsComputerCases"
                 }).ToList();
 
 
@@ -287,6 +456,31 @@ namespace PernikComputers.Controllers
                 }
             }
             return View();
+        }
+        public IActionResult DetailsComputerCase(string id)
+        {
+            var x = service.GetComputerCase(id);
+            ProductDetailsViewModel detailsViewModel = new ProductDetailsViewModel
+            {
+                Id = x.Id,
+                Barcode = x.Barcode,
+                Model = x.Model,
+                Manufacturer = x.Manufacturer,
+                IsPromotion = x.IsPromotion,
+                Category = Category.Processor,
+                Description = new List<string>(),
+                Price = x.Price,
+                Quantity = x.Quantity,
+                Image = x.Image,
+            };
+
+            detailsViewModel.Description.Add($"Type: {x.CaseType} W");
+            detailsViewModel.Description.Add($"Form factor: {x.FormFactor}");
+            detailsViewModel.Description.Add($"Size: {x.CaseSize} mm");
+            detailsViewModel.Description.Add($"Reading speed: {x.Color }");
+            detailsViewModel.Description.Add($"Warranty: {x.Warranty} months");
+
+            return View("Details", detailsViewModel);
         }
     }
 }

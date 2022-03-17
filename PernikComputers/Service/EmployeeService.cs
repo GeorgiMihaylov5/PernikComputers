@@ -19,7 +19,7 @@ namespace PernikComputers.Service
         {
             if (context.Employees.Any(x => x.UserId == userId))
             {
-                throw new InvalidOperationException("Employee already exist.");
+                throw new InvalidOperationException("User already exist.");
             }
 
             Employee employee = new Employee
