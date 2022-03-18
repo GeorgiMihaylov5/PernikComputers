@@ -41,7 +41,16 @@ namespace PernikComputers.Service
 
         public List<Client> GetClients()
         {
-            throw new System.NotImplementedException();
+            var list = context.Clients.ToList();
+
+            foreach (var item in list)
+            {
+                if (item.User == null)
+                {
+                    item.User = context.Users.Find(item.UserId);
+                }
+            }
+            return list;
         }
 
         public string GetFullName(string employeeId)

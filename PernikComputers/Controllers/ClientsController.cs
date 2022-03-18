@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using PernikComputers.Abstraction;
 using PernikComputers.Domain;
 using PernikComputers.Models;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PernikComputers.Controllers
@@ -21,9 +22,24 @@ namespace PernikComputers.Controllers
             this._signInManager = signInManager;
         }
         // GET: ClientsController
-        public IActionResult Index()
+        public IActionResult All()
         {
-            return View();
+            var employees = service.GetClients()
+                .Select(x => new ClientListingModel
+                {
+                    Id = x.Id,
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    Phone = x.Phone,
+                    Address = x.Address,
+                    UserId = x.UserId,
+                    UserName = x.User.UserName,
+                    Email = x.User.Email
+                }).ToList();
+
+
+            employees = employees.OrderBy(x => x.UserName).ToList();
+            return View(employees);
         }
 
         // GET: ClientsController/Details/5
@@ -100,7 +116,7 @@ namespace PernikComputers.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction();
             }
             catch
             {
@@ -121,7 +137,7 @@ namespace PernikComputers.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction();
             }
             catch
             {
