@@ -47,17 +47,45 @@ namespace PernikComputers.Controllers
 
             foreach (var employee in employees)
             {
-                employee.IsAdmin = adminIds.Contains(employee.Id);
+                employee.IsAdmin = adminIds.Contains(employee.UserId);
             }
            
             employees = employees.OrderByDescending(x => x.IsAdmin).ThenBy(x => x.UserName).ToList();
             return View(employees);
         }
-
-        // GET: EmployeeController/Details/5
-        public IActionResult Details(int id)
+        [HttpPost]
+        public async Task<IActionResult> Promote(string userId)
         {
-            return View();
+            if (userId == null)
+            {
+                return RedirectToAction("All");
+            }
+            var user = await userManager.FindByIdAsync(userId);
+
+            if (user == null || await userManager.IsInRoleAsync(user, "Administrator"))
+            {
+                return RedirectToAction("All");
+            }
+            await userManager.AddToRoleAsync(user, "Administrator");
+
+            return RedirectToAction("All");
+        }
+        [HttpPost]
+        public async Task<IActionResult> Demote(string userId)
+        {
+            if (userId == null)
+            {
+                return RedirectToAction("All");
+            }
+            var user = await userManager.FindByIdAsync(userId);
+
+            if (user == null || !await userManager.IsInRoleAsync(user, "Administrator"))
+            {
+                return RedirectToAction("All");
+            }
+            await userManager.RemoveFromRoleAsync(user, "Administrator");
+
+            return RedirectToAction("All");
         }
 
         // GET: EmployeeController/Create
@@ -99,46 +127,42 @@ namespace PernikComputers.Controllers
             return View();
         }
 
-        // GET: EmployeeController/Edit/5
-        public IActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: EmployeeController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction();
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
         // GET: EmployeeController/Delete/5
-        public IActionResult Delete(int id)
+        public IActionResult Delete(string id)
         {
-            return View();
+            var employee = service.GetEmployee(id);
+
+            if (employee == null)
+            {
+                return NotFound();
+            }
+
+            EmployeeListingModel employeeViewModel = new EmployeeListingModel
+            {
+                Id = employee.Id,
+                FirstName = employee.FirstName,
+                LastName = employee.LastName,
+                Phone = employee.Phone,
+                JobTitle = employee.JobTitle,
+                UserId = employee.UserId,
+                UserName = employee.User.UserName,
+                Email = employee.User.Email
+            };
+
+            return View(employeeViewModel);
         }
 
         // POST: EmployeeController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id, IFormCollection collection)
+        public IActionResult Delete(string id, IFormCollection collection)
         {
-            try
+            var isDeleted = service.Remove(id);
+            if (isDeleted)
             {
-                return RedirectToAction();
+                return this.RedirectToAction("All");
             }
-            catch
-            {
-                return View();
-            }
+            return View();
         }
     }
 }

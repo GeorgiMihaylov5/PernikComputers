@@ -36,7 +36,14 @@ namespace PernikComputers.Service
 
         public Employee GetEmployee(string employeeId)
         {
-            throw new System.NotImplementedException();
+            var employee = context.Employees.Find(employeeId);
+
+            if (employee.User == null)
+            {
+                employee.User = context.Users.Find(employee.UserId);
+            }
+
+            return employee;
         }
 
         public List<Employee> GetEmployees()
@@ -60,7 +67,18 @@ namespace PernikComputers.Service
 
         public bool Remove(string employeeId)
         {
-            throw new System.NotImplementedException();
+            var employee = context.Employees.Find(employeeId);
+
+            if (employee == null)
+            {
+                return false;
+            }
+            var user = context.Users.Find(employee.UserId);
+
+            context.Users.Remove(user);
+            context.Employees.Remove(employee);
+
+            return context.SaveChanges() != 0;
         }
     }
 }
