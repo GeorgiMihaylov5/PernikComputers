@@ -28,7 +28,6 @@ namespace PernikComputers.Service
                 Threads = threads,
                 Cache = cache,
                 Barcode = barcode,
-                //Name = name,
                 Manufacturer = manufacturer,
                 Model = model,
                 Price = price,

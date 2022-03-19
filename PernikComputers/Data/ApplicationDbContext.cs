@@ -45,5 +45,7 @@ namespace PernikComputers.Data
         public DbSet<PernikComputers.Models.EmployeeCreateViewModel> EmployeeCreateViewModel { get; set; }
 
         public DbSet<PernikComputers.Models.ClientCreateViewModel> ClientCreateViewModel { get; set; }
+
+        public DbSet<PernikComputers.Models.ProcessorCreateViewModel> ProcessorCreateViewModel { get; set; }
     }
 }

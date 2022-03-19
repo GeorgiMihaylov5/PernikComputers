@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using PernikComputers.Abstraction;
 using PernikComputers.Domain.Enum;
 using PernikComputers.Models;
@@ -81,6 +82,90 @@ namespace PernikComputers.Controllers
             return View("Details", detailsViewModel);
         }
 
+        public IActionResult EditProcessor(string id)
+        {
+            var item = service.GetProcessor(id);
+
+            if (item == null)
+            {
+                return NotFound();
+            }
+            var editModel = new ProcessorCreateViewModel
+            {
+                Id = item.Id,
+                Socket = item.Socket,
+                CPUSpeed = item.CPUSpeed,
+                CPUBoostSpeed = item.CPUBoostSpeed,
+                Cores = item.Cores,
+                Threads = item.Threads,
+                Cache = item.Cache,
+                Barcode = item.Barcode,
+                Manufacturer = item.Manufacturer,
+                Model = item.Model,
+                Price = item.Price,
+                Warranty = item.Warranty,
+                Quantity = item.Quantity,
+                Image = item.Image
+            };
+
+            return View(editModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditProcessor(string id, ProcessorCreateViewModel createVm)
+        {
+            if (ModelState.IsValid)
+            {
+                var isUpdated = service.UpdateProcessor(createVm.Id, createVm.Socket, createVm.CPUSpeed, createVm.CPUBoostSpeed, createVm.Cores, createVm.Threads, createVm.Cache,
+                    createVm.Barcode, createVm.Manufacturer, createVm.Model, createVm.Warranty, createVm.Price, createVm.Quantity, createVm.Image);
+
+                if (isUpdated)
+                {
+                    return RedirectToAction("AllProcessors");
+                }
+            }
+            return View(createVm);
+        }
+
+        public IActionResult DeleteProcessor(string id)
+        {
+            var item = service.GetProcessor(id);
+
+            if (item == null)
+            {
+                return NotFound();
+            }
+            var editModel = new ProcessorCreateViewModel
+            {
+                Id = item.Id,
+                Socket = item.Socket,
+                CPUSpeed = item.CPUSpeed,
+                CPUBoostSpeed = item.CPUBoostSpeed,
+                Cores = item.Cores,
+                Threads = item.Threads,
+                Cache = item.Cache,
+                Barcode = item.Barcode,
+                Manufacturer = item.Manufacturer,
+                Model = item.Model,
+                Price = item.Price,
+                Warranty = item.Warranty,
+                Quantity = item.Quantity,
+                Image = item.Image
+            };
+
+            return View(editModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteProcessor(string id, IFormCollection collection)
+        {
+            var isDeleted = service.RemoveProcessor(id);
+            if (isDeleted)
+            {
+                return this.RedirectToAction("AllProcessors");
+            }
+            return View();
+        }
 
         //-------Motherboards-------------
 
@@ -149,6 +234,89 @@ namespace PernikComputers.Controllers
             return View("Details", detailsViewModel);
         }
 
+        public IActionResult EditMotherboard(string id)
+        {
+            var item = service.GetMotherboard(id);
+
+            if (item == null)
+            {
+                return NotFound();
+            }
+            var editModel = new MotherboardCreateViewModel
+            {
+                Id = item.Id,
+                Socket = item.Socket,
+                Chipset = item.Chipset,
+                TypeRam = item.TypeRam,
+                RamSlotsCount = item.RamSlotsCount,
+                FormFactor = item.FormFactor,
+                Barcode = item.Barcode,
+                Manufacturer = item.Manufacturer,
+                Model = item.Model,
+                Price = item.Price,
+                Warranty = item.Warranty,
+                Quantity = item.Quantity,
+                Image = item.Image
+            };
+
+            return View(editModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditMotherboard(string id, MotherboardCreateViewModel createVm)
+        {
+            if (ModelState.IsValid)
+            {
+                var isUpdated = service.UpdateMotherboard(createVm.Id, createVm.Socket, createVm.Chipset, createVm.TypeRam, createVm.RamSlotsCount, createVm.FormFactor,
+                    createVm.Barcode, createVm.Manufacturer, createVm.Model, createVm.Warranty, createVm.Price, createVm.Quantity, createVm.Image);
+
+                if (isUpdated)
+                {
+                    return RedirectToAction("AllMotherboards");
+                }
+            }
+            return View(createVm);
+        }
+
+        public IActionResult DeleteMotherboard(string id)
+        {
+            var item = service.GetMotherboard(id);
+
+            if (item == null)
+            {
+                return NotFound();
+            }
+            var editModel = new MotherboardCreateViewModel
+            {
+                Id = item.Id,
+                Socket = item.Socket,
+                Chipset = item.Chipset,
+                TypeRam = item.TypeRam,
+                RamSlotsCount = item.RamSlotsCount,
+                FormFactor = item.FormFactor,
+                Barcode = item.Barcode,
+                Manufacturer = item.Manufacturer,
+                Model = item.Model,
+                Price = item.Price,
+                Warranty = item.Warranty,
+                Quantity = item.Quantity,
+                Image = item.Image
+            };
+
+            return View(editModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteMotherboard(string id, IFormCollection collection)
+        {
+            var isDeleted = service.RemoveMotherboard(id);
+            if (isDeleted)
+            {
+                return this.RedirectToAction("AllMotherboards");
+            }
+            return View();
+        }
+
         //--------Ram---------
         public IActionResult AllRams()
         {
@@ -211,6 +379,86 @@ namespace PernikComputers.Controllers
             detailsViewModel.Description.Add($"Warranty: {x.Warranty} months");
 
             return View("Details", detailsViewModel);
+        }
+        public IActionResult EditRam(string id)
+        {
+            var item = service.GetRam(id);
+
+            if (item == null)
+            {
+                return NotFound();
+            }
+            var editModel = new RamCreateViewModel
+            {
+                Id = item.Id,
+                Size = item.Size,
+                TypeRam = item.TypeRam,
+                Frequency = item.Frequency,
+                Timing = item.Timing,
+                Barcode = item.Barcode,
+                Manufacturer = item.Manufacturer,
+                Model = item.Model,
+                Price = item.Price,
+                Warranty = item.Warranty,
+                Quantity = item.Quantity,
+                Image = item.Image
+            };
+
+            return View(editModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditRam(string id, RamCreateViewModel createVm)
+        {
+            if (ModelState.IsValid)
+            {
+                var isUpdated = service.UpdateRam(createVm.Id, createVm.Size, createVm.TypeRam, createVm.Frequency, createVm.Timing,
+                    createVm.Barcode, createVm.Manufacturer, createVm.Model, createVm.Warranty, createVm.Price, createVm.Quantity, createVm.Image);
+
+                if (isUpdated)
+                {
+                    return RedirectToAction("AllRams");
+                }
+            }
+            return View(createVm);
+        }
+
+        public IActionResult DeleteRam(string id)
+        {
+            var item = service.GetRam(id);
+
+            if (item == null)
+            {
+                return NotFound();
+            }
+            var editModel = new RamCreateViewModel
+            {
+                Id = item.Id,
+                Size = item.Size,
+                TypeRam = item.TypeRam,
+                Frequency = item.Frequency,
+                Timing = item.Timing,
+                Barcode = item.Barcode,
+                Manufacturer = item.Manufacturer,
+                Model = item.Model,
+                Price = item.Price,
+                Warranty = item.Warranty,
+                Quantity = item.Quantity,
+                Image = item.Image
+            };
+
+            return View(editModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteRam(string id, IFormCollection collection)
+        {
+            var isDeleted = service.RemoveRam(id);
+            if (isDeleted)
+            {
+                return this.RedirectToAction("AllRams");
+            }
+            return View();
         }
 
         //-------VideoCard-------------
@@ -285,6 +533,98 @@ namespace PernikComputers.Controllers
 
             return View("Details", detailsViewModel);
         }
+
+        public IActionResult EditVideoCard(string id)
+        {
+            var item = service.GetVideoCard(id);
+
+            if (item == null)
+            {
+                return NotFound();
+            }
+            var editModel = new VideoCardCreateViewModel
+            {
+                Id = item.Id,
+                ChipManufacturer = item.ChipManufacturer,
+                GraphicProcessor = item.GraphicProcessor,
+                SizeMemory = item.SizeMemory,
+                TypeMemory = item.TypeMemory,
+                MemoryFrequency = item.MemoryFrequency,
+                CoreFrequency = item.CoreFrequency,
+                CurrentProcesses = item.CurrentProcesses,
+                RailWidth = item.RailWidth,
+                SlotType = item.SlotType,
+                Barcode = item.Barcode,
+                Manufacturer = item.Manufacturer,
+                Model = item.Model,
+                Price = item.Price,
+                Warranty = item.Warranty,
+                Quantity = item.Quantity,
+                Image = item.Image
+            };
+
+            return View(editModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditVideoCard(string id, VideoCardCreateViewModel createVm)
+        {
+            if (ModelState.IsValid)
+            {
+                var isUpdated = service.UpdateVideoCard(createVm.Id, createVm.ChipManufacturer, createVm.GraphicProcessor, createVm.SizeMemory, createVm.TypeMemory,
+                    createVm.MemoryFrequency, createVm.CoreFrequency, createVm.CurrentProcesses, createVm.RailWidth, createVm.SlotType,
+                    createVm.Barcode, createVm.Manufacturer, createVm.Model, createVm.Warranty, createVm.Price, createVm.Quantity, createVm.Image);
+
+                if (isUpdated)
+                {
+                    return RedirectToAction("AllVideoCards");
+                }
+            }
+            return View(createVm);
+        }
+
+        public IActionResult DeleteVideoCard(string id)
+        {
+            var item = service.GetVideoCard(id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+            var editModel = new VideoCardCreateViewModel
+            {
+                Id = item.Id,
+                ChipManufacturer = item.ChipManufacturer,
+                GraphicProcessor = item.GraphicProcessor,
+                SizeMemory = item.SizeMemory,
+                TypeMemory = item.TypeMemory,
+                MemoryFrequency = item.MemoryFrequency,
+                CoreFrequency = item.CoreFrequency,
+                CurrentProcesses = item.CurrentProcesses,
+                RailWidth = item.RailWidth,
+                SlotType = item.SlotType,
+                Barcode = item.Barcode,
+                Manufacturer = item.Manufacturer,
+                Model = item.Model,
+                Price = item.Price,
+                Warranty = item.Warranty,
+                Quantity = item.Quantity,
+                Image = item.Image
+            };
+
+            return View(editModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteVideoCard(string id, IFormCollection collection)
+        {
+            var isDeleted = service.RemoveVideoCard(id);
+            if (isDeleted)
+            {
+                return this.RedirectToAction("AllVideoCards");
+            }
+            return View();
+        }
+
         //-------PowerSupply-------------
 
         public IActionResult AllPowerSupplies()
@@ -350,6 +690,86 @@ namespace PernikComputers.Controllers
 
             return View("Details", detailsViewModel);
         }
+
+        public IActionResult EditPowerSupply(string id)
+        {
+            var item = service.GetPowerSupply(id);
+
+            if (item == null)
+            {
+                return NotFound();
+            }
+            var editModel = new PowerSupplyCreateViewModel
+            {
+                Id = item.Id,
+                Power = item.Power,
+                FormFactor = item.FormFactor,
+                Efficiency = item.Efficiency,
+                Barcode = item.Barcode,
+                Manufacturer = item.Manufacturer,
+                Model = item.Model,
+                Price = item.Price,
+                Warranty = item.Warranty,
+                Quantity = item.Quantity,
+                Image = item.Image
+            };
+
+            return View(editModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditPowerSupply(string id, PowerSupplyCreateViewModel createVm)
+        {
+            if (ModelState.IsValid)
+            {
+                var isUpdated = service.UpdatePowerSupply(createVm.Id, createVm.Power, createVm.FormFactor, createVm.Efficiency,
+                    createVm.Barcode, createVm.Manufacturer, createVm.Model, createVm.Warranty, createVm.Price, createVm.Quantity, createVm.Image);
+
+                if (isUpdated)
+                {
+                    return RedirectToAction("AllPowerSupplies");
+                }
+            }
+            return View(createVm);
+        }
+
+        public IActionResult DeletePowerSupply(string id)
+        {
+            var item = service.GetPowerSupply(id);
+
+            if (item == null)
+            {
+                return NotFound();
+            }
+            var editModel = new PowerSupplyCreateViewModel
+            {
+                Id = item.Id,
+                Power = item.Power,
+                FormFactor = item.FormFactor,
+                Efficiency = item.Efficiency,
+                Barcode = item.Barcode,
+                Manufacturer = item.Manufacturer,
+                Model = item.Model,
+                Price = item.Price,
+                Warranty = item.Warranty,
+                Quantity = item.Quantity,
+                Image = item.Image
+            };
+
+            return View(editModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeletePowerSupply(string id, IFormCollection collection)
+        {
+            var isDeleted = service.RemovePowerSupply(id);
+            if (isDeleted)
+            {
+                return this.RedirectToAction("AllPowerSupplies");
+            }
+            return View();
+        }
+
         //-------Memory-------------
 
         public IActionResult AllMemories()
@@ -417,6 +837,89 @@ namespace PernikComputers.Controllers
             return View("Details", detailsViewModel);
         }
 
+        public IActionResult EditMemory(string id)
+        {
+            var item = service.GetMemory(id);
+
+            if (item == null)
+            {
+                return NotFound();
+            }
+            var editModel = new MemoryCreateViewModel
+            {
+                Id = item.Id,
+                MemoryType = item.MemoryType,
+                FormFactor = item.FormFactor,
+                Capacity = item.Capacity,
+                ReadSpeed = item.ReadSpeed,
+                WriteSpeed = item.WriteSpeed,
+                Barcode = item.Barcode,
+                Manufacturer = item.Manufacturer,
+                Model = item.Model,
+                Price = item.Price,
+                Warranty = item.Warranty,
+                Quantity = item.Quantity,
+                Image = item.Image
+            };
+
+            return View(editModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditMemory(string id, MemoryCreateViewModel createVm)
+        {
+            if (ModelState.IsValid)
+            {
+                var isUpdated = service.UpdateMemory(createVm.Id, createVm.MemoryType, createVm.FormFactor, createVm.Capacity, createVm.ReadSpeed, createVm.WriteSpeed,
+                    createVm.Barcode, createVm.Manufacturer, createVm.Model, createVm.Warranty, createVm.Price, createVm.Quantity, createVm.Image);
+
+                if (isUpdated)
+                {
+                    return RedirectToAction("AllMemories");
+                }
+            }
+            return View(createVm);
+        }
+
+        public IActionResult DeleteMemory(string id)
+        {
+            var item = service.GetMemory(id);
+
+            if (item == null)
+            {
+                return NotFound();
+            }
+            var editModel = new MemoryCreateViewModel
+            {
+                Id = item.Id,
+                MemoryType = item.MemoryType,
+                FormFactor = item.FormFactor,
+                Capacity = item.Capacity,
+                ReadSpeed = item.ReadSpeed,
+                WriteSpeed = item.WriteSpeed,
+                Barcode = item.Barcode,
+                Manufacturer = item.Manufacturer,
+                Model = item.Model,
+                Price = item.Price,
+                Warranty = item.Warranty,
+                Quantity = item.Quantity,
+                Image = item.Image
+            };
+
+            return View(editModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteMemory(string id, IFormCollection collection)
+        {
+            var isDeleted = service.RemoveMemory(id);
+            if (isDeleted)
+            {
+                return this.RedirectToAction("AllMemories");
+            }
+            return View();
+        }
+
         //-------ComputerCase-------------
 
         public IActionResult AllComputerCases()
@@ -481,6 +984,87 @@ namespace PernikComputers.Controllers
             detailsViewModel.Description.Add($"Warranty: {x.Warranty} months");
 
             return View("Details", detailsViewModel);
+        }
+
+        public IActionResult EditComputerCase(string id)
+        {
+            var item = service.GetComputerCase(id);
+
+            if (item == null)
+            {
+                return NotFound();
+            }
+            var editModel = new ComputerCaseCreateViewModel
+            {
+                Id = item.Id,
+                CaseType = item.CaseType,
+                FormFactor = item.FormFactor,
+                CaseSize = item.CaseSize,
+                Color = item.Color,
+                Barcode = item.Barcode,
+                Manufacturer = item.Manufacturer,
+                Model = item.Model,
+                Price = item.Price,
+                Warranty = item.Warranty,
+                Quantity = item.Quantity,
+                Image = item.Image
+            };
+
+            return View(editModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditComputerCase(string id, ComputerCaseCreateViewModel createVm)
+        {
+            if (ModelState.IsValid)
+            {
+                var isUpdated = service.UpdateComputerCase(createVm.Id, createVm.CaseType, createVm.FormFactor, createVm.CaseSize, createVm.Color,
+                    createVm.Barcode, createVm.Manufacturer, createVm.Model, createVm.Warranty, createVm.Price, createVm.Quantity, createVm.Image);
+
+                if (isUpdated)
+                {
+                    return RedirectToAction("AllComputerCases");
+                }
+            }
+            return View(createVm);
+        }
+
+        public IActionResult DeleteComputerCase(string id)
+        {
+            var item = service.GetComputerCase(id);
+
+            if (item == null)
+            {
+                return NotFound();
+            }
+            var editModel = new ComputerCaseCreateViewModel
+            {
+                Id = item.Id,
+                CaseType = item.CaseType,
+                FormFactor = item.FormFactor,
+                CaseSize = item.CaseSize,
+                Color = item.Color,
+                Barcode = item.Barcode,
+                Manufacturer = item.Manufacturer,
+                Model = item.Model,
+                Price = item.Price,
+                Warranty = item.Warranty,
+                Quantity = item.Quantity,
+                Image = item.Image
+            };
+
+            return View(editModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteComputerCase(string id, IFormCollection collection)
+        {
+            var isDeleted = service.RemoveComputerCase(id);
+            if (isDeleted)
+            {
+                return this.RedirectToAction("AllComputerCases");
+            }
+            return View();
         }
     }
 }
