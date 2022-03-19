@@ -20,6 +20,7 @@ namespace PernikComputers.Models
         [Required]
         public int Power { get; set; }
         [Required]
+        [Display(Name = "Form Factor")]
         public string FormFactor { get; set; }
         [Required]
         [Range(1,100)]

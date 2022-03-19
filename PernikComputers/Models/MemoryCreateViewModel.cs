@@ -19,15 +19,19 @@ namespace PernikComputers.Models
         public decimal Price { get; set; }
         public bool IsPromotion { get; set; }
         [Required]
+        [Display(Name = "Memory Type")]
         public MemoryType MemoryType { get; set; }
         [Required]
+        [Display(Name = "Form Factor")]
         public string FormFactor { get; set; }
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Capacity must be a positive number.")]
         public int Capacity { get; set; }
         [Required]
+        [Display(Name = "Reading Speed")]
         public int ReadSpeed { get; set; }
         [Required]
+        [Display(Name = "Recording Speed")]
         public int WriteSpeed { get; set; }
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Quantity must be a positive number.")]

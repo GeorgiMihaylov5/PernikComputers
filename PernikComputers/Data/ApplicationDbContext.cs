@@ -31,21 +31,19 @@ namespace PernikComputers.Data
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Client> Clients { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            builder.Entity<Computer>().HasKey(x => new
-            {
-                x.ProcessorId,
-                x.MotherboardId,
-                x.RamId
-            });
-            base.OnModelCreating(builder);
-        }
-
-        public DbSet<PernikComputers.Models.EmployeeCreateViewModel> EmployeeCreateViewModel { get; set; }
-
-        public DbSet<PernikComputers.Models.ClientCreateViewModel> ClientCreateViewModel { get; set; }
-
-        public DbSet<PernikComputers.Models.ProcessorCreateViewModel> ProcessorCreateViewModel { get; set; }
+        //protected override void OnModelCreating(ModelBuilder builder)
+        //{
+        //    builder.Entity<Computer>().HasKey(x => new
+        //    {
+        //        x.ProcessorId,
+        //        x.MotherboardId,
+        //        x.RamId,
+        //        x.VideoCardId,
+        //        x.PowerSupplyId,
+        //        x.MemoryId,
+        //        x.ComputerCaseId
+        //    });
+        //    base.OnModelCreating(builder);
+        //}
     }
 }

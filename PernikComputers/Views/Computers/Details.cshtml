@@ -1,0 +1,47 @@
+﻿@model PernikComputers.Models.ProductDetailsViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div id="detailsDiv">
+    <div class="b-inline-top" style="margin-right: 50px">
+        <img src="@Model.Image" width="350" height="350"/>
+    </div>
+    <div class="b-inline-top">
+        <h2 id="productTitle">
+           @Model.Manufacturer - @Model.Model
+        </h2>
+        <div class="b-inline-top details-item-price">
+            <h5>Single price</h5>
+            <hr />
+            <span id="pricePerProduct">@Model.Price</span>
+            <span> lv.</span>
+        </div>
+        <div class="b-inline-top details-item-price">
+            <h5>Total price</h5>
+            <hr />
+            <span id="totalPrice">@Model.Price</span>
+            <span> lv.</span>
+        </div>
+            @if(Model.Quantity > 0)
+            {
+                <p>In Stock</p>
+            }
+            else
+            {
+                <p>Not Available</p>
+            }
+
+        @*@await Html.PartialAsync("_OrderPartialView", new OrderCreateBindingModel
+            {
+               ProductId = Model.Id
+           })*@
+    </div>
+    <div>
+        @foreach(var item in Model.Description)
+        {
+            <p>@item</p>
+        }
+    </div>
+</div>

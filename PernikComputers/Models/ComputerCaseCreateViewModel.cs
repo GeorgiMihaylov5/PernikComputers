@@ -18,10 +18,13 @@ namespace PernikComputers.Models
         public decimal Price { get; set; }
         public bool IsPromotion { get; set; }
         [Required]
+        [Display(Name = "Case Type")]
         public string CaseType { get; set; }
         [Required]
+        [Display(Name = "Form Factor")]
         public string FormFactor { get; set; }
         [Required]
+        [Display(Name = "Case Size")]
         public string CaseSize { get; set; }
         [Required]
         public string Color { get; set; }

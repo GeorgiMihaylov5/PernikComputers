@@ -20,8 +20,10 @@ namespace PernikComputers.Models
         [Required]
         public string Socket { get; set; }
         [Required]
+        [Display(Name = "CPU Speed")]
         public double CPUSpeed { get; set; }
         [Required]
+        [Display(Name = "CPU Boost Speed")]
         public double CPUBoostSpeed { get; set; }
         [Required]
         public int Cores { get; set; }

@@ -155,12 +155,15 @@ namespace PernikComputers.Controllers
         // POST: EmployeeController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(string id, IFormCollection collection)
+        public IActionResult Delete(string id, string hi, IFormCollection collection)
         {
-            var isDeleted = service.Remove(id);
-            if (isDeleted)
+            if (hi == "true")
             {
-                return this.RedirectToAction("All");
+                var isDeleted = service.Remove(id);
+                if (isDeleted)
+                {
+                    return this.RedirectToAction("All");
+                }
             }
             return View();
         }

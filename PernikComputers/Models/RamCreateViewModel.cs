@@ -21,6 +21,7 @@ namespace PernikComputers.Models
         [Required]
         public int Size { get; set; }
         [Required]
+        [Display(Name = "Type")]
         public TypeRam TypeRam { get; set; }
         [Required]
         public int Frequency { get; set; }

@@ -23,9 +23,13 @@ namespace PernikComputers.Models
         [Required]
         public string Chipset { get; set; }
         [Required]
+        [Display(Name = "Type Ram")]
         public TypeRam TypeRam { get; set; }
+        [Required]
+        [Display(Name = "Number of memory slots")]
         public int RamSlotsCount { get; set; }
         [Required]
+        [Display(Name = "Form Factor")]
         public string FormFactor { get; set; }
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Quantity must be a positive number.")]

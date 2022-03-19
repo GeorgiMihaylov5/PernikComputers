@@ -64,20 +64,21 @@ namespace PernikComputers.Controllers
                 Model = x.Model,
                 Manufacturer = x.Manufacturer,
                 IsPromotion = x.IsPromotion,
-                Description = new List<string>(),
+                Description = new List<string>()
+                {
+                    $"Socket: {x.Socket}",
+                    $"Operating frequency: {x.CPUSpeed} GHz",
+                    $"Turbo Boost: {x.CPUBoostSpeed} GHz",
+                    $"Cores: {x.Cores}",
+                    $"Threads: {x.Threads}",
+                    $"Cashe: {x.Cache} MB",
+                    $"Warranty: {x.Warranty} months"
+                },
                 Category = Category.Processor,
                 Price = x.Price,
                 Quantity = x.Quantity,
                 Image = x.Image,
-            };
-
-            detailsViewModel.Description.Add($"Socket: {x.Socket}");
-            detailsViewModel.Description.Add($"Operating frequency: {x.CPUSpeed} GHz");
-            detailsViewModel.Description.Add($"Turbo Boost: {x.CPUBoostSpeed} GHz");
-            detailsViewModel.Description.Add($"Cores: {x.Cores}");
-            detailsViewModel.Description.Add($"Threads: {x.Threads}");
-            detailsViewModel.Description.Add($"Cashe: {x.Cache} MB");
-            detailsViewModel.Description.Add($"Warranty: {x.Warranty} months");
+            };  
 
             return View("Details", detailsViewModel);
         }
@@ -218,18 +219,19 @@ namespace PernikComputers.Controllers
                 Manufacturer = x.Manufacturer,
                 IsPromotion = x.IsPromotion,
                 Category = Category.Processor,
-                Description = new List<string>(),
+                Description = new List<string>()
+                {
+                    $"Socket: {x.Socket}",
+                    $"Chipset: {x.Chipset}",
+                    $"Supported memory: {x.TypeRam}",
+                    $"Number of memory slots: {x.RamSlotsCount}",
+                    $"Form factor: {x.FormFactor}",
+                    $"Warranty: {x.Warranty} months"
+                },
                 Price = x.Price,
                 Quantity = x.Quantity,
                 Image = x.Image,
             };
-
-            detailsViewModel.Description.Add($"Socket: {x.Socket}");
-            detailsViewModel.Description.Add($"Chipset: {x.Chipset}");
-            detailsViewModel.Description.Add($"Supported memory: {x.TypeRam}");
-            detailsViewModel.Description.Add($"Number of memory slots: {x.RamSlotsCount}");
-            detailsViewModel.Description.Add($"Form factor: {x.FormFactor}");
-            detailsViewModel.Description.Add($"Warranty: {x.Warranty} months");
 
             return View("Details", detailsViewModel);
         }
@@ -366,17 +368,18 @@ namespace PernikComputers.Controllers
                 Manufacturer = x.Manufacturer,
                 IsPromotion = x.IsPromotion,
                 Category = Category.Processor,
-                Description = new List<string>(),
+                Description = new List<string>()
+                {
+                    $"Capacity: {x.Size} GB",
+                    $"Type: {x.TypeRam}",
+                    $"Frequency: {x.Frequency} MHz",
+                    $"Timing: {x.Timing}",
+                    $"Warranty: {x.Warranty} months"
+                },
                 Price = x.Price,
                 Quantity = x.Quantity,
                 Image = x.Image,
             };
-
-            detailsViewModel.Description.Add($"Capacity: {x.Size} GB");
-            detailsViewModel.Description.Add($"Type: {x.TypeRam}");
-            detailsViewModel.Description.Add($"Frequency: {x.Frequency} MHz");
-            detailsViewModel.Description.Add($"Timing: {x.Timing}");
-            detailsViewModel.Description.Add($"Warranty: {x.Warranty} months");
 
             return View("Details", detailsViewModel);
         }
@@ -513,23 +516,24 @@ namespace PernikComputers.Controllers
                 Model = x.Model,
                 Manufacturer = x.Manufacturer,
                 IsPromotion = x.IsPromotion,
-                Description = new List<string>(),
+                Description = new List<string>()
+                {
+                    $"Chip manufacturer: {x.ChipManufacturer }",
+                    $"Graphic Processor: {x.GraphicProcessor}",
+                    $"Memory capacity: {x.SizeMemory } GB",
+                    $"Memory type: {x.TypeMemory}",
+                    $"Memory Frequency: {x.MemoryFrequency} MHz",
+                    $"Core Frequency: {x.CoreFrequency} MHz",
+                    $"Current Processes: {x.CurrentProcesses}",
+                    $"Rail Width: {x.RailWidth} bit",
+                    $"Slot: {x.SlotType}",
+                    $"Warranty: {x.Warranty} months"
+                },
                 Category = Category.Processor,
                 Price = x.Price,
                 Quantity = x.Quantity,
                 Image = x.Image,
             };
-
-            detailsViewModel.Description.Add($"Chip manufacturer: {x.ChipManufacturer }");
-            detailsViewModel.Description.Add($"Graphic Processor: {x.GraphicProcessor}");
-            detailsViewModel.Description.Add($"Memory capacity: {x.SizeMemory } GB");
-            detailsViewModel.Description.Add($"Memory type: {x.TypeMemory}");
-            detailsViewModel.Description.Add($"Memory Frequency: {x.MemoryFrequency} MHz");
-            detailsViewModel.Description.Add($"Core Frequency: {x.CoreFrequency} MHz");
-            detailsViewModel.Description.Add($"Current Processes: {x.CurrentProcesses}");
-            detailsViewModel.Description.Add($"Rail Width: {x.RailWidth} bit");
-            detailsViewModel.Description.Add($"Slot: {x.SlotType}");
-            detailsViewModel.Description.Add($"Warranty: {x.Warranty} months");
 
             return View("Details", detailsViewModel);
         }
@@ -677,16 +681,17 @@ namespace PernikComputers.Controllers
                 Manufacturer = x.Manufacturer,
                 IsPromotion = x.IsPromotion,
                 Category = Category.Processor,
-                Description = new List<string>(),
+                Description = new List<string>()
+                {
+                    $"Power: {x.Power} W",
+                    $"Form factor: {x.FormFactor}",
+                    $"Efficiency: {x.Efficiency}%",
+                    $"Warranty: {x.Warranty} months"
+                },
                 Price = x.Price,
                 Quantity = x.Quantity,
                 Image = x.Image,
             };
-
-            detailsViewModel.Description.Add($"Power: {x.Power} W");
-            detailsViewModel.Description.Add($"Form factor: {x.FormFactor}");
-            detailsViewModel.Description.Add($"Efficiency: {x.Efficiency}%");
-            detailsViewModel.Description.Add($"Warranty: {x.Warranty} months");
 
             return View("Details", detailsViewModel);
         }
@@ -822,17 +827,18 @@ namespace PernikComputers.Controllers
                 IsPromotion = x.IsPromotion,
                 Category = Category.Processor,
                 Price = x.Price,
-                Description = new List<string>(),
+                Description = new List<string>()
+                {
+                    $"Type: {x.MemoryType} W",
+                    $"Form factor: {x.FormFactor}",
+                    $"Capacity: {x.Capacity} GB",
+                    $"Reading speed: {x.ReadSpeed} MB/s",
+                    $"Recording speed: {x.WriteSpeed} MB/s",
+                    $"Warranty: {x.Warranty} months"
+                },
                 Quantity = x.Quantity,
                 Image = x.Image,
             };
-
-            detailsViewModel.Description.Add($"Type: {x.MemoryType} W");
-            detailsViewModel.Description.Add($"Form factor: {x.FormFactor}");
-            detailsViewModel.Description.Add($"Capacity: {x.Capacity} GB");
-            detailsViewModel.Description.Add($"Reading speed: {x.ReadSpeed} MB/s");
-            detailsViewModel.Description.Add($"Recording speed: {x.WriteSpeed} MB/s");
-            detailsViewModel.Description.Add($"Warranty: {x.Warranty} months");
 
             return View("Details", detailsViewModel);
         }
@@ -971,17 +977,19 @@ namespace PernikComputers.Controllers
                 Manufacturer = x.Manufacturer,
                 IsPromotion = x.IsPromotion,
                 Category = Category.Processor,
-                Description = new List<string>(),
+                Description = new List<string>()
+                {
+
+                    $"Type: {x.CaseType} W",
+                    $"Form factor: {x.FormFactor}",
+                    $"Size: {x.CaseSize} mm",
+                    $"Reading speed: {x.Color }",
+                    $"Warranty: {x.Warranty} months"
+                },
                 Price = x.Price,
                 Quantity = x.Quantity,
                 Image = x.Image,
             };
-
-            detailsViewModel.Description.Add($"Type: {x.CaseType} W");
-            detailsViewModel.Description.Add($"Form factor: {x.FormFactor}");
-            detailsViewModel.Description.Add($"Size: {x.CaseSize} mm");
-            detailsViewModel.Description.Add($"Reading speed: {x.Color }");
-            detailsViewModel.Description.Add($"Warranty: {x.Warranty} months");
 
             return View("Details", detailsViewModel);
         }
