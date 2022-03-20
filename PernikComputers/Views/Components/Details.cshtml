@@ -43,9 +43,22 @@
    })
     </div>
     <div>
-        @foreach(var item in Model.Description)
-        {
-            <p>@item</p>
-        }
+        <h2 class="">Technical Details</h2>
+        <table class="table table-striped">
+            <tbody>
+                @foreach (var item in Model.Description)
+                {
+                    var line = item.Split(':');
+                <tr>
+                    <td>
+                        <strong>@line[0]</strong>
+                    </td>
+                    <td>
+                        @line[1]
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>

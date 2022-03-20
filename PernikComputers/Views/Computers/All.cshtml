@@ -1,17 +1,12 @@
 ﻿@model IEnumerable<ProductAllViewModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Products";
 }
 
 <h1 class="page-title">Products</h1>
 <hr />
-@if (User.IsInRole("Administrator"))
-{
-    <p>
-        <a asp-action="Create">Create Product</a>
-    </p>
-}
+
 <div class="div-m-top">
     <div class="b-inline-top col-3" id="filter-left">
     <form class="filter-form row" asp-action="Index" method="get">
