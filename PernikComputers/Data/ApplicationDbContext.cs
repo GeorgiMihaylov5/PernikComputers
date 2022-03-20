@@ -27,7 +27,7 @@ namespace PernikComputers.Data
         public DbSet<Product> Product { get; set; }
         public DbSet<Computer> Computers { get; set; }
 
-        //public DbSet<Order> Orders { get; set; }
+        public DbSet<Order> Orders { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Client> Clients { get; set; }
 

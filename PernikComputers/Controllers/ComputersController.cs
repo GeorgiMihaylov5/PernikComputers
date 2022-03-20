@@ -58,7 +58,7 @@ namespace PernikComputers.Controllers
                 Model = x.Model,
                 Manufacturer = x.Manufacturer,
                 IsPromotion = x.IsPromotion,
-                Category = Category.Processor,
+                Category = Category.Computer,
                 Description = new List<string>()
                 {
                     $"Processor: {x.Processor.Manufacturer} {x.Processor.Model} ({x.Processor.CPUSpeed}/{x.Processor.CPUBoostSpeed} GHz, {x.Processor.Cache} M, {x.Processor.Cores} cores, {x.Processor.Threads} threads)",

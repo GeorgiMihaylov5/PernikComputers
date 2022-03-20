@@ -218,7 +218,7 @@ namespace PernikComputers.Controllers
                 Model = x.Model,
                 Manufacturer = x.Manufacturer,
                 IsPromotion = x.IsPromotion,
-                Category = Category.Processor,
+                Category = Category.Motherboard,
                 Description = new List<string>()
                 {
                     $"Socket: {x.Socket}",
@@ -367,7 +367,7 @@ namespace PernikComputers.Controllers
                 Model = x.Model,
                 Manufacturer = x.Manufacturer,
                 IsPromotion = x.IsPromotion,
-                Category = Category.Processor,
+                Category = Category.Ram,
                 Description = new List<string>()
                 {
                     $"Capacity: {x.Size} GB",
@@ -529,7 +529,7 @@ namespace PernikComputers.Controllers
                     $"Slot: {x.SlotType}",
                     $"Warranty: {x.Warranty} months"
                 },
-                Category = Category.Processor,
+                Category = Category.VideoCard,
                 Price = x.Price,
                 Quantity = x.Quantity,
                 Image = x.Image,
@@ -680,7 +680,7 @@ namespace PernikComputers.Controllers
                 Model = x.Model,
                 Manufacturer = x.Manufacturer,
                 IsPromotion = x.IsPromotion,
-                Category = Category.Processor,
+                Category = Category.PowerSupply,
                 Description = new List<string>()
                 {
                     $"Power: {x.Power} W",
@@ -825,7 +825,7 @@ namespace PernikComputers.Controllers
                 Model = x.Model,
                 Manufacturer = x.Manufacturer,
                 IsPromotion = x.IsPromotion,
-                Category = Category.Processor,
+                Category = Category.Memory,
                 Price = x.Price,
                 Description = new List<string>()
                 {
@@ -976,7 +976,7 @@ namespace PernikComputers.Controllers
                 Model = x.Model,
                 Manufacturer = x.Manufacturer,
                 IsPromotion = x.IsPromotion,
-                Category = Category.Processor,
+                Category = Category.ComputerCase,
                 Description = new List<string>()
                 {
 
