@@ -33,10 +33,14 @@
                 <p>Not Available</p>
             }
 
-        @*@await Html.PartialAsync("_OrderPartialView", new OrderCreateBindingModel
-            {
-               ProductId = Model.Id
-           })*@
+        @await Html.PartialAsync("_OrderPartialView", new OrderCreateBindingModel
+   {
+       ProductId = Model.Id,
+       Category = Model.Category,
+       Manufacturer = Model.Manufacturer,
+       Model = Model.Model,
+       Price = Model.Price.ToString()
+   })
     </div>
     <div>
         @foreach(var item in Model.Description)

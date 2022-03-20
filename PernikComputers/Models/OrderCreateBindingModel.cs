@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using PernikComputers.Domain.Enum;
+using System.ComponentModel.DataAnnotations;
 
 namespace PernikComputers.Models
 {
@@ -10,5 +11,9 @@ namespace PernikComputers.Models
         [Range(1, int.MaxValue)]
         [Display(Name = "Products")]
         public int Count { get; set; }
+        public Category Category { get; set; }
+        public string Manufacturer { get; set; }
+        public string Model { get; set; }
+        public string Price { get; set; }
     }
 }

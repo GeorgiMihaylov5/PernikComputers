@@ -14,105 +14,105 @@
 }
 <div class="div-m-top">
     <div class="b-inline-top col-3" id="filter-left">
-    <form class="filter-form row" asp-action="Index" method="get">
-       <div class="row" id="filter-price">
-           <h4 class="filter-titles">Price</h4>
-            <input type="number" placeholder="Min price" min="0" name="minPrice"/> 
-            <span id="filter-dash">-</span>
-            <input type="number" placeholder="Max price" min="0" name="maxPrice"/> 
-            <button type="submit"><i class="fa fa-search"></i></button>
-       </div>
-       <div class="row" id="filter-categories">
-         @* <select>
-               @foreach(var item in ViewBag.DropDownCategories)
-                {
-                    <option>@item</option>
-                }
-            </select>*@
-            <h4 class="filter-titles">Categories</h4>
-       </div>
-    </form>
-</div>
+        <form class="filter-form row" asp-action="Index" method="get">
+            <div class="row" id="filter-price">
+                <h4 class="filter-titles">Price</h4>
+                <input type="number" placeholder="Min price" min="0" name="minPrice" />
+                <span id="filter-dash">-</span>
+                <input type="number" placeholder="Max price" min="0" name="maxPrice" />
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </div>
+            <div class="row" id="filter-categories">
+                @* <select>
+                       @foreach(var item in ViewBag.DropDownCategories)
+                        {
+                            <option>@item</option>
+                        }
+                    </select>*@
+                <h4 class="filter-titles">Categories</h4>
+            </div>
+        </form>
+    </div>
 
-<div class="b-inline-top col-md-8" id="products">
-    <ul class="products-list list-group">
-        @foreach(var item in Model)
-        {
-            <li class="products-list-item list-group-item col-md-4">
-               <div>
-                    <a asp-action="@item.DetailsAction" asp-route-id="@item.Id">
-                        <img src="@item.Image" width="200" height="200">
-                        <h5>@item.Manufacturer @item.Model</h5>
-                    </a>
-               </div>
-               <div id="item-price-container">
-                   <span>@item.Price lv.</span>
-                   <a class="btn btn-primary" asp-action="@item.DetailsAction" asp-route-id="@item.Id">SEE MORE</a>
-               </div>
-            </li>
-        }
-    </ul>
-</div>
+    <div class="b-inline-top col-md-8" id="products">
+        <ul class="products-list list-group">
+            @foreach (var item in Model)
+            {
+                <li class="products-list-item list-group-item col-md-4">
+                    <div>
+                        <a asp-action="@item.DetailsAction" asp-route-id="@item.Id">
+                            <img src="@item.Image" width="200" height="200">
+                            <h5>@item.Manufacturer @item.Model</h5>
+                        </a>
+                    </div>
+                    <div id="item-price-container">
+                        <span>@item.Price lv.</span>
+                        <a class="btn btn-primary" asp-action="@item.DetailsAction" asp-route-id="@item.Id">SEE MORE</a>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
 </div>
 
 
 @*@model IEnumerable<PernikComputers.Models.ProductAllViewModel>
 
-@{
-    ViewData["Title"] = "AllProcessors";
-}
+    @{
+        ViewData["Title"] = "AllProcessors";
+    }
 
-<h1>AllProcessors</h1>
+    <h1>AllProcessors</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Manufacturer)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Model)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsPromotion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Image)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Manufacturer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Model)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsPromotion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Image)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Manufacturer)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Model)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsPromotion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Image)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Manufacturer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Model)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsPromotion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Image)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
 *@

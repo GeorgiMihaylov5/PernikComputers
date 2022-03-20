@@ -1,0 +1,29 @@
+﻿@model OrderCreateBindingModel
+
+@{
+    ViewData["ProductsQuantity"] =
+}
+<form asp-controller="Orders" asp-action="Create" method="post">
+    <div class="d-flex align-items-center" style="justify-content: space-evenly">
+        <label class="font-weight-bold text-left mr-1" asp-for="Count">
+            Quantity:
+        </label>
+        <div class="mr-1">
+            <input class="form-control" min="1" asp-for="Count" id="productQuantity" value="1" onclick="CalculatePrice()" />
+            <span asp-validation-for="Count" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-danger">Order</button>
+    </div>
+    <input type="hidden" asp-for="ProductId" value="@Model.ProductId" />
+    <input type="hidden" asp-for="Manufacturer" value="@Model.Manufacturer" />
+    <input type="hidden" asp-for="Model" value="@Model.Model" />
+    <input type="hidden" asp-for="Price" value="@Model.Price" />
+    <input type="hidden" asp-for="Category" value="@Model.Category" />
+</form>
+<script>
+    function CalculatePrice(){
+        let quantity = parseFloat(document.getElementById('productQuantity').value)
+        let pricePerProduct =  parseFloat(document.getElementById('pricePerProduct').textContent)
+        document.getElementById('totalPrice').textContent = (quantity * pricePerProduct).toFixed(2)
+    }
+</script>
