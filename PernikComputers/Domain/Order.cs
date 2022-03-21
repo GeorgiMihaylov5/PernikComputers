@@ -21,7 +21,7 @@ namespace PernikComputers.Domain
         public string Model { get; set; }
         public decimal Price { get; set; }
         public int Count { get; set; }
-        public string Status { get; set; }
+        public OrderStatus Status { get; set; }
         public string Notes { get; set; }
     }
 }

@@ -48,6 +48,7 @@ namespace PernikComputers
             services.AddTransient<IEmployeeService, EmployeeService>();
             services.AddTransient<IClientService, ClientService>();
             services.AddTransient<IOrderService, OrderService>();
+            services.AddTransient<IProductService, ProductService>();
 
             services.Configure<IdentityOptions>(option =>
             {

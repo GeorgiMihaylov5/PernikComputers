@@ -43,7 +43,7 @@ namespace PernikComputers.Controllers
                 }).ToList();
 
 
-            return View("All", processorVM);
+            return View("~/Views/Products/All.cshtml", processorVM);
             //return RedirectToPage("All","Components", processorVM);
         }
 
@@ -77,7 +77,7 @@ namespace PernikComputers.Controllers
                 Image = x.Image,
             };
 
-            return View("Details", detailsViewModel);
+            return View("~/Views/Products/Details.cshtml", detailsViewModel);
         }
 
         public IActionResult Create()
@@ -104,7 +104,7 @@ namespace PernikComputers.Controllers
 
                 if (isCreated)
                 {
-                    return RedirectToAction("All");
+                    return RedirectToAction("~/Views/Products/All.cshtml");
                 }
             }
             return View();

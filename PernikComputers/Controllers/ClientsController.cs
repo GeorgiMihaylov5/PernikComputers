@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Manage.Internal;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using PernikComputers.Abstraction;
 using PernikComputers.Domain;
 using PernikComputers.Models;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace PernikComputers.Controllers
@@ -14,12 +17,17 @@ namespace PernikComputers.Controllers
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IClientService service;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly ILogger<ChangePasswordModel> _logger;
 
-        public ClientsController(UserManager<ApplicationUser> userManager, IClientService service, SignInManager<ApplicationUser> signInManager)
+        public ClientsController(UserManager<ApplicationUser> userManager,
+            IClientService service, 
+            SignInManager<ApplicationUser> signInManager,
+             ILogger<ChangePasswordModel> logger)
         {
             this.userManager = userManager;
             this.service = service;
             this._signInManager = signInManager;
+            _logger = logger;
         }
         // GET: ClientsController
         public IActionResult All()
@@ -90,41 +98,97 @@ namespace PernikComputers.Controllers
 
         public IActionResult Profile()
         {
-            return View();
+            string userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var clientEdit = new ClientCreateViewModel();
+
+            if (User.IsInRole("Employee"))
+            {
+                return RedirectToAction("Profile", "Employees");
+            }
+            else if (User.IsInRole("Administrator"))
+            {
+                var admin = userManager.Users
+                    .FirstOrDefault(x => x.Id == userId);
+
+                clientEdit.FirstName = "Admin";
+                clientEdit.LastName = "Admin";
+                clientEdit.Username = admin.UserName;
+                clientEdit.Email = admin.Email;
+                clientEdit.PhoneNumber = "*********";
+            }
+            else
+            {
+                var client = service.GetClient(userId);
+
+                clientEdit.FirstName = client.FirstName;
+                clientEdit.LastName = client.LastName;
+                clientEdit.Username = client.User.UserName;
+                clientEdit.Email = client.User.Email;
+                clientEdit.PhoneNumber = client.Phone;
+                clientEdit.Address = client.Address;
+            }
+
+            return View(clientEdit);
         }
-
-
-
-
-
-
-
-
-
-
-
-        // GET: ClientsController/Edit/5
-        public IActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: ClientsController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, IFormCollection collection)
+        public IActionResult Profile(ClientCreateViewModel editVm)
         {
-            try
-            {
-                return RedirectToAction();
-            }
-            catch
+            //if (ModelState.IsValid)
+            //{
+            //    var isUpdated = service.Update(createViewModel.Id, createViewModel.Barcode, createViewModel.Name,
+            //        createViewModel.Description, createViewModel.Category, createViewModel.Manufacturer, createViewModel.Warranty,
+            //        createViewModel.Price, createViewModel.Quantity, createViewModel.Image);
+
+            //    if (isUpdated)
+            //    {
+            //        return RedirectToAction("Index");
+            //    }
+            //}
+            //return View(createViewModel);
+            return View();
+        }
+
+
+        public IActionResult Edit()
+        {
+            return View();
+        }
+
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
             {
                 return View();
             }
+
+            var user = await userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return NotFound($"Unable to load user with ID '{userManager.GetUserId(User)}'.");
+            }
+
+            var changePasswordResult = await userManager.ChangePasswordAsync(user, viewModel.OldPassword, viewModel.NewPassword);
+            if (!changePasswordResult.Succeeded)
+            {
+                foreach (var error in changePasswordResult.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+                return View();
+            }
+
+            await _signInManager.RefreshSignInAsync(user);
+            _logger.LogInformation("User changed their password successfully.");
+
+            return RedirectToAction();
         }
 
-        // GET: ClientsController/Delete/5
         public IActionResult Delete(int id)
         {
             return View();

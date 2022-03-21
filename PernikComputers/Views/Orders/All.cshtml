@@ -4,11 +4,9 @@
     ViewData["Title"] = "All";
 }
 
-<h1>All</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div>
+        @await Html.PartialAsync("~/Views/Employees/_ManageLayoutPartialView.cshtml")
+ </div>
 <table class="table">
     <thead>
         <tr>

@@ -16,7 +16,6 @@ namespace PernikComputers.Models
         [Display(Name = "Phone Number")]
         [MaxLength(10)]
         public string PhoneNumber { get; set; }
-        [Required]
         [Display(Name = "Address")]
         [MaxLength(30)]
         public string Address { get; set; }

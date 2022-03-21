@@ -32,7 +32,7 @@ namespace PernikComputers.Controllers
                 }).ToList();
 
             
-            return View("All", processorVM);
+            return View("~/Views/Products/All.cshtml", processorVM);
         }
         public IActionResult CreateProcessor()
         {
@@ -80,7 +80,7 @@ namespace PernikComputers.Controllers
                 Image = x.Image,
             };  
 
-            return View("Details", detailsViewModel);
+            return View("~/Views/Products/Details.cshtml", detailsViewModel);
         }
 
         public IActionResult EditProcessor(string id)
@@ -185,7 +185,7 @@ namespace PernikComputers.Controllers
                 }).ToList();
 
 
-            return View("All", motherboardVM);
+            return View("~/Views/Products/All.cshtml", motherboardVM);
         }
 
         public IActionResult CreateMotherboard()
@@ -233,7 +233,7 @@ namespace PernikComputers.Controllers
                 Image = x.Image,
             };
 
-            return View("Details", detailsViewModel);
+            return View("~/Views/Products/Details.cshtml", detailsViewModel);
         }
 
         public IActionResult EditMotherboard(string id)
@@ -335,7 +335,7 @@ namespace PernikComputers.Controllers
                 }).ToList();
 
 
-            return View("All", ramVM);
+            return View("~/Views/Products/All.cshtml", ramVM);
         }
         public IActionResult CreateRam()
         {
@@ -381,7 +381,7 @@ namespace PernikComputers.Controllers
                 Image = x.Image,
             };
 
-            return View("Details", detailsViewModel);
+            return View("~/Views/Products/Details.cshtml", detailsViewModel);
         }
         public IActionResult EditRam(string id)
         {
@@ -481,7 +481,7 @@ namespace PernikComputers.Controllers
                 }).ToList();
 
 
-            return View("All", videoCardVM);
+            return View("~/Views/Products/All.cshtml", videoCardVM);
         }
 
         public IActionResult CreateVideoCard()
@@ -535,7 +535,7 @@ namespace PernikComputers.Controllers
                 Image = x.Image,
             };
 
-            return View("Details", detailsViewModel);
+            return View("~/Views/Products/Details.cshtml", detailsViewModel);
         }
 
         public IActionResult EditVideoCard(string id)
@@ -646,7 +646,7 @@ namespace PernikComputers.Controllers
                 }).ToList();
 
 
-            return View("All", powerSupplyVM);
+            return View("~/Views/Products/All.cshtml", powerSupplyVM);
         }
 
         public IActionResult CreatePowerSupply()
@@ -693,7 +693,7 @@ namespace PernikComputers.Controllers
                 Image = x.Image,
             };
 
-            return View("Details", detailsViewModel);
+            return View("~/Views/Products/Details.cshtml", detailsViewModel);
         }
 
         public IActionResult EditPowerSupply(string id)
@@ -792,7 +792,7 @@ namespace PernikComputers.Controllers
                 }).ToList();
 
 
-            return View("All", memoryVM);
+            return View("~/Views/Products/All.cshtml", memoryVM);
         }
 
         public IActionResult CreateMemory()
@@ -840,7 +840,7 @@ namespace PernikComputers.Controllers
                 Image = x.Image,
             };
 
-            return View("Details", detailsViewModel);
+            return View("~/Views/Products/Details.cshtml", detailsViewModel);
         }
 
         public IActionResult EditMemory(string id)
@@ -943,7 +943,7 @@ namespace PernikComputers.Controllers
                 }).ToList();
 
 
-            return View("All", computerCaseVM);
+            return View("~/Views/Products/All.cshtml", computerCaseVM);
         }
 
         public IActionResult CreateComputerCase()
@@ -991,7 +991,7 @@ namespace PernikComputers.Controllers
                 Image = x.Image,
             };
 
-            return View("Details", detailsViewModel);
+            return View("~/Views/Products/Details.cshtml", detailsViewModel);
         }
 
         public IActionResult EditComputerCase(string id)

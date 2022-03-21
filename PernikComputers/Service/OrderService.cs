@@ -59,7 +59,8 @@ namespace PernikComputers.Service
                 Category = category,
                 Manufacturer = manufacturer,
                 Model = model,
-                Price = price
+                Price = price,
+                Status = OrderStatus.Pending,
             };
 
             if (category == Category.Processor)

@@ -5,6 +5,7 @@ using PernikComputers.Abstraction;
 using PernikComputers.Domain;
 using PernikComputers.Models;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace PernikComputers.Controllers
@@ -19,16 +20,8 @@ namespace PernikComputers.Controllers
             this.userManager = _userManager;
             this.service = _service;
         }
-        // GET: EmployeeController
         public async Task<IActionResult> All()
         {
-           //var employees = userManager.Users
-           //     .Select(x => new EmployeeListingModel
-           //     {
-           //         Id = x.Id,
-           //         UserName = x.UserName,
-           //         Email = x.Email
-           //     }).ToList();
             var employees = service.GetEmployees()
                 .Select(x => new EmployeeListingModel
                 {
@@ -53,6 +46,7 @@ namespace PernikComputers.Controllers
             employees = employees.OrderByDescending(x => x.IsAdmin).ThenBy(x => x.UserName).ToList();
             return View(employees);
         }
+
         [HttpPost]
         public async Task<IActionResult> Promote(string userId)
         {
@@ -88,13 +82,11 @@ namespace PernikComputers.Controllers
             return RedirectToAction("All");
         }
 
-        // GET: EmployeeController/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: EmployeeController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(EmployeeCreateViewModel employee)
@@ -127,7 +119,6 @@ namespace PernikComputers.Controllers
             return View();
         }
 
-        // GET: EmployeeController/Delete/5
         public IActionResult Delete(string id)
         {
             var employee = service.GetEmployee(id);
@@ -152,7 +143,6 @@ namespace PernikComputers.Controllers
             return View(employeeViewModel);
         }
 
-        // POST: EmployeeController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(string id, string hi, IFormCollection collection)
@@ -166,6 +156,21 @@ namespace PernikComputers.Controllers
                 }
             }
             return View();
+        }
+        public IActionResult Profile()
+        {
+            string userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var clientEdit = new ClientCreateViewModel();
+
+            var employee = service.GetEmployee(userId);
+
+            clientEdit.FirstName = employee.FirstName;
+            clientEdit.LastName = employee.LastName;
+            clientEdit.Username = employee.User.UserName;
+            clientEdit.Email = employee.User.Email;
+            clientEdit.PhoneNumber = employee.Phone;
+
+            return View(clientEdit);
         }
     }
 }

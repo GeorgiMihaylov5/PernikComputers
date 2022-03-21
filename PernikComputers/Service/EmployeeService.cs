@@ -36,12 +36,8 @@ namespace PernikComputers.Service
 
         public Employee GetEmployee(string employeeId)
         {
-            var employee = context.Employees.Find(employeeId);
-
-            if (employee.User == null)
-            {
-                employee.User = context.Users.Find(employee.UserId);
-            }
+            var employee = context.Employees.FirstOrDefault(x => x.UserId == employeeId);
+            employee.User = context.Users.Find(employee.UserId);
 
             return employee;
         }

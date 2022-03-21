@@ -34,11 +34,13 @@ namespace PernikComputers.Service
             return context.SaveChanges() != 0;
         }
 
-        public Client GetClient(string employeeId)
+        public Client GetClient(string id)
         {
-            throw new System.NotImplementedException();
-        }
+            var client = context.Clients.FirstOrDefault(x => x.UserId == id);
+            client.User = context.Users.Find(client.UserId);
 
+            return client;
+        }
         public List<Client> GetClients()
         {
             var list = context.Clients.ToList();
@@ -61,6 +63,11 @@ namespace PernikComputers.Service
         public bool Remove(string employeeId)
         {
             throw new System.NotImplementedException();
+        }
+
+        public bool Update(string id, string firstName, string lastName, string phone, string address)
+        {
+            return false;
         }
     }
 }
