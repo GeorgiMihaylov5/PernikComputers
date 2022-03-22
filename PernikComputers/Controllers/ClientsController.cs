@@ -16,8 +16,8 @@ namespace PernikComputers.Controllers
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IClientService service;
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly ILogger<ChangePasswordModel> _logger;
+        private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly ILogger<ChangePasswordModel> logger;
 
         public ClientsController(UserManager<ApplicationUser> userManager,
             IClientService service, 
@@ -26,8 +26,8 @@ namespace PernikComputers.Controllers
         {
             this.userManager = userManager;
             this.service = service;
-            this._signInManager = signInManager;
-            _logger = logger;
+            this.signInManager = signInManager;
+            this.logger = logger;
         }
         // GET: ClientsController
         public IActionResult All()
@@ -87,7 +87,7 @@ namespace PernikComputers.Controllers
                     {
                         userManager.AddToRoleAsync(user, "Client").Wait();
 
-                        await _signInManager.SignInAsync(user, isPersistent: false);
+                        await signInManager.SignInAsync(user, isPersistent: false);
                         return RedirectToAction("AllProcessors", "Components");
                     }
                 }
@@ -110,6 +110,7 @@ namespace PernikComputers.Controllers
                 var admin = userManager.Users
                     .FirstOrDefault(x => x.Id == userId);
 
+                clientEdit.Id = admin.Id;
                 clientEdit.FirstName = "Admin";
                 clientEdit.LastName = "Admin";
                 clientEdit.Username = admin.UserName;
@@ -120,6 +121,7 @@ namespace PernikComputers.Controllers
             {
                 var client = service.GetClient(userId);
 
+                clientEdit.Id = client.Id;
                 clientEdit.FirstName = client.FirstName;
                 clientEdit.LastName = client.LastName;
                 clientEdit.Username = client.User.UserName;
@@ -183,30 +185,26 @@ namespace PernikComputers.Controllers
                 return View();
             }
 
-            await _signInManager.RefreshSignInAsync(user);
-            _logger.LogInformation("User changed their password successfully.");
+            await signInManager.RefreshSignInAsync(user);
+            logger.LogInformation("User changed their password successfully.");
 
-            return RedirectToAction();
+            return RedirectToAction("Profile");
         }
 
-        public IActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: ClientsController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> Delete(string id)
         {
-            try
+            var isDeleted = service.Remove(id);
+            if (isDeleted)
             {
-                return RedirectToAction();
+                await signInManager.SignOutAsync();
+                logger.LogInformation("User logged out.");
+
+                return RedirectToAction("Index", "Home");
             }
-            catch
-            {
-                return View();
-            }
+
+            return RedirectToAction("Profile");
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace PernikComputers.Domain
 {
-    public class Computer : CommonProperties
+    public class Computer : Product
     {
         public string ProcessorId { get; set; }
         public Processor Processor { get; set; }

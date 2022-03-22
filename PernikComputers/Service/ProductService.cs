@@ -14,9 +14,9 @@ namespace PernikComputers.Service
         {
             this.context = _context;
         }
-        public List<CommonProperties> GetProducts()
+        public List<Product> GetProducts()
         {
-            List<CommonProperties> products = new List<CommonProperties>();
+            List<Product> products = new List<Product>();
             products.AddRange(context.Processors);
             products.AddRange(context.Motherboards);
             products.AddRange(context.Rams);

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Internal;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using PernikComputers.Abstraction;
 using PernikComputers.Domain;
 using PernikComputers.Models;
@@ -14,12 +16,20 @@ namespace PernikComputers.Controllers
     {
         private readonly IEmployeeService service;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly ILogger<LogoutModel> logger;
 
-        public EmployeesController(IEmployeeService _service, UserManager<ApplicationUser> _userManager)
+        public EmployeesController(IEmployeeService service,
+            UserManager<ApplicationUser> userManager, 
+            SignInManager<ApplicationUser> signInManager, 
+            ILogger<LogoutModel> logger)
         {
-            this.userManager = _userManager;
-            this.service = _service;
+            this.service = service;
+            this.userManager = userManager;
+            this.signInManager = signInManager;
+            this.logger = logger;
         }
+
         public async Task<IActionResult> All()
         {
             var employees = service.GetEmployees()
@@ -119,43 +129,44 @@ namespace PernikComputers.Controllers
             return View();
         }
 
-        public IActionResult Delete(string id)
-        {
-            var employee = service.GetEmployee(id);
+        //public IActionResult Delete(string id)
+        //{
+        //    var employee = service.GetEmployee(id);
 
-            if (employee == null)
-            {
-                return NotFound();
-            }
+        //    if (employee == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            EmployeeListingModel employeeViewModel = new EmployeeListingModel
-            {
-                Id = employee.Id,
-                FirstName = employee.FirstName,
-                LastName = employee.LastName,
-                Phone = employee.Phone,
-                JobTitle = employee.JobTitle,
-                UserId = employee.UserId,
-                UserName = employee.User.UserName,
-                Email = employee.User.Email
-            };
+        //    EmployeeListingModel employeeViewModel = new EmployeeListingModel
+        //    {
+        //        Id = employee.Id,
+        //        FirstName = employee.FirstName,
+        //        LastName = employee.LastName,
+        //        Phone = employee.Phone,
+        //        JobTitle = employee.JobTitle,
+        //        UserId = employee.UserId,
+        //        UserName = employee.User.UserName,
+        //        Email = employee.User.Email
+        //    };
 
-            return View(employeeViewModel);
-        }
+        //    return View(employeeViewModel);
+        //}
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(string id, string hi, IFormCollection collection)
+        public async Task<IActionResult> Delete(string id)
         {
-            if (hi == "true")
+            var isDeleted = service.Remove(id);
+            if (isDeleted)
             {
-                var isDeleted = service.Remove(id);
-                if (isDeleted)
-                {
-                    return this.RedirectToAction("All");
-                }
+                await signInManager.SignOutAsync();
+                logger.LogInformation("User logged out.");
+
+                return RedirectToAction("Index", "Home");
             }
-            return View();
+
+            return RedirectToAction("Profile");
         }
         public IActionResult Profile()
         {
@@ -164,13 +175,14 @@ namespace PernikComputers.Controllers
 
             var employee = service.GetEmployee(userId);
 
+            clientEdit.Id = employee.Id;
             clientEdit.FirstName = employee.FirstName;
             clientEdit.LastName = employee.LastName;
             clientEdit.Username = employee.User.UserName;
             clientEdit.Email = employee.User.Email;
             clientEdit.PhoneNumber = employee.Phone;
 
-            return View(clientEdit);
+            return View("~/Views/Clients/Profile.cshtml",clientEdit);
         }
     }
 }

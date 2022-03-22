@@ -5,6 +5,6 @@ namespace PernikComputers.Abstraction
 {
     public interface IProductService
     {
-        public List<CommonProperties> GetProducts();
+        public List<Product> GetProducts();
     }
 }

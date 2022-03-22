@@ -2,7 +2,7 @@
 
 namespace PernikComputers.Domain
 {
-    public class Motherboard : CommonProperties
+    public class Motherboard : Product
     {
         public string Socket { get; set; }
         public string Chipset { get; set; }

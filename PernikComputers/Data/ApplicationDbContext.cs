@@ -24,12 +24,13 @@ namespace PernikComputers.Data
         public DbSet<ComputerCase> ComputerCases { get; set; }
 
 
-        public DbSet<Product> Product { get; set; }
+        public DbSet<AppProduct> AppProducts { get; set; }
         public DbSet<Computer> Computers { get; set; }
 
         public DbSet<Order> Orders { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Client> Clients { get; set; }
+        public DbSet<Product> Products { get; set; }
 
         //protected override void OnModelCreating(ModelBuilder builder)
         //{

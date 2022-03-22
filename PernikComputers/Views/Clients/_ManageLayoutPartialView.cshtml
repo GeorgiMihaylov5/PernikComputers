@@ -1,13 +1,13 @@
 ﻿    <div>
-        <ul class="nav nav-pills flex-column">
+        <ul class="nav nav-pills flex-column" id="accountMenu">
             <li class="nav-item">
-                  <a  class="nav-link" asp-action="Profile" asp-controller="Clients">Profile</a>
+                  <a  class="btn nav-link" asp-action="Profile" asp-controller="Clients">Profile</a>
             </li>
             <li class="nav-item">
-                <a  class="nav-link" asp-action="My" asp-controller="Orders">Orders</a>
+                <a  class="btn nav-link" asp-action="My" asp-controller="Orders">Orders</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" asp-action="ChangePassword" asp-controller="Clients">Change Password</a>
+                <a class="btn nav-link" asp-action="ChangePassword" asp-controller="Clients">Change Password</a>
             </li>
           @*if (User.IsInRole("Administrator"))
             {
@@ -23,3 +23,17 @@
             }*@
         </ul>
     </div>
+    <script>
+        let url = window.location.pathname.split('/')
+        let btns = document.getElementsByClassName("btn");
+
+            if (url[url.length - 1] == 'Profile') {
+                btns[1].className += " active";
+        }
+        else if (url[url.length - 1] == 'My') {
+            btns[2].className += " active";
+        }
+        else if (url[url.length - 1] == 'ChangePassword') {
+            btns[3].className += " active";
+        }
+    </script>

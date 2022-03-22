@@ -1,6 +1,6 @@
 ﻿namespace PernikComputers.Domain
 {
-    public class ComputerCase : CommonProperties
+    public class ComputerCase : Product
     {
         public string CaseType { get; set; }
         public string FormFactor { get; set; }

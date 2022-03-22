@@ -33,7 +33,7 @@
                 <p>Not Available</p>
             }
 
-        @await Html.PartialAsync("_OrderPartialView", new OrderCreateBindingModel
+        @await Html.PartialAsync("~/Views/Products/_OrderPartialView.cshtml", new OrderCreateBindingModel
    {
        ProductId = Model.Id,
        Category = Model.Category,

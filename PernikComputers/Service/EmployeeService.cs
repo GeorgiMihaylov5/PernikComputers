@@ -64,10 +64,16 @@ namespace PernikComputers.Service
         public bool Remove(string employeeId)
         {
             var employee = context.Employees.Find(employeeId);
+            var myOrders = context.Orders.Where(x => x.CustomerId == employee.UserId);
 
             if (employee == null)
             {
                 return false;
+            }
+
+            foreach (var order in myOrders)
+            {
+                context.Orders.Remove(order);
             }
             var user = context.Users.Find(employee.UserId);
 

@@ -55,14 +55,32 @@ namespace PernikComputers.Service
             return list;
         }
 
-        public string GetFullName(string employeeId)
+        public string GetFullName(string clientId)
         {
             throw new System.NotImplementedException();
         }
 
-        public bool Remove(string employeeId)
+        public bool Remove(string clientId)
         {
-            throw new System.NotImplementedException();
+            var client = context.Clients.Find(clientId);
+            var myOrders = context.Orders.Where(x => x.CustomerId == client.UserId);
+
+            if (client == null)
+            {
+                return false;
+            }
+
+            foreach (var order in myOrders)
+            {
+                context.Orders.Remove(order);
+            }
+
+            var user = context.Users.Find(client.UserId);
+
+            context.Users.Remove(user);
+            context.Clients.Remove(client);
+
+            return context.SaveChanges() != 0;
         }
 
         public bool Update(string id, string firstName, string lastName, string phone, string address)

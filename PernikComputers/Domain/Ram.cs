@@ -2,7 +2,7 @@
 
 namespace PernikComputers.Domain
 {
-    public class Ram: CommonProperties
+    public class Ram: Product
     {
         public int Size { get; set; }
         public TypeRam TypeRam { get; set; }

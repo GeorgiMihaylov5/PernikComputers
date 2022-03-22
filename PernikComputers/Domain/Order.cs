@@ -14,12 +14,12 @@ namespace PernikComputers.Domain
         public DateTime OrderedOn { get; set; }
         public Category Category { get; set; }
         public string ProductId { get; set; }
-        //public CommonProperties Product { get; set; }
+        public Product Product { get; set; }
         public string CustomerId { get; set; }
         public ApplicationUser Customer { get; set; }
-        public string Manufacturer { get; set; }
-        public string Model { get; set; }
-        public decimal Price { get; set; }
+        //public string Manufacturer { get; set; }
+        //public string Model { get; set; }
+        //public decimal Price { get; set; }
         public int Count { get; set; }
         public OrderStatus Status { get; set; }
         public string Notes { get; set; }

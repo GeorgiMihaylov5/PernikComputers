@@ -2,7 +2,7 @@
 
 namespace PernikComputers.Domain
 {
-    public class Memory : CommonProperties
+    public class Memory : Product
     {
         public MemoryType MemoryType { get; set; }
         public string FormFactor { get; set; }

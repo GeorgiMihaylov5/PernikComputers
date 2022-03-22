@@ -26,12 +26,12 @@ namespace PernikComputers.Controllers
                 .Select(x => new OrderListingViewModel
                 {
                     Id = x.Id,
-                    OrderedOn = x.OrderedOn.ToString("dd-mm,yyyy hh:mm", CultureInfo.InvariantCulture),
+                    OrderedOn = x.OrderedOn.ToString("dd-MMM,yyyy hh:mm", CultureInfo.InvariantCulture),
                     ProductId = x.ProductId,
-                    Model = x.Model,
-                    Manufacturer = x.Manufacturer,
+                    Model = x.Product.Model,
+                    Manufacturer = x.Product.Manufacturer,
                     Category = x.Category.ToString(),
-                    ProductPrice = x.Price.ToString(),
+                    ProductPrice = x.Product.Price.ToString(),
                     CustomerId = x.CustomerId,
                     CustomerUsername = x.Customer.UserName,
                     Quantity = x.Count
@@ -48,12 +48,12 @@ namespace PernikComputers.Controllers
                 .Select(x => new OrderListingViewModel
                 {
                     Id = x.Id,
-                    OrderedOn = x.OrderedOn.ToString("dd-mm,yyyy hh:mm", CultureInfo.InvariantCulture),
+                    OrderedOn = x.OrderedOn.ToString("dd-MMM,yyyy hh:mm", CultureInfo.InvariantCulture),
                     ProductId = x.ProductId,
-                    Model = x.Model,
-                    Manufacturer = x.Manufacturer,
+                    Model = x.Product.Model,
+                    Manufacturer = x.Product.Manufacturer,
                     Category = x.Category.ToString(),
-                    ProductPrice = x.Price.ToString(),
+                    ProductPrice = x.Product.Price.ToString(),
                     CustomerId = x.CustomerId,
                     CustomerUsername = x.Customer.UserName,
                     Quantity = x.Count

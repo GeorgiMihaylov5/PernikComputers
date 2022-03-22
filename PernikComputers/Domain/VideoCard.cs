@@ -2,7 +2,7 @@
 
 namespace PernikComputers.Domain
 {
-    public class VideoCard : CommonProperties
+    public class VideoCard : Product
     {
         public ChipManufacturer ChipManufacturer { get; set; }
         public string GraphicProcessor{ get; set; }

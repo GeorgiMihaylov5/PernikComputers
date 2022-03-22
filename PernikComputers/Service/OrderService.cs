@@ -32,9 +32,11 @@ namespace PernikComputers.Service
         public List<Order> My(string customerId)
         {
             var orders = context.Orders.Where(x => x.CustomerId == customerId).ToList();
+            var list = context.Products.ToList();
 
             foreach (var order in orders)
             {
+                order.Product = context.Products.Find(order.ProductId);
                 order.Customer = context.Users.Find(order.CustomerId);
             }
 
@@ -57,9 +59,6 @@ namespace PernikComputers.Service
                 Count = count,
                 CustomerId = customerId,
                 Category = category,
-                Manufacturer = manufacturer,
-                Model = model,
-                Price = price,
                 Status = OrderStatus.Pending,
             };
 

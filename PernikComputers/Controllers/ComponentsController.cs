@@ -28,7 +28,15 @@ namespace PernikComputers.Controllers
                     Price = x.Price,
                     IsPromotion = x.IsPromotion,
                     Image = x.Image,
-                    DetailsAction = "DetailsProcessor"
+                    DetailsAction = "DetailsProcessor",
+                    Description = new List<string>()
+                    {
+                        $"Socket: {x.Socket}",
+                        $"Operating frequency: {x.CPUSpeed} GHz",
+                        $"Turbo Boost: {x.CPUBoostSpeed} GHz",
+                        $"Cores: {x.Cores}",
+                        $"Threads: {x.Threads}",
+                    },
                 }).ToList();
 
             
@@ -181,7 +189,13 @@ namespace PernikComputers.Controllers
                     Price = x.Price,
                     IsPromotion = x.IsPromotion,
                     Image = x.Image,
-                    DetailsAction = "DetailsMotherboard"
+                    DetailsAction = "DetailsMotherboard",
+                    Description = new List<string>()
+                {
+                    $"Socket: {x.Socket}",
+                    $"Chipset: {x.Chipset}",
+                    $"Supported memory: {x.TypeRam}",
+                }
                 }).ToList();
 
 
@@ -331,7 +345,13 @@ namespace PernikComputers.Controllers
                     Price = x.Price,
                     IsPromotion = x.IsPromotion,
                     Image = x.Image,
-                    DetailsAction = "DetailsRam"
+                    DetailsAction = "DetailsRam",
+                    Description = new List<string>()
+                {
+                    $"Capacity: {x.Size} GB",
+                    $"Type: {x.TypeRam}",
+                    $"Frequency: {x.Frequency} MHz"
+                }
                 }).ToList();
 
 
@@ -477,7 +497,13 @@ namespace PernikComputers.Controllers
                     Price = x.Price,
                     IsPromotion = x.IsPromotion,
                     Image = x.Image,
-                    DetailsAction = "DetailsVideoCard"
+                    DetailsAction = "DetailsVideoCard",
+                    Description = new List<string>()
+                {
+                    $"Graphic Processor: {x.GraphicProcessor}",
+                    $"Memory capacity: {x.SizeMemory } GB",
+                    $"Memory type: {x.TypeMemory}",
+                }
                 }).ToList();
 
 
@@ -642,7 +668,12 @@ namespace PernikComputers.Controllers
                     Price = x.Price,
                     IsPromotion = x.IsPromotion,
                     Image = x.Image,
-                    DetailsAction = "DetailsPowerSupply"
+                    DetailsAction = "DetailsPowerSupply",
+                    Description = new List<string>()
+                {
+                    $"Power: {x.Power} W",
+                    $"Efficiency: {x.Efficiency}%"
+                }
                 }).ToList();
 
 
@@ -788,7 +819,12 @@ namespace PernikComputers.Controllers
                     Price = x.Price,
                     IsPromotion = x.IsPromotion,
                     Image = x.Image,
-                    DetailsAction = "DetailsMemory"
+                    DetailsAction = "DetailsMemory",
+                    Description = new List<string>()
+                {
+                    $"Type: {x.MemoryType} W",
+                    $"Capacity: {x.Capacity} GB",
+                }
                 }).ToList();
 
 
@@ -939,7 +975,13 @@ namespace PernikComputers.Controllers
                     Price = x.Price,
                     IsPromotion = x.IsPromotion,
                     Image = x.Image,
-                    DetailsAction = "DetailsComputerCases"
+                    DetailsAction = "DetailsComputerCase",
+                    Description = new List<string>()
+                {
+                    $"Type: {x.CaseType} W",
+                    $"Form factor: {x.FormFactor}",
+                    $"Size: {x.CaseSize} mm",
+                }
                 }).ToList();
 
 
@@ -979,11 +1021,10 @@ namespace PernikComputers.Controllers
                 Category = Category.ComputerCase,
                 Description = new List<string>()
                 {
-
                     $"Type: {x.CaseType} W",
                     $"Form factor: {x.FormFactor}",
                     $"Size: {x.CaseSize} mm",
-                    $"Reading speed: {x.Color }",
+                    $"Color: {x.Color }",
                     $"Warranty: {x.Warranty} months"
                 },
                 Price = x.Price,

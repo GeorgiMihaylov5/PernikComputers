@@ -1,6 +1,6 @@
 ﻿namespace PernikComputers.Domain
 {
-    public class Processor: CommonProperties
+    public class Processor: Product
     {
         public string Socket { get; set; }
         public double CPUSpeed { get; set; }
