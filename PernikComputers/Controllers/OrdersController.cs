@@ -34,7 +34,9 @@ namespace PernikComputers.Controllers
                     ProductPrice = x.Product.Price.ToString(),
                     CustomerId = x.CustomerId,
                     CustomerUsername = x.Customer.UserName,
-                    Quantity = x.Count
+                    Quantity = x.Count,
+                    Status = x.Status.ToString(),
+                    TotalPrice = (x.Count * x.Product.Price).ToString()
 
                 }).ToList();
 
@@ -56,7 +58,9 @@ namespace PernikComputers.Controllers
                     ProductPrice = x.Product.Price.ToString(),
                     CustomerId = x.CustomerId,
                     CustomerUsername = x.Customer.UserName,
-                    Quantity = x.Count
+                    Quantity = x.Count,
+                    Status = x.Status.ToString(),
+                    TotalPrice = (x.Count * x.Product.Price).ToString()
 
                 }).ToList();
 

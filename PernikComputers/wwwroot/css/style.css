@@ -126,6 +126,7 @@
 
     #filter-left {
         max-width: 59%;
+        margin: auto;
     }
 
     .details-item-price {
@@ -158,3 +159,24 @@
 .pointer:hover {
     cursor: pointer;
 }
+/*-----------MyOrders---------------*/
+#order-date {
+   
+}
+.order-container {
+    border: 2px solid #00a8b9;
+    border-radius: 10px;
+    padding: 20px;
+}
+.order-details-btn {
+    background-color: #1b6ec2;
+    color: white;
+}
+.order-price-p {
+    display: inline-block;
+}
+.order-container-flex {
+    display: flex;
+    justify-content: space-between;
+}
+

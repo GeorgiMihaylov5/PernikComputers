@@ -14,8 +14,10 @@ namespace PernikComputers.Models
         public string Model { get; set; }
         public string Category { get; set; }
         public string ProductPrice { get; set; }
+        public string TotalPrice { get; set; }
         public string CustomerId { get; set; }
         public string CustomerUsername { get; set; }
         public int Quantity { get; set; }
+        public string Status { get; set; }
     }
 }

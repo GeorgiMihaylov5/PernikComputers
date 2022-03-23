@@ -57,7 +57,13 @@ namespace PernikComputers.Service
 
         public string GetFullName(string clientId)
         {
-            throw new System.NotImplementedException();
+            var client = context.Clients.Find(clientId);
+
+            if (client == null)
+            {
+                return null;
+            }
+            return $"{client.FirstName} {client.LastName}";
         }
 
         public bool Remove(string clientId)
