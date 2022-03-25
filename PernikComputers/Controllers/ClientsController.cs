@@ -29,7 +29,7 @@ namespace PernikComputers.Controllers
             this.signInManager = signInManager;
             this.logger = logger;
         }
-        // GET: ClientsController
+
         public IActionResult All()
         {
             var employees = service.GetClients()
@@ -50,19 +50,11 @@ namespace PernikComputers.Controllers
             return View(employees);
         }
 
-        // GET: ClientsController/Details/5
-        public IActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: ClientsController/Create
         public IActionResult Register()
         {
             return View();
         }
 
-        // POST: ClientsController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(ClientCreateViewModel client)
@@ -148,12 +140,6 @@ namespace PernikComputers.Controllers
             //    }
             //}
             //return View(createViewModel);
-            return View();
-        }
-
-
-        public IActionResult Edit()
-        {
             return View();
         }
 

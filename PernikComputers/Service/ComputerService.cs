@@ -1,4 +1,5 @@
-﻿using PernikComputers.Abstraction;
+﻿using Microsoft.EntityFrameworkCore;
+using PernikComputers.Abstraction;
 using PernikComputers.Data;
 using PernikComputers.Domain;
 using System.Collections.Generic;
@@ -34,7 +35,14 @@ namespace PernikComputers.Service
                 Price = price,
                 Warranty = warranty,
                 Quantity = quantity,
-                Image = image
+                Image = image,
+                Processor = context.Processors.Find(processorId),
+                Motherboard = context.Motherboards.Find(motherboardId),
+                Ram = context.Rams.Find(ramId),
+                VideoCard = context.VideoCards.Find(videoCardId),
+                PowerSupply = context.PowerSupplies.Find(powerSupplyId),
+                Memory = context.Memories.Find(memoryId),
+                ComputerCase = context.ComputerCases.Find(computerCaseId)
             };
             context.Computers.Add(computer);
             return context.SaveChanges() != 0;
@@ -42,49 +50,40 @@ namespace PernikComputers.Service
 
         public Computer GetComputer(string id)
         {
-            var computer = context.Computers.Find(id);
-
-            computer.Processor = context.Processors.Find(computer.ProcessorId);
-            computer.Motherboard = context.Motherboards.Find(computer.MotherboardId);
-            computer.Ram = context.Rams.Find(computer.RamId);
-            computer.VideoCard = context.VideoCards.Find(computer.VideoCardId);
-            computer.PowerSupply = context.PowerSupplies.Find(computer.PowerSupplyId);
-            computer.Memory = context.Memories.Find(computer.MemoryId);
-            computer.ComputerCase = context.ComputerCases.Find(computer.ComputerCaseId);
-
-            return computer;
+            return context.Computers.Include(x => x.Processor)
+                .Include(x => x.Motherboard)
+                .Include(x => x.Ram)
+                .Include(x => x.VideoCard)
+                .Include(x => x.PowerSupply)
+                .Include(x => x.Memory)
+                .Include(x => x.ComputerCase).FirstOrDefault(x => x.Id == id);
         }
 
         public List<Computer> GetComputers()
         {
-            var computers = context.Computers.ToList();
-
-            foreach (var computer in computers)
-            {
-                computer.Processor = context.Processors.Find(computer.ProcessorId);
-                computer.Motherboard = context.Motherboards.Find(computer.MotherboardId);
-                computer.Ram = context.Rams.Find(computer.RamId);
-                computer.VideoCard = context.VideoCards.Find(computer.VideoCardId);
-                computer.PowerSupply = context.PowerSupplies.Find(computer.PowerSupplyId);
-                computer.Memory = context.Memories.Find(computer.MemoryId);
-                computer.ComputerCase = context.ComputerCases.Find(computer.ComputerCaseId);
-            }
-            return computers;
+            return context.Computers
+                .Include(x => x.Processor)
+                .Include(x => x.Motherboard)
+                .Include(x => x.Ram)
+                .Include(x => x.VideoCard)
+                .Include(x => x.PowerSupply)
+                .Include(x => x.Memory)
+                .Include(x => x.ComputerCase).ToList();
         }
 
-        public bool RemoveComputer(string id)
-        {
-            var computer = context.Computers.Find(id);
+        //public bool RemoveComputer(string id)
+        //{
+        //    var computer = context.Computers.Find(id);
 
-            if (computer == null)
-            {
-                return false;
-            }
+        //    if (computer == null)
+        //    {
+        //        return false;
+        //    }
 
-            context.Computers.Remove(computer);
+        //    context.Computers.Remove(computer);
 
-            return context.SaveChanges() != 0;
-        }
+        //    return context.SaveChanges() != 0;
+        //}
 
         public bool UpdateComputer(string id, string processorId, string motherboardId, string ramId, string videoCardId, string powerSupplyId, string memoryId, string computerCaseId, string barcode, string manufacturer, string model, int warranty, decimal price, int quantity, string image)
         {

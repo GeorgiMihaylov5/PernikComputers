@@ -3,18 +3,18 @@
     public class Computer : Product
     {
         public string ProcessorId { get; set; }
-        public Processor Processor { get; set; }
+        public virtual Processor Processor { get; set; }
         public string MotherboardId { get; set; }
-        public Motherboard Motherboard { get; set; }
+        public virtual Motherboard Motherboard { get; set; }
         public string RamId { get; set; }
-        public Ram Ram { get; set; }
+        public virtual Ram Ram { get; set; }
         public string VideoCardId { get; set; }
-        public VideoCard VideoCard { get; set; }
+        public virtual VideoCard VideoCard { get; set; }
         public string PowerSupplyId { get; set; }
-        public PowerSupply PowerSupply { get; set; }
+        public virtual PowerSupply PowerSupply { get; set; }
         public string MemoryId { get; set; }
-        public Memory Memory { get; set; }
+        public virtual Memory Memory { get; set; }
         public string ComputerCaseId { get; set; }
-        public ComputerCase ComputerCase { get; set; }
+        public virtual ComputerCase ComputerCase { get; set; }
     }
 }

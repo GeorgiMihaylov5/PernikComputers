@@ -247,96 +247,96 @@ namespace PernikComputers.Service
 
 
         //------------------Remove-------------------
-        public bool RemoveProcessor(string id)
-        {
-            var item = context.Processors.Find(id);
+        //public bool RemoveProcessor(string id)
+        //{
+        //    var item = context.Processors.Find(id);
 
-            if (item == null)
-            {
-                return false;
-            }
-            context.Processors.Remove(item);
+        //    if (item == null)
+        //    {
+        //        return false;
+        //    }
+        //    context.Processors.Remove(item);
 
-            return context.SaveChanges() != 0;
-        }
+        //    return context.SaveChanges() != 0;
+        //}
 
-        public bool RemoveMotherboard(string id)
-        {
-            var item = context.Motherboards.Find(id);
+        //public bool RemoveMotherboard(string id)
+        //{
+        //    var item = context.Motherboards.Find(id);
 
-            if (item == null)
-            {
-                return false;
-            }
-            context.Motherboards.Remove(item);
+        //    if (item == null)
+        //    {
+        //        return false;
+        //    }
+        //    context.Motherboards.Remove(item);
 
-            return context.SaveChanges() != 0;
-        }
+        //    return context.SaveChanges() != 0;
+        //}
 
-        public bool RemoveRam(string id)
-        {
-            var item = context.Rams.Find(id);
+        //public bool RemoveRam(string id)
+        //{
+        //    var item = context.Rams.Find(id);
 
-            if (item == null)
-            {
-                return false;
-            }
-            context.Rams.Remove(item);
+        //    if (item == null)
+        //    {
+        //        return false;
+        //    }
+        //    context.Rams.Remove(item);
 
-            return context.SaveChanges() != 0;
-        }
+        //    return context.SaveChanges() != 0;
+        //}
 
-        public bool RemoveVideoCard(string id)
-        {
-            var item = context.VideoCards.Find(id);
+        //public bool RemoveVideoCard(string id)
+        //{
+        //    var item = context.VideoCards.Find(id);
 
-            if (item == null)
-            {
-                return false;
-            }
-            context.VideoCards.Remove(item);
+        //    if (item == null)
+        //    {
+        //        return false;
+        //    }
+        //    context.VideoCards.Remove(item);
 
-            return context.SaveChanges() != 0;
-        }
+        //    return context.SaveChanges() != 0;
+        //}
 
-        public bool RemovePowerSupply(string id)
-        {
-            var item = context.PowerSupplies.Find(id);
+        //public bool RemovePowerSupply(string id)
+        //{
+        //    var item = context.PowerSupplies.Find(id);
 
-            if (item == null)
-            {
-                return false;
-            }
-            context.PowerSupplies.Remove(item);
+        //    if (item == null)
+        //    {
+        //        return false;
+        //    }
+        //    context.PowerSupplies.Remove(item);
 
-            return context.SaveChanges() != 0;
-        }
+        //    return context.SaveChanges() != 0;
+        //}
 
-        public bool RemoveMemory(string id)
-        {
-            var item = context.Memories.Find(id);
+        //public bool RemoveMemory(string id)
+        //{
+        //    var item = context.Memories.Find(id);
 
-            if (item == null)
-            {
-                return false;
-            }
-            context.Memories.Remove(item);
+        //    if (item == null)
+        //    {
+        //        return false;
+        //    }
+        //    context.Memories.Remove(item);
 
-            return context.SaveChanges() != 0;
-        }
+        //    return context.SaveChanges() != 0;
+        //}
 
-        public bool RemoveComputerCase(string id)
-        {
-            var item = context.ComputerCases.Find(id);
+        //public bool RemoveComputerCase(string id)
+        //{
+        //    var item = context.ComputerCases.Find(id);
 
-            if (item == null)
-            {
-                return false;
-            }
-            context.ComputerCases.Remove(item);
+        //    if (item == null)
+        //    {
+        //        return false;
+        //    }
+        //    context.ComputerCases.Remove(item);
 
-            return context.SaveChanges() != 0;
-        }
+        //    return context.SaveChanges() != 0;
+        //}
 
         //------------------Update---------------
 

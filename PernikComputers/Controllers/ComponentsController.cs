@@ -11,10 +11,12 @@ namespace PernikComputers.Controllers
     public class ComponentsController : Controller
     {
         private readonly IComponentService service;
+        private readonly IProductService productService;
 
-        public ComponentsController(IComponentService _service)
+        public ComponentsController(IComponentService _service, IProductService productService)
         {
             this.service = _service;
+            this.productService = productService;
         }
         //--------Processors---------
         public IActionResult AllProcessors()
@@ -168,7 +170,7 @@ namespace PernikComputers.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteProcessor(string id, IFormCollection collection)
         {
-            var isDeleted = service.RemoveProcessor(id);
+            var isDeleted = productService.RemoveProduct(id);
             if (isDeleted)
             {
                 return this.RedirectToAction("AllProcessors");
@@ -325,7 +327,7 @@ namespace PernikComputers.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteMotherboard(string id, IFormCollection collection)
         {
-            var isDeleted = service.RemoveMotherboard(id);
+            var isDeleted = productService.RemoveProduct(id);
             if (isDeleted)
             {
                 return this.RedirectToAction("AllMotherboards");
@@ -476,7 +478,7 @@ namespace PernikComputers.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteRam(string id, IFormCollection collection)
         {
-            var isDeleted = service.RemoveRam(id);
+            var isDeleted = productService.RemoveProduct(id);
             if (isDeleted)
             {
                 return this.RedirectToAction("AllRams");
@@ -647,7 +649,7 @@ namespace PernikComputers.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteVideoCard(string id, IFormCollection collection)
         {
-            var isDeleted = service.RemoveVideoCard(id);
+            var isDeleted = productService.RemoveProduct(id);
             if (isDeleted)
             {
                 return this.RedirectToAction("AllVideoCards");
@@ -798,7 +800,7 @@ namespace PernikComputers.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeletePowerSupply(string id, IFormCollection collection)
         {
-            var isDeleted = service.RemovePowerSupply(id);
+            var isDeleted = productService.RemoveProduct(id);
             if (isDeleted)
             {
                 return this.RedirectToAction("AllPowerSupplies");
@@ -954,7 +956,7 @@ namespace PernikComputers.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteMemory(string id, IFormCollection collection)
         {
-            var isDeleted = service.RemoveMemory(id);
+            var isDeleted = productService.RemoveProduct(id);
             if (isDeleted)
             {
                 return this.RedirectToAction("AllMemories");
@@ -1108,7 +1110,7 @@ namespace PernikComputers.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteComputerCase(string id, IFormCollection collection)
         {
-            var isDeleted = service.RemoveComputerCase(id);
+            var isDeleted = productService.RemoveProduct(id);
             if (isDeleted)
             {
                 return this.RedirectToAction("AllComputerCases");

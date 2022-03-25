@@ -6,5 +6,6 @@ namespace PernikComputers.Abstraction
     public interface IProductService
     {
         public List<Product> GetProducts();
+        public bool RemoveProduct(string id);
     }
 }

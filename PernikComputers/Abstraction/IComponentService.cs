@@ -37,13 +37,13 @@ namespace PernikComputers.Abstraction
         public Memory GetMemory(string id);
         public ComputerCase GetComputerCase(string id);
 
-        public bool RemoveProcessor(string id);
-        public bool RemoveMotherboard(string id);
-        public bool RemoveRam(string id);
-        public bool RemoveVideoCard(string id);
-        public bool RemovePowerSupply(string id);
-        public bool RemoveMemory(string id);
-        public bool RemoveComputerCase(string id);
+        //public bool RemoveProcessor(string id);
+        //public bool RemoveMotherboard(string id);
+        //public bool RemoveRam(string id);
+        //public bool RemoveVideoCard(string id);
+        //public bool RemovePowerSupply(string id);
+        //public bool RemoveMemory(string id);
+        //public bool RemoveComputerCase(string id);
 
         public bool UpdateProcessor(string id, string socket, double cpuSpeed, double cpuBoostSpeed, int cores, int threads, int cache,
             string barcode, string manufacturer, string model, int warranty, decimal price, int quantity, string image);

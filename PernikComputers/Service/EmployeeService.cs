@@ -1,4 +1,5 @@
-﻿using PernikComputers.Abstraction;
+﻿using Microsoft.EntityFrameworkCore;
+using PernikComputers.Abstraction;
 using PernikComputers.Data;
 using PernikComputers.Domain;
 using System;
@@ -28,7 +29,8 @@ namespace PernikComputers.Service
                 LastName = lastName,
                 JobTitle = jobTitle,
                 UserId = userId,
-                Phone = phone
+                Phone = phone,
+                User = context.Users.Find(userId)
             };
             context.Employees.Add(employee);
             return context.SaveChanges() != 0;
@@ -36,29 +38,23 @@ namespace PernikComputers.Service
 
         public Employee GetEmployee(string employeeId)
         {
-            var employee = context.Employees.FirstOrDefault(x => x.UserId == employeeId);
-            employee.User = context.Users.Find(employee.UserId);
-
-            return employee;
+            return context.Employees.Include(x => x.User).FirstOrDefault(x => x.UserId == employeeId);
         }
 
         public List<Employee> GetEmployees()
         {
-            var list = context.Employees.ToList();
-
-            foreach (var item in list)
-            {
-                if (item.User == null)
-                {
-                    item.User = context.Users.Find(item.UserId);
-                }
-            }
-            return list;
+            return context.Employees.Include(x => x.User).ToList();
         }
 
         public string GetFullName(string employeeId)
         {
-            throw new System.NotImplementedException();
+            var employee = context.Employees.Find(employeeId);
+
+            if (employee == null)
+            {
+                return null;
+            }
+            return $"{employee.FirstName} {employee.LastName}";
         }
 
         public bool Remove(string employeeId)

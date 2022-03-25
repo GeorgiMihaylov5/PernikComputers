@@ -28,5 +28,17 @@ namespace PernikComputers.Service
 
             return products;
         }
+        public bool RemoveProduct(string id)
+        {
+            var item = context.Products.Find(id);
+
+            if (item == null)
+            {
+                return false;
+            }
+            context.Products.Remove(item);
+
+            return context.SaveChanges() != 0;
+        }
     }
 }

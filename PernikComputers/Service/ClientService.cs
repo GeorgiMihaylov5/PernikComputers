@@ -1,4 +1,5 @@
-﻿using PernikComputers.Abstraction;
+﻿using Microsoft.EntityFrameworkCore;
+using PernikComputers.Abstraction;
 using PernikComputers.Data;
 using PernikComputers.Domain;
 using System;
@@ -28,7 +29,8 @@ namespace PernikComputers.Service
                 LastName = lastName,
                 Address = address,
                 UserId = userId,
-                Phone = phone
+                Phone = phone,
+                User = context.Users.Find(userId)
             };
             context.Clients.Add(client);
             return context.SaveChanges() != 0;
@@ -36,23 +38,11 @@ namespace PernikComputers.Service
 
         public Client GetClient(string id)
         {
-            var client = context.Clients.FirstOrDefault(x => x.UserId == id);
-            client.User = context.Users.Find(client.UserId);
-
-            return client;
+            return context.Clients.Include(x => x.User).FirstOrDefault(x => x.UserId == id); 
         }
         public List<Client> GetClients()
         {
-            var list = context.Clients.ToList();
-
-            foreach (var item in list)
-            {
-                if (item.User == null)
-                {
-                    item.User = context.Users.Find(item.UserId);
-                }
-            }
-            return list;
+            return context.Clients.Include(x => x.User).ToList(); 
         }
 
         public string GetFullName(string clientId)
@@ -91,7 +81,19 @@ namespace PernikComputers.Service
 
         public bool Update(string id, string firstName, string lastName, string phone, string address)
         {
-            return false;
+            var client = context.Clients.Find(id);
+
+            if (client == null)
+            {
+                return false;
+            }
+            client.FirstName = firstName;
+            client.LastName = lastName;
+            client.Phone = phone;
+            client.Address = address;
+            
+            context.Clients.Update(client);
+            return context.SaveChanges() != 0;
         }
     }
 }

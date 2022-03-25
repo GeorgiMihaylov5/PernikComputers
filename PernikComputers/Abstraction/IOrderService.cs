@@ -12,6 +12,5 @@ namespace PernikComputers.Abstraction
         public bool Create(string productId, int count, string customerId, Category category, string manufacturer, string model, decimal price);
         public List<Order> All();
         public List<Order> My(string customerId);
-        public bool CheckUser(string userId);
     }
 }
