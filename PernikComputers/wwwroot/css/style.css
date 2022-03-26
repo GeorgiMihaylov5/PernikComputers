@@ -59,7 +59,6 @@
 }
 
 #filter-categories {
-    margin-left: 0;
 }
 
 .products-list {
@@ -114,7 +113,7 @@
 }
 
 
-@media (max-width: 848px) {
+@media (max-width: 992px) {
     .b-inline-top {
         display: block;
         margin: auto;
@@ -130,6 +129,7 @@
     }
 
     .details-item-price {
+        display: inline-block !important;
         width: 35%;
         margin-bottom: 40px;
     }

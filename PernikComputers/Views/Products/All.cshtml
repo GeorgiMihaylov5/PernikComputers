@@ -10,14 +10,14 @@
 <div class="div-m-top">
     <div class="b-inline-top col-3" id="filter-left">
     <form class="filter-form row" asp-action="Index" method="get">
-       <div class="row" id="filter-price">
+       <div class="" id="filter-price">
            <h4 class="filter-titles">Price</h4>
             <input type="number" placeholder="Min price" min="0" name="minPrice"/> 
             <span id="filter-dash">-</span>
             <input type="number" placeholder="Max price" min="0" name="maxPrice"/> 
             <button type="submit"><i class="fa fa-search"></i></button>
        </div>
-       <div class="row" id="filter-categories">
+       <div class="" id="filter-categories">
          @* <select>
                @foreach(var item in ViewBag.DropDownCategories)
                 {
@@ -29,21 +29,21 @@
     </form>
 </div>
 
-<div class="b-inline-top col-md-8" id="products">
+<div class="b-inline-top col-lg-8" id="products">
     <ul class="products-list list-group">
         @foreach(var item in Model)
         {
-        <li class="products-list-item list-group-item col-md-4">
+        <li class="products-list-item list-group-item col-3">
             <div>
                 <a asp-action="@item.DetailsAction" asp-route-id="@item.Id">
-                    <img src="@item.Image" width="250" height="200">
+                    <img src="@item.Image" width="200" height="200">
                     <h5>@item.Manufacturer @item.Model</h5>
                 </a>
             </div>
             <div style="text-align: center; font-size: 14px">
                 @foreach (var characteristic in item.Description)
                 {
-                    <p>@characteristic</p>
+                    <p style="margin-bottom: 10px">@characteristic</p>
                 }
             </div>
             <div id="item-price-container">

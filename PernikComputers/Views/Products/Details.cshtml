@@ -42,8 +42,8 @@
        Price = Model.Price.ToString()
    })
     </div>
-    <div>
-        <h2 class="">Technical Details</h2>
+    <div style="margin-top: 45px">
+        <h2>Technical Details</h2>
         <table class="table table-striped">
             <tbody>
                 @foreach (var item in Model.Description)
@@ -62,3 +62,10 @@
         </table>
     </div>
 </div>
+<script>
+    function CalculatePrice(){
+        let quantity = parseFloat(document.getElementById('productQuantity').value)
+        let pricePerProduct =  parseFloat(document.getElementById('pricePerProduct').textContent)
+        document.getElementById('totalPrice').textContent = (quantity * pricePerProduct).toFixed(2)
+    }
+</script>

@@ -17,10 +17,3 @@
     <input type="hidden" asp-for="Price" value="@Model.Price" />
     <input type="hidden" asp-for="Category" value="@Model.Category" />
 </form>
-<script>
-    function CalculatePrice(){
-        let quantity = parseFloat(document.getElementById('productQuantity').value)
-        let pricePerProduct =  parseFloat(document.getElementById('pricePerProduct').textContent)
-        document.getElementById('totalPrice').textContent = (quantity * pricePerProduct).toFixed(2)
-    }
-</script>
