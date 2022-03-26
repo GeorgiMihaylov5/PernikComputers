@@ -1,4 +1,5 @@
-﻿using PernikComputers.Abstraction;
+﻿using Microsoft.EntityFrameworkCore;
+using PernikComputers.Abstraction;
 using PernikComputers.Data;
 using PernikComputers.Domain;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace PernikComputers.Service
         {
             this.context = _context;
         }
+
         public List<Product> GetProducts()
         {
             List<Product> products = new List<Product>();

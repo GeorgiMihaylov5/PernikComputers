@@ -7,5 +7,6 @@ namespace PernikComputers.Abstraction
     {
         public List<Product> GetProducts();
         public bool RemoveProduct(string id);
+        //public Product GetProduct(string id);
     }
 }
