@@ -211,5 +211,9 @@ namespace PernikComputers.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+        public IActionResult AdminPanel()
+        {
+            return View();
+        }
     }
 }

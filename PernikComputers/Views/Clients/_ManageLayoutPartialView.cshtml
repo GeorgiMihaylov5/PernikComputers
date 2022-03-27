@@ -1,26 +1,29 @@
 ﻿    <div>
         <ul class="nav nav-pills flex-column" id="accountMenu">
             <li class="nav-item">
-                  <a  class="btn nav-link" asp-action="Profile" asp-controller="Clients">Profile</a>
+                <a class="btn nav-link" asp-action="Profile" asp-controller="Clients">Profile</a>
             </li>
             <li class="nav-item">
-                <a  class="btn nav-link" asp-action="My" asp-controller="Orders">Orders</a>
+                <a class="btn nav-link" asp-action="My" asp-controller="Orders">Orders</a>
             </li>
             <li class="nav-item">
                 <a class="btn nav-link" asp-action="ChangePassword" asp-controller="Clients">Change Password</a>
             </li>
-          @*if (User.IsInRole("Administrator"))
-            {
-                <li class="nav-item">
-                    <a class="nav-link" asp-action="All" asp-controller="Employees">Employees</a>
-                </li>
-                 <li class="nav-item">
-                    <a class="nav-link" asp-action="All" asp-controller="Clients">Clients</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" asp-action="All" asp-controller="Orders">All Orders</a>
-                </li>
-            }*@
+            <li class="nav-item">
+                <a class="btn nav-link" asp-action="AdminPanel" asp-controller="Employees">Admin Panel</a>
+            </li>
+            @*if (User.IsInRole("Administrator"))
+        {
+            <li class="nav-item">
+                <a class="nav-link" asp-action="All" asp-controller="Employees">Employees</a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" asp-action="All" asp-controller="Clients">Clients</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-action="All" asp-controller="Orders">All Orders</a>
+            </li>
+        }*@
         </ul>
     </div>
     <script>
@@ -35,5 +38,7 @@
         }
         else if (url[url.length - 1] == 'ChangePassword') {
             btns[3].className += " active";
-        }
+            } else if (url[url.length - 1] == 'AdminPanel') {
+                btns[4].className += " active";
+            }
     </script>

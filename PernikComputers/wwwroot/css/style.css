@@ -180,3 +180,12 @@
     justify-content: space-between;
 }
 
+/*------------Admin Panel-------------*/
+.a-primary {
+    color: blue !important;
+}
+    .a-primary:hover {
+        color: white !important;
+    }
+
+
