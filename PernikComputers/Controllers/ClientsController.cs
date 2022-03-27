@@ -93,21 +93,9 @@ namespace PernikComputers.Controllers
             string userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var clientEdit = new ClientCreateViewModel();
 
-            if (User.IsInRole("Employee"))
+            if (User.IsInRole("Employee") || User.IsInRole("Administrator"))
             {
                 return RedirectToAction("Profile", "Employees");
-            }
-            else if (User.IsInRole("Administrator"))
-            {
-                var admin = userManager.Users
-                    .FirstOrDefault(x => x.Id == userId);
-
-                clientEdit.Id = admin.Id;
-                clientEdit.FirstName = "Admin";
-                clientEdit.LastName = "Admin";
-                clientEdit.Username = admin.UserName;
-                clientEdit.Email = admin.Email;
-                clientEdit.PhoneNumber = "*********";
             }
             else
             {
@@ -128,19 +116,14 @@ namespace PernikComputers.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Profile(ClientCreateViewModel editVm)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    var isUpdated = service.Update(createViewModel.Id, createViewModel.Barcode, createViewModel.Name,
-            //        createViewModel.Description, createViewModel.Category, createViewModel.Manufacturer, createViewModel.Warranty,
-            //        createViewModel.Price, createViewModel.Quantity, createViewModel.Image);
+            var isUpdated = service.Update(editVm.Id, editVm.FirstName, editVm.LastName, editVm.PhoneNumber, editVm.Address);
 
-            //    if (isUpdated)
-            //    {
-            //        return RedirectToAction("Index");
-            //    }
-            //}
-            //return View(createViewModel);
-            return View();
+            if (isUpdated)
+            {
+                return RedirectToAction("Profile");
+            }
+
+            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult ChangePassword()

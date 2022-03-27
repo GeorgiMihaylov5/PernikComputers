@@ -6,9 +6,10 @@
     </div>
     <div class="b-inline-top col-md-8" id="products">
         <div class="col-md-6">
-            <form asp-action="Edit">
+            <form asp-action="Profile" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Id" />
+
                 <div class="form-group">
                     <label asp-for="Username" class="control-label"></label>
                     <input asp-for="Username" class="form-control" readonly />
@@ -34,20 +35,23 @@
                     <input asp-for="PhoneNumber" class="form-control" />
                     <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                 </div>
+                @if (User.IsInRole("Client"))
+                {
+                    <div class="form-group">
+                        <label asp-for="Address" class="control-label"></label>
+                        <input asp-for="Address" class="form-control" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                }
                 <div class="form-group">
-                    <label asp-for="Address" class="control-label"></label>
-                    <input asp-for="Address" class="form-control" />
-                    <span asp-validation-for="Address" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-primary" />
-                    <a onclick="CancelEdit()">Cancel</a>
+                    <input type="submit" value="Save" class="btn btn-outline-primary" />
+                    <a class="btn-link" onclick="CancelEdit()" style="cursor: pointer">Cancel</a>
                 </div>
             </form>
-            <form asp-action="Delete" method="post">
+            @*<form asp-action="Delete" method="post">
                 <input type="hidden" asp-for="Id" />
-                <input type="submit" value="Delete Account" class="btn btn-danger" />
-            </form>
+                <input type="submit" value="Delete Account" class="btn btn-outline-danger" />
+            </form>*@
     </div>
     </div>
 </div>

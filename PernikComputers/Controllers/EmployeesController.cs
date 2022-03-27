@@ -20,8 +20,8 @@ namespace PernikComputers.Controllers
         private readonly ILogger<LogoutModel> logger;
 
         public EmployeesController(IEmployeeService service,
-            UserManager<ApplicationUser> userManager, 
-            SignInManager<ApplicationUser> signInManager, 
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
             ILogger<LogoutModel> logger)
         {
             this.service = service;
@@ -52,7 +52,7 @@ namespace PernikComputers.Controllers
             {
                 employee.IsAdmin = adminIds.Contains(employee.UserId);
             }
-           
+
             employees = employees.OrderByDescending(x => x.IsAdmin).ThenBy(x => x.UserName).ToList();
             return View(employees);
         }
@@ -171,18 +171,45 @@ namespace PernikComputers.Controllers
         public IActionResult Profile()
         {
             string userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var clientEdit = new ClientCreateViewModel();
+            var employeeEdit = new ClientCreateViewModel();
 
             var employee = service.GetEmployee(userId);
+            if (User.IsInRole("Administrator"))
+            {
+                var admin = userManager.Users
+                    .FirstOrDefault(x => x.Id == userId);
 
-            clientEdit.Id = employee.Id;
-            clientEdit.FirstName = employee.FirstName;
-            clientEdit.LastName = employee.LastName;
-            clientEdit.Username = employee.User.UserName;
-            clientEdit.Email = employee.User.Email;
-            clientEdit.PhoneNumber = employee.Phone;
+                employeeEdit.Id = admin.Id;
+                employeeEdit.FirstName = "Admin";
+                employeeEdit.LastName = "Admin";
+                employeeEdit.Username = admin.UserName;
+                employeeEdit.Email = admin.Email;
+                employeeEdit.PhoneNumber = "*********";
+            }
+            else
+            {
+                employeeEdit.Id = employee.Id;
+                employeeEdit.FirstName = employee.FirstName;
+                employeeEdit.LastName = employee.LastName;
+                employeeEdit.Username = employee.User.UserName;
+                employeeEdit.Email = employee.User.Email;
+                employeeEdit.PhoneNumber = employee.Phone;
+            }
 
-            return View("~/Views/Clients/Profile.cshtml",clientEdit);
+            return View("~/Views/Clients/Profile.cshtml", employeeEdit);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Profile(EmployeeCreateViewModel editVm)
+        {
+            var isUpdated = service.Update(editVm.Id, editVm.FirstName, editVm.LastName, editVm.PhoneNumber);
+
+            if (isUpdated)
+            {
+                return RedirectToAction("Profile");
+            }
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

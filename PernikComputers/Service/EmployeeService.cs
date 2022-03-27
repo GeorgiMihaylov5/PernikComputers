@@ -78,5 +78,21 @@ namespace PernikComputers.Service
 
             return context.SaveChanges() != 0;
         }
+
+        public bool Update(string id, string firstName, string lastName, string phone)
+        {
+            var employees = context.Employees.Find(id);
+
+            if (employees == null)
+            {
+                return false;
+            }
+            employees.FirstName = firstName;
+            employees.LastName = lastName;
+            employees.Phone = phone;
+
+            context.Employees.Update(employees);
+            return context.SaveChanges() != 0;
+        }
     }
 }
