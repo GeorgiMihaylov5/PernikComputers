@@ -25,6 +25,22 @@ namespace PernikComputers.Controllers
                    Price = x.Price,
                    IsPromotion = x.IsPromotion,
                    Image = x.Image,
+                   Description = new List<string>()
+               }).ToList();
+
+            return View(productVm);
+        }
+        public IActionResult AllTable()
+        {
+            List<ProductAllTableViewModel> productVm = service.GetProducts()
+               .Select(x => new ProductAllTableViewModel
+               {
+                   Id = x.Id,
+                   Barcode = x.Barcode,
+                   Manufacturer = x.Manufacturer,
+                   Model = x.Model,
+                   Price = x.Price,
+                   Image = x.Image,
                }).ToList();
 
             return View(productVm);

@@ -1,0 +1,80 @@
+﻿@model IEnumerable<ProductAllTableViewModel>
+
+@{
+    ViewData["Title"] = "Products";
+}
+
+<div class="b-inline-top col-3" id="filter-left">
+    @await Html.PartialAsync("~/Views/Clients/_ManageLayoutPartialView.cshtml")
+</div>
+<div class="b-inline-top col-md-8" id="products">
+    @await Html.PartialAsync("~/Views/Employees/_AdminPanelPartialView.cshtml")
+
+    <div class="alert alert-info" style="margin-top: 25px">
+        <h2 style="text-align: center">Products - @Model.Count()</h2>
+    </div>
+
+    <div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Category)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Category)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Manufacturer)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Warranty)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Price)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Quantity)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Image)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Barcode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Category)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Manufacturer)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Warranty)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Image)
+                        </td>
+                        <td>
+                             <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                             <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                             <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

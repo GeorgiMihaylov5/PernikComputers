@@ -36,8 +36,7 @@ namespace PernikComputers.Controllers
                 .Select(x => new EmployeeListingModel
                 {
                     Id = x.Id,
-                    FirstName = x.FirstName,
-                    LastName = x.LastName,
+                    FullName = service.GetFullName(x.Id),
                     Phone = x.Phone,
                     JobTitle = x.JobTitle,
                     UserId = x.UserId,
@@ -121,7 +120,7 @@ namespace PernikComputers.Controllers
                     {
                         userManager.AddToRoleAsync(user, "Employee").Wait();
 
-                        return RedirectToAction("AllProcessors", "Components");
+                        return RedirectToAction("All");
                     }
                 }
             }
@@ -155,15 +154,12 @@ namespace PernikComputers.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(string id)
+        public IActionResult Delete(string id)
         {
             var isDeleted = service.Remove(id);
             if (isDeleted)
             {
-                await signInManager.SignOutAsync();
-                logger.LogInformation("User logged out.");
-
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("All", "Employees");
             }
 
             return RedirectToAction("Profile");

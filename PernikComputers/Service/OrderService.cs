@@ -21,7 +21,7 @@ namespace PernikComputers.Service
 
         public List<Order> All()
         {
-            return context.Orders.Include(x => x.Customer).OrderByDescending(x => x.OrderedOn).ToList();
+            return context.Orders.Include(x => x.Customer).Include(x => x.Product).OrderByDescending(x => x.OrderedOn).ToList();
         }
         public List<Order> My(string customerId)
         {

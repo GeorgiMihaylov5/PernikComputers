@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PernikComputers.Abstraction;
+using PernikComputers.Domain.Enum;
 using PernikComputers.Models;
 using System;
 using System.Collections.Generic;
@@ -80,6 +81,27 @@ namespace PernikComputers.Controllers
                 }
             }
             return RedirectToAction();
+        }
+        public IActionResult Rejected()
+        {
+            List<OrderListingViewModel> orders = service.All().Where(x => x.Status == OrderStatus.Rejected)
+                .Select(x => new OrderListingViewModel
+                {
+                    Id = x.Id,
+                    OrderedOn = x.OrderedOn.ToString("dd-MMM,yyyy hh:mm", CultureInfo.InvariantCulture),
+                    ProductId = x.ProductId,
+                    Model = x.Product.Model,
+                    Manufacturer = x.Product.Manufacturer,
+                    Category = x.Category.ToString(),
+                    ProductPrice = x.Product.Price.ToString(),
+                    CustomerId = x.CustomerId,
+                    CustomerUsername = x.Customer.UserName,
+                    Quantity = x.Count,
+                    Status = x.Status.ToString(),
+                    TotalPrice = (x.Count * x.Product.Price).ToString()
+
+                }).ToList();
+            return View("All", orders);
         }
     }
 }

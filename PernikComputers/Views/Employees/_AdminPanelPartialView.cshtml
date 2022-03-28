@@ -1,4 +1,4 @@
-﻿<ul class="nav nav-tabs" id="myTab" role="tablist">
+﻿<ul class="nav nav-tabs" id="myTab" role="tablist" style="justify-content: space-around;">
     <li class="nav-item">
         <a class="panel nav-link" asp-action="All" asp-controller="Employees" role="tab" aria-controls="home" aria-selected="false">Employees</a>
     </li>          
@@ -6,13 +6,13 @@
         <a class="panel nav-link" asp-action="All" asp-controller="Clients" role="tab" aria-controls="home" aria-selected="false">Clients</a>
     </li>          
     <li class="nav-item">
-        <a class="panel nav-link" href="#home" role="tab" aria-controls="home" aria-selected="false">Products</a>
+        <a class="panel nav-link" asp-action="AllTable" asp-controller="Products" role="tab" aria-controls="home" aria-selected="false">Products</a>
     </li>          
     <li class="nav-item">
         <a class="panel nav-link" asp-action="All" asp-controller="Orders" role="tab" aria-controls="home" aria-selected="false">Orders</a>
     </li>          
     <li class="nav-item">
-        <a class="panel nav-link" href="#home" role="tab" aria-controls="home" aria-selected="false">Rejected orders</a>
+        <a class="panel nav-link"asp-action="Rejected" asp-controller="Orders" role="tab" aria-controls="home" aria-selected="false">Rejected orders</a>
     </li>
 </ul>
 <script>
@@ -24,5 +24,14 @@
     }
     else if (urlAdmin[urlAdmin.length - 2] == 'Clients' && urlAdmin[urlAdmin.length - 1] == 'All') {
         btnsAdmin[1].className += " active";
+    }
+    else if (urlAdmin[urlAdmin.length - 2] == 'Products' && urlAdmin[urlAdmin.length - 1] == 'AllTable') {
+        btnsAdmin[2].className += " active";
+    }
+    else if (urlAdmin[urlAdmin.length - 2] == 'Orders' && urlAdmin[urlAdmin.length - 1] == 'All') {
+        btnsAdmin[3].className += " active";
+    }
+    else if (urlAdmin[urlAdmin.length - 2] == 'Orders' && urlAdmin[urlAdmin.length - 1] == 'Rejected') {
+        btnsAdmin[4].className += " active";
     }
 </script>

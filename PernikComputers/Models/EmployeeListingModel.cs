@@ -8,9 +8,15 @@ namespace PernikComputers.Models
     {
         [Required]
         [StringLength(100, MinimumLength = 3)]
+        [Display(Name = "Full Name")]
+        public string FullName { get; set; }
+        [Required]
+        [StringLength(100, MinimumLength = 3)]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
         [Required]
         [StringLength(100, MinimumLength = 3)]
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
         [Required]
         [MaxLength(10)]    

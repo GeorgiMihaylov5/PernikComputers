@@ -36,8 +36,7 @@ namespace PernikComputers.Controllers
                 .Select(x => new ClientListingModel
                 {
                     Id = x.Id,
-                    FirstName = x.FirstName,
-                    LastName = x.LastName,
+                    FullName = service.GetFullName(x.Id),
                     Phone = x.Phone,
                     Address = x.Address,
                     UserId = x.UserId,
@@ -167,10 +166,13 @@ namespace PernikComputers.Controllers
             var isDeleted = service.Remove(id);
             if (isDeleted)
             {
-                await signInManager.SignOutAsync();
-                logger.LogInformation("User logged out.");
+                if (!User.IsInRole("Administrator"))
+                {
+                    await signInManager.SignOutAsync();
+                    logger.LogInformation("User logged out.");
+                }
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("All", "Clients");
             }
 
             return RedirectToAction("Profile");
