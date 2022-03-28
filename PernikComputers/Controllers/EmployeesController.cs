@@ -168,13 +168,13 @@ namespace PernikComputers.Controllers
         {
             string userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var employeeEdit = new ClientCreateViewModel();
+            var admin = userManager.Users
+                   .FirstOrDefault(x => x.Id == userId);
 
             var employee = service.GetEmployee(userId);
-            if (User.IsInRole("Administrator"))
-            {
-                var admin = userManager.Users
-                    .FirstOrDefault(x => x.Id == userId);
 
+            if (admin.UserName == "admin")
+            {            
                 employeeEdit.Id = admin.Id;
                 employeeEdit.FirstName = "Admin";
                 employeeEdit.LastName = "Admin";
