@@ -4,107 +4,110 @@
     ViewData["Title"] = "All";
 }
 
-<h1>All</h1>
-
- <div>
+ <div class="b-inline-top col-3" id="filter-left">
         @await Html.PartialAsync("~/Views/Clients/_ManageLayoutPartialView.cshtml")
  </div>
+<div  class="b-inline-top col-md-8" id="products">
+    @await Html.PartialAsync("~/Views/Employees/AdminPanel.cshtml")
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Phone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.JobTitle)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsAdmin)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserId)
-            </th>
-            <th>
-                Action
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.JobTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsAdmin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserId)
-            </td>
-            <td>
-                @if (item.UserName == "admin")
-                    {
-                        <form asp-action="Promote" asp-controller="Employees" method="post">
-                            <input type="hidden" name="userId" value="@item.UserId" />
-                        </form>
-                    }
-                    else if (!item.IsAdmin)
-                    {
-                        <form asp-action="Promote" asp-controller="Employees" method="post">
-                            <input type="hidden" name="userId" value="@item.UserId" />
-                            <button type="submit" class="btn btn-success">Promote</button>
-                        </form>
-                    }
-                    else
-                    {
-                        <form asp-action="Demote" asp-controller="Employees" method="post">
-                            <input type="hidden" name="userId" value="@item.UserId" />
-                            <button type="submit" class="btn btn-danger">Demote</button>
-                        </form>
-                    }
-            </td>
-            <td>
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Phone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.JobTitle)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsAdmin)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserId)
+                </th>
+                <th>
+                    Action
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JobTitle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsAdmin)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserId)
+                    </td>
+                    <td>
+                        @if (item.UserName == "admin")
+                        {
+                            <form asp-action="Promote" asp-controller="Employees" method="post">
+                                <input type="hidden" name="userId" value="@item.UserId" />
+                            </form>
+                        }
+                        else if (!item.IsAdmin)
+                        {
+                            <form asp-action="Promote" asp-controller="Employees" method="post">
+                                <input type="hidden" name="userId" value="@item.UserId" />
+                                <button type="submit" class="btn btn-success">Promote</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <form asp-action="Demote" asp-controller="Employees" method="post">
+                                <input type="hidden" name="userId" value="@item.UserId" />
+                                <button type="submit" class="btn btn-danger">Demote</button>
+                            </form>
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

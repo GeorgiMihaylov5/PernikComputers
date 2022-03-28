@@ -32,7 +32,6 @@ namespace PernikComputers.Service
                 Barcode = barcode,
                 Manufacturer = manufacturer,
                 Model = model,
-                Price = price,
                 Warranty = warranty,
                 Quantity = quantity,
                 Image = image,
@@ -44,6 +43,11 @@ namespace PernikComputers.Service
                 Memory = context.Memories.Find(memoryId),
                 ComputerCase = context.ComputerCases.Find(computerCaseId)
             };
+
+            computer.Price = computer.Processor.Price + computer.Motherboard.Price +
+                computer.Ram.Price + computer.VideoCard.Price +
+                computer.PowerSupply.Price + computer.Memory.Price +
+                computer.ComputerCase.Price;
             context.Computers.Add(computer);
             return context.SaveChanges() != 0;
         }

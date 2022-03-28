@@ -10,7 +10,7 @@
                 <a class="btn nav-link" asp-action="ChangePassword" asp-controller="Clients">Change Password</a>
             </li>
             <li class="nav-item">
-                <a class="btn nav-link" asp-action="AdminPanel" asp-controller="Employees">Admin Panel</a>
+                <a class="btn nav-link" asp-action="All" asp-controller="Employees">Admin Panel</a>
             </li>
             @*if (User.IsInRole("Administrator"))
         {
@@ -37,8 +37,8 @@
             btns[2].className += " active";
         }
         else if (url[url.length - 1] == 'ChangePassword') {
-            btns[3].className += " active";
-            } else if (url[url.length - 1] == 'AdminPanel') {
+                btns[3].className += " active";
+            } else if (url[url.length - 2] == 'Employees' && url[url.length - 1] == 'All') {
                 btns[4].className += " active";
             }
     </script>

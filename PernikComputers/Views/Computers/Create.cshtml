@@ -44,31 +44,31 @@
             </div>
             <div class="form-group">
                 <label asp-for="ProcessorId" class="control-label"></label>
-                <select asp-for="ProcessorId" class ="form-control" asp-items="ViewBag.ProcessorId"></select>
+                <select asp-for="ProcessorId" class="form-control" asp-items="ViewBag.ProcessorId" onclick="SelectMotherboard()"></select>
             </div>
             <div class="form-group">
                 <label asp-for="MotherboardId" class="control-label"></label>
-                <select asp-for="MotherboardId" class ="form-control" asp-items="ViewBag.MotherboardId"></select>
+                <select asp-for="MotherboardId" class="form-control" onclick="SelectRam()"></select>
             </div>
             <div class="form-group">
                 <label asp-for="RamId" class="control-label"></label>
-                <select asp-for="RamId" class ="form-control" asp-items="ViewBag.RamId"></select>
+                <select asp-for="RamId" class="form-control"></select>
             </div>
             <div class="form-group">
                 <label asp-for="VideoCardId" class="control-label"></label>
-                <select asp-for="VideoCardId" class ="form-control" asp-items="ViewBag.VideoCardId"></select>
+                <select asp-for="VideoCardId" class="form-control" asp-items="ViewBag.VideoCardId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="PowerSupplyId" class="control-label"></label>
-                <select asp-for="PowerSupplyId" class ="form-control" asp-items="ViewBag.PowerSupplyId"></select>
+                <select asp-for="PowerSupplyId" class="form-control" asp-items="ViewBag.PowerSupplyId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="MemoryId" class="control-label"></label>
-                <select asp-for="MemoryId" class ="form-control" asp-items="ViewBag.MemoryId"></select>
+                <select asp-for="MemoryId" class="form-control" asp-items="ViewBag.MemoryId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="ComputerCaseId" class="control-label"></label>
-                <select asp-for="ComputerCaseId" class ="form-control" asp-items="ViewBag.ComputerCaseId"></select>
+                <select asp-for="ComputerCaseId" class="form-control" asp-items="ViewBag.ComputerCaseId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Quantity" class="control-label"></label>
@@ -90,6 +90,98 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+<script>
+    let processor = document.getElementById('ProcessorId')
+    let motherboard = document.getElementById('MotherboardId')
+    let ram = document.getElementById('RamId')
+    let videoCard = document.getElementById('VideoCardId')
+    let powerSupply = document.getElementById('PowerSupplyId')
+    let memory = document.getElementById('MemoryId')
+    let computerCase = document.getElementById('ComputerCaseId')
+
+    motherboard.disabled = true
+    ram.disabled = true
+
+    let processorObj = null
+    let motherboardObj = null
+
+
+    function SelectMotherboard() {
+        motherboard.length = 0
+        let selectedProcessor = processor.options[processor.selectedIndex].value
+        let allProcessors = @Html.Raw(Json.Serialize(@ViewBag.Processors));
+        console.log(processor.textContent)
+
+        if (selectedProcessor == 0) {
+            location.reload()
+        }
+
+        for (var i = 0; i < allProcessors.length; i++) {
+            if (selectedProcessor == allProcessors[i].id) {
+                processorObj = allProcessors[i]
+                break
+            }
+        }
+
+        let allMotherboards = @Html.Raw(Json.Serialize(@ViewBag.Motherboards));
+        for (var i = 0; i < allMotherboards.length; i++) {
+            if (allMotherboards[i].socket == processorObj.socket) {
+                let newOption = new Option(allMotherboards[i].model, allMotherboards[i].id)
+                motherboard.add(newOption, undefined);
+            }
+        }
+
+        motherboard.disabled = false
+    }
+
+    function SelectRam() {
+        ram.length = 0
+
+        let allMotherboars = @Html.Raw(Json.Serialize(@ViewBag.Motherboards));
+        let selectedMotherboard = motherboard.options[motherboard.selectedIndex].value
+
+        for (var i = 0; i < allMotherboars.length; i++) {
+            if (selectedMotherboard == allMotherboars[i].id) {
+                motherboardObj = allMotherboars[i]
+                break
+            }
+        }
+
+        let allRams = @Html.Raw(Json.Serialize(@ViewBag.Rams));
+
+        for (var i = 0; i < allRams.length; i++) {
+            if (allRams[i].typeRam == motherboardObj.typeRam) {
+                let newOption1 = new Option(allRams[i].model, allRams[i].id)
+                ram.add(newOption1, undefined);
+            }
+        }
+
+        ram.disabled = false
+    }
+
+
+    SelectMotherboard()
+    SelectRam()
+    console.log('Hey')
+</script>
+
+<!--<script>
+    let times = 1;
+    let lasted = ''
+    function GetProcessor() {
+        if (times % 2 == 0) {
+            let p = document.getElementById('ProcessorId')
+            let selected = p.options[p.selectedIndex].value;
+            lasted = selected
+            console.log(selected)
+        }
+        times++
+    }-->
+
+    @*var data = @Html.Raw(Json.Serialize(@Model));
+    console.log(data)*@
+<!--</script>-->
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

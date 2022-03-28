@@ -82,6 +82,10 @@ namespace PernikComputers.Controllers
 
         public IActionResult Create()
         {
+            ViewBag.Processors = componentService.GetProcessors();
+            ViewBag.Motherboards = componentService.GetMotherboards();
+            ViewBag.Rams = componentService.GetRams();
+
             ViewData["ProcessorId"] = new SelectList(componentService.GetProcessors(), "Id", "Model");
             ViewData["MotherboardId"] = new SelectList(componentService.GetMotherboards(), "Id", "Model");
             ViewData["RamId"] = new SelectList(componentService.GetRams(), "Id", "Model");
