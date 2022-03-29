@@ -34,6 +34,7 @@
             @foreach (var item in Model)
             {
                 var details = item.Category == Category.Computer ? "Details" : $"Details{item.Category}";
+                var controller = item.Category == Category.Computer ? "Computers" : $"Components";
                 <li class="products-list-item list-group-item col-3">
                     <div>
                         <a asp-action="@details" asp-route-id="@item.Id">
@@ -49,7 +50,7 @@
                     </div>
                     <div id="item-price-container">
                         <span>@item.Price lv.</span>
-                        <a class="btn btn-primary" asp-action="@details" asp-route-id="@item.Id">SEE MORE</a>
+                        <a class="btn btn-primary" asp-action="@details" asp-controller="@controller" asp-route-id="@item.Id">SEE MORE</a>
                     </div>
                 </li>
             }

@@ -91,5 +91,22 @@ namespace PernikComputers.Controllers
 
             return this.RedirectToAction("AllTable");
         }
+        public IActionResult AllDiscounts()
+        {
+            List<ProductAllViewModel> productVm = service.GetProducts()
+              .Where(x => x.Discount != 0)
+              .Select(x => new ProductAllViewModel
+              {
+                  Id = x.Id,
+                  Manufacturer = x.Manufacturer,
+                  Model = x.Model,
+                  Price = x.Price,
+                  Discount = x.Discount,
+                  Image = x.Image,
+                  Description = new List<string>()
+              }).ToList();
+
+            return View("All", productVm);
+        }
     }
 }
