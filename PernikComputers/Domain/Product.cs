@@ -12,7 +12,7 @@ namespace PernikComputers.Domain
         public string Model { get; set; }
         public int Warranty { get; set; }
         public decimal Price { get; set; }
-        public int Promotion { get; set; }
+        public decimal Discount { get; set; }
         public Category Category { get; set; }
         public int Quantity { get; set; }
         public string Image { get; set; }

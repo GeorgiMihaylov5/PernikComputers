@@ -1,0 +1,56 @@
+﻿@model PernikComputers.Models.ProductPromotionViewModel
+
+@{
+    ViewData["Title"] = "Discount";
+}
+
+<h1 class="text-center">Make Discount</h1>
+
+<div id="detailsDiv" class="text-center">
+    <div class="b-inline-top" style="margin-right: 50px">
+        <img src="@Model.Image" width="400" height="350"/>
+    </div>
+    <div>
+        <h2 id="productTitle">
+           @Model.Manufacturer - @Model.Model
+        </h2>
+        <div class="b-inline-top details-item-price">
+            <h5>Old price</h5>
+            <hr />
+            <span id="oldPrice">@Model.OldPrice</span>
+            <span> lv.</span>
+        </div>
+        <div class="b-inline-top details-item-price">
+            <h5>New price</h5>
+            <hr />
+            <span id="newPrice">@Model.NewPrice</span>
+            <span> lv.</span>
+        </div>
+        <div>
+            <form asp-action="MakeDiscount" asp-controller="Products" method="post">
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <div>
+                        <label>Enter percentages: </label>
+                        <input class="form-control m-auto text-center" asp-for="Discount" class="form-control" id="productDiscount" min=0 style="width: 150px" onchange="CalculateDiscount()"/>
+                        <span asp-validation-for="Discount" class="text-danger"></span>
+                    </div>
+                    <div class="d-block mt-4">
+                        <button type="submit" class="btn btn-success">Make Discount</button>
+                    </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function CalculateDiscount(){
+        let discount = parseFloat(document.getElementById('productDiscount').value)
+        let oldPrice =  parseFloat(document.getElementById('oldPrice').textContent)
+        document.getElementById('newPrice').textContent = (oldPrice - oldPrice * discount / 100).toFixed(2)
+    }
+</script>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

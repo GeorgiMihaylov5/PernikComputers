@@ -31,15 +31,15 @@ namespace PernikComputers.Controllers
                     Manufacturer = x.Manufacturer,
                     Model = x.Model,
                     Price = x.Price,
-                    Promotion = x.Promotion,
+                    Discount = x.Discount,
                     Image = x.Image,
+                    Category = x.Category,
                     Description = new List<string>()
                     {
                         $"{x.Processor.Manufacturer} {x.Processor.Model} ({x.Processor.CPUSpeed}/{x.Processor.CPUBoostSpeed} GHz, {x.Processor.Cache} M)",
                         $"{x.VideoCard.Manufacturer} {x.VideoCard.Model} {x.VideoCard.SizeMemory} GB",
                         $"{x.Ram.Size} GB {x.Ram.TypeRam} {x.Ram.Frequency} MHz"
-                    },
-                    DetailsAction = "Details"
+                    }
                 }).ToList();
 
 
@@ -57,8 +57,8 @@ namespace PernikComputers.Controllers
                 Barcode = x.Barcode,
                 Model = x.Model,
                 Manufacturer = x.Manufacturer,
-                Promotion = x.Promotion,
-                Category = Category.Computer,
+                Discount = x.Discount,
+                Category = x.Category,
                 Description = new List<string>()
                 {
                     $"Processor: {x.Processor.Manufacturer} {x.Processor.Model} ({x.Processor.CPUSpeed}/{x.Processor.CPUBoostSpeed} GHz, {x.Processor.Cache} M, {x.Processor.Cores} cores, {x.Processor.Threads} threads)",

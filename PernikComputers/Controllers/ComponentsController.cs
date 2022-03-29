@@ -28,9 +28,9 @@ namespace PernikComputers.Controllers
                     Manufacturer = x.Manufacturer,
                     Model = x.Model,
                     Price = x.Price,
-                    Promotion = x.Promotion,
+                    Discount = x.Discount,
                     Image = x.Image,
-                    DetailsAction = "DetailsProcessor",
+                    Category = x.Category,
                     Description = new List<string>()
                     {
                         $"Socket: {x.Socket}",
@@ -73,7 +73,7 @@ namespace PernikComputers.Controllers
                 Barcode = x.Barcode,
                 Model = x.Model,
                 Manufacturer = x.Manufacturer,
-                Promotion = x.Promotion,
+                Discount = x.Discount,
                 Description = new List<string>()
                 {
                     $"Socket: {x.Socket}",
@@ -119,7 +119,7 @@ namespace PernikComputers.Controllers
                 Image = item.Image
             };
 
-            return View(editModel);
+            return View("CreateProcessor", editModel);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -189,9 +189,9 @@ namespace PernikComputers.Controllers
                     Manufacturer = x.Manufacturer,
                     Model = x.Model,
                     Price = x.Price,
-                    Promotion = x.Promotion,
+                    Discount = x.Discount,
                     Image = x.Image,
-                    DetailsAction = "DetailsMotherboard",
+                    Category = x.Category,
                     Description = new List<string>()
                 {
                     $"Socket: {x.Socket}",
@@ -233,7 +233,7 @@ namespace PernikComputers.Controllers
                 Barcode = x.Barcode,
                 Model = x.Model,
                 Manufacturer = x.Manufacturer,
-                Promotion = x.Promotion,
+                Discount = x.Discount,
                 Category = Category.Motherboard,
                 Description = new List<string>()
                 {
@@ -345,9 +345,9 @@ namespace PernikComputers.Controllers
                     Manufacturer = x.Manufacturer,
                     Model = x.Model,
                     Price = x.Price,
-                    Promotion = x.Promotion,
+                    Discount = x.Discount,
                     Image = x.Image,
-                    DetailsAction = "DetailsRam",
+                    Category = x.Category,
                     Description = new List<string>()
                 {
                     $"Capacity: {x.Size} GB",
@@ -388,7 +388,7 @@ namespace PernikComputers.Controllers
                 Barcode = x.Barcode,
                 Model = x.Model,
                 Manufacturer = x.Manufacturer,
-                Promotion = x.Promotion,
+                Discount = x.Discount,
                 Category = Category.Ram,
                 Description = new List<string>()
                 {
@@ -497,9 +497,9 @@ namespace PernikComputers.Controllers
                     Manufacturer = x.Manufacturer,
                     Model = x.Model,
                     Price = x.Price,
-                    Promotion = x.Promotion,
+                    Discount = x.Discount,
                     Image = x.Image,
-                    DetailsAction = "DetailsVideoCard",
+                    Category = x.Category,
                     Description = new List<string>()
                 {
                     $"Graphic Processor: {x.GraphicProcessor}",
@@ -543,7 +543,7 @@ namespace PernikComputers.Controllers
                 Barcode = x.Barcode,
                 Model = x.Model,
                 Manufacturer = x.Manufacturer,
-                Promotion = x.Promotion,
+                Discount = x.Discount,
                 Description = new List<string>()
                 {
                     $"Chip manufacturer: {x.ChipManufacturer }",
@@ -668,9 +668,9 @@ namespace PernikComputers.Controllers
                     Manufacturer = x.Manufacturer,
                     Model = x.Model,
                     Price = x.Price,
-                    Promotion = x.Promotion,
+                    Discount = x.Discount,
                     Image = x.Image,
-                    DetailsAction = "DetailsPowerSupply",
+                    Category = x.Category,
                     Description = new List<string>()
                 {
                     $"Power: {x.Power} W",
@@ -712,7 +712,7 @@ namespace PernikComputers.Controllers
                 Barcode = x.Barcode,
                 Model = x.Model,
                 Manufacturer = x.Manufacturer,
-                Promotion = x.Promotion,
+                Discount = x.Discount,
                 Category = Category.PowerSupply,
                 Description = new List<string>()
                 {
@@ -819,9 +819,9 @@ namespace PernikComputers.Controllers
                     Manufacturer = x.Manufacturer,
                     Model = x.Model,
                     Price = x.Price,
-                    Promotion = x.Promotion,
+                    Discount = x.Discount,
                     Image = x.Image,
-                    DetailsAction = "DetailsMemory",
+                    Category = x.Category,
                     Description = new List<string>()
                 {
                     $"Type: {x.MemoryType} W",
@@ -862,7 +862,7 @@ namespace PernikComputers.Controllers
                 Barcode = x.Barcode,
                 Model = x.Model,
                 Manufacturer = x.Manufacturer,
-                Promotion = x.Promotion,
+                Discount = x.Discount,
                 Category = Category.Memory,
                 Price = x.Price,
                 Description = new List<string>()
@@ -975,9 +975,9 @@ namespace PernikComputers.Controllers
                     Manufacturer = x.Manufacturer,
                     Model = x.Model,
                     Price = x.Price,
-                    Promotion = x.Promotion,
+                    Discount = x.Discount,
                     Image = x.Image,
-                    DetailsAction = "DetailsComputerCase",
+                    Category = x.Category,
                     Description = new List<string>()
                 {
                     $"Type: {x.CaseType} W",
@@ -1019,7 +1019,7 @@ namespace PernikComputers.Controllers
                 Barcode = x.Barcode,
                 Model = x.Model,
                 Manufacturer = x.Manufacturer,
-                Promotion = x.Promotion,
+                Discount = x.Discount,
                 Category = Category.ComputerCase,
                 Description = new List<string>()
                 {

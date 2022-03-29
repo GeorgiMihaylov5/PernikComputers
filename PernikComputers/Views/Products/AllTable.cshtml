@@ -70,7 +70,11 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                <tr>
+                    var details = item.Category == Category.Computer ? "Details" : $"Details{item.Category}";
+                    var controller = item.Category == Category.Computer ? "Computers" : "Components";
+                    var edit = item.Category == Category.Computer ? "Edit" : $"Edit{item.Category}";
+
+                    <tr>
                     <td class="align-middle">
                         <button class="btn btn-outline-dark btn-sm">See Barcode</button>
                     </td>
@@ -96,23 +100,29 @@
                         <img src="@item.Image" width="50" height="50" />
                     </td>
                     <td class="align-middle">
-                        @if (item.Promotion == 0)
+                        @if (item.Discount == 0)
                         {
-                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-success btn-sm">Add Promotion</a>
+                            <a asp-action="MakeDiscount" asp-route-id="@item.Id" class="btn btn-outline-success btn-sm">Add Discount</a>
                         }
                         else
                         {
-                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm">Remove Promotion</a>
+                             <form asp-action="RemoveDiscount" asp-controller="Products" method="post">
+                                 <input type="hidden" name="id" value="@item.Id" />
+                                 <button type="submit" class="btn btn-outline-danger btn-sm">Remove Discount</button>
+                             </form>
                         }
                     </td>
                     <td class="align-middle">
-                        <a asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square text-success"></i></a>
+                        <a asp-action="@edit" asp-controller="@controller" asp-route-id="@item.Id"><i class="bi bi-pencil-square text-success"></i></a>
                     </td>
+                    <td class="align-middle" style="padding: 7px">
+                             <form asp-action="Delete" asp-controller="Products" method="post">
+                                 <input type="hidden" name="id" value="@item.Id" />
+                                 <button type="submit" class="btn text-danger"><i class="bi bi-trash-fill"></i></button>
+                             </form>
+                         </td>
                     <td class="align-middle">
-                        <a asp-action="Delete" asp-controller="Products" asp-route-id="@item.Id"><i class="bi bi-trash-fill text-danger"></i></a>
-                    </td>
-                    <td class="align-middle">
-                        <a asp-action="Details" asp-route-id="@item.Id"><i class="fa-solid fa-circle-info text-info"></i></a>
+                        <a asp-action="@details" asp-controller="@controller" asp-route-id="@item.Id"><i class="fa-solid fa-circle-info text-info"></i></a>
                     </td>
                 </tr>
                 }

@@ -6,7 +6,7 @@
             Quantity:
         </label>
         <div class="mr-1">
-            <input class="form-control" min="1" asp-for="Count" id="productQuantity" value="1" onclick="CalculatePrice()" />
+            <input class="form-control" min="1" asp-for="Count" id="productQuantity" value="1" onchange="CalculatePrice()" />
             <span asp-validation-for="Count" class="text-danger"></span>
         </div>
         <button type="submit" class="btn btn-danger">Order</button>

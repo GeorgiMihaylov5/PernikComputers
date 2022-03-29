@@ -33,9 +33,10 @@
         <ul class="products-list list-group">
             @foreach (var item in Model)
             {
+                var details = item.Category == Category.Computer ? "Details" : $"Details{item.Category}";
                 <li class="products-list-item list-group-item col-3">
                     <div>
-                        <a asp-action="@item.DetailsAction" asp-route-id="@item.Id">
+                        <a asp-action="@details" asp-route-id="@item.Id">
                             <img src="@item.Image" width="200" height="175">
                             <h5>@item.Manufacturer @item.Model</h5>
                         </a>
@@ -48,7 +49,7 @@
                     </div>
                     <div id="item-price-container">
                         <span>@item.Price lv.</span>
-                        <a class="btn btn-primary" asp-action="@item.DetailsAction" asp-route-id="@item.Id">SEE MORE</a>
+                        <a class="btn btn-primary" asp-action="@details" asp-route-id="@item.Id">SEE MORE</a>
                     </div>
                 </li>
             }

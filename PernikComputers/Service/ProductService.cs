@@ -16,6 +16,11 @@ namespace PernikComputers.Service
             this.context = _context;
         }
 
+        public Product GetProduct(string id)
+        {
+            return context.Products.Find(id);
+        }
+
         public List<Product> GetProducts()
         {
             List<Product> products = new List<Product>();
@@ -30,6 +35,41 @@ namespace PernikComputers.Service
 
             return products;
         }
+
+        public bool MakeDiscount(string id, int discount)
+        {
+            var product = GetProduct(id);
+
+            if (product == null)
+            {
+                return false;
+            }
+
+            product.Discount = product.Price * discount / 100;
+            product.Price -= product.Discount;
+
+            context.Products.Update(product);
+
+            return context.SaveChanges() != 0;
+        }
+
+        public bool RemoveDiscount(string id)
+        {
+            var product = GetProduct(id);
+
+            if (product == null)
+            {
+                return false;
+            }
+
+            product.Price += product.Discount;
+            product.Discount = 0;
+
+            context.Products.Update(product);
+
+            return context.SaveChanges() != 0;
+        }
+
         public bool RemoveProduct(string id)
         {
             var item = context.Products.Find(id);
