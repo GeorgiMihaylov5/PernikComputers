@@ -189,3 +189,16 @@
     }
 
 
+
+/*--------Home-------*/
+.text-block {
+    position: absolute;
+    top: 10vw;
+    left: 8vw;
+    padding: 10px 15px 6px 15px;
+}
+
+.some-paragraph {
+    font-size: 2vw;
+}
+

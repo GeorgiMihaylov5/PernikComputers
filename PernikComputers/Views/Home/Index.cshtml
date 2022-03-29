@@ -2,21 +2,30 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="">
+<div style="position: relative; margin-bottom: 30px;">
     <img src="~/Images/computers.jpg" class="img-fluid" />
     <div class="text-block col-3">
         <h5 class="some-paragraph" style="color: white; margin-bottom: 20px">See our promotions:</h5>
         <a href="#" class="some-paragraph btn btn-outline-light">Promotions</a>
     </div>
 </div>
-<style>
-    .text-block {
-        position: absolute;
-        top: 15vw;
-        left: 8vw;
-        padding: 10px 15px 6px 15px;
-    }
-    .some-paragraph {
-        font-size: 2vw;
-    }
-</style>
+<div class="text-center">
+    <h3>See Our Products</h3>
+
+    <div class="col-3 d-inline-block">
+        <img src="~/Images/computerProduct.webp" width="200" height="200"/>
+        <p class="font-weight-bolder">Computers</p>
+    </div>
+    <div class="col-3 d-inline-block">
+        <img src="~/Images/processorProduct.webp"  width="200" height="200"/>
+        <p class="font-weight-bolder">Components</p>
+    </div>
+    <div class="col-3 d-inline-block">
+        <img src="~/Images/keyboardProduct.png"  width="200" height="200"/>
+        <p class="font-weight-bolder">Periphery</p>
+    </div>
+    @*<div>
+        <img />
+        <p>Accessories</p>
+    </div>*@
+</div>

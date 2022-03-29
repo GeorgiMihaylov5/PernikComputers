@@ -25,7 +25,7 @@ namespace PernikComputers.Controllers
                 .Select(x => new OrderListingViewModel
                 {
                     Id = x.Id,
-                    OrderedOn = x.OrderedOn.ToString("dd-MMM,yyyy hh:mm", CultureInfo.InvariantCulture),
+                    OrderedOn = x.OrderedOn.ToString("dd-MMM,yyyy hh:mm tt", CultureInfo.InvariantCulture),
                     ProductId = x.ProductId,
                     Model = x.Product.Model,
                     Manufacturer = x.Product.Manufacturer,
@@ -88,7 +88,7 @@ namespace PernikComputers.Controllers
                 .Select(x => new OrderListingViewModel
                 {
                     Id = x.Id,
-                    OrderedOn = x.OrderedOn.ToString("dd-MMM,yyyy hh:mm", CultureInfo.InvariantCulture),
+                    OrderedOn = x.OrderedOn.ToString("dd-MMM,yyyy hh:mm tt", CultureInfo.InvariantCulture),
                     ProductId = x.ProductId,
                     Model = x.Product.Model,
                     Manufacturer = x.Product.Manufacturer,

@@ -14,6 +14,25 @@
         <h2 style="text-align: center">Products - @Model.Count()</h2>
     </div>
 
+    <div class="text-center" style="margin-bottom: 20px">
+        <a asp-action="Create" asp-controller="Computers" class="btn btn-outline-dark">Create Computer</a>
+        <div class="dropdown d-inline-block">
+            <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Create Component
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a asp-action="CreateProcessor" asp-controller="Components" class="dropdown-item">Create Processor</a>
+                <a asp-action="CreateMotherboard" asp-controller="Components" class="dropdown-item">Create Motherboard</a>
+                <a asp-action="CreateRam" asp-controller="Components" class="dropdown-item">Create Ram</a>
+                <a asp-action="CreateVideoCard" asp-controller="Components" class="dropdown-item">Create Video Card</a>
+                <a asp-action="CreatePowerSupply" asp-controller="Components" class="dropdown-item">Create Power Supply</a>
+                <a asp-action="CreateMemory" asp-controller="Components" class="dropdown-item">Create Memory</a>
+                <a asp-action="CreateComputerCase" asp-controller="Components" class="dropdown-item">Create Computer Case</a>
+            </div>
+        </div>
+        <a asp-action="Create" asp-controller="Computers" class="btn btn-outline-dark">Create Periphery</a>
+    </div>
+
     <div>
         <table class="table">
             <thead>
