@@ -28,7 +28,7 @@ namespace PernikComputers.Controllers
                     Manufacturer = x.Manufacturer,
                     Model = x.Model,
                     Price = x.Price,
-                    IsPromotion = x.IsPromotion,
+                    Promotion = x.Promotion,
                     Image = x.Image,
                     DetailsAction = "DetailsProcessor",
                     Description = new List<string>()
@@ -73,7 +73,7 @@ namespace PernikComputers.Controllers
                 Barcode = x.Barcode,
                 Model = x.Model,
                 Manufacturer = x.Manufacturer,
-                IsPromotion = x.IsPromotion,
+                Promotion = x.Promotion,
                 Description = new List<string>()
                 {
                     $"Socket: {x.Socket}",
@@ -189,7 +189,7 @@ namespace PernikComputers.Controllers
                     Manufacturer = x.Manufacturer,
                     Model = x.Model,
                     Price = x.Price,
-                    IsPromotion = x.IsPromotion,
+                    Promotion = x.Promotion,
                     Image = x.Image,
                     DetailsAction = "DetailsMotherboard",
                     Description = new List<string>()
@@ -233,7 +233,7 @@ namespace PernikComputers.Controllers
                 Barcode = x.Barcode,
                 Model = x.Model,
                 Manufacturer = x.Manufacturer,
-                IsPromotion = x.IsPromotion,
+                Promotion = x.Promotion,
                 Category = Category.Motherboard,
                 Description = new List<string>()
                 {
@@ -345,7 +345,7 @@ namespace PernikComputers.Controllers
                     Manufacturer = x.Manufacturer,
                     Model = x.Model,
                     Price = x.Price,
-                    IsPromotion = x.IsPromotion,
+                    Promotion = x.Promotion,
                     Image = x.Image,
                     DetailsAction = "DetailsRam",
                     Description = new List<string>()
@@ -388,7 +388,7 @@ namespace PernikComputers.Controllers
                 Barcode = x.Barcode,
                 Model = x.Model,
                 Manufacturer = x.Manufacturer,
-                IsPromotion = x.IsPromotion,
+                Promotion = x.Promotion,
                 Category = Category.Ram,
                 Description = new List<string>()
                 {
@@ -497,7 +497,7 @@ namespace PernikComputers.Controllers
                     Manufacturer = x.Manufacturer,
                     Model = x.Model,
                     Price = x.Price,
-                    IsPromotion = x.IsPromotion,
+                    Promotion = x.Promotion,
                     Image = x.Image,
                     DetailsAction = "DetailsVideoCard",
                     Description = new List<string>()
@@ -543,7 +543,7 @@ namespace PernikComputers.Controllers
                 Barcode = x.Barcode,
                 Model = x.Model,
                 Manufacturer = x.Manufacturer,
-                IsPromotion = x.IsPromotion,
+                Promotion = x.Promotion,
                 Description = new List<string>()
                 {
                     $"Chip manufacturer: {x.ChipManufacturer }",
@@ -668,7 +668,7 @@ namespace PernikComputers.Controllers
                     Manufacturer = x.Manufacturer,
                     Model = x.Model,
                     Price = x.Price,
-                    IsPromotion = x.IsPromotion,
+                    Promotion = x.Promotion,
                     Image = x.Image,
                     DetailsAction = "DetailsPowerSupply",
                     Description = new List<string>()
@@ -712,7 +712,7 @@ namespace PernikComputers.Controllers
                 Barcode = x.Barcode,
                 Model = x.Model,
                 Manufacturer = x.Manufacturer,
-                IsPromotion = x.IsPromotion,
+                Promotion = x.Promotion,
                 Category = Category.PowerSupply,
                 Description = new List<string>()
                 {
@@ -819,7 +819,7 @@ namespace PernikComputers.Controllers
                     Manufacturer = x.Manufacturer,
                     Model = x.Model,
                     Price = x.Price,
-                    IsPromotion = x.IsPromotion,
+                    Promotion = x.Promotion,
                     Image = x.Image,
                     DetailsAction = "DetailsMemory",
                     Description = new List<string>()
@@ -862,7 +862,7 @@ namespace PernikComputers.Controllers
                 Barcode = x.Barcode,
                 Model = x.Model,
                 Manufacturer = x.Manufacturer,
-                IsPromotion = x.IsPromotion,
+                Promotion = x.Promotion,
                 Category = Category.Memory,
                 Price = x.Price,
                 Description = new List<string>()
@@ -975,7 +975,7 @@ namespace PernikComputers.Controllers
                     Manufacturer = x.Manufacturer,
                     Model = x.Model,
                     Price = x.Price,
-                    IsPromotion = x.IsPromotion,
+                    Promotion = x.Promotion,
                     Image = x.Image,
                     DetailsAction = "DetailsComputerCase",
                     Description = new List<string>()
@@ -1019,7 +1019,7 @@ namespace PernikComputers.Controllers
                 Barcode = x.Barcode,
                 Model = x.Model,
                 Manufacturer = x.Manufacturer,
-                IsPromotion = x.IsPromotion,
+                Promotion = x.Promotion,
                 Category = Category.ComputerCase,
                 Description = new List<string>()
                 {

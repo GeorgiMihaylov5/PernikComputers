@@ -11,7 +11,7 @@ namespace PernikComputers.Models
         public IEnumerable<string> Description { get; set; }
         public Category Category { get; set; }
         public decimal Price { get; set; }
-        public bool IsPromotion { get; set; }
+        public int Promotion { get; set; }
         public string Image { get; set; }
         public string DetailsAction { get; set; }
     }

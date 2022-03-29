@@ -23,7 +23,7 @@ namespace PernikComputers.Controllers
                    Manufacturer = x.Manufacturer,
                    Model = x.Model,
                    Price = x.Price,
-                   IsPromotion = x.IsPromotion,
+                   Promotion = x.Promotion,
                    Image = x.Image,
                    Description = new List<string>()
                }).ToList();
@@ -41,6 +41,10 @@ namespace PernikComputers.Controllers
                    Model = x.Model,
                    Price = x.Price,
                    Image = x.Image,
+                   Category = x.Category,
+                   Warranty = x.Warranty,
+                   Quantity = x.Quantity,
+                   Promotion = x.Promotion
                }).ToList();
 
             return View(productVm);

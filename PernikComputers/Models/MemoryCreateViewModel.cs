@@ -17,7 +17,6 @@ namespace PernikComputers.Models
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Price must be a positive number.")]
         public decimal Price { get; set; }
-        public bool IsPromotion { get; set; }
         [Required]
         [Display(Name = "Memory Type")]
         public MemoryType MemoryType { get; set; }

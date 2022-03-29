@@ -31,7 +31,7 @@ namespace PernikComputers.Controllers
                     Manufacturer = x.Manufacturer,
                     Model = x.Model,
                     Price = x.Price,
-                    IsPromotion = x.IsPromotion,
+                    Promotion = x.Promotion,
                     Image = x.Image,
                     Description = new List<string>()
                     {
@@ -57,7 +57,7 @@ namespace PernikComputers.Controllers
                 Barcode = x.Barcode,
                 Model = x.Model,
                 Manufacturer = x.Manufacturer,
-                IsPromotion = x.IsPromotion,
+                Promotion = x.Promotion,
                 Category = Category.Computer,
                 Description = new List<string>()
                 {
@@ -86,9 +86,9 @@ namespace PernikComputers.Controllers
             ViewBag.Motherboards = componentService.GetMotherboards();
             ViewBag.Rams = componentService.GetRams();
 
-            ViewData["ProcessorId"] = new SelectList(componentService.GetProcessors(), "Id", "Model");
-            ViewData["MotherboardId"] = new SelectList(componentService.GetMotherboards(), "Id", "Model");
-            ViewData["RamId"] = new SelectList(componentService.GetRams(), "Id", "Model");
+            //ViewData["ProcessorId"] = new SelectList(componentService.GetProcessors(), "Id", "Model");
+            //ViewData["MotherboardId"] = new SelectList(componentService.GetMotherboards(), "Id", "Model");
+            //ViewData["RamId"] = new SelectList(componentService.GetRams(), "Id", "Model");
             ViewData["VideoCardId"] = new SelectList(componentService.GetVideoCards(), "Id", "Model");
             ViewData["PowerSupplyId"] = new SelectList(componentService.GetPowerSupplies(), "Id", "Model");
             ViewData["MemoryId"] = new SelectList(componentService.GetMemories(), "Id", "Model");

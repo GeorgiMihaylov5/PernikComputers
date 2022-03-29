@@ -30,6 +30,7 @@ namespace PernikComputers.Service
                 Barcode = barcode,
                 Manufacturer = manufacturer,
                 Model = model,
+                Category = Category.Processor,
                 Price = price,
                 Warranty = warranty,
                 Quantity = quantity,
@@ -53,6 +54,7 @@ namespace PernikComputers.Service
                 Barcode = barcode,
                 Manufacturer = manufacturer,
                 Model = model,
+                Category = Category.Motherboard,
                 Price = price,
                 Warranty = warranty,
                 Quantity = quantity,
@@ -74,6 +76,7 @@ namespace PernikComputers.Service
                 Barcode = barcode,
                 Manufacturer = manufacturer,
                 Model = model,
+                Category = Category.Ram,
                 Price = price,
                 Warranty = warranty,
                 Quantity = quantity,
@@ -100,6 +103,7 @@ namespace PernikComputers.Service
                 Barcode = barcode,
                 Manufacturer = manufacturer,
                 Model = model,
+                Category = Category.VideoCard,
                 Price = price,
                 Warranty = warranty,
                 Quantity = quantity,
@@ -120,6 +124,7 @@ namespace PernikComputers.Service
                 Barcode = barcode,
                 Manufacturer = manufacturer,
                 Model = model,
+                Category = Category.PowerSupply,
                 Price = price,
                 Warranty = warranty,
                 Quantity = quantity,
@@ -142,6 +147,7 @@ namespace PernikComputers.Service
                 Barcode = barcode,
                 Manufacturer = manufacturer,
                 Model = model,
+                Category = Category.Memory,
                 Price = price,
                 Warranty = warranty,
                 Quantity = quantity,
@@ -163,6 +169,7 @@ namespace PernikComputers.Service
                 Barcode = barcode,
                 Manufacturer = manufacturer,
                 Model = model,
+                Category = Category.ComputerCase,
                 Price = price,
                 Warranty = warranty,
                 Quantity = quantity,
@@ -208,7 +215,7 @@ namespace PernikComputers.Service
         {
             return context.ComputerCases.ToList();
         }
-        //------------------Get---------------------------
+        ////------------------Get---------------------------
 
         public Processor GetProcessor(string id)
         {

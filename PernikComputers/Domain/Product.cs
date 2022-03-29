@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using PernikComputers.Domain.Enum;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PernikComputers.Domain
 {
@@ -11,7 +12,8 @@ namespace PernikComputers.Domain
         public string Model { get; set; }
         public int Warranty { get; set; }
         public decimal Price { get; set; }
-        public bool IsPromotion { get; set; }
+        public int Promotion { get; set; }
+        public Category Category { get; set; }
         public int Quantity { get; set; }
         public string Image { get; set; }
     }
