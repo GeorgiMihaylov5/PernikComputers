@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PernikComputers.Abstraction;
+using PernikComputers.Data;
+using PernikComputers.Domain;
 using PernikComputers.Models;
 using System;
 using System.Collections.Generic;
@@ -14,16 +16,47 @@ namespace PernikComputers.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IComputerService service;
+        ApplicationDbContext context;
 
-        public HomeController(ILogger<HomeController> logger, IComputerService service)
+        public HomeController(ILogger<HomeController> logger, IComputerService service, ApplicationDbContext context)
         {
             _logger = logger;
             this.service = service;
+            this.context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            Dictionary<string, int> map = new Dictionary<string, int>();
+
+            foreach (var order in context.Orders.ToList())
+            {
+                if (!map.ContainsKey(order.ProductId))
+                {
+                    map.Add(order.ProductId, 1);
+                }
+                else
+                {
+                    map[order.ProductId]++;
+                }
+            }
+            var ids = map.OrderByDescending(x => x.Value).Take(6).Select(x => x.Key).ToList();
+            var products = context.Products.Where(x => ids.Contains(x.Id)).ToList();
+
+            List<ProductAllViewModel> productVm = products
+               .Select(x => new ProductAllViewModel
+               {
+                   Id = x.Id,
+                   Manufacturer = x.Manufacturer,
+                   Model = x.Model,
+                   Price = x.Price,
+                   Image = x.Image,
+                   Category = x.Category,
+                   Discount = x.Discount,
+                   Description = new List<string>()
+               }).ToList();
+
+            return View(productVm);
         }
 
         public IActionResult Privacy()

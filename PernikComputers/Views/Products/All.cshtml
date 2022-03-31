@@ -35,37 +35,39 @@
             {
                 var details = item.Category == Category.Computer ? "Details" : $"Details{item.Category}";
                 var controller = item.Category == Category.Computer ? "Computers" : $"Components";
-                <li class="products-list-item list-group-item col-3">
+                <li class="products-list-item list-group-item col-3" style="display: grid; align-content: space-between">
                     <div>
                         <a asp-action="@details" asp-controller="@controller" asp-route-id="@item.Id">
                             <img src="@item.Image" width="200" height="175">
                             <h5>@item.Manufacturer @item.Model</h5>
                         </a>
                     </div>
-                    <div class="text-center" style="font-size: 14px; height: 175px">
+                    <div class="text-center h" style="font-size: 14px; height: max-content">
                         @foreach (var characteristic in item.Description)
                         {
                             <p style="margin-bottom: 10px">@characteristic</p>
                         }
                     </div>
-                    <div style="height: 24px">
-                        @if (item.Discount > 0)
-                        {
-                            var oldPrice = $"{item.Discount + item.Price:f2}";
-                            <p class="mb-0 text-left"><s>@oldPrice lv.</s></p>
-                        }
-                    </div>
-                    <div id="item-price-container">
-                        @if (item.Discount > 0)
-                        {
-                            <span class="font-weight-bold text-danger" style="font-size: 17px">@item.Price lv.</span>
-                        }
-                        else
-                        {
-                            <span class="font-weight-bold" style="font-size: 17px"> @item.Price lv.</span>
-                        }
+                    <div>
+                        <div style="height: 24px">
+                            @if (item.Discount > 0)
+                            {
+                                var oldPrice = $"{item.Discount + item.Price:f2}";
+                                <p class="mb-0 text-left"><s>@oldPrice lv.</s></p>
+                            }
+                        </div>
+                        <div id="item-price-container">
+                            @if (item.Discount > 0)
+                            {
+                                <span class="font-weight-bold text-danger" style="font-size: 17px">@item.Price lv.</span>
+                            }
+                            else
+                            {
+                                <span class="font-weight-bold" style="font-size: 17px"> @item.Price lv.</span>
+                            }
 
-                        <a class="btn btn-primary" asp-action="@details" asp-controller="@controller" asp-route-id="@item.Id">SEE MORE</a>
+                            <a class="btn btn-primary" asp-action="@details" asp-controller="@controller" asp-route-id="@item.Id">SEE MORE</a>
+                        </div>
                     </div>
                 </li>
             }
