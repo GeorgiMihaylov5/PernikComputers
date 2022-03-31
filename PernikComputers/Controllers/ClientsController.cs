@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using PernikComputers.Abstraction;
 using PernikComputers.Domain;
 using PernikComputers.Models;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace PernikComputers.Controllers
         private readonly ILogger<ChangePasswordModel> logger;
 
         public ClientsController(UserManager<ApplicationUser> userManager,
-            IClientService service, 
+            IClientService service,
             SignInManager<ApplicationUser> signInManager,
              ILogger<ChangePasswordModel> logger)
         {
@@ -51,6 +52,7 @@ namespace PernikComputers.Controllers
 
         public IActionResult Register()
         {
+            ViewBag.Users = new List<string>(userManager.Users.Select(x => x.UserName));
             return View();
         }
 
@@ -83,7 +85,6 @@ namespace PernikComputers.Controllers
                     }
                 }
             }
-            ModelState.AddModelError(string.Empty, "The user exists.");
             return View();
         }
 

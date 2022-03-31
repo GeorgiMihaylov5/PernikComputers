@@ -25,6 +25,7 @@ namespace PernikComputers.Controllers
                    Price = x.Price,
                    Discount = x.Discount,
                    Image = x.Image,
+                   Category = x.Category,
                    Description = new List<string>()
                }).ToList();
 
@@ -102,6 +103,7 @@ namespace PernikComputers.Controllers
                   Model = x.Model,
                   Price = x.Price,
                   Discount = x.Discount,
+                  Category = x.Category,
                   Image = x.Image,
                   Description = new List<string>()
               }).ToList();

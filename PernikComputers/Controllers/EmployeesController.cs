@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Internal;
 using Microsoft.AspNetCore.Mvc;
@@ -29,7 +30,7 @@ namespace PernikComputers.Controllers
             this.signInManager = signInManager;
             this.logger = logger;
         }
-
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> All()
         {
             var employees = service.GetEmployees()

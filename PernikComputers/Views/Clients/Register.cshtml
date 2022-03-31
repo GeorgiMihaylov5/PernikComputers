@@ -5,64 +5,95 @@
     //https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/content-gh/en/_mdb5/standard/web/docs/extended/registration/assets/featured.png
 }
 
-<h1>Register</h1>
 
-<h4>ClientCreateViewModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Register">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
+<div class="text-center">
+    <div class="d-inline-block col-8" style="max-width: 419px">
+        <h1 class="text-center mb-3">Register</h1>
+        <form asp-action="Register" onsubmit="return isUsernameFree()">
+            <div class="mb-2 icon-div-mw-3">
+                <span><i class="fa-solid fa-circle-user icon-width"></i></span>
+                <div class="d-inline-block icon-div-width-4">
+                    <input asp-for="FirstName" class="form-control" placeholder="First Name" />
+                </div>
+                <div class="d-inline-block icon-div-width-4">
+                    <input asp-for="LastName" class="form-control" placeholder="Last Name" />
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
+            <span asp-validation-for="FirstName" class="text-danger icon-div-width-4"></span>
+            <span asp-validation-for="LastName" class="text-danger icon-div-width-4"></span>
+            <div class="mb-2 icon-div-mw-3">
+                <span><i class="fa-solid fa-phone icon-width"></i></span>
+                <div class="d-inline-block icon-div-width-9">
+                    <input asp-for="PhoneNumber" class="form-control" placeholder="Phone Number" />
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="PhoneNumber" class="control-label"></label>
-                <input asp-for="PhoneNumber" class="form-control" />
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            <div class="mb-2 icon-div-mw-3">
+                <span><i class="fa-solid fa-location-dot icon-width"></i></span>
+                <div class="d-inline-block icon-div-width-9">
+                    <input asp-for="Address" class="form-control" placeholder="Address" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" />
-                <span asp-validation-for="Address" class="text-danger"></span>
+            <div class="mb-2 icon-div-mw-3">
+                <span><i class="fa-solid fa-envelope icon-width"></i></span>
+                <div class="d-inline-block icon-div-width-9">
+                    <input asp-for="Email" class="form-control" placeholder="Email" />
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+            <span asp-validation-for="Email" class="text-danger"></span>
+            <div class="mb-2 icon-div-mw-3">
+                <span><i class="fa-solid fa-address-card icon-width"></i></span>
+                <div class="d-inline-block icon-div-width-9">
+                    <input asp-for="Username" class="form-control" placeholder="Username" id="username"/>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Username" class="control-label"></label>
-                <input asp-for="Username" class="form-control" />
-                <span asp-validation-for="Username" class="text-danger"></span>
+            <span asp-validation-for="Username" class="text-danger"></span>
+            <span class="text-danger d-none" id="usernameEror"></span>
+            <div class="mb-2 icon-div-mw-3">
+                <span><i class="fa-solid fa-lock icon-width"></i></span>
+                <div class="d-inline-block icon-div-width-9">
+                    <input asp-for="Password" class="form-control" placeholder="Password" />
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
+            <span asp-validation-for="Password" class="text-danger"></span>
+            <div class="mb-2 icon-div-mw-3">
+                <span><i class="fa-solid fa-key icon-width"></i></span>
+                <div class="d-inline-block icon-div-width-9">
+                    <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm Password" />
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="ConfirmPassword" class="control-label"></label>
-                <input asp-for="ConfirmPassword" class="form-control" />
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            <div class="form-group mt-4">
+                <button type="submit" class="btn-radius btn btn-outline-primary btn-lg">REGISTER</button>
+                <p class="mt-1 ml-4">Already have an account? <a asp-area="Identity" asp-page="/Account/Login">Login here</a></p>
             </div>
         </form>
     </div>
+    <div class="d-inline align-top col-3">
+        <img src="~/Images/registerImage.webp" width="400" height="400" />
+    </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
+<script>
+    function isUsernameFree() {
+        let usernames = @Html.Raw(Json.Serialize(@ViewBag.Users));
+        let currentUsername = document.getElementById('username').value
+
+        for (var i = 0; i < usernames.length; i++) {
+            if (usernames[i] == currentUsername) {
+                let span = document.getElementById('usernameEror')
+                span.className = 'text-danger'
+                span.textContent = "User exist!"
+                return false
+            }
+        }
+        document.getElementById('usernameEror').className += ' d-none'
+        return true
+    }
+</script>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

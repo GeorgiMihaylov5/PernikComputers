@@ -37,7 +37,7 @@
                 var controller = item.Category == Category.Computer ? "Computers" : $"Components";
                 <li class="products-list-item list-group-item col-3">
                     <div>
-                        <a asp-action="@details" asp-route-id="@item.Id">
+                        <a asp-action="@details" asp-controller="@controller" asp-route-id="@item.Id">
                             <img src="@item.Image" width="200" height="175">
                             <h5>@item.Manufacturer @item.Model</h5>
                         </a>

@@ -31,7 +31,7 @@
                     <input type="hidden" name="id" value="@Model.Id" />
                     <div>
                         <label>Enter percentages: </label>
-                        <input class="form-control m-auto text-center" asp-for="Discount" class="form-control" id="productDiscount" min=0 style="width: 150px" onchange="CalculateDiscount()"/>
+                        <input class="form-control m-auto text-center" asp-for="Discount" id="productDiscount" min=0 style="width: 150px" onchange="CalculateDiscount()"/>
                         <span asp-validation-for="Discount" class="text-danger"></span>
                     </div>
                     <div class="d-block mt-4">
