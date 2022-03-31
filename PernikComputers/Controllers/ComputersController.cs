@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PernikComputers.Abstraction;
@@ -79,7 +80,7 @@ namespace PernikComputers.Controllers
 
             return View("~/Views/Products/Details.cshtml", detailsViewModel);
         }
-
+        [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             ViewBag.Processors = componentService.GetProcessors();
@@ -97,6 +98,7 @@ namespace PernikComputers.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public IActionResult Create(ComputerCreateViewModel createVm)
         {
             if (ModelState.IsValid)
@@ -111,9 +113,9 @@ namespace PernikComputers.Controllers
                 }
             }
             return View();
-            //ViewData["GanreId"] = new SelectList(_context.Ganres, "Id", "Name", movie.GanreId);
         }
 
+        [Authorize(Roles = "Administrator")]
         public IActionResult Edit(int id)
         {
             return View();
@@ -121,26 +123,8 @@ namespace PernikComputers.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public IActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        public IActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id, IFormCollection collection)
         {
             try
             {

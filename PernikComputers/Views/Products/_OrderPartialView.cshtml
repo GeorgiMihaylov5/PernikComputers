@@ -9,7 +9,15 @@
             <input class="form-control" min="1" asp-for="Count" id="productQuantity" value="1" onchange="CalculatePrice()" />
             <span asp-validation-for="Count" class="text-danger"></span>
         </div>
-        <button type="submit" class="btn btn-danger">Order</button>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <button type="submit" class="btn btn-danger">Order</button>
+        }
+        else
+        {
+            <a class="btn btn-danger" asp-area="Identity" asp-page="/Account/Login">Order</a>
+        }
+
     </div>
     <input type="hidden" asp-for="ProductId" value="@Model.ProductId" />
     <input type="hidden" asp-for="Manufacturer" value="@Model.Manufacturer" />

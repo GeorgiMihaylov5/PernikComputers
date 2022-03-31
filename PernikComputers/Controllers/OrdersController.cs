@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PernikComputers.Abstraction;
 using PernikComputers.Domain.Enum;
 using PernikComputers.Models;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace PernikComputers.Controllers
 {
+    [Authorize]
     public class OrdersController : Controller
     {
         private readonly IOrderService service;
@@ -19,6 +21,7 @@ namespace PernikComputers.Controllers
         {
             this.service = _service;
         }
+        [Authorize(Roles = "Administrator")]
         public IActionResult All()
         {
             List<OrderListingViewModel> orders = service.All()
@@ -30,12 +33,12 @@ namespace PernikComputers.Controllers
                     Model = x.Product.Model,
                     Manufacturer = x.Product.Manufacturer,
                     Category = x.Category.ToString(),
-                    ProductPrice = x.Product.Price.ToString(),
+                    ProductPrice = x.OrderedPrice.ToString(),
                     CustomerId = x.CustomerId,
                     CustomerUsername = x.Customer.UserName,
                     Quantity = x.Count,
                     Status = x.Status.ToString(),
-                    TotalPrice = (x.Count * x.Product.Price).ToString()
+                    TotalPrice = (x.Count * x.OrderedPrice).ToString()
 
                 }).ToList();
 
@@ -54,12 +57,12 @@ namespace PernikComputers.Controllers
                     Model = x.Product.Model,
                     Manufacturer = x.Product.Manufacturer,
                     Category = x.Category.ToString(),
-                    ProductPrice = x.Product.Price.ToString(),
+                    ProductPrice = x.OrderedPrice.ToString(),
                     CustomerId = x.CustomerId,
                     CustomerUsername = x.Customer.UserName,
                     Quantity = x.Count,
                     Status = x.Status.ToString(),
-                    TotalPrice = (x.Count * x.Product.Price).ToString()
+                    TotalPrice = (x.Count * x.OrderedPrice).ToString()
 
                 }).ToList();
 
@@ -82,6 +85,7 @@ namespace PernikComputers.Controllers
             }
             return RedirectToAction();
         }
+        [Authorize(Roles = "Administrator")]
         public IActionResult Rejected()
         {
             List<OrderListingViewModel> orders = service.All().Where(x => x.Status == OrderStatus.Rejected)
@@ -93,7 +97,7 @@ namespace PernikComputers.Controllers
                     Model = x.Product.Model,
                     Manufacturer = x.Product.Manufacturer,
                     Category = x.Category.ToString(),
-                    ProductPrice = x.Product.Price.ToString(),
+                    ProductPrice = x.OrderedPrice.ToString(),
                     CustomerId = x.CustomerId,
                     CustomerUsername = x.Customer.UserName,
                     Quantity = x.Count,

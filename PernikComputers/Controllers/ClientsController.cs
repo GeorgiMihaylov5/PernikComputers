@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Manage.Internal;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace PernikComputers.Controllers
 {
+    [Authorize]
     public class ClientsController : Controller
     {
         private readonly UserManager<ApplicationUser> userManager;
@@ -30,7 +32,7 @@ namespace PernikComputers.Controllers
             this.signInManager = signInManager;
             this.logger = logger;
         }
-
+        [Authorize(Roles = "Administrator")]
         public IActionResult All()
         {
             var employees = service.GetClients()
@@ -49,7 +51,7 @@ namespace PernikComputers.Controllers
             employees = employees.OrderBy(x => x.UserName).ToList();
             return View(employees);
         }
-
+        [AllowAnonymous]
         public IActionResult Register()
         {
             ViewBag.Users = new List<string>(userManager.Users.Select(x => x.UserName));
@@ -58,6 +60,7 @@ namespace PernikComputers.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public async Task<ActionResult> Register(ClientCreateViewModel client)
         {
             if (!ModelState.IsValid)
@@ -160,23 +163,23 @@ namespace PernikComputers.Controllers
             return RedirectToAction("Profile");
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(string id)
-        {
-            var isDeleted = service.Remove(id);
-            if (isDeleted)
-            {
-                if (!User.IsInRole("Administrator"))
-                {
-                    await signInManager.SignOutAsync();
-                    logger.LogInformation("User logged out.");
-                }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Delete(string id)
+        //{
+        //    var isDeleted = service.Remove(id);
+        //    if (isDeleted)
+        //    {
+        //        if (!User.IsInRole("Administrator"))
+        //        {
+        //            await signInManager.SignOutAsync();
+        //            logger.LogInformation("User logged out.");
+        //        }
 
-                return RedirectToAction("All", "Clients");
-            }
+        //        return RedirectToAction("All", "Clients");
+        //    }
 
-            return RedirectToAction("Profile");
-        }
+        //    return RedirectToAction("Profile");
+        //}
     }
 }

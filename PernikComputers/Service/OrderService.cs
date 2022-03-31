@@ -37,6 +37,7 @@ namespace PernikComputers.Service
                 OrderedOn = DateTime.Now,
                 ProductId = productId,
                 Count = count,
+                OrderedPrice = price,
                 CustomerId = customerId,
                 Category = category,
                 Status = OrderStatus.Pending,

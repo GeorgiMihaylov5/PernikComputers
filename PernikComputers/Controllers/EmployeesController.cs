@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace PernikComputers.Controllers
 {
+    [Authorize]
     public class EmployeesController : Controller
     {
         private readonly IEmployeeService service;
@@ -58,6 +59,7 @@ namespace PernikComputers.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Promote(string userId)
         {
             if (userId == null)
@@ -75,6 +77,7 @@ namespace PernikComputers.Controllers
             return RedirectToAction("All");
         }
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Demote(string userId)
         {
             if (userId == null)
@@ -91,7 +94,7 @@ namespace PernikComputers.Controllers
 
             return RedirectToAction("All");
         }
-
+        [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             return View();
@@ -99,6 +102,7 @@ namespace PernikComputers.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Create(EmployeeCreateViewModel employee)
         {
             if (!ModelState.IsValid)
@@ -153,18 +157,19 @@ namespace PernikComputers.Controllers
         //    return View(employeeViewModel);
         //}
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Delete(string id)
-        {
-            var isDeleted = service.Remove(id);
-            if (isDeleted)
-            {
-                return RedirectToAction("All", "Employees");
-            }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult Delete(string id)
+        //{
+        //    var isDeleted = service.Remove(id);
+        //    if (isDeleted)
+        //    {
+        //        return RedirectToAction("All", "Employees");
+        //    }
 
-            return RedirectToAction("Profile");
-        }
+        //    return RedirectToAction("Profile");
+        //}
+        [Authorize(Roles = "Employee,Administrator")]
         public IActionResult Profile()
         {
             string userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);

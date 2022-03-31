@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PernikComputers.Abstraction;
 using PernikComputers.Domain.Enum;
@@ -8,6 +9,7 @@ using System.Linq;
 
 namespace PernikComputers.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class ComponentsController : Controller
     {
         private readonly IComponentService service;
@@ -19,6 +21,7 @@ namespace PernikComputers.Controllers
             this.productService = productService;
         }
         //--------Processors---------
+        [AllowAnonymous]
         public IActionResult AllProcessors()
         {
             List<ProductAllViewModel> processorVM = service.GetProcessors()
@@ -64,6 +67,7 @@ namespace PernikComputers.Controllers
             }
             return View();
         }
+        [AllowAnonymous]
         public IActionResult DetailsProcessor(string id)
         {
             var x = service.GetProcessor(id);
@@ -179,7 +183,7 @@ namespace PernikComputers.Controllers
         }
 
         //-------Motherboards-------------
-
+        [AllowAnonymous]
         public IActionResult AllMotherboards()
         {
             List<ProductAllViewModel> motherboardVM = service.GetMotherboards()
@@ -224,6 +228,7 @@ namespace PernikComputers.Controllers
             }
             return View();
         }
+        [AllowAnonymous]
         public IActionResult DetailsMotherboard(string id)
         {
             var x = service.GetMotherboard(id);
@@ -336,6 +341,7 @@ namespace PernikComputers.Controllers
         }
 
         //--------Ram---------
+        [AllowAnonymous]
         public IActionResult AllRams()
         {
             List<ProductAllViewModel> ramVM = service.GetRams()
@@ -379,6 +385,7 @@ namespace PernikComputers.Controllers
             }
             return View();
         }
+        [AllowAnonymous]
         public IActionResult DetailsRam(string id)
         {
             var x = service.GetRam(id);
@@ -488,6 +495,7 @@ namespace PernikComputers.Controllers
 
         //-------VideoCard-------------
 
+        [AllowAnonymous]
         public IActionResult AllVideoCards()
         {
             List<ProductAllViewModel> videoCardVM = service.GetVideoCards()
@@ -533,7 +541,7 @@ namespace PernikComputers.Controllers
             }
             return View();
         }
-
+        [AllowAnonymous]
         public IActionResult DetailsVideoCard(string id)
         {
             var x = service.GetVideoCard(id);
@@ -658,7 +666,7 @@ namespace PernikComputers.Controllers
         }
 
         //-------PowerSupply-------------
-
+        [AllowAnonymous]
         public IActionResult AllPowerSupplies()
         {
             List<ProductAllViewModel>powerSupplyVM = service.GetPowerSupplies()
@@ -702,7 +710,7 @@ namespace PernikComputers.Controllers
             }
             return View();
         }
-
+        [AllowAnonymous]
         public IActionResult DetailsPowerSupply(string id)
         {
             var x = service.GetPowerSupply(id);
@@ -809,7 +817,7 @@ namespace PernikComputers.Controllers
         }
 
         //-------Memory-------------
-
+        [AllowAnonymous]
         public IActionResult AllMemories()
         {
             List<ProductAllViewModel> memoryVM = service.GetMemories()
@@ -853,6 +861,7 @@ namespace PernikComputers.Controllers
             }
             return View();
         }
+        [AllowAnonymous]
         public IActionResult DetailsMemory(string id)
         {
             var x = service.GetMemory(id);
@@ -965,7 +974,7 @@ namespace PernikComputers.Controllers
         }
 
         //-------ComputerCase-------------
-
+        [AllowAnonymous]
         public IActionResult AllComputerCases()
         {
             List<ProductAllViewModel> computerCaseVM = service.GetComputerCases()
@@ -1010,6 +1019,7 @@ namespace PernikComputers.Controllers
             }
             return View();
         }
+        [AllowAnonymous]
         public IActionResult DetailsComputerCase(string id)
         {
             var x = service.GetComputerCase(id);

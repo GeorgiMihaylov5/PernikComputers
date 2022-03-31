@@ -30,8 +30,8 @@
             <form asp-action="MakeDiscount" asp-controller="Products" method="post">
                     <input type="hidden" name="id" value="@Model.Id" />
                     <div>
-                        <label>Enter percentages: </label>
-                        <input class="form-control m-auto text-center" asp-for="Discount" id="productDiscount" min=0 style="width: 150px" onchange="CalculateDiscount()"/>
+                        @*<label>Enter percentages: </label>*@
+                        <input class="form-control m-auto text-center" asp-for="Discount" id="productDiscount" min=0 style="width: 160px" onchange="CalculateDiscount()" placeholder="Enter percentages" value=""/>
                         <span asp-validation-for="Discount" class="text-danger"></span>
                     </div>
                     <div class="d-block mt-4">
@@ -46,7 +46,7 @@
     function CalculateDiscount(){
         let discount = parseFloat(document.getElementById('productDiscount').value)
         let oldPrice =  parseFloat(document.getElementById('oldPrice').textContent)
-        document.getElementById('newPrice').textContent = (oldPrice - oldPrice * discount / 100).toFixed(2)
+        document.getElementById('newPrice').textContent = (oldPrice - oldPrice * discount / 100)
     }
 </script>
 

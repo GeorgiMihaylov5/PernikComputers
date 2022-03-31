@@ -17,9 +17,7 @@ namespace PernikComputers.Domain
         public Product Product { get; set; }
         public string CustomerId { get; set; }
         public ApplicationUser Customer { get; set; }
-        //public string Manufacturer { get; set; }
-        //public string Model { get; set; }
-        //public decimal Price { get; set; }
+        public decimal OrderedPrice { get; set; }
         public int Count { get; set; }
         public OrderStatus Status { get; set; }
         public string Notes { get; set; }
