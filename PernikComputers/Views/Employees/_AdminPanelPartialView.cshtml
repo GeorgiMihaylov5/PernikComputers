@@ -1,37 +1,44 @@
 ﻿<ul class="nav nav-tabs" id="myTab" role="tablist" style="justify-content: space-around;">
     <li class="nav-item">
-        <a class="panel nav-link" asp-action="All" asp-controller="Employees" role="tab" aria-controls="home" aria-selected="false">Employees</a>
-    </li>          
-    <li class="nav-item">
-        <a class="panel nav-link" asp-action="All" asp-controller="Clients" role="tab" aria-controls="home" aria-selected="false">Clients</a>
-    </li>          
-    <li class="nav-item">
-        <a class="panel nav-link" asp-action="AllTable" asp-controller="Products" role="tab" aria-controls="home" aria-selected="false">Products</a>
-    </li>          
-    <li class="nav-item">
         <a class="panel nav-link" asp-action="All" asp-controller="Orders" role="tab" aria-controls="home" aria-selected="false">Orders</a>
-    </li>          
-    <li class="nav-item">
-        <a class="panel nav-link"asp-action="Rejected" asp-controller="Orders" role="tab" aria-controls="home" aria-selected="false">Rejected orders</a>
     </li>
+    <li class="nav-item">
+        <a class="panel nav-link" asp-action="Rejected" asp-controller="Orders" role="tab" aria-controls="home" aria-selected="false">Rejected orders</a>
+    </li>
+    @if (User.IsInRole("Administrator"))
+    {
+        <li class="nav-item">
+            <a class="panel nav-link" asp-action="All" asp-controller="Employees" role="tab" aria-controls="home" aria-selected="false">Employees</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="panel nav-link" asp-action="All" asp-controller="Clients" role="tab" aria-controls="home" aria-selected="false">Clients</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="panel nav-link" asp-action="AllTable" asp-controller="Products" role="tab" aria-controls="home" aria-selected="false">Products</a>
+        </li>
+
+    }
 </ul>
 <script>
     let urlAdmin = window.location.pathname.split('/')
     let btnsAdmin = document.getElementsByClassName("panel");
 
-    if (urlAdmin[urlAdmin.length - 2] == 'Employees' && urlAdmin[urlAdmin.length - 1] == 'All') {
+    if (urlAdmin[urlAdmin.length - 2] == 'Orders' && urlAdmin[urlAdmin.length - 1] == 'All') {
         btnsAdmin[0].className += " active";
     }
-    else if (urlAdmin[urlAdmin.length - 2] == 'Clients' && urlAdmin[urlAdmin.length - 1] == 'All') {
+    else if (urlAdmin[urlAdmin.length - 2] == 'Orders' && urlAdmin[urlAdmin.length - 1] == 'Rejected') {
         btnsAdmin[1].className += " active";
     }
-    else if (urlAdmin[urlAdmin.length - 2] == 'Products' && urlAdmin[urlAdmin.length - 1] == 'AllTable') {
+
+    if (urlAdmin[urlAdmin.length - 2] == 'Employees' && urlAdmin[urlAdmin.length - 1] == 'All') {
         btnsAdmin[2].className += " active";
     }
-    else if (urlAdmin[urlAdmin.length - 2] == 'Orders' && urlAdmin[urlAdmin.length - 1] == 'All') {
+    else if (urlAdmin[urlAdmin.length - 2] == 'Clients' && urlAdmin[urlAdmin.length - 1] == 'All') {
         btnsAdmin[3].className += " active";
     }
-    else if (urlAdmin[urlAdmin.length - 2] == 'Orders' && urlAdmin[urlAdmin.length - 1] == 'Rejected') {
+    else if (urlAdmin[urlAdmin.length - 2] == 'Products' && urlAdmin[urlAdmin.length - 1] == 'AllTable') {
         btnsAdmin[4].className += " active";
     }
 </script>

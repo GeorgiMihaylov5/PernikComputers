@@ -170,7 +170,12 @@ namespace PernikComputers.Service
 
             return context.SaveChanges() != 0;
         }
-        
+
+        public Order GetOrder(string orderId, string userId)
+        {
+            throw new NotImplementedException();
+        }
+
 
         //private CommonProperties GetProduct(string productId, Category category)
         //{

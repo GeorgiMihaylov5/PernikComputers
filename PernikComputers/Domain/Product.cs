@@ -1,4 +1,5 @@
 ﻿using PernikComputers.Domain.Enum;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PernikComputers.Domain
@@ -16,5 +17,6 @@ namespace PernikComputers.Domain
         public Category Category { get; set; }
         public int Quantity { get; set; }
         public string Image { get; set; }
+        public ICollection<Order> Orders { get; set; }
     }
 }

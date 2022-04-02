@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PernikComputers.Abstraction;
+using PernikComputers.Domain;
 using PernikComputers.Domain.Enum;
 using PernikComputers.Models;
 using System;
@@ -15,17 +16,17 @@ namespace PernikComputers.Controllers
     public class ComputersController : Controller
     {
         private readonly IComputerService service;
-        private readonly IComponentService componentService;
+        private readonly IProductService productService;
 
-        public ComputersController(IComputerService _service, IComponentService _componentService)
+        public ComputersController(IComputerService _service, IProductService productService)
         {
             this.service = _service;
-            this.componentService = _componentService;
+            this.productService = productService;
         }
 
         public IActionResult All()
         {
-            List<ProductAllViewModel> processorVM = service.GetComputers()
+            List<ProductAllViewModel> processorVM = productService.GetProducts<Computer>()
                 .Select(x => new ProductAllViewModel
                 {
                     Id = x.Id,
@@ -35,12 +36,7 @@ namespace PernikComputers.Controllers
                     Discount = x.Discount,
                     Image = x.Image,
                     Category = x.Category,
-                    Description = new List<string>()
-                    {
-                        $"{x.Processor.Manufacturer} {x.Processor.Model} ({x.Processor.CPUSpeed}/{x.Processor.CPUBoostSpeed} GHz, {x.Processor.Cache} M)",
-                        $"{x.VideoCard.Manufacturer} {x.VideoCard.Model} {x.VideoCard.SizeMemory} GB",
-                        $"{x.Ram.Size} GB {x.Ram.TypeRam} {x.Ram.Frequency} MHz"
-                    }
+                    Description = productService.AllDescription(x.Id)
                 }).ToList();
 
 
@@ -48,51 +44,19 @@ namespace PernikComputers.Controllers
             //return RedirectToPage("All","Components", processorVM);
         }
 
-        public IActionResult Details(string id)
-        {
-            var x = service.GetComputer(id);
-
-            ProductDetailsViewModel detailsViewModel = new ProductDetailsViewModel
-            {
-                Id = x.Id,
-                Barcode = x.Barcode,
-                Model = x.Model,
-                Manufacturer = x.Manufacturer,
-                Discount = x.Discount,
-                Category = x.Category,
-                Description = new List<string>()
-                {
-                    $"Processor: {x.Processor.Manufacturer} {x.Processor.Model} ({x.Processor.CPUSpeed}/{x.Processor.CPUBoostSpeed} GHz, {x.Processor.Cache} M, {x.Processor.Cores} cores, {x.Processor.Threads} threads)",
-                    $"Video Card: {x.VideoCard.Manufacturer} {x.VideoCard.Model} {x.VideoCard.SizeMemory} GB",
-                    $"Ram: {x.Ram.Size} GB {x.Ram.TypeRam} {x.Ram.Frequency} MHz",
-                    $"Chipset: {x.Motherboard.Chipset}",
-                    $"Motherboard: {x.Motherboard.Manufacturer} {x.Motherboard.Model}",
-                    $"Memory: {x.Memory.Capacity} GB {x.Memory.MemoryType}",
-                    $"Computer case: {x.ComputerCase.Manufacturer} {x.ComputerCase.Model}",
-                    $"Size: {x.ComputerCase.CaseSize} mm",
-                    $"Power Supply: {x.PowerSupply.Power} W {x.PowerSupply.Manufacturer} {x.PowerSupply.Model}",
-                    $"Warranty: {x.Warranty} months"
-                },
-                Price = x.Price,
-                Quantity = x.Quantity,
-                Image = x.Image,
-            };
-
-            return View("~/Views/Products/Details.cshtml", detailsViewModel);
-        }
         [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
-            ViewBag.Processors = componentService.GetProcessors();
-            ViewBag.Motherboards = componentService.GetMotherboards();
-            ViewBag.Rams = componentService.GetRams();
-            ViewData["ProcessorId"] = new SelectList(componentService.GetProcessors(), "Id", "Model");
-            ViewData["MotherboardId"] = new SelectList(componentService.GetMotherboards(), "Id", "Model");
-            ViewData["RamId"] = new SelectList(componentService.GetRams(), "Id", "Model");
-            ViewData["VideoCardId"] = new SelectList(componentService.GetVideoCards(), "Id", "Model");
-            ViewData["PowerSupplyId"] = new SelectList(componentService.GetPowerSupplies(), "Id", "Model");
-            ViewData["MemoryId"] = new SelectList(componentService.GetMemories(), "Id", "Model");
-            ViewData["ComputerCaseId"] = new SelectList(componentService.GetComputerCases(), "Id", "Model");
+            ViewBag.Processors = productService.GetProducts<Processor>();
+            ViewBag.Motherboards = productService.GetProducts<Motherboard>();
+            ViewBag.Rams = productService.GetProducts<Ram>();
+            ViewData["ProcessorId"] = new SelectList(productService.GetProducts<Processor>(), "Id", "Model");
+            ViewData["MotherboardId"] = new SelectList(productService.GetProducts<Motherboard>(), "Id", "Model");
+            ViewData["RamId"] = new SelectList(productService.GetProducts<Ram>(), "Id", "Model");
+            ViewData["VideoCardId"] = new SelectList(productService.GetProducts<VideoCard>(), "Id", "Model");
+            ViewData["PowerSupplyId"] = new SelectList(productService.GetProducts<PowerSupply>(), "Id", "Model");
+            ViewData["MemoryId"] = new SelectList(productService.GetProducts<Memory>(), "Id", "Model");
+            ViewData["ComputerCaseId"] = new SelectList(productService.GetProducts<ComputerCase>(), "Id", "Model");
             return View();
         }
 
@@ -116,24 +80,54 @@ namespace PernikComputers.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        public IActionResult Edit(int id)
+        public IActionResult Edit(string id)
         {
-            return View();
+            Computer item = productService.GetProduct(id);
+
+            if (item == null)
+            {
+                return NotFound();
+            }
+            var editModel = new ComputerCreateViewModel()
+            {
+                Id = item.Id,
+                Barcode = item.Barcode,
+                Manufacturer = item.Manufacturer,
+                Model = item.Model,
+                Price = item.Price,
+                Warranty = item.Warranty,
+                Quantity = item.Quantity,
+                Image = item.Image,
+                ProcessorId = item.ProcessorId,
+                MotherboardId = item.MotherboardId,
+                RamId = item.RamId,
+                VideoCardId = item.VideoCardId,
+                PowerSupplyId = item.PowerSupplyId,
+                MemoryId = item.MemoryId,
+                ComputerCaseId = item.ComputerCaseId
+            };
+
+            return View("Create", editModel);
+
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
-        public IActionResult Edit(int id, IFormCollection collection)
+        public IActionResult Edit(string id, ComputerCreateViewModel createVm)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                var isUpdated = service.UpdateComputer(createVm.Id, createVm.ProcessorId, createVm.MotherboardId, createVm.RamId,
+                    createVm.VideoCardId, createVm.PowerSupplyId, createVm.MemoryId, createVm.ComputerCaseId,
+                    createVm.Barcode, createVm.Manufacturer, createVm.Model, createVm.Warranty, createVm.Price, createVm.Quantity, createVm.Image);
+
+                if (isUpdated)
+                {
+                    return RedirectToAction("All");
+                }
             }
-            catch
-            {
-                return View();
-            }
+            return View(createVm);
         }
     }
 }

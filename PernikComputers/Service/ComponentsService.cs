@@ -42,7 +42,7 @@ namespace PernikComputers.Service
             return context.SaveChanges() != 0;
         }
 
-        bool IComponentService.CreateMotherboard(string socket, string chipset, TypeRam typeRam, int ramSlotsCount, string formFactor, string barcode, string manufacturer, string model, int warranty, decimal price, int quantity, string image)
+        public bool CreateMotherboard(string socket, string chipset, TypeRam typeRam, int ramSlotsCount, string formFactor, string barcode, string manufacturer, string model, int warranty, decimal price, int quantity, string image)
         {
             var motherboard = new Motherboard
             {
@@ -65,7 +65,7 @@ namespace PernikComputers.Service
             return context.SaveChanges() != 0;
         }
 
-        bool IComponentService.CreateRam(int size, TypeRam typeRam, int frequency, string timing, string barcode, string manufacturer, string model, int warranty, decimal price, int quantity, string image)
+        public bool CreateRam(int size, TypeRam typeRam, int frequency, string timing, string barcode, string manufacturer, string model, int warranty, decimal price, int quantity, string image)
         {
             var ram = new Ram
             {
@@ -181,175 +181,18 @@ namespace PernikComputers.Service
         }
 
         //------------List------------
-        public List<Processor> GetProcessors()
+        public List<Product> GetComponents()
         {
-            return context.Processors.ToList();
+            return context.Products.Where(x => x.Category != Category.Computer &&
+            x.Category != Category.Laptop && x.Category != Category.Periphery &&
+            x.Category != Category.Accessories).ToList();
         }
-
-        public List<Motherboard> GetMotherboards()
-        {
-            return context.Motherboards.ToList();
-        }
-
-        public List<Ram> GetRams()
-        {
-            return context.Rams.ToList();
-        }
-
-        public List<VideoCard> GetVideoCards()
-        {
-            return context.VideoCards.ToList();
-        }
-
-        public List<PowerSupply> GetPowerSupplies()
-        {
-            return context.PowerSupplies.ToList();
-        }
-
-        public List<Memory> GetMemories()
-        {
-            return context.Memories.ToList();
-        }
-
-        public List<ComputerCase> GetComputerCases()
-        {
-            return context.ComputerCases.ToList();
-        }
-        ////------------------Get---------------------------
-
-        public Processor GetProcessor(string id)
-        {
-            return context.Processors.Find(id);
-        }
-
-        public Motherboard GetMotherboard(string id)
-        {
-            return context.Motherboards.Find(id);
-        }
-
-        public Ram GetRam(string id)
-        {
-            return context.Rams.Find(id);
-        }
-
-        public VideoCard GetVideoCard(string id)
-        {
-            return context.VideoCards.Find(id);
-        }
-
-        public PowerSupply GetPowerSupply(string id)
-        {
-            return context.PowerSupplies.Find(id);
-        }
-
-        public Memory GetMemory(string id)
-        {
-            return context.Memories.Find(id);
-        }
-
-        public ComputerCase GetComputerCase(string id)
-        {
-            return context.ComputerCases.Find(id);
-        }
-
-
-        //------------------Remove-------------------
-        //public bool RemoveProcessor(string id)
-        //{
-        //    var item = context.Processors.Find(id);
-
-        //    if (item == null)
-        //    {
-        //        return false;
-        //    }
-        //    context.Processors.Remove(item);
-
-        //    return context.SaveChanges() != 0;
-        //}
-
-        //public bool RemoveMotherboard(string id)
-        //{
-        //    var item = context.Motherboards.Find(id);
-
-        //    if (item == null)
-        //    {
-        //        return false;
-        //    }
-        //    context.Motherboards.Remove(item);
-
-        //    return context.SaveChanges() != 0;
-        //}
-
-        //public bool RemoveRam(string id)
-        //{
-        //    var item = context.Rams.Find(id);
-
-        //    if (item == null)
-        //    {
-        //        return false;
-        //    }
-        //    context.Rams.Remove(item);
-
-        //    return context.SaveChanges() != 0;
-        //}
-
-        //public bool RemoveVideoCard(string id)
-        //{
-        //    var item = context.VideoCards.Find(id);
-
-        //    if (item == null)
-        //    {
-        //        return false;
-        //    }
-        //    context.VideoCards.Remove(item);
-
-        //    return context.SaveChanges() != 0;
-        //}
-
-        //public bool RemovePowerSupply(string id)
-        //{
-        //    var item = context.PowerSupplies.Find(id);
-
-        //    if (item == null)
-        //    {
-        //        return false;
-        //    }
-        //    context.PowerSupplies.Remove(item);
-
-        //    return context.SaveChanges() != 0;
-        //}
-
-        //public bool RemoveMemory(string id)
-        //{
-        //    var item = context.Memories.Find(id);
-
-        //    if (item == null)
-        //    {
-        //        return false;
-        //    }
-        //    context.Memories.Remove(item);
-
-        //    return context.SaveChanges() != 0;
-        //}
-
-        //public bool RemoveComputerCase(string id)
-        //{
-        //    var item = context.ComputerCases.Find(id);
-
-        //    if (item == null)
-        //    {
-        //        return false;
-        //    }
-        //    context.ComputerCases.Remove(item);
-
-        //    return context.SaveChanges() != 0;
-        //}
-
+        
         //------------------Update---------------
 
         public bool UpdateProcessor(string id, string socket, double cpuSpeed, double cpuBoostSpeed, int cores, int threads, int cache, string barcode, string manufacturer, string model, int warranty, decimal price, int quantity, string image)
         {
-            var item = GetProcessor(id);
+            var item = context.Processors.Find(id);
 
             if (item == null)
             {
@@ -376,7 +219,7 @@ namespace PernikComputers.Service
 
         public bool UpdateMotherboard(string id, string socket, string chipset, TypeRam typeRam, int ramSlotsCount, string formFactor, string barcode, string manufacturer, string model, int warranty, decimal price, int quantity, string image)
         {
-            var item = GetMotherboard(id);
+            var item = context.Motherboards.Find(id);
 
             if (item == null)
             {
@@ -403,7 +246,7 @@ namespace PernikComputers.Service
 
         public bool UpdateRam(string id, int size, TypeRam typeRam, int frequency, string timing, string barcode, string manufacturer, string model, int warranty, decimal price, int quantity, string image)
         {
-            var item = GetRam(id);
+            var item = context.Rams.Find(id);
 
             if (item == null)
             {
@@ -429,7 +272,7 @@ namespace PernikComputers.Service
 
         public bool UpdateVideoCard(string id, ChipManufacturer chipManufacturer, string graphicProcessor, int sizeMemory, string typeMemory, int memoryFrequency, int coreFrequency, int currentProcesses, int railWidth, string slotType, string barcode, string manufacturer, string model, int warranty, decimal price, int quantity, string image)
         {
-            var item = GetVideoCard(id);
+            var item = context.VideoCards.Find(id);
 
             if (item == null)
             {
@@ -460,7 +303,7 @@ namespace PernikComputers.Service
 
         public bool UpdatePowerSupply(string id, int power, string formFactor, int efficiency, string barcode, string manufacturer, string model, int warranty, decimal price, int quantity, string image)
         {
-            var item = GetPowerSupply(id);
+            var item = context.PowerSupplies.Find(id);
 
             if (item == null)
             {
@@ -485,7 +328,7 @@ namespace PernikComputers.Service
 
         public bool UpdateMemory(string id, MemoryType memoryType, string formFactor, int capacity, int readSpeed, int writeSpeed, string barcode, string manufacturer, string model, int warranty, decimal price, int quantity, string image)
         {
-            var item = GetMemory(id);
+            var item = context.Memories.Find(id);
 
             if (item == null)
             {
@@ -512,7 +355,7 @@ namespace PernikComputers.Service
 
         public bool UpdateComputerCase(string id, string caseType, string formFactor, string caseSize, string color, string barcode, string manufacturer, string model, int warranty, decimal price, int quantity, string image)
         {
-            var item = GetComputerCase(id);
+            var item = context.ComputerCases.Find(id);
 
             if (item == null)
             {

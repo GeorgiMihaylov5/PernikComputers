@@ -5,10 +5,13 @@ namespace PernikComputers.Abstraction
 {
     public interface IProductService
     {
-        public List<Product> GetProducts();
+        public List<Product> GetAllProducts();
+        public List<T> GetProducts<T>();
+        public dynamic GetProduct(string id);
         public bool RemoveProduct(string id);
-        public Product GetProduct(string id);
         public bool MakeDiscount(string id, int discount);
         public bool RemoveDiscount(string id);
+        public List<string> AllDescription(string id);
+        public List<string> DetailsDescription(string id);
     }
 }

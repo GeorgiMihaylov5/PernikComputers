@@ -1,4 +1,6 @@
-﻿namespace PernikComputers.Domain
+﻿using System.Collections.Generic;
+
+namespace PernikComputers.Domain
 {
     public class Processor: Product
     {
@@ -8,5 +10,6 @@
         public int Cores { get; set; }
         public int Threads { get; set; }
         public int Cache { get; set; }
+        public ICollection<Computer> Computers { get; set; }
     }
 }

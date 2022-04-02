@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PernikComputers.Abstraction;
+using PernikComputers.Domain;
 using PernikComputers.Domain.Enum;
 using PernikComputers.Models;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace PernikComputers.Controllers
         [AllowAnonymous]
         public IActionResult AllProcessors()
         {
-            List<ProductAllViewModel> processorVM = service.GetProcessors()
+            List<ProductAllViewModel> processorVM = productService.GetProducts<Processor>()
                 .Select(x => new ProductAllViewModel
                 {
                     Id = x.Id,
@@ -34,17 +35,9 @@ namespace PernikComputers.Controllers
                     Discount = x.Discount,
                     Image = x.Image,
                     Category = x.Category,
-                    Description = new List<string>()
-                    {
-                        $"Socket: {x.Socket}",
-                        $"Operating frequency: {x.CPUSpeed} GHz",
-                        $"Turbo Boost: {x.CPUBoostSpeed} GHz",
-                        $"Cores: {x.Cores}",
-                        $"Threads: {x.Threads}",
-                    },
+                    Description = productService.AllDescription(x.Id)
                 }).ToList();
 
-            
             return View("~/Views/Products/All.cshtml", processorVM);
         }
         public IActionResult CreateProcessor()
@@ -67,39 +60,10 @@ namespace PernikComputers.Controllers
             }
             return View();
         }
-        [AllowAnonymous]
-        public IActionResult DetailsProcessor(string id)
-        {
-            var x = service.GetProcessor(id);
-            ProductDetailsViewModel detailsViewModel = new ProductDetailsViewModel
-            {
-                Id = x.Id,
-                Barcode = x.Barcode,
-                Model = x.Model,
-                Manufacturer = x.Manufacturer,
-                Discount = x.Discount,
-                Description = new List<string>()
-                {
-                    $"Socket: {x.Socket}",
-                    $"Operating frequency: {x.CPUSpeed} GHz",
-                    $"Turbo Boost: {x.CPUBoostSpeed} GHz",
-                    $"Cores: {x.Cores}",
-                    $"Threads: {x.Threads}",
-                    $"Cashe: {x.Cache} MB",
-                    $"Warranty: {x.Warranty} months"
-                },
-                Category = Category.Processor,
-                Price = x.Price,
-                Quantity = x.Quantity,
-                Image = x.Image,
-            };  
-
-            return View("~/Views/Products/Details.cshtml", detailsViewModel);
-        }
 
         public IActionResult EditProcessor(string id)
         {
-            var item = service.GetProcessor(id);
+            Processor item = productService.GetProduct(id);
 
             if (item == null)
             {
@@ -142,51 +106,11 @@ namespace PernikComputers.Controllers
             return View(createVm);
         }
 
-        public IActionResult DeleteProcessor(string id)
-        {
-            var item = service.GetProcessor(id);
-
-            if (item == null)
-            {
-                return NotFound();
-            }
-            var editModel = new ProcessorCreateViewModel
-            {
-                Id = item.Id,
-                Socket = item.Socket,
-                CPUSpeed = item.CPUSpeed,
-                CPUBoostSpeed = item.CPUBoostSpeed,
-                Cores = item.Cores,
-                Threads = item.Threads,
-                Cache = item.Cache,
-                Barcode = item.Barcode,
-                Manufacturer = item.Manufacturer,
-                Model = item.Model,
-                Price = item.Price,
-                Warranty = item.Warranty,
-                Quantity = item.Quantity,
-                Image = item.Image
-            };
-
-            return View(editModel);
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteProcessor(string id, IFormCollection collection)
-        {
-            var isDeleted = productService.RemoveProduct(id);
-            if (isDeleted)
-            {
-                return this.RedirectToAction("AllProcessors");
-            }
-            return View();
-        }
-
         //-------Motherboards-------------
         [AllowAnonymous]
         public IActionResult AllMotherboards()
         {
-            List<ProductAllViewModel> motherboardVM = service.GetMotherboards()
+            List<ProductAllViewModel> motherboardVM = productService.GetProducts<Motherboard>()
                 .Select(x => new ProductAllViewModel
                 {
                     Id = x.Id,
@@ -196,14 +120,8 @@ namespace PernikComputers.Controllers
                     Discount = x.Discount,
                     Image = x.Image,
                     Category = x.Category,
-                    Description = new List<string>()
-                {
-                    $"Socket: {x.Socket}",
-                    $"Chipset: {x.Chipset}",
-                    $"Supported memory: {x.TypeRam}",
-                }
+                    Description = productService.AllDescription(x.Id)
                 }).ToList();
-
 
             return View("~/Views/Products/All.cshtml", motherboardVM);
         }
@@ -228,38 +146,10 @@ namespace PernikComputers.Controllers
             }
             return View();
         }
-        [AllowAnonymous]
-        public IActionResult DetailsMotherboard(string id)
-        {
-            var x = service.GetMotherboard(id);
-            ProductDetailsViewModel detailsViewModel = new ProductDetailsViewModel
-            {
-                Id = x.Id,
-                Barcode = x.Barcode,
-                Model = x.Model,
-                Manufacturer = x.Manufacturer,
-                Discount = x.Discount,
-                Category = Category.Motherboard,
-                Description = new List<string>()
-                {
-                    $"Socket: {x.Socket}",
-                    $"Chipset: {x.Chipset}",
-                    $"Supported memory: {x.TypeRam}",
-                    $"Number of memory slots: {x.RamSlotsCount}",
-                    $"Form factor: {x.FormFactor}",
-                    $"Warranty: {x.Warranty} months"
-                },
-                Price = x.Price,
-                Quantity = x.Quantity,
-                Image = x.Image,
-            };
-
-            return View("~/Views/Products/Details.cshtml", detailsViewModel);
-        }
-
+        
         public IActionResult EditMotherboard(string id)
         {
-            var item = service.GetMotherboard(id);
+            Motherboard item = productService.GetProduct(id);
 
             if (item == null)
             {
@@ -301,50 +191,11 @@ namespace PernikComputers.Controllers
             return View(createVm);
         }
 
-        public IActionResult DeleteMotherboard(string id)
-        {
-            var item = service.GetMotherboard(id);
-
-            if (item == null)
-            {
-                return NotFound();
-            }
-            var editModel = new MotherboardCreateViewModel
-            {
-                Id = item.Id,
-                Socket = item.Socket,
-                Chipset = item.Chipset,
-                TypeRam = item.TypeRam,
-                RamSlotsCount = item.RamSlotsCount,
-                FormFactor = item.FormFactor,
-                Barcode = item.Barcode,
-                Manufacturer = item.Manufacturer,
-                Model = item.Model,
-                Price = item.Price,
-                Warranty = item.Warranty,
-                Quantity = item.Quantity,
-                Image = item.Image
-            };
-
-            return View(editModel);
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteMotherboard(string id, IFormCollection collection)
-        {
-            var isDeleted = productService.RemoveProduct(id);
-            if (isDeleted)
-            {
-                return this.RedirectToAction("AllMotherboards");
-            }
-            return View();
-        }
-
         //--------Ram---------
         [AllowAnonymous]
         public IActionResult AllRams()
         {
-            List<ProductAllViewModel> ramVM = service.GetRams()
+            List<ProductAllViewModel> ramVM = productService.GetProducts<Ram>()
                 .Select(x => new ProductAllViewModel
                 {
                     Id = x.Id,
@@ -354,12 +205,7 @@ namespace PernikComputers.Controllers
                     Discount = x.Discount,
                     Image = x.Image,
                     Category = x.Category,
-                    Description = new List<string>()
-                {
-                    $"Capacity: {x.Size} GB",
-                    $"Type: {x.TypeRam}",
-                    $"Frequency: {x.Frequency} MHz"
-                }
+                    Description = productService.AllDescription(x.Id)
                 }).ToList();
 
 
@@ -385,36 +231,9 @@ namespace PernikComputers.Controllers
             }
             return View();
         }
-        [AllowAnonymous]
-        public IActionResult DetailsRam(string id)
-        {
-            var x = service.GetRam(id);
-            ProductDetailsViewModel detailsViewModel = new ProductDetailsViewModel
-            {
-                Id = x.Id,
-                Barcode = x.Barcode,
-                Model = x.Model,
-                Manufacturer = x.Manufacturer,
-                Discount = x.Discount,
-                Category = Category.Ram,
-                Description = new List<string>()
-                {
-                    $"Capacity: {x.Size} GB",
-                    $"Type: {x.TypeRam}",
-                    $"Frequency: {x.Frequency} MHz",
-                    $"Timing: {x.Timing}",
-                    $"Warranty: {x.Warranty} months"
-                },
-                Price = x.Price,
-                Quantity = x.Quantity,
-                Image = x.Image,
-            };
-
-            return View("~/Views/Products/Details.cshtml", detailsViewModel);
-        }
         public IActionResult EditRam(string id)
         {
-            var item = service.GetRam(id);
+            Ram item = productService.GetProduct(id);
 
             if (item == null)
             {
@@ -455,50 +274,12 @@ namespace PernikComputers.Controllers
             return View(createVm);
         }
 
-        public IActionResult DeleteRam(string id)
-        {
-            var item = service.GetRam(id);
-
-            if (item == null)
-            {
-                return NotFound();
-            }
-            var editModel = new RamCreateViewModel
-            {
-                Id = item.Id,
-                Size = item.Size,
-                TypeRam = item.TypeRam,
-                Frequency = item.Frequency,
-                Timing = item.Timing,
-                Barcode = item.Barcode,
-                Manufacturer = item.Manufacturer,
-                Model = item.Model,
-                Price = item.Price,
-                Warranty = item.Warranty,
-                Quantity = item.Quantity,
-                Image = item.Image
-            };
-
-            return View(editModel);
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteRam(string id, IFormCollection collection)
-        {
-            var isDeleted = productService.RemoveProduct(id);
-            if (isDeleted)
-            {
-                return this.RedirectToAction("AllRams");
-            }
-            return View();
-        }
-
         //-------VideoCard-------------
 
         [AllowAnonymous]
         public IActionResult AllVideoCards()
         {
-            List<ProductAllViewModel> videoCardVM = service.GetVideoCards()
+            List<ProductAllViewModel> videoCardVM = productService.GetProducts<VideoCard>()
                 .Select(x => new ProductAllViewModel
                 {
                     Id = x.Id,
@@ -508,12 +289,7 @@ namespace PernikComputers.Controllers
                     Discount = x.Discount,
                     Image = x.Image,
                     Category = x.Category,
-                    Description = new List<string>()
-                {
-                    $"Graphic Processor: {x.GraphicProcessor}",
-                    $"Memory capacity: {x.SizeMemory } GB",
-                    $"Memory type: {x.TypeMemory}",
-                }
+                    Description = productService.AllDescription(x.Id)
                 }).ToList();
 
 
@@ -541,42 +317,9 @@ namespace PernikComputers.Controllers
             }
             return View();
         }
-        [AllowAnonymous]
-        public IActionResult DetailsVideoCard(string id)
-        {
-            var x = service.GetVideoCard(id);
-            ProductDetailsViewModel detailsViewModel = new ProductDetailsViewModel
-            {
-                Id = x.Id,
-                Barcode = x.Barcode,
-                Model = x.Model,
-                Manufacturer = x.Manufacturer,
-                Discount = x.Discount,
-                Description = new List<string>()
-                {
-                    $"Chip manufacturer: {x.ChipManufacturer }",
-                    $"Graphic Processor: {x.GraphicProcessor}",
-                    $"Memory capacity: {x.SizeMemory } GB",
-                    $"Memory type: {x.TypeMemory}",
-                    $"Memory Frequency: {x.MemoryFrequency} MHz",
-                    $"Core Frequency: {x.CoreFrequency} MHz",
-                    $"Current Processes: {x.CurrentProcesses}",
-                    $"Rail Width: {x.RailWidth} bit",
-                    $"Slot: {x.SlotType}",
-                    $"Warranty: {x.Warranty} months"
-                },
-                Category = Category.VideoCard,
-                Price = x.Price,
-                Quantity = x.Quantity,
-                Image = x.Image,
-            };
-
-            return View("~/Views/Products/Details.cshtml", detailsViewModel);
-        }
-
         public IActionResult EditVideoCard(string id)
         {
-            var item = service.GetVideoCard(id);
+            VideoCard item = productService.GetProduct(id);
 
             if (item == null)
             {
@@ -623,53 +366,11 @@ namespace PernikComputers.Controllers
             return View(createVm);
         }
 
-        public IActionResult DeleteVideoCard(string id)
-        {
-            var item = service.GetVideoCard(id);
-            if (item == null)
-            {
-                return NotFound();
-            }
-            var editModel = new VideoCardCreateViewModel
-            {
-                Id = item.Id,
-                ChipManufacturer = item.ChipManufacturer,
-                GraphicProcessor = item.GraphicProcessor,
-                SizeMemory = item.SizeMemory,
-                TypeMemory = item.TypeMemory,
-                MemoryFrequency = item.MemoryFrequency,
-                CoreFrequency = item.CoreFrequency,
-                CurrentProcesses = item.CurrentProcesses,
-                RailWidth = item.RailWidth,
-                SlotType = item.SlotType,
-                Barcode = item.Barcode,
-                Manufacturer = item.Manufacturer,
-                Model = item.Model,
-                Price = item.Price,
-                Warranty = item.Warranty,
-                Quantity = item.Quantity,
-                Image = item.Image
-            };
-
-            return View(editModel);
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteVideoCard(string id, IFormCollection collection)
-        {
-            var isDeleted = productService.RemoveProduct(id);
-            if (isDeleted)
-            {
-                return this.RedirectToAction("AllVideoCards");
-            }
-            return View();
-        }
-
         //-------PowerSupply-------------
         [AllowAnonymous]
         public IActionResult AllPowerSupplies()
         {
-            List<ProductAllViewModel>powerSupplyVM = service.GetPowerSupplies()
+            List<ProductAllViewModel>powerSupplyVM = productService.GetProducts<PowerSupply>()
                 .Select(x => new ProductAllViewModel
                 {
                     Id = x.Id,
@@ -679,11 +380,7 @@ namespace PernikComputers.Controllers
                     Discount = x.Discount,
                     Image = x.Image,
                     Category = x.Category,
-                    Description = new List<string>()
-                {
-                    $"Power: {x.Power} W",
-                    $"Efficiency: {x.Efficiency}%"
-                }
+                    Description = productService.AllDescription(x.Id)
                 }).ToList();
 
 
@@ -710,36 +407,9 @@ namespace PernikComputers.Controllers
             }
             return View();
         }
-        [AllowAnonymous]
-        public IActionResult DetailsPowerSupply(string id)
-        {
-            var x = service.GetPowerSupply(id);
-            ProductDetailsViewModel detailsViewModel = new ProductDetailsViewModel
-            {
-                Id = x.Id,
-                Barcode = x.Barcode,
-                Model = x.Model,
-                Manufacturer = x.Manufacturer,
-                Discount = x.Discount,
-                Category = Category.PowerSupply,
-                Description = new List<string>()
-                {
-                    $"Power: {x.Power} W",
-                    $"Form factor: {x.FormFactor}",
-                    $"Efficiency: {x.Efficiency}%",
-                    $"Warranty: {x.Warranty} months"
-                },
-                Price = x.Price,
-                Quantity = x.Quantity,
-                Image = x.Image,
-            };
-
-            return View("~/Views/Products/Details.cshtml", detailsViewModel);
-        }
-
         public IActionResult EditPowerSupply(string id)
         {
-            var item = service.GetPowerSupply(id);
+            PowerSupply item = productService.GetProduct(id);
 
             if (item == null)
             {
@@ -779,48 +449,11 @@ namespace PernikComputers.Controllers
             return View(createVm);
         }
 
-        public IActionResult DeletePowerSupply(string id)
-        {
-            var item = service.GetPowerSupply(id);
-
-            if (item == null)
-            {
-                return NotFound();
-            }
-            var editModel = new PowerSupplyCreateViewModel
-            {
-                Id = item.Id,
-                Power = item.Power,
-                FormFactor = item.FormFactor,
-                Efficiency = item.Efficiency,
-                Barcode = item.Barcode,
-                Manufacturer = item.Manufacturer,
-                Model = item.Model,
-                Price = item.Price,
-                Warranty = item.Warranty,
-                Quantity = item.Quantity,
-                Image = item.Image
-            };
-
-            return View(editModel);
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeletePowerSupply(string id, IFormCollection collection)
-        {
-            var isDeleted = productService.RemoveProduct(id);
-            if (isDeleted)
-            {
-                return this.RedirectToAction("AllPowerSupplies");
-            }
-            return View();
-        }
-
         //-------Memory-------------
         [AllowAnonymous]
         public IActionResult AllMemories()
         {
-            List<ProductAllViewModel> memoryVM = service.GetMemories()
+            List<ProductAllViewModel> memoryVM = productService.GetProducts<Memory>()
                 .Select(x => new ProductAllViewModel
                 {
                     Id = x.Id,
@@ -830,11 +463,7 @@ namespace PernikComputers.Controllers
                     Discount = x.Discount,
                     Image = x.Image,
                     Category = x.Category,
-                    Description = new List<string>()
-                {
-                    $"Type: {x.MemoryType} W",
-                    $"Capacity: {x.Capacity} GB",
-                }
+                    Description = productService.AllDescription(x.Id)
                 }).ToList();
 
 
@@ -861,38 +490,9 @@ namespace PernikComputers.Controllers
             }
             return View();
         }
-        [AllowAnonymous]
-        public IActionResult DetailsMemory(string id)
-        {
-            var x = service.GetMemory(id);
-            ProductDetailsViewModel detailsViewModel = new ProductDetailsViewModel
-            {
-                Id = x.Id,
-                Barcode = x.Barcode,
-                Model = x.Model,
-                Manufacturer = x.Manufacturer,
-                Discount = x.Discount,
-                Category = Category.Memory,
-                Price = x.Price,
-                Description = new List<string>()
-                {
-                    $"Type: {x.MemoryType} W",
-                    $"Form factor: {x.FormFactor}",
-                    $"Capacity: {x.Capacity} GB",
-                    $"Reading speed: {x.ReadSpeed} MB/s",
-                    $"Recording speed: {x.WriteSpeed} MB/s",
-                    $"Warranty: {x.Warranty} months"
-                },
-                Quantity = x.Quantity,
-                Image = x.Image,
-            };
-
-            return View("~/Views/Products/Details.cshtml", detailsViewModel);
-        }
-
         public IActionResult EditMemory(string id)
         {
-            var item = service.GetMemory(id);
+            Memory item = productService.GetProduct(id);
 
             if (item == null)
             {
@@ -934,50 +534,11 @@ namespace PernikComputers.Controllers
             return View(createVm);
         }
 
-        public IActionResult DeleteMemory(string id)
-        {
-            var item = service.GetMemory(id);
-
-            if (item == null)
-            {
-                return NotFound();
-            }
-            var editModel = new MemoryCreateViewModel
-            {
-                Id = item.Id,
-                MemoryType = item.MemoryType,
-                FormFactor = item.FormFactor,
-                Capacity = item.Capacity,
-                ReadSpeed = item.ReadSpeed,
-                WriteSpeed = item.WriteSpeed,
-                Barcode = item.Barcode,
-                Manufacturer = item.Manufacturer,
-                Model = item.Model,
-                Price = item.Price,
-                Warranty = item.Warranty,
-                Quantity = item.Quantity,
-                Image = item.Image
-            };
-
-            return View(editModel);
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteMemory(string id, IFormCollection collection)
-        {
-            var isDeleted = productService.RemoveProduct(id);
-            if (isDeleted)
-            {
-                return this.RedirectToAction("AllMemories");
-            }
-            return View();
-        }
-
         //-------ComputerCase-------------
         [AllowAnonymous]
         public IActionResult AllComputerCases()
         {
-            List<ProductAllViewModel> computerCaseVM = service.GetComputerCases()
+            List<ProductAllViewModel> computerCaseVM = productService.GetProducts<ComputerCase>()
                 .Select(x => new ProductAllViewModel
                 {
                     Id = x.Id,
@@ -987,12 +548,7 @@ namespace PernikComputers.Controllers
                     Discount = x.Discount,
                     Image = x.Image,
                     Category = x.Category,
-                    Description = new List<string>()
-                {
-                    $"Type: {x.CaseType} W",
-                    $"Form factor: {x.FormFactor}",
-                    $"Size: {x.CaseSize} mm",
-                }
+                    Description =productService.AllDescription(x.Id)
                 }).ToList();
 
 
@@ -1019,37 +575,9 @@ namespace PernikComputers.Controllers
             }
             return View();
         }
-        [AllowAnonymous]
-        public IActionResult DetailsComputerCase(string id)
-        {
-            var x = service.GetComputerCase(id);
-            ProductDetailsViewModel detailsViewModel = new ProductDetailsViewModel
-            {
-                Id = x.Id,
-                Barcode = x.Barcode,
-                Model = x.Model,
-                Manufacturer = x.Manufacturer,
-                Discount = x.Discount,
-                Category = Category.ComputerCase,
-                Description = new List<string>()
-                {
-                    $"Type: {x.CaseType} W",
-                    $"Form factor: {x.FormFactor}",
-                    $"Size: {x.CaseSize} mm",
-                    $"Color: {x.Color }",
-                    $"Warranty: {x.Warranty} months"
-                },
-                Price = x.Price,
-                Quantity = x.Quantity,
-                Image = x.Image,
-            };
-
-            return View("~/Views/Products/Details.cshtml", detailsViewModel);
-        }
-
         public IActionResult EditComputerCase(string id)
         {
-            var item = service.GetComputerCase(id);
+            ComputerCase item = productService.GetProduct(id);
 
             if (item == null)
             {
@@ -1088,44 +616,6 @@ namespace PernikComputers.Controllers
                 }
             }
             return View(createVm);
-        }
-
-        public IActionResult DeleteComputerCase(string id)
-        {
-            var item = service.GetComputerCase(id);
-
-            if (item == null)
-            {
-                return NotFound();
-            }
-            var editModel = new ComputerCaseCreateViewModel
-            {
-                Id = item.Id,
-                CaseType = item.CaseType,
-                FormFactor = item.FormFactor,
-                CaseSize = item.CaseSize,
-                Color = item.Color,
-                Barcode = item.Barcode,
-                Manufacturer = item.Manufacturer,
-                Model = item.Model,
-                Price = item.Price,
-                Warranty = item.Warranty,
-                Quantity = item.Quantity,
-                Image = item.Image
-            };
-
-            return View(editModel);
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteComputerCase(string id, IFormCollection collection)
-        {
-            var isDeleted = productService.RemoveProduct(id);
-            if (isDeleted)
-            {
-                return this.RedirectToAction("AllComputerCases");
-            }
-            return View();
         }
     }
 }

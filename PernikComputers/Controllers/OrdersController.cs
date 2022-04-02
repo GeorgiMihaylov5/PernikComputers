@@ -21,7 +21,7 @@ namespace PernikComputers.Controllers
         {
             this.service = _service;
         }
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator,Employee")]
         public IActionResult All()
         {
             List<OrderListingViewModel> orders = service.All()
@@ -85,7 +85,7 @@ namespace PernikComputers.Controllers
             }
             return RedirectToAction();
         }
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator,Employee")]
         public IActionResult Rejected()
         {
             List<OrderListingViewModel> orders = service.All().Where(x => x.Status == OrderStatus.Rejected)

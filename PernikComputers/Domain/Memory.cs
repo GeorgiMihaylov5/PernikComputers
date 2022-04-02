@@ -1,4 +1,5 @@
 ﻿using PernikComputers.Domain.Enum;
+using System.Collections.Generic;
 
 namespace PernikComputers.Domain
 {
@@ -9,5 +10,6 @@ namespace PernikComputers.Domain
         public int Capacity { get; set; }
         public int ReadSpeed { get; set; }
         public int WriteSpeed { get; set; }
+        public ICollection<Computer> Computers { get; set; }
     }
 }

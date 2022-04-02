@@ -52,43 +52,6 @@ namespace PernikComputers.Service
             return context.SaveChanges() != 0;
         }
 
-        public Computer GetComputer(string id)
-        {
-            return context.Computers.Include(x => x.Processor)
-                .Include(x => x.Motherboard)
-                .Include(x => x.Ram)
-                .Include(x => x.VideoCard)
-                .Include(x => x.PowerSupply)
-                .Include(x => x.Memory)
-                .Include(x => x.ComputerCase).FirstOrDefault(x => x.Id == id);
-        }
-
-        public List<Computer> GetComputers()
-        {
-            return context.Computers
-                .Include(x => x.Processor)
-                .Include(x => x.Motherboard)
-                .Include(x => x.Ram)
-                .Include(x => x.VideoCard)
-                .Include(x => x.PowerSupply)
-                .Include(x => x.Memory)
-                .Include(x => x.ComputerCase).ToList();
-        }
-
-        //public bool RemoveComputer(string id)
-        //{
-        //    var computer = context.Computers.Find(id);
-
-        //    if (computer == null)
-        //    {
-        //        return false;
-        //    }
-
-        //    context.Computers.Remove(computer);
-
-        //    return context.SaveChanges() != 0;
-        //}
-
         public bool UpdateComputer(string id, string processorId, string motherboardId, string ramId, string videoCardId, string powerSupplyId, string memoryId, string computerCaseId, string barcode, string manufacturer, string model, int warranty, decimal price, int quantity, string image)
         {
             var computer = context.Computers.Find(id);

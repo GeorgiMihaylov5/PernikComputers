@@ -9,11 +9,11 @@
             <li class="nav-item">
                 <a class="btn nav-link profile-nav" asp-action="ChangePassword" asp-controller="Clients">Change Password</a>
             </li>
-            @if (User.IsInRole("Administrator"))
+            @if (User.IsInRole("Administrator") || User.IsInRole("Employee"))
             {
 
                 <li class="nav-item">
-                    <a class="btn nav-link profile-nav" asp-action="All" asp-controller="Employees">Admin Panel</a>
+                    <a class="btn nav-link profile-nav" asp-action="All" asp-controller="Orders">Control Panel</a>
                 </li>
             }
             @*if (User.IsInRole("Administrator"))
