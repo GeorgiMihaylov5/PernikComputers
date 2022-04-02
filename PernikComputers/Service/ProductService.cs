@@ -34,41 +34,41 @@ namespace PernikComputers.Service
             products.AddRange(context.ComputerCases);
             products.AddRange(context.Computers);
 
-            return products;
+            return products.OrderBy(x => x.Price).ToList();
         }
         public List<T> GetProducts<T>()
         {
             if (typeof(T) == typeof(Processor))
             {
-                return context.Processors.ToList() as List<T>;
+                return context.Processors.OrderBy(x => x.Price).ToList() as List<T>;
             }
             else if (typeof(T) == typeof(Motherboard))
             {
-                return context.Motherboards.ToList() as List<T>;
+                return context.Motherboards.OrderBy(x => x.Price).ToList() as List<T>;
             }
             else if (typeof(T) == typeof(Ram))
             {
-                return context.Rams.ToList() as List<T>;
+                return context.Rams.OrderBy(x => x.Price).ToList() as List<T>;
             }
             else if (typeof(T) == typeof(VideoCard))
             {
-                return context.VideoCards.ToList() as List<T>;
+                return context.VideoCards.OrderBy(x => x.Price).ToList() as List<T>;
             }
             else if (typeof(T) == typeof(PowerSupply))
             {
-                return context.PowerSupplies.ToList() as List<T>;
+                return context.PowerSupplies.OrderBy(x => x.Price).ToList() as List<T>;
             }
             else if (typeof(T) == typeof(Memory))
             {
-                return context.Memories.ToList() as List<T>;
+                return context.Memories.OrderBy(x => x.Price).ToList() as List<T>;
             }
             else if (typeof(T) == typeof(ComputerCase))
             {
-                return context.ComputerCases.ToList() as List<T>;
+                return context.ComputerCases.OrderBy(x => x.Price).ToList() as List<T>;
             }
             else if (typeof(T) == typeof(Computer))
             {
-                return context.Computers.ToList() as List<T>;
+                return context.Computers.OrderBy(x => x.Price).ToList() as List<T>;
             }
             else
             {

@@ -4,21 +4,21 @@
     ViewData["Title"] = "Details";
 }
 
-<div id="detailsDiv">
-    <div class="b-inline-top" style="margin-right: 50px">
+<div class="text-center">
+    <div class="d-lg-inline-block align-top" style="margin-right: 50px">
         <img src="@Model.Image" width="400" height="350"/>
     </div>
-    <div class="b-inline-top">
+    <div class="d-lg-inline-block align-top">
         <h2 id="productTitle">
            @Model.Manufacturer - @Model.Model
         </h2>
-        <div class="b-inline-top details-item-price">
+        <div class="d-lg-inline-block align-top details-item-price">
             <h5>Single price</h5>
             <hr />
             <span id="pricePerProduct">@Model.Price</span>
             <span> lv.</span>
         </div>
-        <div class="b-inline-top details-item-price">
+        <div class="d-lg-inline-block align-top details-item-price">
             <h5>Total price</h5>
             <hr />
             <span id="totalPrice">@Model.Price</span>
@@ -30,7 +30,7 @@
             }
             else
             {
-                <p>Not Available</p>
+                <p class="text-danger">Not Available</p>
             }
 
         @await Html.PartialAsync("~/Views/Products/_OrderPartialView.cshtml", new OrderCreateBindingModel
@@ -68,4 +68,5 @@
         let pricePerProduct =  parseFloat(document.getElementById('pricePerProduct').textContent)
         document.getElementById('totalPrice').textContent = (quantity * pricePerProduct).toFixed(2)
     }
+    document.getElementById('productQuantity').max = @Html.Raw(Json.Serialize(Model.Quantity));
 </script>

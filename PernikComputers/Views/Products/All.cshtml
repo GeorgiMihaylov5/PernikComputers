@@ -4,11 +4,11 @@
     ViewData["Title"] = "Products";
 }
 
-<h1 class="page-title">Products</h1>
+<h1 class="text-center">Products</h1>
 <hr />
 
 <div class="div-m-top">
-    <div class="b-inline-top col-3" id="filter-left">
+    <div class="d-lg-inline-block align-top col-3" id="filter-left">
         <form class="filter-form row" asp-action="Index" method="get">
             <div class="" id="filter-price">
                 <h4 class="filter-titles">Price</h4>
@@ -29,107 +29,50 @@
         </form>
     </div>
 
-    <div class="b-inline-top col-lg-8" id="products">
-        <ul class="products-list list-group">
+    <div class="d-lg-inline-block align-top col-lg-8 m-auto" id="products">
+        <ul class="flex-row flex-wrap list-group">
             @foreach (var item in Model)
             {
-                <li class="products-list-item list-group-item col-3" style="display: grid; align-content: space-between">
-                    <div>
-                        <a asp-action="Details" asp-controller="Products" asp-route-id="@item.Id">
-                            <img src="@item.Image" width="200" height="175">
-                            <h5>@item.Manufacturer @item.Model</h5>
-                        </a>
-                    </div>
-                    <div class="text-center h" style="font-size: 14px; height: max-content">
-                        @foreach (var characteristic in item.Description)
+            <li class="products-list-item list-group-item col-3 flex-row flex-wrap align-content-between rounded" style="display: grid">
+                <div>
+                    <a asp-action="Details" asp-controller="Products" asp-route-id="@item.Id">
+                        <img src="@item.Image" width="200" height="175">
+                        <h5>@item.Manufacturer @item.Model</h5>
+                    </a>
+                </div>
+                @if (item.Quantity == 0)
+                {
+                    <p class="text-danger">Not Available</p>
+                }
+                <div class="text-center" style="font-size: 14px;">
+                    @foreach (var characteristic in item.Description)
+                    {
+                        <p style="margin-bottom: 10px">@characteristic</p>
+                    }
+                </div>
+                <div>
+                    <div style="height: 24px">
+                        @if (item.Discount > 0)
                         {
-                            <p style="margin-bottom: 10px">@characteristic</p>
+                            var oldPrice = $"{item.Discount + item.Price:f2}";
+                            <p class="mb-0 text-left"><s>@oldPrice lv.</s></p>
                         }
                     </div>
-                    <div>
-                        <div style="height: 24px">
-                            @if (item.Discount > 0)
-                            {
-                                var oldPrice = $"{item.Discount + item.Price:f2}";
-                                <p class="mb-0 text-left"><s>@oldPrice lv.</s></p>
-                            }
-                        </div>
-                        <div id="item-price-container">
-                            @if (item.Discount > 0)
-                            {
-                                <span class="font-weight-bold text-danger" style="font-size: 17px">@item.Price lv.</span>
-                            }
-                            else
-                            {
-                                <span class="font-weight-bold" style="font-size: 17px"> @item.Price lv.</span>
-                            }
+                    <div id="item-price-container">
+                        @if (item.Discount > 0)
+                        {
+                            <span class="font-weight-bold text-danger" style="font-size: 17px">@item.Price lv.</span>
+                        }
+                        else
+                        {
+                            <span class="font-weight-bold" style="font-size: 17px"> @item.Price lv.</span>
+                        }
 
-                            <a class="btn btn-primary" asp-action="Details" asp-controller="Products" asp-route-id="@item.Id">SEE MORE</a>
-                        </div>
+                        <a class="btn btn-primary" asp-action="Details" asp-controller="Products" asp-route-id="@item.Id">SEE MORE</a>
                     </div>
-                </li>
+                </div>
+            </li>
             }
         </ul>
     </div>
 </div>
-
-@*@model IEnumerable<PernikComputers.Models.ProductAllViewModel>
-
-    @{
-        ViewData["Title"] = "AllProcessors";
-    }
-
-    <h1>AllProcessors</h1>
-
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Manufacturer)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Model)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Price)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IsPromotion)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Image)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-    @foreach (var item in Model) {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Manufacturer)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Model)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsPromotion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Image)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
-    }
-        </tbody>
-    </table>
-*@

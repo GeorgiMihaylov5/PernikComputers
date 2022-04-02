@@ -35,7 +35,8 @@ namespace PernikComputers.Controllers
                     Discount = x.Discount,
                     Image = x.Image,
                     Category = x.Category,
-                    Description = productService.AllDescription(x.Id)
+                    Description = productService.AllDescription(x.Id),
+                    Quantity = x.Quantity
                 }).ToList();
 
             return View("~/Views/Products/All.cshtml", processorVM);
@@ -120,7 +121,8 @@ namespace PernikComputers.Controllers
                     Discount = x.Discount,
                     Image = x.Image,
                     Category = x.Category,
-                    Description = productService.AllDescription(x.Id)
+                    Description = productService.AllDescription(x.Id),
+                    Quantity = x.Quantity
                 }).ToList();
 
             return View("~/Views/Products/All.cshtml", motherboardVM);
@@ -205,7 +207,8 @@ namespace PernikComputers.Controllers
                     Discount = x.Discount,
                     Image = x.Image,
                     Category = x.Category,
-                    Description = productService.AllDescription(x.Id)
+                    Description = productService.AllDescription(x.Id),
+                    Quantity = x.Quantity
                 }).ToList();
 
 
@@ -289,7 +292,8 @@ namespace PernikComputers.Controllers
                     Discount = x.Discount,
                     Image = x.Image,
                     Category = x.Category,
-                    Description = productService.AllDescription(x.Id)
+                    Description = productService.AllDescription(x.Id),
+                    Quantity = x.Quantity
                 }).ToList();
 
 
@@ -380,7 +384,8 @@ namespace PernikComputers.Controllers
                     Discount = x.Discount,
                     Image = x.Image,
                     Category = x.Category,
-                    Description = productService.AllDescription(x.Id)
+                    Description = productService.AllDescription(x.Id),
+                    Quantity = x.Quantity
                 }).ToList();
 
 
@@ -463,7 +468,8 @@ namespace PernikComputers.Controllers
                     Discount = x.Discount,
                     Image = x.Image,
                     Category = x.Category,
-                    Description = productService.AllDescription(x.Id)
+                    Description = productService.AllDescription(x.Id),
+                    Quantity = x.Quantity
                 }).ToList();
 
 
@@ -548,7 +554,8 @@ namespace PernikComputers.Controllers
                     Discount = x.Discount,
                     Image = x.Image,
                     Category = x.Category,
-                    Description =productService.AllDescription(x.Id)
+                    Description =productService.AllDescription(x.Id),
+                    Quantity = x.Quantity
                 }).ToList();
 
 

@@ -38,7 +38,7 @@
         <ul class="list-group flex-sm-row flex-wrap justify-content-between justify-content-smd-start">
             @foreach (var item in Model)
             {
-                <li class="list-group-item col-md-4 text-center m-1" style="flex: 0 0 32%;">
+                <li class="list-group-item col-md-4 text-center m-1 rounded" style="flex: 0 0 32%;">
                     <div class="d-inline-block align-top">
                         <a asp-action="Details" asp-controller="Products" asp-route-id="@item.Id">
                             <img src="@item.Image" width="165" height="145">

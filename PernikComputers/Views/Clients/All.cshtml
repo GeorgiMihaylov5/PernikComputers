@@ -4,10 +4,10 @@
     ViewData["Title"] = "All";
 }
 
-<div class="b-inline-top col-3" id="filter-left">
+<div class="d-lg-inline-block align-top col-3" id="filter-left">
     @await Html.PartialAsync("~/Views/Clients/_ManageLayoutPartialView.cshtml")
 </div>
-<div class="b-inline-top col-md-8" id="products">
+<div class="d-lg-inline-block align-top col-md-8">
     @await Html.PartialAsync("~/Views/Employees/_AdminPanelPartialView.cshtml")
 
     <div class="alert alert-info" style="margin-top: 25px">

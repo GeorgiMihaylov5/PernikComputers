@@ -29,7 +29,8 @@ namespace PernikComputers.Controllers
                    Discount = x.Discount,
                    Image = x.Image,
                    Category = x.Category,
-                   Description =  service.AllDescription(x.Id)
+                   Description =  service.AllDescription(x.Id),
+                   Quantity = x.Quantity
                }).ToList();
 
             return View(productVm);
@@ -121,7 +122,8 @@ namespace PernikComputers.Controllers
                   Discount = x.Discount,
                   Image = x.Image,
                   Category = x.Category,
-                  Description = service.AllDescription(x.Id)
+                  Description = service.AllDescription(x.Id),
+                  Quantity = x.Quantity
               }).ToList();
 
             return View("All", productVm);
