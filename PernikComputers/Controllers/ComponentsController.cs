@@ -88,7 +88,7 @@ namespace PernikComputers.Controllers
                 Image = item.Image
             };
 
-            return View("CreateProcessor", editModel);
+            return View("EditProcessor", editModel);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -101,7 +101,7 @@ namespace PernikComputers.Controllers
 
                 if (isUpdated)
                 {
-                    return RedirectToAction("AllProcessors");
+                    return RedirectToAction("AllTable","Products");
                 }
             }
             return View(createVm);

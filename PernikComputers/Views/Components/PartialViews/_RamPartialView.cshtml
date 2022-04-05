@@ -1,0 +1,101 @@
+﻿@model PernikComputers.Models.RamCreateViewModel
+
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="Barcode" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <input asp-for="Barcode" class="form-control" />
+    </div>
+    <p><span asp-validation-for="Barcode" class="text-danger"></span></p>
+</div>
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="Manufacturer" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <input asp-for="Manufacturer" class="form-control" />
+    </div>
+    <p><span asp-validation-for="Manufacturer" class="text-danger"></span></p>
+</div>
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="Model" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <input asp-for="Model" class="form-control" />
+    </div>
+    <p><span asp-validation-for="Model" class="text-danger"></span></p>
+</div>
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="Price" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <input asp-for="Price" class="form-control" />
+    </div>
+    <p><span asp-validation-for="Price" class="text-danger"></span></p>
+</div>
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="Warranty" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <input asp-for="Warranty" class="form-control" />
+    </div>
+    <p><span asp-validation-for="Warranty" class="text-danger"></span></p>
+</div>
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="Size" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <input asp-for="Size" class="form-control" />
+    </div>
+    <p><span asp-validation-for="Size" class="text-danger"></span></p>
+</div>
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="TypeRam" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <select asp-for="TypeRam" class="form-control" asp-items="Html.GetEnumSelectList<TypeRam>()"></select>
+    </div>
+    <p><span asp-validation-for="TypeRam" class="text-danger"></span></p>
+</div>
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="Frequency" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <input asp-for="Frequency" class="form-control" />
+    </div>
+    <p><span asp-validation-for="Frequency" class="text-danger"></span></p>
+</div>
+<div>
+    <div class="d-inline-block w-130 align-middle">
+        <label asp-for="Timing" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200 align-middle">
+        <input asp-for="Timing" class="form-control" />
+    </div>
+    <p><span asp-validation-for="Timing" class="text-danger"></span></p>
+</div>
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="Quantity" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <input asp-for="Quantity" class="form-control" />
+    </div>
+    <p><span asp-validation-for="Quantity" class="text-danger"></span></p>
+</div>
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="Image" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <input asp-for="Image" class="form-control" />
+    </div>
+    <p><span asp-validation-for="Image" class="text-danger"></span></p>
+</div>

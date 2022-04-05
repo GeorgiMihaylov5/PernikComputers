@@ -1,14 +1,14 @@
-﻿@model PernikComputers.Models.ProcessorCreateViewModel
+﻿@model PernikComputers.Models.VideoCardCreateViewModel
 
 @{
     ViewData["Title"] = "Edit";
 }
 
-<h1 class="text-center">Edit Procesor</h1>
+<h1 class="text-center">Edit Video Card</h1>
 <hr />
 <div>
-    <form asp-action="EditProcessor" class="text-center">
-        @await Html.PartialAsync("PartialViews/_ProcessorPartialView.cshtml", Model)
+    <form asp-action="EditVideoCard" class="text-center">
+        @await Html.PartialAsync("PartialViews/_VideoCardPartialView.cshtml", Model)
         <div class="form-group mt-4">
             <button type="submit" class="btn-radius btn btn-outline-primary btn-lg">EDIT</button>
             <a asp-action="AllTable" asp-controller="Products" class="mt-1 ml-4 d-block">Back to products</a>

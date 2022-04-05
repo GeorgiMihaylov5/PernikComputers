@@ -1,0 +1,146 @@
+﻿@model PernikComputers.Models.VideoCardCreateViewModel
+
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="Barcode" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <input asp-for="Barcode" class="form-control" />
+    </div>
+    <p><span asp-validation-for="Barcode" class="text-danger"></span></p>
+</div>
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="Manufacturer" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <input asp-for="Manufacturer" class="form-control" />
+    </div>
+    <p><span asp-validation-for="Manufacturer" class="text-danger"></span></p>
+</div>
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="Model" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <input asp-for="Model" class="form-control" />
+    </div>
+    <p><span asp-validation-for="Model" class="text-danger"></span></p>
+</div>
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="Price" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <input asp-for="Price" class="form-control" />
+    </div>
+    <p><span asp-validation-for="Price" class="text-danger"></span></p>
+</div>
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="Warranty" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <input asp-for="Warranty" class="form-control" />
+    </div>
+    <p><span asp-validation-for="Warranty" class="text-danger"></span></p>
+</div>
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="ChipManufacturer" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <select asp-for="ChipManufacturer" class="form-control" asp-items="Html.GetEnumSelectList<ChipManufacturer>()"></select>
+    </div>
+    <p><span asp-validation-for="ChipManufacturer" class="text-danger"></span></p>
+</div>
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="GraphicProcessor" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <input asp-for="GraphicProcessor" class="form-control" />
+    </div>
+    <p><span asp-validation-for="GraphicProcessor" class="text-danger"></span></p>
+</div>
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="SizeMemory" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <input asp-for="SizeMemory" class="form-control" />
+    </div>
+    <p><span asp-validation-for="SizeMemory" class="text-danger"></span></p>
+</div>
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="TypeMemory" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <input asp-for="TypeMemory" class="form-control" />
+    </div>
+    <p><span asp-validation-for="TypeMemory" class="text-danger"></span></p>
+</div>
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="MemoryFrequency" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <input asp-for="MemoryFrequency" class="form-control" />
+    </div>
+    <p><span asp-validation-for="MemoryFrequency" class="text-danger"></span></p>
+</div>
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="CoreFrequency" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <input asp-for="CoreFrequency" class="form-control" />
+    </div>
+    <p><span asp-validation-for="CoreFrequency" class="text-danger"></span></p>
+</div>
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="CurrentProcesses" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <input asp-for="CurrentProcesses" class="form-control" />
+    </div>
+    <p><span asp-validation-for="CurrentProcesses" class="text-danger"></span></p>
+</div>
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="RailWidth" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <input asp-for="RailWidth" class="form-control" />
+    </div>
+    <p><span asp-validation-for="RailWidth" class="text-danger"></span></p>
+</div>
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="SlotType" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <input asp-for="SlotType" class="form-control" />
+    </div>
+    <p><span asp-validation-for="SlotType" class="text-danger"></span></p>
+</div>
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="Quantity" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <input asp-for="Quantity" class="form-control" />
+    </div>
+    <p><span asp-validation-for="Quantity" class="text-danger"></span></p>
+</div>
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="Image" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <input asp-for="Image" class="form-control" />
+    </div>
+    <p><span asp-validation-for="Image" class="text-danger"></span></p>
+</div>

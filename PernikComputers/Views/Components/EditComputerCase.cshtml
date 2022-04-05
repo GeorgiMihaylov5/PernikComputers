@@ -1,16 +1,16 @@
 ﻿@model PernikComputers.Models.ComputerCaseCreateViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
 }
 
-<h1 class="text-center">Create Computer Case</h1>
+<h1 class="text-center">Edit Computer Case</h1>
 <hr />
 <div>
-    <form asp-action="CreateComputerCase" class="text-center">
+    <form asp-action="EditComputerCase" class="text-center">
         @await Html.PartialAsync("PartialViews/_ComputerCasePartialView.cshtml", Model)
         <div class="form-group mt-4">
-            <button type="submit" class="btn-radius btn btn-outline-primary btn-lg">CREATE</button>
+            <button type="submit" class="btn-radius btn btn-outline-primary btn-lg">EDIT</button>
             <a asp-action="AllTable" asp-controller="Products" class="mt-1 ml-5 d-block">Back to products</a>
         </div>
     </form>
