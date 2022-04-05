@@ -13,5 +13,6 @@ namespace PernikComputers.Abstraction
         public List<Order> All();
         public List<Order> My(string customerId);
         public Order GetOrder(string orderId, string userId);
+        public bool Update(string id, OrderStatus orderStatus, string notes);
     }
 }

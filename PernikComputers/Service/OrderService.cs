@@ -176,6 +176,11 @@ namespace PernikComputers.Service
             throw new NotImplementedException();
         }
 
+        public bool Update(string id, OrderStatus orderStatus, string notes)
+        {
+            throw new NotImplementedException();
+        }
+
 
         //private CommonProperties GetProduct(string productId, Category category)
         //{
