@@ -24,17 +24,7 @@ namespace PernikComputers.Service
 
         public List<Product> GetAllProducts()
         {
-            List<Product> products = new List<Product>();
-            products.AddRange(context.Processors);
-            products.AddRange(context.Motherboards);
-            products.AddRange(context.Rams);
-            products.AddRange(context.VideoCards);
-            products.AddRange(context.PowerSupplies);
-            products.AddRange(context.Memories);
-            products.AddRange(context.ComputerCases);
-            products.AddRange(context.Computers);
-
-            return products.OrderBy(x => x.Price).ToList();
+            return context.Products.ToList();
         }
         public List<T> GetProducts<T>() where T : class
         {

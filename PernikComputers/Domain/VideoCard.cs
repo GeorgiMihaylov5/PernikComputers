@@ -14,6 +14,6 @@ namespace PernikComputers.Domain
         public int CurrentProcesses { get; set; }
         public int RailWidth { get; set; }
         public string SlotType { get; set; }
-        public ICollection<Computer> Computers { get; set; }
+        public virtual ICollection<Computer> Computers { get; set; }
     }
 }

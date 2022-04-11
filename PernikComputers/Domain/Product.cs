@@ -17,6 +17,6 @@ namespace PernikComputers.Domain
         public Category Category { get; set; }
         public int Quantity { get; set; }
         public string Image { get; set; }
-        public ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

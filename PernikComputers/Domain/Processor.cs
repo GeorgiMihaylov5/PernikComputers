@@ -10,6 +10,6 @@ namespace PernikComputers.Domain
         public int Cores { get; set; }
         public int Threads { get; set; }
         public int Cache { get; set; }
-        public ICollection<Computer> Computers { get; set; }
+        public virtual ICollection<Computer> Computers { get; set; }
     }
 }

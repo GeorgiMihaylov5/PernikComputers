@@ -8,6 +8,6 @@ namespace PernikComputers.Domain
         public string FormFactor { get; set; }
         public string CaseSize { get; set; }
         public string Color { get; set; }
-        public ICollection<Computer> Computers { get; set; }
+        public virtual ICollection<Computer> Computers { get; set; }
     }
 }

@@ -10,6 +10,6 @@ namespace PernikComputers.Domain
         public TypeRam TypeRam { get; set; }
         public int RamSlotsCount { get; set; }
         public string FormFactor { get; set; }
-        public ICollection<Computer> Computers { get; set; }
+        public virtual ICollection<Computer> Computers { get; set; }
     }
 }
