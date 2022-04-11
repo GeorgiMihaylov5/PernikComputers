@@ -4,20 +4,17 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1 class="text-center">Edit Computer</h1>
 
-<h4>ComputerCreateViewModel</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            @await Html.PartialAsync("~/Views/Computers/_ProductInfoPartialView.cshtml", Model)
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
+<div class="text-center">
+    <form asp-action="Edit" asp-controller="Computers" method="post">
+        @await Html.PartialAsync("~/Views/Computers/_ProductInfoPartialView.cshtml")
+        <div class="form-group mt-4">
+            <button type="submit" class="btn-radius btn btn-outline-primary btn-lg">EDIT</button>
+            <a asp-action="AllTable" asp-controller="Products" class="mt-1 ml-4 d-block">Back to products</a>
+        </div>
+    </form>
 </div>
 
 @section Scripts {

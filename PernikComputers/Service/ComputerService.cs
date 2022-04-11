@@ -2,6 +2,7 @@
 using PernikComputers.Abstraction;
 using PernikComputers.Data;
 using PernikComputers.Domain;
+using PernikComputers.Domain.Enum;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,7 +19,7 @@ namespace PernikComputers.Service
 
         public bool Create(string processorId, string motherboardId, string ramId, string videoCardId, 
             string powerSupplyId, string memoryId, string computerCaseId, 
-            string barcode, string manufacturer, string model, int warranty, decimal price, int quantity, string image)
+            string barcode, string manufacturer, string model, int warranty, int quantity)
         {
             var computer = new Computer
             {
@@ -34,7 +35,8 @@ namespace PernikComputers.Service
                 Model = model,
                 Warranty = warranty,
                 Quantity = quantity,
-                Image = image,
+                Category = Category.Computer,
+                Image = context.ComputerCases.Find(computerCaseId).Image,
                 Processor = context.Processors.Find(processorId),
                 Motherboard = context.Motherboards.Find(motherboardId),
                 Ram = context.Rams.Find(ramId),
@@ -52,7 +54,9 @@ namespace PernikComputers.Service
             return context.SaveChanges() != 0;
         }
 
-        public bool UpdateComputer(string id, string processorId, string motherboardId, string ramId, string videoCardId, string powerSupplyId, string memoryId, string computerCaseId, string barcode, string manufacturer, string model, int warranty, decimal price, int quantity, string image)
+        public bool UpdateComputer(string id, string processorId, string motherboardId, string ramId,
+            string videoCardId, string powerSupplyId, string memoryId, string computerCaseId,
+            string barcode, string manufacturer, string model, int warranty, decimal price, int quantity, string image)
         {
             var computer = context.Computers.Find(id);
 

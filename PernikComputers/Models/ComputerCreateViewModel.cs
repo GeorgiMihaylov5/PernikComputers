@@ -9,7 +9,6 @@ namespace PernikComputers.Models
 {
     public class ComputerCreateViewModel
     {
-        [Key]
         public string Id { get; set; }
         [Required]
         public string Barcode { get; set; }
@@ -19,8 +18,6 @@ namespace PernikComputers.Models
         public string Model { get; set; }
         [Required]
         public int Warranty { get; set; }
-        [Required]
-        [Range(1, int.MaxValue, ErrorMessage = "Price must be a positive number.")]
         public decimal Price { get; set; }
         [Required]
         public string ProcessorId { get; set; }

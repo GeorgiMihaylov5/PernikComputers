@@ -162,6 +162,11 @@ namespace PernikComputers.Controllers
 
             return RedirectToAction("Profile");
         }
+        [AllowAnonymous]
+        public IActionResult Home()
+        {
+            return View();
+        }
 
         //[HttpPost]
         //[ValidateAntiForgeryToken]

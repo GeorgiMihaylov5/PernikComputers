@@ -36,44 +36,9 @@ namespace PernikComputers.Service
 
             return products.OrderBy(x => x.Price).ToList();
         }
-        public List<T> GetProducts<T>()
+        public List<T> GetProducts<T>() where T : class
         {
-            if (typeof(T) == typeof(Processor))
-            {
-                return context.Processors.OrderBy(x => x.Price).ToList() as List<T>;
-            }
-            else if (typeof(T) == typeof(Motherboard))
-            {
-                return context.Motherboards.OrderBy(x => x.Price).ToList() as List<T>;
-            }
-            else if (typeof(T) == typeof(Ram))
-            {
-                return context.Rams.OrderBy(x => x.Price).ToList() as List<T>;
-            }
-            else if (typeof(T) == typeof(VideoCard))
-            {
-                return context.VideoCards.OrderBy(x => x.Price).ToList() as List<T>;
-            }
-            else if (typeof(T) == typeof(PowerSupply))
-            {
-                return context.PowerSupplies.OrderBy(x => x.Price).ToList() as List<T>;
-            }
-            else if (typeof(T) == typeof(Memory))
-            {
-                return context.Memories.OrderBy(x => x.Price).ToList() as List<T>;
-            }
-            else if (typeof(T) == typeof(ComputerCase))
-            {
-                return context.ComputerCases.OrderBy(x => x.Price).ToList() as List<T>;
-            }
-            else if (typeof(T) == typeof(Computer))
-            {
-                return context.Computers.OrderBy(x => x.Price).ToList() as List<T>;
-            }
-            else
-            {
-                return null;
-            }
+            return context.Products.OfType<T>().ToList();
         }
 
         public bool MakeDiscount(string id, int discount)

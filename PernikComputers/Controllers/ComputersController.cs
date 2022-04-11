@@ -66,18 +66,22 @@ namespace PernikComputers.Controllers
         [Authorize(Roles = "Administrator")]
         public IActionResult Create(ComputerCreateViewModel createVm)
         {
-            if (ModelState.IsValid)
+            try
             {
                 var isCreated = service.Create(createVm.ProcessorId, createVm.MotherboardId, createVm.RamId,
                     createVm.VideoCardId, createVm.PowerSupplyId, createVm.MemoryId, createVm.ComputerCaseId,
-                    createVm.Barcode, createVm.Manufacturer, createVm.Model, createVm.Warranty, createVm.Price, createVm.Quantity, createVm.Image);
+                    createVm.Barcode, createVm.Manufacturer, createVm.Model, createVm.Warranty, createVm.Quantity);
 
                 if (isCreated)
                 {
-                    return RedirectToAction("~/Views/Products/All.cshtml");
+                    return RedirectToAction("AllTable", "Products");
                 }
+                return View(createVm);
             }
-            return View();
+            catch
+            {
+                return View(createVm);
+            }
         }
 
         [Authorize(Roles = "Administrator")]

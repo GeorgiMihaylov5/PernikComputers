@@ -12,7 +12,7 @@
             @if (User.IsInRole("Administrator") || User.IsInRole("Employee"))
             {
 
-                <li class="nav-item">
+                <li class="nav-item mb-3">
                     <a class="btn nav-link profile-nav" asp-action="All" asp-controller="Orders">Control Panel</a>
                 </li>
             }

@@ -6,7 +6,7 @@
 <div class="d-lg-inline-block align-top col-3" id="filter-left">
         @await Html.PartialAsync("~/Views/Clients/_ManageLayoutPartialView.cshtml")
 </div>
-<div class="d-lg-inline-block align-top col-md-8">
+<div class="d-lg-inline-block align-top col-md-8 m-auto">
     @if (ViewContext.RouteData.Values["action"].ToString() == "All" || ViewContext.RouteData.Values["action"].ToString() == "Rejected")
     {
         @await Html.PartialAsync("~/Views/Employees/_AdminPanelPartialView.cshtml")
@@ -30,7 +30,7 @@
                     <h4>
                         Order: @item.Manufacturer @item.Model
                     </h4>
-                    <div class="row justify-content-between">
+                    <div class="row justify-content-between m-0">
                         <span>
                             Status: @item.Status
                         </span>
@@ -42,7 +42,7 @@
                 <div>
                     <p>User: @item.CustomerUsername</p>
                 </div>
-                <div class="row justify-content-between">
+                <div class="row justify-content-between m-0">
                     <p class="order-price-p">Total Price: @item.TotalPrice</p>
 
                     <button type="submit" class="order-details-btn btn">Details</button>
