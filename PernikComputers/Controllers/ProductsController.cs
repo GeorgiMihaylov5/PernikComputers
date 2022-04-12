@@ -29,7 +29,7 @@ namespace PernikComputers.Controllers
                    Discount = x.Discount,
                    Image = x.Image,
                    Category = x.Category,
-                   Description =  service.AllDescription(x.Id),
+                   Description =  x.PartialDescription,
                    Quantity = x.Quantity
                }).ToList();
 
@@ -122,7 +122,7 @@ namespace PernikComputers.Controllers
                   Discount = x.Discount,
                   Image = x.Image,
                   Category = x.Category,
-                  Description = service.AllDescription(x.Id),
+                  Description = x.PartialDescription,
                   Quantity = x.Quantity
               }).ToList();
 
@@ -140,7 +140,7 @@ namespace PernikComputers.Controllers
                 Model = x.Model,
                 Manufacturer = x.Manufacturer,
                 Discount = x.Discount,
-                Description = service.DetailsDescription(x.Id),
+                Description = x.FullDescription.ToList(),
                 Category = Category.Processor,
                 Price = x.Price,
                 Quantity = x.Quantity,

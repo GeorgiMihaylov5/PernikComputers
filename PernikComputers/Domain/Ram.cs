@@ -10,5 +10,21 @@ namespace PernikComputers.Domain
         public int Frequency { get; set; }
         public string Timing { get; set; }
         public virtual ICollection<Computer> Computers { get; set; }
+        public override IEnumerable<string> FullDescription
+            => new List<string>()
+            {
+                $"Capacity: {this.Size} GB",
+                $"Type: {this.TypeRam}",
+                $"Frequency: {this.Frequency} MHz",
+                $"Timing: {this.Timing}",
+                $"Warranty: {this.Warranty} months"
+            };
+        public override IEnumerable<string> PartialDescription
+            => new List<string>()
+            {
+                $"Capacity: {this.Size} GB",
+                $"Type: {this.TypeRam}",
+                $"Frequency: {this.Frequency} MHz"
+            };
     }
 }

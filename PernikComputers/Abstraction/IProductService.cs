@@ -11,7 +11,5 @@ namespace PernikComputers.Abstraction
         public bool RemoveProduct(string id);
         public bool MakeDiscount(string id, int discount);
         public bool RemoveDiscount(string id);
-        public List<string> AllDescription(string id);
-        public List<string> DetailsDescription(string id);
     }
 }

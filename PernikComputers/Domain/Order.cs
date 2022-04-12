@@ -12,7 +12,6 @@ namespace PernikComputers.Domain
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
         public DateTime OrderedOn { get; set; }
-        public Category Category { get; set; }
         public string ProductId { get; set; }
         public virtual Product Product { get; set; }
         public string CustomerId { get; set; }

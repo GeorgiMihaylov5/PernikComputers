@@ -39,7 +39,6 @@ namespace PernikComputers.Service
                 Count = count,
                 OrderedPrice = price,
                 CustomerId = customerId,
-                Category = category,
                 Status = OrderStatus.Pending,
             };
 

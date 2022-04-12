@@ -17,6 +17,10 @@ namespace PernikComputers.Domain
         public Category Category { get; set; }
         public int Quantity { get; set; }
         public string Image { get; set; }
+        [NotMapped()]
+        public virtual IEnumerable<string> FullDescription { get; }
+        [NotMapped()]
+        public virtual IEnumerable<string> PartialDescription { get; }
         public virtual ICollection<Order> Orders { get; set; }
     }
 }
