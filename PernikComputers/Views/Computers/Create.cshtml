@@ -17,6 +17,83 @@
     </form>
 </div>
 
+
+
+@*<script>
+    let processor = document.getElementById('ProcessorId')
+    let motherboard = document.getElementById('MotherboardId')
+    let ram = document.getElementById('RamId')
+    let videoCard = document.getElementById('VideoCardId')
+    let powerSupply = document.getElementById('PowerSupplyId')
+    let memory = document.getElementById('MemoryId')
+    let computerCase = document.getElementById('ComputerCaseId')
+
+    motherboard.disabled = true
+    ram.disabled = true
+
+    let processorObj = null
+    let motherboardObj = null
+
+
+    function SelectMotherboard() {
+        motherboard.length = 0
+        let selectedProcessor = processor.options[processor.selectedIndex].value
+        let allProcessors = @Html.Raw(Json.Serialize(ViewBag.Processors));
+        console.log(processor.textContent)
+
+        if (selectedProcessor == 0) {
+            location.reload()
+        }
+
+        for (var i = 0; i < allProcessors.length; i++) {
+            if (selectedProcessor == allProcessors[i].id) {
+                processorObj = allProcessors[i]
+                break
+            }
+        }
+
+        let allMotherboards = @Html.Raw(Json.Serialize(@ViewBag.Motherboards));
+        for (var i = 0; i < allMotherboards.length; i++) {
+            if (allMotherboards[i].socket == processorObj.socket) {
+                let newOption = new Option(allMotherboards[i].model, allMotherboards[i].id)
+                motherboard.add(newOption, undefined);
+            }
+        }
+
+        motherboard.disabled = false
+    }
+
+    function SelectRam() {
+        ram.length = 0
+
+        let allMotherboars = @Html.Raw(Json.Serialize(@ViewBag.Motherboards));
+        let selectedMotherboard = motherboard.options[motherboard.selectedIndex].value
+
+        for (var i = 0; i < allMotherboars.length; i++) {
+            if (selectedMotherboard == allMotherboars[i].id) {
+                motherboardObj = allMotherboars[i]
+                break
+            }
+        }
+
+        let allRams = @Html.Raw(Json.Serialize(@ViewBag.Rams));
+
+        for (var i = 0; i < allRams.length; i++) {
+            if (allRams[i].typeRam == motherboardObj.typeRam) {
+                let newOption1 = new Option(allRams[i].model, allRams[i].id)
+                ram.add(newOption1, undefined);
+            }
+        }
+
+        ram.disabled = false
+    }
+
+
+    SelectMotherboard()
+    SelectRam()
+    console.log('Hey')
+</script>*@
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

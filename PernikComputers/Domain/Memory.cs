@@ -14,7 +14,7 @@ namespace PernikComputers.Domain
         public override IEnumerable<string> FullDescription
             => new List<string>()
             {
-                $"Type: {this.MemoryType} W",
+                $"Type: {this.MemoryType}",
                 $"Form factor: {this.FormFactor}",
                 $"Capacity: {this.Capacity} GB",
                 $"Reading speed: {this.ReadSpeed} MB/s",
@@ -24,7 +24,7 @@ namespace PernikComputers.Domain
         public override IEnumerable<string> PartialDescription
             => new List<string>()
             {
-                $"Type: {this.MemoryType} W",
+                $"Type: {this.MemoryType}",
                 $"Capacity: {this.Capacity} GB",
             };
     }

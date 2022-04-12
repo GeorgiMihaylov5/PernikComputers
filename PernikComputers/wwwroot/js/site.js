@@ -1,4 +1,51 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿function SelectMotherboards(allProcessors, allMotherboards) {
+    let processorField = document.getElementById('ProcessorId')
+    let motherboardField = document.getElementById('MotherboardId')
 
-// Write your JavaScript code.
+    let processorFieldValue = processorField.options[processorField.selectedIndex].value
+    let currentProcessor = null
+
+    //remove old motherboard
+    motherboardField.length = 0
+
+    //search processord in collection
+    for (var i = 0; i < allProcessors.length; i++) {
+        if (processorFieldValue == allProcessors[i].id) {
+            currentProcessor = allProcessors[i]
+            break
+        }
+    }
+
+    //search for compatible motherboards
+    for (var i = 0; i < allMotherboards.length; i++) {
+        if (allMotherboards[i].socket == currentProcessor.socket) {
+            let newOption = new Option(allMotherboards[i].model, allMotherboards[i].id)
+            motherboardField.add(newOption, undefined);
+        }
+    }
+}
+
+function SelectRams(allMotherboards, allRams) {
+    let ramField = document.getElementById('RamId')
+    let motherboardField = document.getElementById('MotherboardId')
+
+    let motherboardFieldValue = motherboardField.options[motherboardField.selectedIndex].value
+    let currentMotherboard = null
+    ramField.length = 0
+
+    //search motherboard in collection
+    for (var i = 0; i < allMotherboards.length; i++) {
+        if (motherboardFieldValue == allMotherboards[i].id) {
+            currentMotherboard = allMotherboards[i]
+            break
+        }
+    }
+
+    //search for compatible rams
+    for (var i = 0; i < allRams.length; i++) {
+        if (allRams[i].typeRam == currentMotherboard.typeRam) {
+            let newOption1 = new Option(allRams[i].model, allRams[i].id)
+            ramField.add(newOption1, undefined);
+        }
+    }
+}

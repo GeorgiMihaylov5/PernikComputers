@@ -15,6 +15,7 @@ using PernikComputers.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace PernikComputers
@@ -46,6 +47,10 @@ namespace PernikComputers
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddMvc().AddJsonOptions(o =>
+            {
+                o.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+            });
             services.AddTransient<IComponentService, ComponentsService>();
             services.AddTransient<IComputerService, ComputerService>();
             services.AddTransient<IEmployeeService, EmployeeService>();

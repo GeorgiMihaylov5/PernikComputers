@@ -50,7 +50,7 @@
         <label asp-for="ProcessorId" class="font-weight-bold"></label>
     </div>
     <div class="d-inline-block w-200">
-        <select asp-for="ProcessorId" class="form-control" asp-items="ViewBag.ProcessorId" onclick="SelectMotherboard()"></select>
+        <select asp-for="ProcessorId" class="form-control" asp-items="ViewBag.ProcessorId" onchange="SelectMotherboards(allProcessors.$values, allMotherboards.$values)"></select>
     </div>
     <p><span asp-validation-for="ProcessorId" class="text-danger"></span></p>
 </div>
@@ -59,7 +59,7 @@
         <label asp-for="MotherboardId" class="font-weight-bold"></label>
     </div>
     <div class="d-inline-block w-200">
-        <select asp-for="MotherboardId" class="form-control" onclick="SelectRam()"></select>
+        <select asp-for="MotherboardId" class="form-control" onchange="SelectRams(allMotherboards.$values, allRams.$values)"></select>
     </div>
     <p><span asp-validation-for="MotherboardId" class="text-danger"></span></p>
 </div>
@@ -126,78 +126,11 @@
     </div>
     <p><span asp-validation-for="Image" class="text-danger"></span></p>
 </div>*@
-
 <script>
-    let processor = document.getElementById('ProcessorId')
-    let motherboard = document.getElementById('MotherboardId')
-    let ram = document.getElementById('RamId')
-    let videoCard = document.getElementById('VideoCardId')
-    let powerSupply = document.getElementById('PowerSupplyId')
-    let memory = document.getElementById('MemoryId')
-    let computerCase = document.getElementById('ComputerCaseId')
+    let allProcessors = @Json.Serialize(ViewBag.Processors);
+    let allMotherboards = @Json.Serialize(ViewBag.Motherboards);
+    let allRams = @Json.Serialize(ViewBag.Rams);
 
-    motherboard.disabled = true
-    ram.disabled = true
-
-    let processorObj = null
-    let motherboardObj = null
-
-
-    function SelectMotherboard() {
-        motherboard.length = 0
-        let selectedProcessor = processor.options[processor.selectedIndex].value
-        let allProcessors = @Html.Raw(Json.Serialize(@ViewBag.Processors));
-        console.log(processor.textContent)
-
-        if (selectedProcessor == 0) {
-            location.reload()
-        }
-
-        for (var i = 0; i < allProcessors.length; i++) {
-            if (selectedProcessor == allProcessors[i].id) {
-                processorObj = allProcessors[i]
-                break
-            }
-        }
-
-        let allMotherboards = @Html.Raw(Json.Serialize(@ViewBag.Motherboards));
-        for (var i = 0; i < allMotherboards.length; i++) {
-            if (allMotherboards[i].socket == processorObj.socket) {
-                let newOption = new Option(allMotherboards[i].model, allMotherboards[i].id)
-                motherboard.add(newOption, undefined);
-            }
-        }
-
-        motherboard.disabled = false
-    }
-
-    function SelectRam() {
-        ram.length = 0
-
-        let allMotherboars = @Html.Raw(Json.Serialize(@ViewBag.Motherboards));
-        let selectedMotherboard = motherboard.options[motherboard.selectedIndex].value
-
-        for (var i = 0; i < allMotherboars.length; i++) {
-            if (selectedMotherboard == allMotherboars[i].id) {
-                motherboardObj = allMotherboars[i]
-                break
-            }
-        }
-
-        let allRams = @Html.Raw(Json.Serialize(@ViewBag.Rams));
-
-        for (var i = 0; i < allRams.length; i++) {
-            if (allRams[i].typeRam == motherboardObj.typeRam) {
-                let newOption1 = new Option(allRams[i].model, allRams[i].id)
-                ram.add(newOption1, undefined);
-            }
-        }
-
-        ram.disabled = false
-    }
-
-
-    SelectMotherboard()
-    SelectRam()
-    console.log('Hey')
+    SelectMotherboards(allProcessors.$values, allMotherboards.$values)
+    SelectRams(allMotherboards.$values, allRams.$values)
 </script>
