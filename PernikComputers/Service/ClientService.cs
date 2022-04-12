@@ -38,11 +38,11 @@ namespace PernikComputers.Service
 
         public Client GetClient(string id)
         {
-            return context.Clients.Include(x => x.User).FirstOrDefault(x => x.UserId == id); 
+            return context.Clients.FirstOrDefault(x => x.UserId == id); 
         }
         public List<Client> GetClients()
         {
-            return context.Clients.Include(x => x.User).ToList(); 
+            return context.Clients.ToList(); 
         }
 
         public string GetFullName(string clientId)

@@ -30,7 +30,6 @@ namespace PernikComputers.Service
                 JobTitle = jobTitle,
                 UserId = userId,
                 Phone = phone,
-                User = context.Users.Find(userId)
             };
             context.Employees.Add(employee);
             return context.SaveChanges() != 0;
@@ -38,12 +37,12 @@ namespace PernikComputers.Service
 
         public Employee GetEmployee(string employeeId)
         {
-            return context.Employees.Include(x => x.User).FirstOrDefault(x => x.UserId == employeeId);
+            return context.Employees.FirstOrDefault(x => x.UserId == employeeId);
         }
 
         public List<Employee> GetEmployees()
         {
-            return context.Employees.Include(x => x.User).ToList();
+            return context.Employees.ToList();
         }
 
         public string GetFullName(string employeeId)

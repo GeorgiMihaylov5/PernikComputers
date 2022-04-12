@@ -36,14 +36,7 @@ namespace PernikComputers.Service
                 Warranty = warranty,
                 Quantity = quantity,
                 Category = Category.Computer,
-                Image = context.ComputerCases.Find(computerCaseId).Image,
-                Processor = context.Processors.Find(processorId),
-                Motherboard = context.Motherboards.Find(motherboardId),
-                Ram = context.Rams.Find(ramId),
-                VideoCard = context.VideoCards.Find(videoCardId),
-                PowerSupply = context.PowerSupplies.Find(powerSupplyId),
-                Memory = context.Memories.Find(memoryId),
-                ComputerCase = context.ComputerCases.Find(computerCaseId)
+                Image = context.ComputerCases.Find(computerCaseId).Image
             };
 
             computer.Price = computer.Processor.Price + computer.Motherboard.Price +

@@ -64,7 +64,18 @@ namespace PernikComputers.Service
 
         public bool Update(string id, OrderStatus orderStatus, string notes)
         {
-            throw new NotImplementedException();
+            var order = context.Orders.Find(id);
+
+            if (order == null)
+            {
+                return false;
+            }
+
+            order.Status = orderStatus;
+            order.Notes = notes;
+
+            context.Orders.Update(order);
+            return context.SaveChanges() != 0;
         }
     }
 }
