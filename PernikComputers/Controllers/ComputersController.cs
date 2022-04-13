@@ -111,7 +111,18 @@ namespace PernikComputers.Controllers
                 ComputerCaseId = item.ComputerCaseId
             };
 
-            return View("Create", editModel);
+            ViewBag.Processors = productService.GetProducts<Processor>();
+            ViewBag.Motherboards = productService.GetProducts<Motherboard>();
+            ViewBag.Rams = productService.GetProducts<Ram>();
+            ViewData["ProcessorId"] = new SelectList(productService.GetProducts<Processor>(), "Id", "Model");
+            ViewData["MotherboardId"] = new SelectList(productService.GetProducts<Motherboard>(), "Id", "Model");
+            ViewData["RamId"] = new SelectList(productService.GetProducts<Ram>(), "Id", "Model");
+            ViewData["VideoCardId"] = new SelectList(productService.GetProducts<VideoCard>(), "Id", "Model");
+            ViewData["PowerSupplyId"] = new SelectList(productService.GetProducts<PowerSupply>(), "Id", "Model");
+            ViewData["MemoryId"] = new SelectList(productService.GetProducts<Memory>(), "Id", "Model");
+            ViewData["ComputerCaseId"] = new SelectList(productService.GetProducts<ComputerCase>(), "Id", "Model");
+
+            return View("Edit", editModel);
 
         }
 
@@ -132,6 +143,20 @@ namespace PernikComputers.Controllers
                 }
             }
             return View(createVm);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
+        public IActionResult Restore(ComputerCreateViewModel viewModel)
+        {
+            Computer computer = productService.GetProduct(viewModel.Id);
+            computer.Price = computer.Processor.Price + computer.Motherboard.Price +
+                computer.Ram.Price + computer.VideoCard.Price +
+                computer.PowerSupply.Price + computer.Memory.Price +
+                computer.ComputerCase.Price;
+            computer.Image = computer.ComputerCase.Image;
+
+            return View("Edit", computer);
         }
     }
 }
