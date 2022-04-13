@@ -60,7 +60,7 @@
                 <label asp-for="ProcessorId" class="font-weight-bold"></label>
             </div>
             <div class="d-inline-block w-200">
-                <select asp-for="ProcessorId" class="form-control" asp-items="ViewBag.ProcessorId" onchange="SelectMotherboards(allProcessors.$values, allMotherboards.$values)"></select>
+                <select asp-for="ProcessorId" class="form-control" asp-items="ViewBag.ProcessorId" onchange="SelectMotherboards(allProcessors, allMotherboards)"></select>
             </div>
             <p><span asp-validation-for="ProcessorId" class="text-danger"></span></p>
         </div>
@@ -69,7 +69,7 @@
                 <label asp-for="MotherboardId" class="font-weight-bold"></label>
             </div>
             <div class="d-inline-block w-200">
-                <select asp-for="MotherboardId" class="form-control" onchange="SelectRams(allMotherboards.$values, allRams.$values)"></select>
+                <select asp-for="MotherboardId" class="form-control" onchange="SelectRams(allMotherboards, allRams)"></select>
             </div>
             <p><span asp-validation-for="MotherboardId" class="text-danger"></span></p>
         </div>
@@ -145,12 +145,13 @@
 
 
 <script>
-    let allProcessors = @Json.Serialize(ViewBag.Processors);
-    let allMotherboards = @Json.Serialize(ViewBag.Motherboards);
-    let allRams = @Json.Serialize(ViewBag.Rams);
+    let allProcessors = @Html.Raw(Json.Serialize(ViewBag.Processors));
+    let allMotherboards = @Html.Raw(Json.Serialize(ViewBag.Motherboards));
+    let allRams = @Html.Raw(Json.Serialize(ViewBag.Rams));
 
-    SelectMotherboards(allProcessors.$values, allMotherboards.$values)
-    SelectRams(allMotherboards.$values, allRams.$values)
+
+    SelectMotherboards(allProcessors, allMotherboards)
+    SelectRams(allMotherboards, allRams)
 </script>
 
 

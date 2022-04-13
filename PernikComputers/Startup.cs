@@ -47,10 +47,10 @@ namespace PernikComputers
 
             services.AddControllersWithViews();
             services.AddRazorPages();
-            services.AddMvc().AddJsonOptions(o =>
-            {
-                o.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
-            });
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
             services.AddTransient<IComponentService, ComponentsService>();
             services.AddTransient<IComputerService, ComputerService>();
             services.AddTransient<IEmployeeService, EmployeeService>();

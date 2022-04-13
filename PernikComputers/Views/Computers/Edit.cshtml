@@ -9,12 +9,12 @@
 <hr />
 <div class="text-center">
     @*<form asp-action="Restore" asp-controller="Computers" method="post">
-        <div>
-            <div class="mb-3">
-                <button type="submit" class="btn btn-danger">Restore price and image by default</button>
+            <div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-danger">Restore price and image by default</button>
+                </div>
             </div>
-        </div>
-    </form>*@
+        </form>*@
     <form asp-action="Edit" asp-controller="Computers" method="post">
         <div>
             <div class="d-inline-block w-130">
@@ -66,7 +66,7 @@
                 <label asp-for="ProcessorId" class="font-weight-bold"></label>
             </div>
             <div class="d-inline-block w-200">
-                <select asp-for="ProcessorId" class="form-control" asp-items="ViewBag.ProcessorId" onchange="SelectMotherboards(allProcessors.$values, allMotherboards.$values)"></select>
+                <select asp-for="ProcessorId" class="form-control" asp-items="ViewBag.ProcessorId" onchange="SelectMotherboards(allProcessors, allMotherboards)"></select>
             </div>
             <p><span asp-validation-for="ProcessorId" class="text-danger"></span></p>
         </div>
@@ -75,7 +75,7 @@
                 <label asp-for="MotherboardId" class="font-weight-bold"></label>
             </div>
             <div class="d-inline-block w-200">
-                <select asp-for="MotherboardId" class="form-control" onchange="SelectRams(allMotherboards.$values, allRams.$values)"></select>
+                <select asp-for="MotherboardId" class="form-control" onchange="SelectRams(allMotherboards, allRams)"></select>
             </div>
             <p><span asp-validation-for="MotherboardId" class="text-danger"></span></p>
         </div>
@@ -149,13 +149,14 @@
     </form>
 </div>
 
+
 <script>
     let allProcessors = @Json.Serialize(ViewBag.Processors);
     let allMotherboards = @Json.Serialize(ViewBag.Motherboards);
     let allRams = @Json.Serialize(ViewBag.Rams);
 
-    SelectMotherboards(allProcessors.$values, allMotherboards.$values)
-    SelectRams(allMotherboards.$values, allRams.$values)
+    SelectMotherboards(allProcessors, allMotherboards)
+    SelectRams(allMotherboards, allRams)
 </script>
 
 @section Scripts {
