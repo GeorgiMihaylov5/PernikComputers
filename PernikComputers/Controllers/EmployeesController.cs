@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using PernikComputers.Abstraction;
 using PernikComputers.Domain;
 using PernikComputers.Models;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -97,6 +98,7 @@ namespace PernikComputers.Controllers
         [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
+            ViewBag.Users = new List<string>(userManager.Users.Select(x => x.UserName));
             return View();
         }
 
@@ -105,6 +107,7 @@ namespace PernikComputers.Controllers
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Create(EmployeeCreateViewModel employee)
         {
+            ViewBag.Users = new List<string>(userManager.Users.Select(x => x.UserName));
             if (!ModelState.IsValid)
             {
                 return View(employee);

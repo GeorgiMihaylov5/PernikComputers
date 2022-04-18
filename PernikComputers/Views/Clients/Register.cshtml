@@ -9,7 +9,7 @@
 <div class="text-center">
     <div class="d-lg-inline-block align-top col-8" style="max-width: 419px">
         <h1 class="text-center mb-3">Register</h1>
-        <form asp-action="Register" onsubmit="return isUsernameFree()">
+        <form asp-action="Register" onsubmit="return isUsernameFree(users)">
             <div class="mb-2 icon-div-mw-3">
                 <span><i class="fa-solid fa-circle-user icon-width"></i></span>
                 <div class="d-inline-block icon-div-width-4">
@@ -74,26 +74,9 @@
         <img src="~/Images/registerImage.webp" width="400" height="400" />
     </div>
 </div>
-
-
 <script>
-    function isUsernameFree() {
-        let usernames = @Html.Raw(Json.Serialize(@ViewBag.Users));
-        let currentUsername = document.getElementById('username').value
-
-        for (var i = 0; i < usernames.length; i++) {
-            if (usernames[i] == currentUsername) {
-                let span = document.getElementById('usernameEror')
-                span.className = 'text-danger'
-                span.textContent = "User exist!"
-                return false
-            }
-        }
-        document.getElementById('usernameEror').className += ' d-none'
-        return true
-    }
+    let users = @Json.Serialize(ViewBag.Users);
 </script>
-
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

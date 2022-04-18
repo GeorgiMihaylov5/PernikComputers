@@ -63,6 +63,7 @@ namespace PernikComputers.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> Register(ClientCreateViewModel client)
         {
+            ViewBag.Users = new List<string>(userManager.Users.Select(x => x.UserName));
             if (!ModelState.IsValid)
             {
                 return View(client);

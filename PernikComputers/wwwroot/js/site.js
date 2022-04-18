@@ -49,3 +49,18 @@ function SelectRams(allMotherboards, allRams) {
         }
     }
 }
+
+function isUsernameFree(usernames) {
+    let currentUsername = document.getElementById('username').value
+
+    for (var i = 0; i < usernames.length; i++) {
+        if (usernames[i] == currentUsername) {
+            let span = document.getElementById('usernameEror')
+            span.className = 'text-danger'
+            span.textContent = "User exist!"
+            return false
+        }
+    }
+    document.getElementById('usernameEror').className += ' d-none'
+    return true
+}
