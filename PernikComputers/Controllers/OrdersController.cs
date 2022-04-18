@@ -40,7 +40,9 @@ namespace PernikComputers.Controllers
                     Status = x.Status.ToString(),
                     TotalPrice = (x.Count * x.OrderedPrice).ToString()
 
-                }).ToList();
+                }).OrderByDescending(x => x.Status == OrderStatus.Pending.ToString())
+                .ThenByDescending(x => x.Status == OrderStatus.Approved.ToString())
+                .ThenByDescending(x => x.Status == OrderStatus.Completed.ToString()).ToList();
 
             return View(orders);
         }
@@ -106,6 +108,74 @@ namespace PernikComputers.Controllers
 
                 }).ToList();
             return View("All", orders);
+        }
+        [Authorize]
+        public IActionResult Details(string id)
+        {
+            var order = service.GetOrder(id);
+
+            var detailsViewModel = new OrderDetailsViewModel()
+            {
+                Id = order.Id,
+                OrderedOn = order.OrderedOn.ToString("dd-MMM,yyyy hh:mm tt", CultureInfo.InvariantCulture),
+                ProductId = order.ProductId,
+                Manufacturer = order.Product.Manufacturer,
+                Model = order.Product.Model,
+                Category = order.Product.Category.ToString(),
+                Image = order.Product.Image,
+                Warranty = order.Product.Warranty.ToString(),
+                Barcode = order.Product.Barcode,
+                OrderedPrice = (order.OrderedPrice * order.Count).ToString(),
+                SinglePrice = order.OrderedPrice.ToString(),
+                CustomerId = order.CustomerId,
+                CustomerUsername = order.Customer.UserName,
+                Quantity = order.Count,
+                Status = order.Status.ToString(),
+                Notes = order.Notes
+            };
+
+            return View(detailsViewModel);
+        }
+        [Authorize(Roles = "Administrator,Employee")]
+        public IActionResult Edit(string id)
+        {
+            var order = service.GetOrder(id);
+
+            var viewModel = new OrderDetailsViewModel()
+            {
+                Id = order.Id,
+                OrderedOn = order.OrderedOn.ToString("dd-MMM,yyyy hh:mm tt", CultureInfo.InvariantCulture),
+                ProductId = order.ProductId,
+                Manufacturer = order.Product.Manufacturer,
+                Model = order.Product.Model,
+                Category = order.Product.Category.ToString(),
+                Image = order.Product.Image,
+                Warranty = order.Product.Warranty.ToString(),
+                Barcode = order.Product.Barcode,
+                OrderedPrice = (order.OrderedPrice * order.Count).ToString(),
+                SinglePrice = order.OrderedPrice.ToString(),
+                CustomerId = order.CustomerId,
+                CustomerUsername = order.Customer.UserName,
+                Quantity = order.Count,
+                Status = order.Status.ToString(),
+                Notes = order.Notes
+            };
+
+            return View(viewModel);
+        }
+        [Authorize(Roles = "Administrator,Employee")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(OrderDetailsViewModel editViewModel)
+        {
+            var status = (OrderStatus)Enum.Parse(typeof(OrderStatus), editViewModel.Status);
+            var isUpdated = service.Update(editViewModel.Id, status, editViewModel.Notes);
+
+            if (isUpdated)
+            {
+                return RedirectToAction("Details", new { editViewModel.Id });
+            }
+            return View();
         }
     }
 }

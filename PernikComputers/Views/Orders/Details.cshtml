@@ -1,0 +1,67 @@
+﻿@model OrderDetailsViewModel
+
+<div class="m-auto" style="width: 80%">
+    <div>
+        @*&#8470;*@
+        <h2 class="text-center">Order: @Model.Manufacturer @Model.Model</h2>
+    </div>
+    <hr />
+    <div class="row justify-content-between m-0">
+        <img src="@Model.Image" width="200" />
+
+        <div class="" style="max-width: 250px">
+            <h3 class="text-center">Notes</h3>
+            <div class="border border-primary rounded p-2" style="border-width: 2px !important">
+                @if (Model.Notes == null)
+                {
+                    <p>No Notes</p>
+                }
+                else
+                {
+                <p>@Model.Notes</p>
+                }
+            </div>
+        </div>
+
+        <div>
+            <div class="rounded bg-primary p-2 text-white">
+                <p>Ordered on: @Model.OrderedOn</p>
+                <p class="text-right">Status: <strong>@Model.Status</strong></p>
+            </div>
+            <p class="text-right m-2">See product <a class="font-italic" asp-action="Details" asp-controller="Products" asp-route-id="@Model.ProductId">here</a>.</p>
+        </div>
+    </div>
+
+    <div class="row justify-content-between m-0">
+        <div>
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <td>Category</td>
+                        <td>@Model.Category</td>
+                    </tr>
+                    <tr>
+                        <td>Manufacturer</td>
+                        <td>@Model.Manufacturer</td>
+                    </tr>
+                    <tr>
+                        <td>Model</td>
+                        <td>@Model.Model</td>
+                    </tr>
+                    <tr>
+                        <td>Warranty</td>
+                        <td>@Model.Warranty</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="d-flex align-items-end justify-content-md-center" style="width: 265px; ">
+            <div class="text-center" style="width: 165px; margin-left: 10px; margin-bottom: 10px;">
+                <p>Count: @Model.Quantity</p>
+                <p>Single price: @Model.SinglePrice</p>
+                <hr />
+                <p class="font-weight-bold">Total price: @Model.OrderedPrice</p>
+            </div>
+        </div>
+    </div>
+</div>
