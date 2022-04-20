@@ -4,7 +4,6 @@
     {
         Computer,
         Laptop,
-        Periphery,
         Accessories,
         Processor,
         Motherboard,
@@ -12,6 +11,9 @@
         VideoCard,
         PowerSupply,
         Memory,
-        ComputerCase
+        ComputerCase,
+        Monitor,
+        Keyboard,
+        Mouse
     }
 }
