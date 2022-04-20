@@ -19,16 +19,16 @@ namespace PernikComputers.Service
 
         public dynamic GetProduct(string id)
         {
-            return context.Products.Find(id);
+            return context.Products.Where(x => x.IsRemoved != true).FirstOrDefault(x => x.Id == id);
         }
 
         public List<Product> GetAllProducts()
         {
-            return context.Products.ToList();
+            return context.Products.Where(x => x.IsRemoved != true).ToList();
         }
         public List<T> GetProducts<T>() where T : class
         {
-            return context.Products.OfType<T>().ToList();
+            return context.Products.Where(x => x.IsRemoved != true).OfType<T>().ToList();
         }
 
         public bool MakeDiscount(string id, int discount)
@@ -73,7 +73,8 @@ namespace PernikComputers.Service
             {
                 return false;
             }
-            context.Products.Remove(item);
+            item.IsRemoved = true;
+            context.Products.Update(item);
 
             return context.SaveChanges() != 0;
         }

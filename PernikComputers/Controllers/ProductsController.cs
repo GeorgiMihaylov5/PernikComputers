@@ -139,6 +139,11 @@ namespace PernikComputers.Controllers
         {
             Product x = service.GetProduct(id);
 
+            if (x == null)
+            {
+                return NoContent();
+            }
+
             ProductDetailsViewModel detailsViewModel = new ProductDetailsViewModel
             {
                 Id = x.Id,

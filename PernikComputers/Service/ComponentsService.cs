@@ -185,7 +185,7 @@ namespace PernikComputers.Service
         {
             return context.Products.Where(x => x.Category != Category.Computer &&
             x.Category != Category.Laptop && x.Category != Category.Periphery &&
-            x.Category != Category.Accessories).ToList();
+            x.Category != Category.Accessories && x.IsRemoved != true).ToList();
         }
         
         //------------------Update---------------

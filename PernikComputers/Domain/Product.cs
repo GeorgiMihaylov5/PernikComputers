@@ -16,6 +16,7 @@ namespace PernikComputers.Domain
         public decimal Discount { get; set; }
         public Category Category { get; set; }
         public int Quantity { get; set; }
+        public bool IsRemoved { get; set; }
         public string Image { get; set; }
         [NotMapped()]
         public virtual IEnumerable<string> FullDescription { get; }
