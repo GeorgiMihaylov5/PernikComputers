@@ -23,7 +23,7 @@
     }
 
     .filter-form button {
-        width: 15%;
+        width: 100px;
         padding: 8px;
         background: #2196F3;
         color: white;
@@ -85,6 +85,7 @@
 #products ul li:last-child {
     margin-bottom: 10px !important;
 }
+
 /*---------------------Details-----------------------*/
 
 #productTitle {

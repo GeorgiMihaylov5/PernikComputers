@@ -10,21 +10,49 @@
 <div class="div-m-top">
     <div class="d-lg-inline-block align-top col-3" id="filter-left">
         <form class="filter-form row" asp-action="Index" method="get">
+            <div class="col-7 p-0 mb-3 w-100">
+                <h4 class="filter-titles">Filters</h4>
+                <div class="d-block">
+                    <input type="checkbox" value="Promotion" />
+                    <label>Promotions</label>
+                </div>
+                <div class="d-block">
+                    <input type="checkbox" value="topProducts" />
+                    <label>Top Products</label>
+                </div>
+                <div class="d-block">
+                    <input type="checkbox" value="newProducts" />
+                    <label>New Products</label>
+                </div>
+            </div>
             <div class="" id="filter-price">
                 <h4 class="filter-titles">Price</h4>
                 <input type="number" placeholder="Min price" min="0" name="minPrice" />
                 <span id="filter-dash">-</span>
                 <input type="number" placeholder="Max price" min="0" name="maxPrice" />
-                <button type="submit"><i class="fa fa-search"></i></button>
             </div>
-            <div class="" id="filter-categories">
-                @* <select>
-                       @foreach(var item in ViewBag.DropDownCategories)
-                        {
-                            <option>@item</option>
-                        }
-                    </select>*@
-                <h4 class="filter-titles">Categories</h4>
+            <div class="col-7 p-0 mb-3">
+                <h4 class="filter-titles">Manufacturer</h4>
+                @foreach (var item in ViewBag.Manufacturers)
+                {
+                    <div class="d-block">
+                        <input type="checkbox" value="@item" />
+                        <label for="@item">@item</label>
+                    </div>
+                }
+            </div>
+            <div class="col-7 p-0 mb-3">
+                <h4 class="filter-titles">Model</h4>
+                @foreach (var item in ViewBag.Models)
+                {
+                    <div class="d-block">
+                        <input type="checkbox" value="@item" />
+                        <label for="@item">@item</label>
+                    </div>
+                }
+            </div>
+            <div class="d-block col-7 text-center p-0 mb-3">
+                <button type="submit" class="btn"><i class="fa fa-search"></i></button>
             </div>
         </form>
     </div>

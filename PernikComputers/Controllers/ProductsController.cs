@@ -33,6 +33,9 @@ namespace PernikComputers.Controllers
                    Quantity = x.Quantity
                }).ToList();
 
+            ViewBag.Manufacturers = productVm.Select(x => x.Manufacturer).Distinct().ToList();
+            ViewBag.Models = productVm.Select(x => x.Model).ToList();
+
             return View(productVm);
         }
         [Authorize(Roles = "Administrator")]
@@ -125,6 +128,9 @@ namespace PernikComputers.Controllers
                   Description = x.PartialDescription,
                   Quantity = x.Quantity
               }).ToList();
+
+            ViewBag.Manufacturers = productVm.Select(x => x.Manufacturer).Distinct().ToList();
+            ViewBag.Models = productVm.Select(x => x.Model).ToList();
 
             return View("All", productVm);
         }

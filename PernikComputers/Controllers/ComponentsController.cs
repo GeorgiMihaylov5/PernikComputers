@@ -21,6 +21,29 @@ namespace PernikComputers.Controllers
             this.service = _service;
             this.productService = productService;
         }
+        [AllowAnonymous]
+        public IActionResult All()
+        {
+            List<ProductAllViewModel> componentVM = service.GetComponents()
+               .Select(x => new ProductAllViewModel
+               {
+                   Id = x.Id,
+                   Manufacturer = x.Manufacturer,
+                   Model = x.Model,
+                   Price = x.Price,
+                   Discount = x.Discount,
+                   Image = x.Image,
+                   Category = x.Category,
+                   Description = x.PartialDescription,
+                   Quantity = x.Quantity
+               }).ToList();
+
+
+            ViewBag.Manufacturers = componentVM.Select(x => x.Manufacturer).Distinct().ToList();
+            ViewBag.Models = componentVM.Select(x => x.Model).ToList();
+
+            return View("~/Views/Products/All.cshtml", componentVM);
+        }
         //--------Processors---------
         [AllowAnonymous]
         public IActionResult AllProcessors()
@@ -38,6 +61,10 @@ namespace PernikComputers.Controllers
                     Description = x.PartialDescription,
                     Quantity = x.Quantity
                 }).ToList();
+
+
+            ViewBag.Manufacturers = processorVM.Select(x => x.Manufacturer).Distinct().ToList();
+            ViewBag.Models = processorVM.Select(x => x.Model).ToList();
 
             return View("~/Views/Products/All.cshtml", processorVM);
         }
@@ -125,6 +152,9 @@ namespace PernikComputers.Controllers
                     Quantity = x.Quantity
                 }).ToList();
 
+            ViewBag.Manufacturers = motherboardVM.Select(x => x.Manufacturer).Distinct().ToList();
+            ViewBag.Models = motherboardVM.Select(x => x.Model).ToList();
+
             return View("~/Views/Products/All.cshtml", motherboardVM);
         }
 
@@ -211,6 +241,8 @@ namespace PernikComputers.Controllers
                     Quantity = x.Quantity
                 }).ToList();
 
+            ViewBag.Manufacturers = ramVM.Select(x => x.Manufacturer).Distinct().ToList();
+            ViewBag.Models = ramVM.Select(x => x.Model).ToList();
 
             return View("~/Views/Products/All.cshtml", ramVM);
         }
@@ -296,6 +328,8 @@ namespace PernikComputers.Controllers
                     Quantity = x.Quantity
                 }).ToList();
 
+            ViewBag.Manufacturers = videoCardVM.Select(x => x.Manufacturer).Distinct().ToList();
+            ViewBag.Models = videoCardVM.Select(x => x.Model).ToList();
 
             return View("~/Views/Products/All.cshtml", videoCardVM);
         }
@@ -374,7 +408,7 @@ namespace PernikComputers.Controllers
         [AllowAnonymous]
         public IActionResult AllPowerSupplies()
         {
-            List<ProductAllViewModel>powerSupplyVM = productService.GetProducts<PowerSupply>()
+            List<ProductAllViewModel> powerSupplyVM = productService.GetProducts<PowerSupply>()
                 .Select(x => new ProductAllViewModel
                 {
                     Id = x.Id,
@@ -388,6 +422,8 @@ namespace PernikComputers.Controllers
                     Quantity = x.Quantity
                 }).ToList();
 
+            ViewBag.Manufacturers = powerSupplyVM.Select(x => x.Manufacturer).Distinct().ToList();
+            ViewBag.Models = powerSupplyVM.Select(x => x.Model).ToList();
 
             return View("~/Views/Products/All.cshtml", powerSupplyVM);
         }
@@ -472,6 +508,8 @@ namespace PernikComputers.Controllers
                     Quantity = x.Quantity
                 }).ToList();
 
+            ViewBag.Manufacturers = memoryVM.Select(x => x.Manufacturer).Distinct().ToList();
+            ViewBag.Models = memoryVM.Select(x => x.Model).ToList();
 
             return View("~/Views/Products/All.cshtml", memoryVM);
         }
@@ -558,6 +596,8 @@ namespace PernikComputers.Controllers
                     Quantity = x.Quantity
                 }).ToList();
 
+            ViewBag.Manufacturers = computerCaseVM.Select(x => x.Manufacturer).Distinct().ToList();
+            ViewBag.Models = computerCaseVM.Select(x => x.Model).ToList();
 
             return View("~/Views/Products/All.cshtml", computerCaseVM);
         }

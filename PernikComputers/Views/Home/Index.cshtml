@@ -15,12 +15,16 @@
     <h3>See Our Products</h3>
 
     <div class="col-3 d-inline-block">
-        <img src="~/Images/computerProduct.webp" width="200" height="200" class="img-fluid"/>
-        <p class="font-weight-bolder">Computers</p>
+        <a asp-controller="Computers" asp-action="All" class="text-decoration-none">
+            <img src="~/Images/computerProduct.webp" width="200" height="200" class="img-fluid" />
+            <p class="font-weight-bolder text-dark" >Computers</p>
+        </a>
     </div>
     <div class="col-3 d-inline-block">
-        <img src="~/Images/processorProduct.webp"  width="200" height="200" class="img-fluid"/>
-        <p class="font-weight-bolder">Components</p>
+        <a asp-controller="Components" asp-action="All" class="text-decoration-none">
+            <img src="~/Images/processorProduct.webp" width="200" height="200" class="img-fluid" />
+            <p class="font-weight-bolder text-dark">Components</p>
+        </a>
     </div>
     <div class="col-3 d-inline-block">
         <img src="~/Images/keyboardProduct.png"  width="200" height="200" class="img-fluid"/>

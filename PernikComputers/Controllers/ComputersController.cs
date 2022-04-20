@@ -25,7 +25,7 @@ namespace PernikComputers.Controllers
 
         public IActionResult All()
         {
-            List<ProductAllViewModel> processorVM = productService.GetProducts<Computer>()
+            List<ProductAllViewModel> computerViewModel = productService.GetProducts<Computer>()
                 .Select(x => new ProductAllViewModel
                 {
                     Id = x.Id,
@@ -39,8 +39,10 @@ namespace PernikComputers.Controllers
                     Quantity = x.Quantity
                 }).ToList();
 
+            ViewBag.Manufacturers = computerViewModel.Select(x => x.Manufacturer).Distinct().ToList();
+            ViewBag.Models = computerViewModel.Select(x => x.Model).ToList();
 
-            return View("~/Views/Products/All.cshtml", processorVM);
+            return View("~/Views/Products/All.cshtml", computerViewModel);
             //return RedirectToPage("All","Components", processorVM);
         }
 
