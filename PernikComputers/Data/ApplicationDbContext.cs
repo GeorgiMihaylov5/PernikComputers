@@ -24,28 +24,18 @@ namespace PernikComputers.Data
         public DbSet<ComputerCase> ComputerCases { get; set; }
 
 
-        public DbSet<AppProduct> AppProducts { get; set; }
+        public DbSet<Accessory> AppProducts { get; set; }
         public DbSet<Computer> Computers { get; set; }
+        public DbSet<Monitor> Monitors { get; set; }
+        public DbSet<Laptop> Laptops { get; set; }
+        public DbSet<Keyboard> Keyboards { get; set; }
+        public DbSet<Mouse> Mouses { get; set; }
+        public DbSet<Accessory> Accessories { get; set; }
+
 
         public DbSet<Order> Orders { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<PernikComputers.Models.ProductPromotionViewModel> ProductPromotionViewModel { get; set; }
-
-        //protected override void OnModelCreating(ModelBuilder builder)
-        //{
-        //    builder.Entity<Computer>().HasKey(x => new
-        //    {
-        //        x.ProcessorId,
-        //        x.MotherboardId,
-        //        x.RamId,
-        //        x.VideoCardId,
-        //        x.PowerSupplyId,
-        //        x.MemoryId,
-        //        x.ComputerCaseId
-        //    });
-        //    base.OnModelCreating(builder);
-        //}
     }
 }
