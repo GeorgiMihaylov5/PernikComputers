@@ -147,5 +147,92 @@ namespace PernikComputers.Controllers
             }
             return View();
         }
+
+        public IActionResult EditMonitor(string id)
+        {
+            Monitor item = productService.GetProduct(id);
+
+            if (item == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new MonitorCreateViewModel()
+            {
+                Id = item.Id,
+                Barcode = item.Barcode,
+                Manufacturer = item.Manufacturer,
+                Model = item.Model,
+                Price = item.Price,
+                Warranty = item.Warranty,
+                Quantity = item.Quantity,
+                Image = item.Image,
+                Size = item.Size,
+                Resolution = item.Resolution,
+                ReactionTime = item.ReactionTime,
+                RefreshRate = item.RefreshRate,
+                TypeDisplay = item.TypeDisplay,
+            };
+
+            return View(viewModel);
+        }
+        public IActionResult EditKeyboard(string id)
+        {
+            Keyboard item = productService.GetProduct(id);
+
+            if (item == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new KeyboardCreateViewModel()
+            {
+                Id = item.Id,
+                Barcode = item.Barcode,
+                Manufacturer = item.Manufacturer,
+                Model = item.Model,
+                Price = item.Price,
+                Warranty = item.Warranty,
+                Quantity = item.Quantity,
+                Image = item.Image,
+                ConnectivityTechnology = item.ConnectivityTechnology,
+                KeysCount = item.KeysCount,
+                Backlight = item.Backlight,
+                CableLength = item.CableLength,
+                Size = item.Size,
+            };
+
+            return View(viewModel);
+        }
+        public IActionResult EditMouse(string id)
+        {
+            Mouse item = productService.GetProduct(id);
+
+            if (item == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new MouseCreateViewModel()
+            {
+                Id = item.Id,
+                Barcode = item.Barcode,
+                Manufacturer = item.Manufacturer,
+                Model = item.Model,
+                Price = item.Price,
+                Warranty = item.Warranty,
+                Quantity = item.Quantity,
+                Image = item.Image,
+                ConnectivityTechnology = item.ConnectivityTechnology,
+                KeysCount = item.KeysCount,
+                Backlight = item.Backlight,
+                CableLength = item.CableLength,
+                Size = item.Size,
+                Sensitivity = item.Sensitivity,
+                Weight = item.Weight,
+            };
+
+            return View(viewModel);
+        }
     }
 }
