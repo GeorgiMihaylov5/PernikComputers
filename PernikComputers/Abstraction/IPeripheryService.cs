@@ -7,9 +7,9 @@ namespace PernikComputers.Abstraction
     public interface IPeripheryService
     {
         public List<Product> GetPeripheries();
-        public bool CreateMonitor(int size, string resolution, TypeDisplay typeDisplay, int reactionTime, int refreshRate,
+        public bool CreateMonitor(double size, string resolution, TypeDisplay typeDisplay, int reactionTime, int refreshRate,
             string barcode, string manufacturer, string model, int warranty, decimal price, int quantity, string image);
-        public bool UpdateMonitor(string id, int size, string resolution, TypeDisplay typeDisplay, int reactionTime, int refreshRate,
+        public bool UpdateMonitor(string id, double size, string resolution, TypeDisplay typeDisplay, int reactionTime, int refreshRate,
             string barcode, string manufacturer, string model, int warranty, decimal price, int quantity, string image);
         public bool CreateKeyboard(int keysCount, bool backlight, double cableLength, string size,
             string barcode, string manufacturer, string model, int warranty, decimal price, int quantity, string image);

@@ -2,6 +2,8 @@
 using PernikComputers.Data;
 using PernikComputers.Domain;
 using PernikComputers.Domain.Enum;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace PernikComputers.Service
 {
@@ -34,6 +36,11 @@ namespace PernikComputers.Service
             return context.SaveChanges() != 0;
         }
 
+        public List<Product> GetAccessories()
+        {
+            return context.Products.Where(x => x.Category == Category.Accessories).ToList();
+        }
+
         public bool UpdateAccessory(string id, string typeAccessory, string descripton, string barcode, string manufacturer, string model, int warranty, decimal price, int quantity, string image)
         {
             var item = context.Accessories.Find(id);
@@ -47,7 +54,6 @@ namespace PernikComputers.Service
             item.Barcode = barcode;
             item.Manufacturer = manufacturer;
             item.Model = model;
-            item.Category = Category.Accessories;
             item.Price = price;
             item.Warranty = warranty;
             item.Quantity = quantity;

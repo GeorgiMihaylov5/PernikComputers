@@ -5,7 +5,7 @@ namespace PernikComputers.Domain
 {
     public class Monitor : Product
     {
-        public int Size { get; set; }
+        public double Size { get; set; }
         public string Resolution { get; set; }
         public TypeDisplay TypeDisplay { get; set; }
         public int ReactionTime { get; set; }

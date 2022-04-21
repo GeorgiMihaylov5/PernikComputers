@@ -3,7 +3,6 @@
     public enum ChipManufacturer
     {
         Nvidia,
-        AMD,
-        Intel
+        AMD
     }
 }
