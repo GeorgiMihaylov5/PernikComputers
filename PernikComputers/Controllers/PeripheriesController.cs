@@ -234,5 +234,53 @@ namespace PernikComputers.Controllers
 
             return View(viewModel);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditMonitor(string id, MonitorCreateViewModel createVm)
+        {
+            if (ModelState.IsValid)
+            {
+                var isUpdated = service.UpdateMonitor(createVm.Id, createVm.Size, createVm.Resolution, createVm.TypeDisplay, createVm.ReactionTime, createVm.RefreshRate,
+                    createVm.Barcode, createVm.Manufacturer, createVm.Model, createVm.Warranty, createVm.Price, createVm.Quantity, createVm.Image);
+
+                if (isUpdated)
+                {
+                    return RedirectToAction("AllTable", "Products");
+                }
+            }
+            return View(createVm);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditKeyboard(string id, KeyboardCreateViewModel createVm)
+        {
+            if (ModelState.IsValid)
+            {
+                var isUpdated = service.UpdateKeyboard(createVm.Id, createVm.KeysCount, createVm.Backlight, createVm.CableLength, createVm.Size,
+                    createVm.Barcode, createVm.Manufacturer, createVm.Model, createVm.Warranty, createVm.Price, createVm.Quantity, createVm.Image);
+
+                if (isUpdated)
+                {
+                    return RedirectToAction("AllTable", "Products");
+                }
+            }
+            return View(createVm);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditMouse(string id, Mouse createVm)
+        {
+            if (ModelState.IsValid)
+            {
+                var isUpdated = service.UpdateMouse(createVm.Id, createVm.KeysCount, createVm.Backlight, createVm.CableLength, createVm.Size, createVm.Sensitivity, createVm.Weight,
+                    createVm.Barcode, createVm.Manufacturer, createVm.Model, createVm.Warranty, createVm.Price, createVm.Quantity, createVm.Image);
+
+                if (isUpdated)
+                {
+                    return RedirectToAction("AllTable", "Products");
+                }
+            }
+            return View(createVm);
+        }
     }
 }

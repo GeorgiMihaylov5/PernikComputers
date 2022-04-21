@@ -70,8 +70,25 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    var controller = item.Category == Category.Computer ? "Computers" : "Components";
-                    var edit = item.Category == Category.Computer ? "Edit" : $"Edit{item.Category}";
+                    var controller = "Components";
+
+                    if (item.Category == Category.Accessories)
+                    {
+                        controller = "Accessories";
+                    }
+                    else if (item.Category == Category.Laptop)
+                    {
+                        controller = "Laptops";
+                    }
+                    else if (item.Category == Category.Computer)
+                    {
+                        controller = "Computers";
+                    }
+                    else if (item.Category == Category.Monitor || item.Category == Category.Mouse || item.Category == Category.Keyboard)
+                    {
+                        controller = "Peripheries";
+                    }
+                    var edit = $"Edit{item.Category}";
 
                     <tr>
                     <td class="align-middle">

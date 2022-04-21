@@ -43,7 +43,7 @@ namespace PernikComputers.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        public IActionResult Create()
+        public IActionResult CreateLaptop()
         {
             return View();
         }
@@ -51,7 +51,7 @@ namespace PernikComputers.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
-        public IActionResult Create(LaptopCreateViewModel createVm)
+        public IActionResult CreateLaptop(LaptopCreateViewModel createVm)
         {
             if (ModelState.IsValid)
             {
@@ -69,7 +69,7 @@ namespace PernikComputers.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        public IActionResult Edit(string id)
+        public IActionResult EditLaptop(string id)
         {
             Laptop item = productService.GetProduct(id);
 
@@ -99,14 +99,14 @@ namespace PernikComputers.Controllers
                 Color = item.Color
             };
 
-            return View("Edit", editModel);
+            return View("EditLaptop", editModel);
 
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
-        public IActionResult Edit(string id, LaptopCreateViewModel createVm)
+        public IActionResult EditLaptop(string id, LaptopCreateViewModel createVm)
         {
             if (ModelState.IsValid)
             {

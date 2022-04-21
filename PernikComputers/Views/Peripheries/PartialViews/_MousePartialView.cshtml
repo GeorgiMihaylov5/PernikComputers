@@ -1,0 +1,128 @@
+﻿@model PernikComputers.Models.MouseCreateViewModel
+
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="Barcode" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <input asp-for="Barcode" class="form-control" />
+    </div>
+    <p><span asp-validation-for="Barcode" class="text-danger"></span></p>
+</div>
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="Manufacturer" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <input asp-for="Manufacturer" class="form-control" />
+    </div>
+    <p><span asp-validation-for="Manufacturer" class="text-danger"></span></p>
+</div>
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="Model" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <input asp-for="Model" class="form-control" />
+    </div>
+    <p><span asp-validation-for="Model" class="text-danger"></span></p>
+</div>
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="Price" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <input asp-for="Price" class="form-control" />
+    </div>
+    <p><span asp-validation-for="Price" class="text-danger"></span></p>
+</div>
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="Warranty" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <input asp-for="Warranty" class="form-control" />
+    </div>
+    <p><span asp-validation-for="Warranty" class="text-danger"></span></p>
+</div>
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="ConnectivityTechnology" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <select asp-for="ConnectivityTechnology" class="form-control" asp-items="Html.GetEnumSelectList<ConnectivityTechnology>()"></select>
+    </div>
+    <p><span asp-validation-for="ConnectivityTechnology" class="text-danger"></span></p>
+</div>
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="KeysCount" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <input asp-for="KeysCount" class="form-control" />
+    </div>
+    <p><span asp-validation-for="KeysCount" class="text-danger"></span></p>
+</div>
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="Backlight" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <input asp-for="Backlight" class="form-control" />
+    </div>
+    <p><span asp-validation-for="Backlight" class="text-danger"></span></p>
+</div>
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="Size" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <input asp-for="Size" class="form-control" />
+    </div>
+    <p><span asp-validation-for="Size" class="text-danger"></span></p>
+</div>
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="CableLength" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <input asp-for="CableLength" class="form-control" />
+    </div>
+    <p><span asp-validation-for="CableLength" class="text-danger"></span></p>
+</div>
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="Sensitivity" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <input asp-for="Sensitivity" class="form-control" />
+    </div>
+    <p><span asp-validation-for="Sensitivity" class="text-danger"></span></p>
+</div>
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="Weight" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <input asp-for="Weight" class="form-control" />
+    </div>
+    <p><span asp-validation-for="Weight" class="text-danger"></span></p>
+</div>
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="Quantity" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <input asp-for="Quantity" class="form-control" />
+    </div>
+    <p><span asp-validation-for="Quantity" class="text-danger"></span></p>
+</div>
+<div>
+    <div class="d-inline-block w-130">
+        <label asp-for="Image" class="font-weight-bold"></label>
+    </div>
+    <div class="d-inline-block w-200">
+        <input asp-for="Image" class="form-control" />
+    </div>
+    <p><span asp-validation-for="Image" class="text-danger"></span></p>
+</div>

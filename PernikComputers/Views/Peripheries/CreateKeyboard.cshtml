@@ -1,0 +1,22 @@
+﻿@model PernikComputers.Models.KeyboardCreateViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1 class="text-center">Create Keyboard</h1>
+<hr />
+<div>
+    <form asp-action="CreateKeyboard" class="text-center">
+        @await Html.PartialAsync("PartialViews/_KeyboardPartialView.cshtml", Model)
+        <div class="form-group mt-4">
+            <button type="submit" class="btn-radius btn btn-outline-primary btn-lg">CREATE</button>
+            <a asp-action="AllTable" asp-controller="Products" class="mt-1 ml-5 d-block">Back to products</a>
+        </div>
+    </form>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

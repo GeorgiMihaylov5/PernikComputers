@@ -22,11 +22,14 @@ namespace PernikComputers.Models
         [Range(1, int.MaxValue, ErrorMessage = "Price must be a positive number.")]
         public decimal Price { get; set; }
         [Required]
+        [Display(Name = "Technology")]
         public ConnectivityTechnology ConnectivityTechnology { get; set; }
+        [Required]
+        [Display(Name = "Keys Count")]
         public int KeysCount { get; set; }
         [Required]
         public bool Backlight { get; set; }
-        [Required]
+        [Display(Name = "Cable Length")]
         public double CableLength { get; set; }
         [Required]
         public string Size { get; set; }

@@ -47,7 +47,7 @@ namespace PernikComputers.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        public IActionResult Create()
+        public IActionResult CreateComputer()
         {
             ViewBag.Processors = productService.GetProducts<Processor>();
             ViewBag.Motherboards = productService.GetProducts<Motherboard>();
@@ -65,7 +65,7 @@ namespace PernikComputers.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
-        public IActionResult Create(ComputerCreateViewModel createVm)
+        public IActionResult CreateComputer(ComputerCreateViewModel createVm)
         {
             try
             {
@@ -86,7 +86,7 @@ namespace PernikComputers.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        public IActionResult Edit(string id)
+        public IActionResult EditComputer(string id)
         {
             Computer item = productService.GetProduct(id);
 
@@ -124,14 +124,14 @@ namespace PernikComputers.Controllers
             ViewData["MemoryId"] = new SelectList(productService.GetProducts<Memory>(), "Id", "Model");
             ViewData["ComputerCaseId"] = new SelectList(productService.GetProducts<ComputerCase>(), "Id", "Model");
 
-            return View("Edit", editModel);
+            return View("EditComputer", editModel);
 
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
-        public IActionResult Edit(string id, ComputerCreateViewModel createVm)
+        public IActionResult EditComputer(string id, ComputerCreateViewModel createVm)
         {
             if (ModelState.IsValid)
             {
@@ -158,7 +158,7 @@ namespace PernikComputers.Controllers
                 computer.ComputerCase.Price;
             computer.Image = computer.ComputerCase.Image;
 
-            return View("Edit", computer);
+            return View("EditComputer", computer);
         }
     }
 }

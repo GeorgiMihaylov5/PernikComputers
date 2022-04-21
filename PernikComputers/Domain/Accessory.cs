@@ -13,12 +13,13 @@ namespace PernikComputers.Domain
             => new List<string>()
             {
                 $"Type: {this.TypeAccessory}",
-                $"Warranty: {this.Warranty} months"
-            }.Concat(Description.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries));
+                $"Warranty: {this.Warranty} months",
+                $"Other: {Description}"
+            };
 
         public override IEnumerable<string> PartialDescription
              => new List<string>()
-            {
+             {
                 $"Type: {this.TypeAccessory}",
                 $"Warranty: {this.Warranty} months"
              };

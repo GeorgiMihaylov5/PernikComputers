@@ -44,7 +44,7 @@ namespace PernikComputers.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        public IActionResult Create()
+        public IActionResult CreateAccessory()
         {
             return View();
         }
@@ -52,7 +52,7 @@ namespace PernikComputers.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
-        public IActionResult Create(AccessoryCreateViewModel createVm)
+        public IActionResult CreateAccessory(AccessoryCreateViewModel createVm)
         {
             if (ModelState.IsValid)
             {
@@ -68,7 +68,7 @@ namespace PernikComputers.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        public IActionResult Edit(string id)
+        public IActionResult EditAccessory(string id)
         {
             Accessory item = productService.GetProduct(id);
 
@@ -97,7 +97,7 @@ namespace PernikComputers.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
-        public IActionResult Edit(string id, AccessoryCreateViewModel createVm)
+        public IActionResult EditAccessory(string id, AccessoryCreateViewModel createVm)
         {
             if (ModelState.IsValid)
             {
