@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<PernikComputers.Models.EmployeeListingModel>
 
 @{
-    ViewData["Title"] = "All";
+    ViewData["Title"] = "Employees";
 }
 
  <div class="d-lg-inline-block align-top col-3" id="filter-left">
@@ -36,7 +36,7 @@
                          @Html.DisplayNameFor(model => model.JobTitle)
                      </th>
                      <th></th>
-                     <th></th>
+                     @*<th></th>*@
                  </tr>
              </thead>
              <tbody>
@@ -81,12 +81,12 @@
                                  </form>
                              }
                          </td>
-                         <td style="padding: 7px">
+                         @*<td style="padding: 7px">
                              <form asp-action="Delete" asp-controller="Employees" method="post">
                                  <input type="hidden" name="id" value="@item.Id" />
                                  <button type="submit" class="btn text-danger"><i class="bi bi-trash-fill"></i></button>
                              </form>
-                         </td>
+                         </td>*@
                      </tr>
                  }
              </tbody>

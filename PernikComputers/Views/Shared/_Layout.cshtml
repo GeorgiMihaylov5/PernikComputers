@@ -14,7 +14,7 @@
     <header>
         <nav class="navbar navbar-expand-md navbar-toggleable-md navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand font-weight-bolder" asp-area="" asp-controller="Home" asp-action="Index">PERNIK <i class="fa-solid fa-computer" style="color: #2196f3"></i></a>
+                <a class="navbar-brand font-weight-bolder" asp-area="" asp-controller="Clients" asp-action="Index">PERNIK <i class="fa-solid fa-computer" style="color: #2196f3"></i></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -39,31 +39,31 @@
                                        <a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="All">All Products</a>
                                    </li>
                                    <li>
-                                       <a class="dropdown-item">
+                                       <a class="dropdown-item" asp-controller="Components" asp-action="All">
                                            Components <i class="fa-solid fa-caret-right"></i>
                                        </a>
                                        <ul class="dropdown-menu dropdown-submenu">
                                            <li class="nav-item">
                                                <a class="dropdown-item" asp-area="" asp-controller="Components" asp-action="AllProcessors">Processors</a>
                                            </li>
-                                             <li class="nav-item">
-                                                <a class="dropdown-item" asp-area="" asp-controller="Components" asp-action="AllMotherboards">Motherboards</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="dropdown-item" asp-area="" asp-controller="Components" asp-action="AllRams">Rams</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="dropdown-item" asp-area="" asp-controller="Components" asp-action="AllVideoCards">Video Cards</a>
-                                            </li>
-                                              <li class="nav-item">
-                                                <a class="dropdown-item" asp-area="" asp-controller="Components" asp-action="AllPowerSupplies">Power Supplies</a>
-                                            </li>
-                                              <li class="nav-item">
-                                                <a class="dropdown-item" asp-area="" asp-controller="Components" asp-action="AllMemories">Memories</a>
-                                            </li>
-                                              <li class="nav-item">
-                                                <a class="dropdown-item" asp-area="" asp-controller="Components" asp-action="AllComputerCases">Computer Cases</a>
-                                            </li>
+                                           <li class="nav-item">
+                                               <a class="dropdown-item" asp-area="" asp-controller="Components" asp-action="AllMotherboards">Motherboards</a>
+                                           </li>
+                                           <li class="nav-item">
+                                               <a class="dropdown-item" asp-area="" asp-controller="Components" asp-action="AllRams">Rams</a>
+                                           </li>
+                                           <li class="nav-item">
+                                               <a class="dropdown-item" asp-area="" asp-controller="Components" asp-action="AllVideoCards">Video Cards</a>
+                                           </li>
+                                           <li class="nav-item">
+                                               <a class="dropdown-item" asp-area="" asp-controller="Components" asp-action="AllPowerSupplies">Power Supplies</a>
+                                           </li>
+                                           <li class="nav-item">
+                                               <a class="dropdown-item" asp-area="" asp-controller="Components" asp-action="AllMemories">Memories</a>
+                                           </li>
+                                           <li class="nav-item">
+                                               <a class="dropdown-item" asp-area="" asp-controller="Components" asp-action="AllComputerCases">Computer Cases</a>
+                                           </li>
                                        </ul>
                                    </li>
                                    <li>
@@ -74,11 +74,30 @@
                                            <li>
                                                <a class="dropdown-item" asp-area="" asp-controller="Computers" asp-action="All">Computers</a>
                                            </li>
-                                               <li>
-                                                   <a class="dropdown-item" href="#">Laptops</a>
-                                               </li>
+                                           <li>
+                                               <a class="dropdown-item" asp-area="" asp-controller="Laptops" asp-action="All">Laptops</a>
+                                           </li>
 
                                        </ul>
+                                   </li>
+                                   <li>
+                                       <a class="dropdown-item" asp-controller="Peripheries" asp-action="All">
+                                           Peripheries <i class="fa-solid fa-caret-right"></i>
+                                       </a>
+                                       <ul class="dropdown-menu dropdown-submenu">
+                                           <li>
+                                               <a class="dropdown-item" asp-area="" asp-controller="Peripheries" asp-action="AllMonitors">Monitors</a>
+                                           </li>
+                                           <li>
+                                               <a class="dropdown-item" asp-area="" asp-controller="Peripheries" asp-action="AllKeyboards">Keyboards</a>
+                                           </li>
+                                           <li>
+                                               <a class="dropdown-item" asp-area="" asp-controller="Peripheries" asp-action="AllMouses">Mouses</a>
+                                           </li>
+                                       </ul>
+                                   </li>
+                                   <li>
+                                       <a class="dropdown-item" asp-area="" asp-controller="Accessories" asp-action="All">Accessories</a>
                                    </li>
                                </ul>
                            </div>

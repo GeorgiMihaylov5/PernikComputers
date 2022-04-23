@@ -22,6 +22,28 @@ namespace PernikComputers.Controllers
             this.productService = productService;
         }
         [AllowAnonymous]
+        public IActionResult All()
+        {
+            List<ProductAllViewModel> viewModels = service.GetPeripheries()
+               .Select(x => new ProductAllViewModel
+               {
+                   Id = x.Id,
+                   Manufacturer = x.Manufacturer,
+                   Model = x.Model,
+                   Price = x.Price,
+                   Discount = x.Discount,
+                   Image = x.Image,
+                   Category = x.Category,
+                   Description = x.PartialDescription,
+                   Quantity = x.Quantity
+               }).ToList();
+
+            ViewBag.Manufacturers = viewModels.Select(x => x.Manufacturer).Distinct().ToList();
+            ViewBag.Models = viewModels.Select(x => x.Model).ToList();
+
+            return View("~/Views/Products/All.cshtml", viewModels);
+        }
+        [AllowAnonymous]
         public IActionResult AllMonitors()
         {
             List<ProductAllViewModel> viewModels = productService.GetProducts<Monitor>()

@@ -1,5 +1,8 @@
 ﻿@model PernikComputers.Models.ClientCreateViewModel
 
+@{
+    ViewData["Title"] = "Profile";
+}
 <div>
     <div class="d-lg-inline-block align-top col-3" id="filter-left">
         @await Html.PartialAsync("~/Views/Clients/_ManageLayoutPartialView.cshtml")
@@ -49,10 +52,10 @@
                 </div>
             </form>
             @*<form asp-action="Delete" method="post">
-                <input type="hidden" asp-for="Id" />
-                <input type="submit" value="Delete Account" class="btn btn-outline-danger" />
-            </form>*@
-    </div>
+                    <input type="hidden" asp-for="Id" />
+                    <input type="submit" value="Delete Account" class="btn btn-outline-danger" />
+                </form>*@
+        </div>
     </div>
 </div>
 

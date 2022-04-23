@@ -1,4 +1,7 @@
 ﻿@model OrderDetailsViewModel
+@{
+    ViewData["Title"] = "OrderDetails";
+}
 
 <div class="m-auto" style="width: 80%">
     <div>
@@ -18,7 +21,7 @@
                 }
                 else
                 {
-                <p>@Model.Notes</p>
+                    <p>@Model.Notes</p>
                 }
             </div>
         </div>

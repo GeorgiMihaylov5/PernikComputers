@@ -19,18 +19,58 @@ namespace PernikComputers.Controllers
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IClientService service;
+        private readonly IOrderService orderService;
+        private readonly IProductService productService;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly ILogger<ChangePasswordModel> logger;
 
         public ClientsController(UserManager<ApplicationUser> userManager,
             IClientService service,
+            IOrderService orderService,
+            IProductService productService,
             SignInManager<ApplicationUser> signInManager,
              ILogger<ChangePasswordModel> logger)
         {
             this.userManager = userManager;
             this.service = service;
+            this.orderService = orderService;
+            this.productService = productService;
             this.signInManager = signInManager;
             this.logger = logger;
+        }
+        [AllowAnonymous]
+        public IActionResult Index()
+        {
+            Dictionary<string, int> map = new Dictionary<string, int>();
+
+            foreach (var order in orderService.All())
+            {
+                if (!map.ContainsKey(order.ProductId))
+                {
+                    map.Add(order.ProductId, 1);
+                }
+                else
+                {
+                    map[order.ProductId]++;
+                }
+            }
+            var ids = map.OrderByDescending(x => x.Value).Take(6).Select(x => x.Key).ToList();
+            var products = productService.GetAllProducts().Where(x => ids.Contains(x.Id)).ToList();
+
+            List<ProductAllViewModel> productVm = products
+               .Select(x => new ProductAllViewModel
+               {
+                   Id = x.Id,
+                   Manufacturer = x.Manufacturer,
+                   Model = x.Model,
+                   Price = x.Price,
+                   Image = x.Image,
+                   Category = x.Category,
+                   Discount = x.Discount,
+                   Description = new List<string>()
+               }).ToList();
+
+            return View(productVm);
         }
         [Authorize(Roles = "Administrator")]
         public IActionResult All()
