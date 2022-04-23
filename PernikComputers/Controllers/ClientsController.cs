@@ -72,6 +72,16 @@ namespace PernikComputers.Controllers
 
             return View(productVm);
         }
+        [AllowAnonymous]
+        public IActionResult AboutUs()
+        {
+            return View();
+        }
+        [AllowAnonymous]
+        public IActionResult Contacts()
+        {
+            return View();
+        }
         [Authorize(Roles = "Administrator")]
         public IActionResult All()
         {
