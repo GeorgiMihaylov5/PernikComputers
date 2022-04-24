@@ -39,7 +39,7 @@ namespace PernikComputers.Controllers
                }).ToList();
 
             ViewBag.Manufacturers = viewModels.Select(x => x.Manufacturer).Distinct().ToList();
-            ViewBag.Models = viewModels.Select(x => x.Model).ToList();
+            ViewBag.Models = viewModels.Select(x => x.Model).Distinct().ToList();
 
             return View("~/Views/Products/All.cshtml", viewModels);
         }
@@ -83,7 +83,7 @@ namespace PernikComputers.Controllers
                }).ToList();
 
             ViewBag.Manufacturers = viewModels.Select(x => x.Manufacturer).Distinct().ToList();
-            ViewBag.Models = viewModels.Select(x => x.Model).ToList();
+            ViewBag.Models = viewModels.Select(x => x.Model).Distinct().ToList();
 
             return View("~/Views/Products/All.cshtml", viewModels);
         }
@@ -105,7 +105,7 @@ namespace PernikComputers.Controllers
                }).ToList();
 
             ViewBag.Manufacturers = viewModels.Select(x => x.Manufacturer).Distinct().ToList();
-            ViewBag.Models = viewModels.Select(x => x.Model).ToList();
+            ViewBag.Models = viewModels.Select(x => x.Model).Distinct().ToList();
 
             return View("~/Views/Products/All.cshtml", viewModels);
         }

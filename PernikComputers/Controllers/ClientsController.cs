@@ -19,21 +19,21 @@ namespace PernikComputers.Controllers
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IClientService service;
-        private readonly IOrderService orderService;
+        //private readonly IOrderService orderService;
         private readonly IProductService productService;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly ILogger<ChangePasswordModel> logger;
 
         public ClientsController(UserManager<ApplicationUser> userManager,
             IClientService service,
-            IOrderService orderService,
+            //IOrderService orderService,
             IProductService productService,
             SignInManager<ApplicationUser> signInManager,
              ILogger<ChangePasswordModel> logger)
         {
             this.userManager = userManager;
             this.service = service;
-            this.orderService = orderService;
+           // this.orderService = orderService;
             this.productService = productService;
             this.signInManager = signInManager;
             this.logger = logger;
@@ -41,21 +41,22 @@ namespace PernikComputers.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
-            Dictionary<string, int> map = new Dictionary<string, int>();
+            //Dictionary<string, int> map = new Dictionary<string, int>();
 
-            foreach (var order in orderService.All())
-            {
-                if (!map.ContainsKey(order.ProductId))
-                {
-                    map.Add(order.ProductId, 1);
-                }
-                else
-                {
-                    map[order.ProductId]++;
-                }
-            }
-            var ids = map.OrderByDescending(x => x.Value).Take(6).Select(x => x.Key).ToList();
-            var products = productService.GetAllProducts().Where(x => ids.Contains(x.Id)).ToList();
+            //foreach (var order in orderService.All())
+            //{
+            //    if (!map.ContainsKey(order.ProductId))
+            //    {
+            //        map.Add(order.ProductId, 1);
+            //    }
+            //    else
+            //    {
+            //        map[order.ProductId]++;
+            //    }
+            //}
+            //var ids = map.OrderByDescending(x => x.Value).Take(6).Select(x => x.Key).ToList();
+            //var products = productService.GetAllProducts().Where(x => ids.Contains(x.Id)).ToList();
+            var products = productService.GetAllProducts().OrderByDescending(x => x.Orders.Count).Take(6).ToList();
 
             List<ProductAllViewModel> productVm = products
                .Select(x => new ProductAllViewModel

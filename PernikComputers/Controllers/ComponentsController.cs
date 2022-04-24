@@ -40,7 +40,7 @@ namespace PernikComputers.Controllers
 
 
             ViewBag.Manufacturers = componentVM.Select(x => x.Manufacturer).Distinct().ToList();
-            ViewBag.Models = componentVM.Select(x => x.Model).ToList();
+            ViewBag.Models = componentVM.Select(x => x.Model).Distinct().ToList();
 
             return View("~/Views/Products/All.cshtml", componentVM);
         }
@@ -64,7 +64,7 @@ namespace PernikComputers.Controllers
 
 
             ViewBag.Manufacturers = processorVM.Select(x => x.Manufacturer).Distinct().ToList();
-            ViewBag.Models = processorVM.Select(x => x.Model).ToList();
+            ViewBag.Models = processorVM.Select(x => x.Model).Distinct().ToList();
 
             return View("~/Views/Products/All.cshtml", processorVM);
         }
@@ -153,7 +153,7 @@ namespace PernikComputers.Controllers
                 }).ToList();
 
             ViewBag.Manufacturers = motherboardVM.Select(x => x.Manufacturer).Distinct().ToList();
-            ViewBag.Models = motherboardVM.Select(x => x.Model).ToList();
+            ViewBag.Models = motherboardVM.Select(x => x.Model).Distinct().ToList();
 
             return View("~/Views/Products/All.cshtml", motherboardVM);
         }
@@ -242,7 +242,7 @@ namespace PernikComputers.Controllers
                 }).ToList();
 
             ViewBag.Manufacturers = ramVM.Select(x => x.Manufacturer).Distinct().ToList();
-            ViewBag.Models = ramVM.Select(x => x.Model).ToList();
+            ViewBag.Models = ramVM.Select(x => x.Model).Distinct().ToList();
 
             return View("~/Views/Products/All.cshtml", ramVM);
         }
@@ -329,7 +329,7 @@ namespace PernikComputers.Controllers
                 }).ToList();
 
             ViewBag.Manufacturers = videoCardVM.Select(x => x.Manufacturer).Distinct().ToList();
-            ViewBag.Models = videoCardVM.Select(x => x.Model).ToList();
+            ViewBag.Models = videoCardVM.Select(x => x.Model).Distinct().ToList();
 
             return View("~/Views/Products/All.cshtml", videoCardVM);
         }
@@ -423,7 +423,7 @@ namespace PernikComputers.Controllers
                 }).ToList();
 
             ViewBag.Manufacturers = powerSupplyVM.Select(x => x.Manufacturer).Distinct().ToList();
-            ViewBag.Models = powerSupplyVM.Select(x => x.Model).ToList();
+            ViewBag.Models = powerSupplyVM.Select(x => x.Model).Distinct().ToList();
 
             return View("~/Views/Products/All.cshtml", powerSupplyVM);
         }
@@ -509,7 +509,7 @@ namespace PernikComputers.Controllers
                 }).ToList();
 
             ViewBag.Manufacturers = memoryVM.Select(x => x.Manufacturer).Distinct().ToList();
-            ViewBag.Models = memoryVM.Select(x => x.Model).ToList();
+            ViewBag.Models = memoryVM.Select(x => x.Model).Distinct().ToList();
 
             return View("~/Views/Products/All.cshtml", memoryVM);
         }
@@ -597,7 +597,7 @@ namespace PernikComputers.Controllers
                 }).ToList();
 
             ViewBag.Manufacturers = computerCaseVM.Select(x => x.Manufacturer).Distinct().ToList();
-            ViewBag.Models = computerCaseVM.Select(x => x.Model).ToList();
+            ViewBag.Models = computerCaseVM.Select(x => x.Model).Distinct().ToList();
 
             return View("~/Views/Products/All.cshtml", computerCaseVM);
         }

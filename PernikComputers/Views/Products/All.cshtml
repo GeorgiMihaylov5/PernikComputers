@@ -9,20 +9,20 @@
 
 <div class="div-m-top">
     <div class="d-lg-inline-block align-top col-3" id="filter-left">
-        <form class="filter-form row" asp-action="Index" method="get">
+        <form class="filter-form row" asp-action="Search" method="get">
             <div class="col-7 p-0 mb-3 w-100">
                 <h4 class="filter-titles">Filters</h4>
                 <div class="d-block">
-                    <input type="checkbox" value="Promotion" />
-                    <label>Promotions</label>
+                    <input type="radio" id="promotions" value="1" name="filter"/>
+                    <label for="promotions">Promotions</label>
                 </div>
                 <div class="d-block">
-                    <input type="checkbox" value="topProducts" />
-                    <label>Top Products</label>
+                    <input type="radio" id="topProducts" value="2" name="filter"/>
+                    <label for="topProducts">Top Products</label>
                 </div>
                 <div class="d-block">
-                    <input type="checkbox" value="newProducts" />
-                    <label>New Products</label>
+                    <input type="radio" id="ascendingPrice" value="3" name="filter"/>
+                    <label for="ascendingPrice">Ascending Price</label>
                 </div>
             </div>
             <div class="" id="filter-price">
@@ -36,7 +36,7 @@
                 @foreach (var item in ViewBag.Manufacturers)
                 {
                     <div class="d-block">
-                        <input type="checkbox" value="@item" />
+                        <input type="checkbox" value="@item" id="@item" name="manufacturers"/>
                         <label for="@item">@item</label>
                     </div>
                 }
@@ -45,10 +45,10 @@
                 <h4 class="filter-titles">Model</h4>
                 @foreach (var item in ViewBag.Models)
                 {
-                    <div class="d-block">
-                        <input type="checkbox" value="@item" />
-                        <label for="@item">@item</label>
-                    </div>
+            <div class="d-block">
+                <input type="checkbox" value="@item" id="@item" name="models"/>
+                <label for="@item">@item</label>
+            </div>
                 }
             </div>
             <div class="d-block col-7 text-center p-0 mb-3">

@@ -38,7 +38,7 @@ namespace PernikComputers.Controllers
                }).ToList();
 
             ViewBag.Manufacturers = viewModel.Select(x => x.Manufacturer).Distinct().ToList();
-            ViewBag.Models = viewModel.Select(x => x.Model).ToList();
+            ViewBag.Models = viewModel.Select(x => x.Model).Distinct().ToList();
 
             return View("~/Views/Products/All.cshtml", viewModel);
         }

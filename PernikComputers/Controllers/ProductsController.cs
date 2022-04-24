@@ -34,7 +34,7 @@ namespace PernikComputers.Controllers
                }).ToList();
 
             ViewBag.Manufacturers = productVm.Select(x => x.Manufacturer).Distinct().ToList();
-            ViewBag.Models = productVm.Select(x => x.Model).ToList();
+            ViewBag.Models = productVm.Select(x => x.Model).Distinct().ToList();
 
             return View(productVm);
         }
@@ -130,7 +130,7 @@ namespace PernikComputers.Controllers
               }).ToList();
 
             ViewBag.Manufacturers = productVm.Select(x => x.Manufacturer).Distinct().ToList();
-            ViewBag.Models = productVm.Select(x => x.Model).ToList();
+            ViewBag.Models = productVm.Select(x => x.Model).Distinct().ToList();
 
             return View("All", productVm);
         }
@@ -159,6 +159,75 @@ namespace PernikComputers.Controllers
             };
 
             return View("~/Views/Products/Details.cshtml", detailsViewModel);
+        }
+        [AllowAnonymous]
+        public IActionResult Search(string filter, int minPrice, int maxPrice, List<string> manufacturers, List<string> models)
+        {
+            var products = new List<Product>();
+
+            if (manufacturers.Count > 0)
+            {
+                foreach (var item in manufacturers)
+                {
+                    var currentProducts = service.GetAllProducts().Where(x => x.Manufacturer == item).ToList();
+                    products.AddRange(currentProducts);
+                }
+            }
+            else
+            {
+                products = service.GetAllProducts();
+            }
+            if (models.Count > 0)
+            {
+                foreach (var item in models)
+                {
+                    products = products.Where(x => x.Model == item).Distinct().ToList();
+                }
+            }
+
+            if (minPrice > 0 && maxPrice > minPrice)
+            {
+                products = products.Where(x => x.Price >= minPrice && x.Price <= maxPrice).ToList();
+            }
+            else if (minPrice > 0 && maxPrice <= minPrice)
+            {
+                products = products.Where(x => x.Price >= minPrice).ToList();
+            }
+            else if (maxPrice > 0)
+            {
+                products = products.Where(x => x.Price <= maxPrice).ToList();
+            }
+
+            if (filter == "1")
+            {
+                products = products.Where(x => x.Discount != 0).ToList();
+            }
+            else if (filter == "2")
+            {
+                products = products.OrderByDescending(x => x.Orders.Count).ToList();
+            }
+            else if (filter == "3")
+            {
+                products = products.OrderBy(x => x.Price).ToList();
+            }
+
+            List<ProductAllViewModel> productVm = products
+              .Select(x => new ProductAllViewModel
+              {
+                  Id = x.Id,
+                  Manufacturer = x.Manufacturer,
+                  Model = x.Model,
+                  Price = x.Price,
+                  Discount = x.Discount,
+                  Image = x.Image,
+                  Category = x.Category,
+                  Description = x.PartialDescription,
+                  Quantity = x.Quantity
+              }).ToList();
+
+            ViewBag.Manufacturers = service.GetAllProducts().Select(x => x.Manufacturer).Distinct().ToList();
+            ViewBag.Models = service.GetAllProducts().Select(x => x.Model).Distinct().ToList();
+            return View("All", productVm);
         }
     }
 }

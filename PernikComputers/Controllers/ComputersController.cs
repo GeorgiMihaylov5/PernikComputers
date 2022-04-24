@@ -40,7 +40,7 @@ namespace PernikComputers.Controllers
                 }).ToList();
 
             ViewBag.Manufacturers = computerViewModel.Select(x => x.Manufacturer).Distinct().ToList();
-            ViewBag.Models = computerViewModel.Select(x => x.Model).ToList();
+            ViewBag.Models = computerViewModel.Select(x => x.Model).Distinct().ToList();
 
             return View("~/Views/Products/All.cshtml", computerViewModel);
             //return RedirectToPage("All","Components", processorVM);
