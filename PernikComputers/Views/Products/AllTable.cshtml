@@ -15,8 +15,10 @@
     </div>
 
     <div class="text-center" style="margin-bottom: 20px">
-        <a asp-action="Create" asp-controller="Computers" class="btn btn-outline-dark">Create Computer</a>
-        <div class="dropdown d-inline-block mb-2 mb-lg-0">
+        <a asp-action="CreateComputer" asp-controller="Computers" class="btn btn-outline-dark">Create Computer</a>
+        <a asp-action="CreateLaptop" asp-controller="Laptops" class="btn btn-outline-dark">Create Laptop</a>
+
+        <div class="dropdown d-inline-block mb-2 mb-xl-0">
             <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Create Component
             </button>
@@ -30,7 +32,17 @@
                 <a asp-action="CreateComputerCase" asp-controller="Components" class="dropdown-item">Create Computer Case</a>
             </div>
         </div>
-        <a asp-action="Create" asp-controller="Computers" class="btn btn-outline-dark">Create Periphery</a>
+        <div class="dropdown d-inline-block mb-2 mb-lg-0">
+            <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Create Periphery
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a asp-action="CreateMonitor" asp-controller="Peripheries" class="dropdown-item">Create Monitor</a>
+                <a asp-action="CreateKeyboard" asp-controller="Peripheries" class="dropdown-item">Create Keyboard</a>
+                <a asp-action="CreateMouse" asp-controller="Peripheries" class="dropdown-item">Create Mouse</a>
+            </div>
+        </div>
+        <a asp-action="CreateAccessory" asp-controller="Accessories" class="btn btn-outline-dark">Create Accessory</a>
     </div>
 
     <div class="table-responsive">

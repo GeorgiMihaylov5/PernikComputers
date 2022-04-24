@@ -226,3 +226,8 @@
 .rounded-2 {
     border-radius: 2.25rem !important;
 }
+
+/*------Periphery------------*/
+.h-17px {
+    height: 17px;
+}
