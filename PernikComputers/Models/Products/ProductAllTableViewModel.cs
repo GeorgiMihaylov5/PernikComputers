@@ -12,7 +12,7 @@ namespace PernikComputers.Models
         public string Barcode { get; set; }
         public string Manufacturer { get; set; }
         public string Model { get; set; }
-        public Category Category { get; set; }
+        public string Category { get; set; }
         public decimal Price { get; set; }
         public decimal Discount { get; set; }
         public string Image { get; set; }

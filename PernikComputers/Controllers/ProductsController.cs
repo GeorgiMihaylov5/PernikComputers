@@ -50,7 +50,7 @@ namespace PernikComputers.Controllers
                    Model = x.Model,
                    Price = x.Price,
                    Image = x.Image,
-                   Category = x.Category,
+                   Category = x.Category.ToString(),
                    Warranty = x.Warranty,
                    Quantity = x.Quantity,
                    Discount = x.Discount

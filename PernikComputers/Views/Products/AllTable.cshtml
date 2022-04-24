@@ -44,7 +44,12 @@
         </div>
         <a asp-action="CreateAccessory" asp-controller="Accessories" class="btn btn-outline-dark">Create Accessory</a>
     </div>
-
+    <div id="message-box">
+        @*<div id="message-barcode" class="p-3 rounded alert-success row justify-content-between align-items-center">
+            <span>Laptop Lenovo 300 barcode is dasafaaf</span>
+            <button type="button" class="btn" onclick="closeAlert(this.parentElement)">&times;</button>
+        </div>*@
+    </div>
     <div class="table-responsive">
         <table class="table table-hover text-center">
             <thead>
@@ -82,29 +87,21 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    var controller = "Components";
+                    var controller = item.Category;
 
-                    if (item.Category == Category.Accessories)
-                    {
-                        controller = "Accessories";
-                    }
-                    else if (item.Category == Category.Laptop)
-                    {
-                        controller = "Laptops";
-                    }
-                    else if (item.Category == Category.Computer)
-                    {
-                        controller = "Computers";
-                    }
-                    else if (item.Category == Category.Monitor || item.Category == Category.Mouse || item.Category == Category.Keyboard)
+                    if (item.Category == "Monitor" || item.Category == "Mouse" || item.Category == "Keyboard")
                     {
                         controller = "Peripheries";
+                    }
+                    else if(item.Category != "Laptop" && item.Category != "Computer" && item.Category != "Accessory")
+                    {
+                        controller = "Components";
                     }
                     var edit = $"Edit{item.Category}";
 
                     <tr>
                     <td class="align-middle">
-                        <button class="btn btn-outline-dark btn-sm">See Barcode</button>
+                        <button class="btn btn-outline-dark btn-sm" onclick="addAlert(@Json.Serialize(item).ToString())">See Barcode</button>
                     </td>
                     <td class="align-middle">
                         @Html.DisplayFor(modelItem => item.Category)
