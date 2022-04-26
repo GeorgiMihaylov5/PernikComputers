@@ -44,7 +44,32 @@ namespace PernikComputers.Controllers
 
             return View("~/Views/Products/All.cshtml", componentVM);
         }
-        //--------Processors---------
+        [AllowAnonymous]
+        [HttpPost]
+        public IActionResult All(string filter, int minPrice, int maxPrice, List<string> manufacturers, List<string> models)
+        {
+            var oldProducts = service.GetComponents();
+            List<ProductAllViewModel> componentVM = productService.Search(filter, minPrice, maxPrice, manufacturers, models, oldProducts)
+               .Select(x => new ProductAllViewModel
+               {
+                   Id = x.Id,
+                   Manufacturer = x.Manufacturer,
+                   Model = x.Model,
+                   Price = x.Price,
+                   Discount = x.Discount,
+                   Image = x.Image,
+                   Category = x.Category,
+                   Description = x.PartialDescription,
+                   Quantity = x.Quantity
+               }).ToList();
+
+
+            ViewBag.Manufacturers = oldProducts.Select(x => x.Manufacturer).Distinct().ToList();
+            ViewBag.Models = oldProducts.Select(x => x.Model).Distinct().ToList();
+
+            return View("~/Views/Products/All.cshtml", componentVM);
+        }
+            //--------Processors---------
         [AllowAnonymous]
         public IActionResult AllProcessors()
         {
@@ -68,6 +93,31 @@ namespace PernikComputers.Controllers
 
             return View("~/Views/Products/All.cshtml", processorVM);
         }
+        [AllowAnonymous]
+        [HttpPost]
+        public IActionResult AllProcessors(string filter, int minPrice, int maxPrice, List<string> manufacturers, List<string> models)
+        {
+            var oldProducts = productService.GetProducts<Processor>();
+            List<ProductAllViewModel> processorVM = productService.Search(filter, minPrice, maxPrice, manufacturers, models, oldProducts)
+                .Select(x => new ProductAllViewModel
+                {
+                    Id = x.Id,
+                    Manufacturer = x.Manufacturer,
+                    Model = x.Model,
+                    Price = x.Price,
+                    Discount = x.Discount,
+                    Image = x.Image,
+                    Category = x.Category,
+                    Description = x.PartialDescription,
+                    Quantity = x.Quantity
+                }).ToList();
+
+
+            ViewBag.Manufacturers = oldProducts.Select(x => x.Manufacturer).Distinct().ToList();
+            ViewBag.Models = oldProducts.Select(x => x.Model).Distinct().ToList();
+
+            return View("~/Views/Products/All.cshtml", processorVM);
+        }
         public IActionResult CreateProcessor()
         {
             return View();
@@ -78,7 +128,7 @@ namespace PernikComputers.Controllers
         {
             if (ModelState.IsValid)
             {
-                var isCreated = service.CreateProcessor(createVm.Socket, createVm.CPUSpeed, createVm.CPUBoostSpeed, createVm.Cores, createVm.Threads, createVm.Cache,
+                var isCreated = service.CreateProcessor(createVm.Socket.Replace(" ",""), createVm.CPUSpeed, createVm.CPUBoostSpeed, createVm.Cores, createVm.Threads, createVm.Cache,
                     createVm.Barcode, createVm.Manufacturer, createVm.Model, createVm.Warranty, createVm.Price, createVm.Quantity, createVm.Image);
 
                 if (isCreated)
@@ -157,6 +207,30 @@ namespace PernikComputers.Controllers
 
             return View("~/Views/Products/All.cshtml", motherboardVM);
         }
+        [AllowAnonymous]
+        [HttpPost]
+        public IActionResult AllMotherboards(string filter, int minPrice, int maxPrice, List<string> manufacturers, List<string> models)
+        {
+            var oldProducts = productService.GetProducts<Motherboard>();
+            List<ProductAllViewModel> motherboardVM = productService.Search(filter, minPrice, maxPrice, manufacturers, models, oldProducts)
+                .Select(x => new ProductAllViewModel
+                {
+                    Id = x.Id,
+                    Manufacturer = x.Manufacturer,
+                    Model = x.Model,
+                    Price = x.Price,
+                    Discount = x.Discount,
+                    Image = x.Image,
+                    Category = x.Category,
+                    Description = x.PartialDescription,
+                    Quantity = x.Quantity
+                }).ToList();
+
+            ViewBag.Manufacturers = oldProducts.Select(x => x.Manufacturer).Distinct().ToList();
+            ViewBag.Models = oldProducts.Select(x => x.Model).Distinct().ToList();
+
+            return View("~/Views/Products/All.cshtml", motherboardVM);
+        }
 
         public IActionResult CreateMotherboard()
         {
@@ -168,7 +242,7 @@ namespace PernikComputers.Controllers
         {
             if (ModelState.IsValid)
             {
-                var isCreated = service.CreateMotherboard(createVm.Socket, createVm.Chipset, createVm.TypeRam, createVm.RamSlotsCount, createVm.FormFactor,
+                var isCreated = service.CreateMotherboard(createVm.Socket.Replace(" ", ""), createVm.Chipset, createVm.TypeRam, createVm.RamSlotsCount, createVm.FormFactor,
                     createVm.Barcode, createVm.Manufacturer, createVm.Model, createVm.Warranty, createVm.Price, createVm.Quantity, createVm.Image);
 
                 if (isCreated)
@@ -243,6 +317,30 @@ namespace PernikComputers.Controllers
 
             ViewBag.Manufacturers = ramVM.Select(x => x.Manufacturer).Distinct().ToList();
             ViewBag.Models = ramVM.Select(x => x.Model).Distinct().ToList();
+
+            return View("~/Views/Products/All.cshtml", ramVM);
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        public IActionResult AllRams(string filter, int minPrice, int maxPrice, List<string> manufacturers, List<string> models)
+        {
+           var oldProducts = productService.GetProducts<Ram>();
+           List <ProductAllViewModel> ramVM = productService.Search(filter, minPrice, maxPrice, manufacturers, models, oldProducts)
+                .Select(x => new ProductAllViewModel
+                {
+                    Id = x.Id,
+                    Manufacturer = x.Manufacturer,
+                    Model = x.Model,
+                    Price = x.Price,
+                    Discount = x.Discount,
+                    Image = x.Image,
+                    Category = x.Category,
+                    Description = x.PartialDescription,
+                    Quantity = x.Quantity
+                }).ToList();
+
+            ViewBag.Manufacturers = oldProducts.Select(x => x.Manufacturer).Distinct().ToList();
+            ViewBag.Models = oldProducts.Select(x => x.Model).Distinct().ToList();
 
             return View("~/Views/Products/All.cshtml", ramVM);
         }
@@ -330,6 +428,30 @@ namespace PernikComputers.Controllers
 
             ViewBag.Manufacturers = videoCardVM.Select(x => x.Manufacturer).Distinct().ToList();
             ViewBag.Models = videoCardVM.Select(x => x.Model).Distinct().ToList();
+
+            return View("~/Views/Products/All.cshtml", videoCardVM);
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        public IActionResult AllVideoCards(string filter, int minPrice, int maxPrice, List<string> manufacturers, List<string> models)
+        {
+            var oldProducts = productService.GetProducts<VideoCard>();
+            List <ProductAllViewModel> videoCardVM = productService.Search(filter, minPrice, maxPrice, manufacturers, models, oldProducts)
+                .Select(x => new ProductAllViewModel
+                {
+                    Id = x.Id,
+                    Manufacturer = x.Manufacturer,
+                    Model = x.Model,
+                    Price = x.Price,
+                    Discount = x.Discount,
+                    Image = x.Image,
+                    Category = x.Category,
+                    Description = x.PartialDescription,
+                    Quantity = x.Quantity
+                }).ToList();
+
+            ViewBag.Manufacturers = oldProducts.Select(x => x.Manufacturer).Distinct().ToList();
+            ViewBag.Models = oldProducts.Select(x => x.Model).Distinct().ToList();
 
             return View("~/Views/Products/All.cshtml", videoCardVM);
         }
@@ -427,6 +549,30 @@ namespace PernikComputers.Controllers
 
             return View("~/Views/Products/All.cshtml", powerSupplyVM);
         }
+        [AllowAnonymous]
+        [HttpPost]
+        public IActionResult AllPowerSupplies(string filter, int minPrice, int maxPrice, List<string> manufacturers, List<string> models)
+        {
+            var oldProducts = productService.GetProducts<PowerSupply>();
+            List <ProductAllViewModel> powerSupplyVM = productService.Search(filter, minPrice, maxPrice, manufacturers, models, oldProducts)
+                .Select(x => new ProductAllViewModel
+                {
+                    Id = x.Id,
+                    Manufacturer = x.Manufacturer,
+                    Model = x.Model,
+                    Price = x.Price,
+                    Discount = x.Discount,
+                    Image = x.Image,
+                    Category = x.Category,
+                    Description = x.PartialDescription,
+                    Quantity = x.Quantity
+                }).ToList();
+
+            ViewBag.Manufacturers = oldProducts.Select(x => x.Manufacturer).Distinct().ToList();
+            ViewBag.Models = oldProducts.Select(x => x.Model).Distinct().ToList();
+
+            return View("~/Views/Products/All.cshtml", powerSupplyVM);
+        }
 
         public IActionResult CreatePowerSupply()
         {
@@ -510,6 +656,30 @@ namespace PernikComputers.Controllers
 
             ViewBag.Manufacturers = memoryVM.Select(x => x.Manufacturer).Distinct().ToList();
             ViewBag.Models = memoryVM.Select(x => x.Model).Distinct().ToList();
+
+            return View("~/Views/Products/All.cshtml", memoryVM);
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        public IActionResult AllMemories(string filter, int minPrice, int maxPrice, List<string> manufacturers, List<string> models)
+        {
+            var oldProducts = productService.GetProducts<Memory>();
+            List <ProductAllViewModel> memoryVM = productService.Search(filter, minPrice, maxPrice, manufacturers, models, oldProducts)
+                .Select(x => new ProductAllViewModel
+                {
+                    Id = x.Id,
+                    Manufacturer = x.Manufacturer,
+                    Model = x.Model,
+                    Price = x.Price,
+                    Discount = x.Discount,
+                    Image = x.Image,
+                    Category = x.Category,
+                    Description = x.PartialDescription,
+                    Quantity = x.Quantity
+                }).ToList();
+
+            ViewBag.Manufacturers = oldProducts.Select(x => x.Manufacturer).Distinct().ToList();
+            ViewBag.Models = oldProducts.Select(x => x.Model).Distinct().ToList();
 
             return View("~/Views/Products/All.cshtml", memoryVM);
         }
@@ -598,6 +768,30 @@ namespace PernikComputers.Controllers
 
             ViewBag.Manufacturers = computerCaseVM.Select(x => x.Manufacturer).Distinct().ToList();
             ViewBag.Models = computerCaseVM.Select(x => x.Model).Distinct().ToList();
+
+            return View("~/Views/Products/All.cshtml", computerCaseVM);
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        public IActionResult AllComputerCases(string filter, int minPrice, int maxPrice, List<string> manufacturers, List<string> models)
+        {
+            var oldProducts = productService.GetProducts<ComputerCase>();
+            List <ProductAllViewModel> computerCaseVM = productService.Search(filter, minPrice, maxPrice, manufacturers, models, oldProducts)
+                .Select(x => new ProductAllViewModel
+                {
+                    Id = x.Id,
+                    Manufacturer = x.Manufacturer,
+                    Model = x.Model,
+                    Price = x.Price,
+                    Discount = x.Discount,
+                    Image = x.Image,
+                    Category = x.Category,
+                    Description = x.PartialDescription,
+                    Quantity = x.Quantity
+                }).ToList();
+
+            ViewBag.Manufacturers = oldProducts.Select(x => x.Manufacturer).Distinct().ToList();
+            ViewBag.Models = oldProducts.Select(x => x.Model).Distinct().ToList();
 
             return View("~/Views/Products/All.cshtml", computerCaseVM);
         }

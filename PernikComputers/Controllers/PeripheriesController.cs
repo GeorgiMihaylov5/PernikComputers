@@ -44,6 +44,30 @@ namespace PernikComputers.Controllers
             return View("~/Views/Products/All.cshtml", viewModels);
         }
         [AllowAnonymous]
+        [HttpPost]
+        public IActionResult All(string filter, int minPrice, int maxPrice, List<string> manufacturers, List<string> models)
+        {
+            var oldProducts = service.GetPeripheries();
+           List <ProductAllViewModel> viewModels = productService.Search(filter, minPrice, maxPrice, manufacturers, models, oldProducts)
+               .Select(x => new ProductAllViewModel
+               {
+                   Id = x.Id,
+                   Manufacturer = x.Manufacturer,
+                   Model = x.Model,
+                   Price = x.Price,
+                   Discount = x.Discount,
+                   Image = x.Image,
+                   Category = x.Category,
+                   Description = x.PartialDescription,
+                   Quantity = x.Quantity
+               }).ToList();
+
+            ViewBag.Manufacturers = oldProducts.Select(x => x.Manufacturer).Distinct().ToList();
+            ViewBag.Models = oldProducts.Select(x => x.Model).Distinct().ToList();
+
+            return View("~/Views/Products/All.cshtml", viewModels);
+        }
+        [AllowAnonymous]
         public IActionResult AllMonitors()
         {
             List<ProductAllViewModel> viewModels = productService.GetProducts<Monitor>()
@@ -62,6 +86,30 @@ namespace PernikComputers.Controllers
 
             ViewBag.Manufacturers = viewModels.Select(x => x.Manufacturer).Distinct().ToList();
             ViewBag.Models = viewModels.Select(x => x.Model).ToList();
+
+            return View("~/Views/Products/All.cshtml", viewModels);
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        public IActionResult AllMonitors(string filter, int minPrice, int maxPrice, List<string> manufacturers, List<string> models)
+        {
+            var oldProducts = productService.GetProducts<Monitor>();
+            List<ProductAllViewModel> viewModels = productService.Search(filter, minPrice, maxPrice, manufacturers, models, oldProducts)
+               .Select(x => new ProductAllViewModel
+               {
+                   Id = x.Id,
+                   Manufacturer = x.Manufacturer,
+                   Model = x.Model,
+                   Price = x.Price,
+                   Discount = x.Discount,
+                   Image = x.Image,
+                   Category = x.Category,
+                   Description = x.PartialDescription,
+                   Quantity = x.Quantity
+               }).ToList();
+
+            ViewBag.Manufacturers = oldProducts.Select(x => x.Manufacturer).Distinct().ToList();
+            ViewBag.Models = oldProducts.Select(x => x.Model).ToList();
 
             return View("~/Views/Products/All.cshtml", viewModels);
         }
@@ -88,6 +136,30 @@ namespace PernikComputers.Controllers
             return View("~/Views/Products/All.cshtml", viewModels);
         }
         [AllowAnonymous]
+        [HttpPost]
+        public IActionResult AllKeyboards(string filter, int minPrice, int maxPrice, List<string> manufacturers, List<string> models)
+        {
+            var oldProducts = productService.GetProducts<Keyboard>();
+            List <ProductAllViewModel> viewModels = productService.Search(filter, minPrice, maxPrice, manufacturers, models, oldProducts)
+               .Select(x => new ProductAllViewModel
+               {
+                   Id = x.Id,
+                   Manufacturer = x.Manufacturer,
+                   Model = x.Model,
+                   Price = x.Price,
+                   Discount = x.Discount,
+                   Image = x.Image,
+                   Category = x.Category,
+                   Description = x.PartialDescription,
+                   Quantity = x.Quantity
+               }).ToList();
+
+            ViewBag.Manufacturers = oldProducts.Select(x => x.Manufacturer).Distinct().ToList();
+            ViewBag.Models = oldProducts.Select(x => x.Model).Distinct().ToList();
+
+            return View("~/Views/Products/All.cshtml", viewModels);
+        }
+        [AllowAnonymous]
         public IActionResult AllMouses()
         {
             List<ProductAllViewModel> viewModels = productService.GetProducts<Mouse>()
@@ -106,6 +178,30 @@ namespace PernikComputers.Controllers
 
             ViewBag.Manufacturers = viewModels.Select(x => x.Manufacturer).Distinct().ToList();
             ViewBag.Models = viewModels.Select(x => x.Model).Distinct().ToList();
+
+            return View("~/Views/Products/All.cshtml", viewModels);
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        public IActionResult AllMouses(string filter, int minPrice, int maxPrice, List<string> manufacturers, List<string> models)
+        {
+            var oldProducts = productService.GetProducts<Mouse>();
+            List<ProductAllViewModel> viewModels = productService.Search(filter, minPrice, maxPrice, manufacturers, models, oldProducts)
+               .Select(x => new ProductAllViewModel
+               {
+                   Id = x.Id,
+                   Manufacturer = x.Manufacturer,
+                   Model = x.Model,
+                   Price = x.Price,
+                   Discount = x.Discount,
+                   Image = x.Image,
+                   Category = x.Category,
+                   Description = x.PartialDescription,
+                   Quantity = x.Quantity
+               }).ToList();
+
+            ViewBag.Manufacturers = oldProducts.Select(x => x.Manufacturer).Distinct().ToList();
+            ViewBag.Models = oldProducts.Select(x => x.Model).Distinct().ToList();
 
             return View("~/Views/Products/All.cshtml", viewModels);
         }

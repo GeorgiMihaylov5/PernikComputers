@@ -38,6 +38,12 @@
                                    <li>
                                        <a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="All">All Products</a>
                                    </li>
+                                                                      <li>
+                                       <a class="dropdown-item" asp-area="" asp-controller="Computers" asp-action="All">Computers</a>
+                                   </li>
+                                   <li>
+                                       <a class="dropdown-item"  asp-area="" asp-controller="Laptops" asp-action="All">Laptops</a>
+                                   </li>
                                    <li>
                                        <a class="dropdown-item" asp-controller="Components" asp-action="All">
                                            Components <i class="fa-solid fa-caret-right"></i>
@@ -66,7 +72,7 @@
                                            </li>
                                        </ul>
                                    </li>
-                                   <li>
+                                @*   <li>
                                        <a class="dropdown-item">
                                            Computers & Laptops <i class="fa-solid fa-caret-right"></i>
                                        </a>
@@ -79,7 +85,7 @@
                                            </li>
 
                                        </ul>
-                                   </li>
+                                   </li>*@
                                    <li>
                                        <a class="dropdown-item" asp-controller="Peripheries" asp-action="All">
                                            Peripheries <i class="fa-solid fa-caret-right"></i>
@@ -105,7 +111,7 @@
                        <li>
                            <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="AllDiscounts">Discount</a>
                       </li>
-                                             <li>
+                      <li>
                            <a class="nav-link text-dark" asp-area="" asp-controller="Clients" asp-action="Contacts">Contacts</a>
                       </li>
                     </ul>

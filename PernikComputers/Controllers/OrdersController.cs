@@ -66,7 +66,9 @@ namespace PernikComputers.Controllers
                     Status = x.Status.ToString(),
                     TotalPrice = (x.Count * x.OrderedPrice).ToString()
 
-                }).ToList();
+                }).OrderByDescending(x => x.Status == OrderStatus.Pending.ToString())
+                .ThenByDescending(x => x.Status == OrderStatus.Approved.ToString())
+                .ThenByDescending(x => x.Status == OrderStatus.Completed.ToString()).ToList();
 
             return View("All", orders);
         }
@@ -173,7 +175,7 @@ namespace PernikComputers.Controllers
 
             if (isUpdated)
             {
-                return RedirectToAction("Details", new { editViewModel.Id });
+                return RedirectToAction("All");
             }
             return View();
         }

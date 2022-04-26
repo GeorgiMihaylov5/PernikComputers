@@ -24,7 +24,7 @@ namespace PernikComputers.Service
                 Barcode = barcode,
                 Manufacturer = manufacturer,
                 Model = model,
-                Category = Category.Accessories,
+                Category = Category.Accessory,
                 Price = price,
                 Warranty = warranty,
                 Quantity = quantity,
@@ -38,7 +38,7 @@ namespace PernikComputers.Service
 
         public List<Product> GetAccessories()
         {
-            return context.Products.Where(x => x.Category == Category.Accessories).ToList();
+            return context.Products.Where(x => x.Category == Category.Accessory).ToList();
         }
 
         public bool UpdateAccessory(string id, string typeAccessory, string descripton, string barcode, string manufacturer, string model, int warranty, decimal price, int quantity, string image)

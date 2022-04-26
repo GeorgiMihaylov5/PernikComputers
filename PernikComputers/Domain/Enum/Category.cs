@@ -4,7 +4,7 @@
     {
         Computer,
         Laptop,
-        Accessories,
+        Accessory,
         Processor,
         Motherboard,
         Ram,

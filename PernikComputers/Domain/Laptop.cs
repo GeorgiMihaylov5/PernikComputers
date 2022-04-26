@@ -20,24 +20,24 @@ namespace PernikComputers.Domain
                  $"Processor: {this.Processor}",
                  $"Video Card: {this.VideoCard}",
                  $"Ram: {this.Ram}",
-                 $"Motherboard: {this.Motherboard}",
+                 $"Connection and Porst: {this.Motherboard}",
                  $"Memory: {this.Memory}",
                  $"Power Supply: {this.PowerSupply}",
                  $"Resolution: {this.Resolution}",
-                 $"Refresh Rate: {this.RefreshRate}",
-                 $"Display Size: {this.DisplaySize}",
+                 $"Refresh Rate: {this.RefreshRate} Hz",
+                 $"Display Size: {this.DisplaySize}\"",
                  $"Color: {this.Color}",
                  $"Warranty: {this.Warranty} months"
             };
         public override IEnumerable<string> PartialDescription
             => new List<string>()
             {
-                 $"Processor: {this.Processor}",
-                 $"Video Card: {this.VideoCard}",
-                 $"Ram: {this.Ram}",
-                 $"Memory: {this.Memory}",
-                 $"Resolution: {this.Resolution}",
-                 $"Display Size: {this.DisplaySize}",
+                 $"{this.Processor}",
+                 $"{this.VideoCard}",
+                 $"{this.Ram}",
+                 $"{this.Memory}",
+                 $"{this.Resolution}",
+                 $"{this.DisplaySize}\"",
             };
     }
 }

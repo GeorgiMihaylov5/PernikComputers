@@ -85,6 +85,10 @@
 #products ul li:last-child {
     margin-bottom: 10px !important;
 }
+.wh-input {
+    width: 30px !important;
+    height: 11px !important;
+}
 
 /*---------------------Details-----------------------*/
 
@@ -225,6 +229,9 @@
 /*-------Contacts-------*/
 .rounded-2 {
     border-radius: 2.25rem !important;
+}
+.bg-blue {
+    background-color:#2196f3 !important;
 }
 
 /*------Periphery------------*/

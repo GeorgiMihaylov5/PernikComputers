@@ -186,7 +186,7 @@ namespace PernikComputers.Service
             return context.Products.Where(x => x.Category != Category.Computer &&
             x.Category != Category.Laptop && x.Category != Category.Monitor &&
             x.Category != Category.Keyboard && x.Category != Category.Mouse &&
-            x.Category != Category.Accessories && x.IsRemoved != true).ToList();
+            x.Category != Category.Accessory && x.IsRemoved != true).ToList();
         }
         
         //------------------Update---------------

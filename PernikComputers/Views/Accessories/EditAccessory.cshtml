@@ -8,7 +8,7 @@
 <hr />
 <div>
     <form asp-action="EditAccessory" class="text-center">
-        @await Html.PartialAsync("_LaptopPartialView", Model)
+        @await Html.PartialAsync("_AccessoryPartialView", Model)
         <div class="form-group mt-4">
             <button type="submit" class="btn-radius btn btn-outline-primary btn-lg">EDIT</button>
             <a asp-action="AllTable" asp-controller="Products" class="mt-1 ml-5 d-block">Back to products</a>

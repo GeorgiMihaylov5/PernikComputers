@@ -33,7 +33,7 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Address)
                     </th>
-                    <th></th>
+@*                    <th></th>*@
                 </tr>
             </thead>
             <tbody>
@@ -55,12 +55,12 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Address)
                         </td>
-                        <td style="padding: 7px">
+@*                        <td style="padding: 7px">
                             <form asp-action="Delete" asp-controller="Clients" method="post">
                                 <input type="hidden" name="id" value="@item.Id" />
                                 <button type="submit" class="btn text-danger"><i class="bi bi-trash-fill"></i></button>
                             </form>
-                        </td>
+                        </td>*@
                     </tr>
                 }
             </tbody>

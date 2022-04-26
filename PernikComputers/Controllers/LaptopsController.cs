@@ -41,6 +41,29 @@ namespace PernikComputers.Controllers
 
             return View("~/Views/Products/All.cshtml", laptopViewModel);
         }
+        [HttpPost]
+        public IActionResult All(string filter, int minPrice, int maxPrice, List<string> manufacturers, List<string> models)
+        {
+            var oldProducts = productService.GetProducts<Laptop>();
+            List <ProductAllViewModel> laptopViewModel = productService.Search(filter, minPrice, maxPrice, manufacturers, models, oldProducts)
+               .Select(x => new ProductAllViewModel
+               {
+                   Id = x.Id,
+                   Manufacturer = x.Manufacturer,
+                   Model = x.Model,
+                   Price = x.Price,
+                   Discount = x.Discount,
+                   Image = x.Image,
+                   Category = x.Category,
+                   Description = x.PartialDescription,
+                   Quantity = x.Quantity
+               }).ToList();
+
+            ViewBag.Manufacturers = oldProducts.Select(x => x.Manufacturer).Distinct().ToList();
+            ViewBag.Models = oldProducts.Select(x => x.Model).Distinct().ToList();
+
+            return View("~/Views/Products/All.cshtml", laptopViewModel);
+        }
 
         [Authorize(Roles = "Administrator")]
         public IActionResult CreateLaptop()

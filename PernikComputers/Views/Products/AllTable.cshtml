@@ -87,7 +87,7 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    var controller = item.Category;
+                    var controller = string.Empty;
 
                     if (item.Category == "Monitor" || item.Category == "Mouse" || item.Category == "Keyboard")
                     {
@@ -96,6 +96,18 @@
                     else if(item.Category != "Laptop" && item.Category != "Computer" && item.Category != "Accessory")
                     {
                         controller = "Components";
+                    }
+                    else if(item.Category == "Accessory")
+                    {
+                        controller = "Accessories";
+                    }
+                    else if(item.Category == "Laptop")
+                    {
+                        controller = "Laptops";
+                    }
+                    else if(item.Category == "Computer")
+                    {
+                        controller = "Computers";
                     }
                     var edit = $"Edit{item.Category}";
 

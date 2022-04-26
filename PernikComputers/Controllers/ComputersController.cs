@@ -45,6 +45,30 @@ namespace PernikComputers.Controllers
             return View("~/Views/Products/All.cshtml", computerViewModel);
             //return RedirectToPage("All","Components", processorVM);
         }
+        [HttpPost]
+        public IActionResult All(string filter, int minPrice, int maxPrice, List<string> manufacturers, List<string> models)
+        {
+            var oldProducts = productService.GetProducts<Computer>();
+            List <ProductAllViewModel> computerViewModel = productService.Search(filter, minPrice, maxPrice, manufacturers, models, oldProducts)
+                .Select(x => new ProductAllViewModel
+                {
+                    Id = x.Id,
+                    Manufacturer = x.Manufacturer,
+                    Model = x.Model,
+                    Price = x.Price,
+                    Discount = x.Discount,
+                    Image = x.Image,
+                    Category = x.Category,
+                    Description = x.PartialDescription,
+                    Quantity = x.Quantity
+                }).ToList();
+
+            ViewBag.Manufacturers = oldProducts.Select(x => x.Manufacturer).Distinct().ToList();
+            ViewBag.Models = oldProducts.Select(x => x.Model).Distinct().ToList();
+
+            return View("~/Views/Products/All.cshtml", computerViewModel);
+            //return RedirectToPage("All","Components", processorVM);
+        }
 
         [Authorize(Roles = "Administrator")]
         public IActionResult CreateComputer()
@@ -160,5 +184,19 @@ namespace PernikComputers.Controllers
 
             return View("EditComputer", computer);
         }
+        //private int ComputerQuantity(Computer computer)
+        //{
+        //    int[] quantities =
+        //    {
+        //        computer.Processor.Quantity,
+        //        computer.Motherboard.Quantity,
+        //        computer.Ram.Quantity,
+        //        computer.VideoCard.Quantity,
+        //        computer.PowerSupply.Quantity,
+        //        computer.Memory.Quantity,
+        //        computer.ComputerCase.Quantity
+        //    };
+        //    return quantities.Min();
+        //}
     }
 }

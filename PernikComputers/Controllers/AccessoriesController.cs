@@ -42,6 +42,29 @@ namespace PernikComputers.Controllers
 
             return View("~/Views/Products/All.cshtml", viewModel);
         }
+        [HttpPost]
+        public IActionResult All(string filter, int minPrice, int maxPrice, List<string> manufacturers, List<string> models)
+        {
+            var oldProducts = productService.GetProducts<Accessory>();
+            List<ProductAllViewModel> viewModel = productService.Search(filter, minPrice, maxPrice, manufacturers, models, oldProducts)
+               .Select(x => new ProductAllViewModel
+               {
+                   Id = x.Id,
+                   Manufacturer = x.Manufacturer,
+                   Model = x.Model,
+                   Price = x.Price,
+                   Discount = x.Discount,
+                   Image = x.Image,
+                   Category = x.Category,
+                   Description = x.PartialDescription,
+                   Quantity = x.Quantity
+               }).ToList();
+
+            ViewBag.Manufacturers = oldProducts.Select(x => x.Manufacturer).Distinct().ToList();
+            ViewBag.Models = oldProducts.Select(x => x.Model).Distinct().ToList();
+
+            return View("~/Views/Products/All.cshtml", viewModel);
+        }
 
         [Authorize(Roles = "Administrator")]
         public IActionResult CreateAccessory()
@@ -90,7 +113,7 @@ namespace PernikComputers.Controllers
                 Description = item.Description
             };
 
-            return View("Edit", editModel);
+            return View(editModel);
 
         }
 

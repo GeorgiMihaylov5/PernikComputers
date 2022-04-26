@@ -78,5 +78,57 @@ namespace PernikComputers.Service
 
             return context.SaveChanges() != 0;
         }
+        public List<Product> Search(string filter, int minPrice, int maxPrice, ICollection<string> manufacturers, ICollection<string> models, IEnumerable<Product> oldProducts)
+        {
+            var products = new List<Product>();
+
+            if (manufacturers.Count > 0)
+            {
+                foreach (var item in manufacturers)
+                {
+                    var currentProducts = oldProducts.Where(x => x.Manufacturer == item).ToList();
+                    products.AddRange(currentProducts);
+                }
+            }
+            else
+            {
+                products = oldProducts.ToList();
+            }
+            if (models.Count > 0)
+            {
+                foreach (var item in models)
+                {
+                    products = products.Where(x => x.Model == item).Distinct().ToList();
+                }
+            }
+
+            if (minPrice > 0 && maxPrice > minPrice)
+            {
+                products = products.Where(x => x.Price >= minPrice && x.Price <= maxPrice).ToList();
+            }
+            else if (minPrice > 0 && maxPrice <= minPrice)
+            {
+                products = products.Where(x => x.Price >= minPrice).ToList();
+            }
+            else if (maxPrice > 0)
+            {
+                products = products.Where(x => x.Price <= maxPrice).ToList();
+            }
+
+            if (filter == "1")
+            {
+                products = products.Where(x => x.Discount != 0).ToList();
+            }
+            else if (filter == "2")
+            {
+                products = products.OrderByDescending(x => x.Orders.Count).ToList();
+            }
+            else if (filter == "3")
+            {
+                products = products.OrderBy(x => x.Price).ToList();
+            }
+
+            return products;
+        }
     }
 }
