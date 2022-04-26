@@ -21,6 +21,10 @@ namespace PernikComputers.Controllers
         {
             this.service = _service;
         }
+        /// <summary>
+        /// View all orders
+        /// </summary>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator,Employee")]
         public IActionResult All()
         {
@@ -46,6 +50,10 @@ namespace PernikComputers.Controllers
 
             return View(orders);
         }
+        /// <summary>
+        /// View orders for current user
+        /// </summary>
+        /// <returns></returns>
         public IActionResult My()
         {
             string userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -72,6 +80,11 @@ namespace PernikComputers.Controllers
 
             return View("All", orders);
         }
+        /// <summary>
+        /// Create order
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(OrderCreateBindingModel viewModel)
@@ -89,6 +102,10 @@ namespace PernikComputers.Controllers
             }
             return RedirectToAction();
         }
+        /// <summary>
+        /// View rejected orders
+        /// </summary>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator,Employee")]
         public IActionResult Rejected()
         {
@@ -111,11 +128,21 @@ namespace PernikComputers.Controllers
                 }).ToList();
             return View("All", orders);
         }
+        /// <summary>
+        /// See details of order
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Authorize]
         public IActionResult Details(string id)
         {
             var order = service.GetOrder(id);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
+            if (userId != order.CustomerId)
+            {
+                return NotFound();
+            }
             var detailsViewModel = new OrderDetailsViewModel()
             {
                 Id = order.Id,
@@ -138,6 +165,11 @@ namespace PernikComputers.Controllers
 
             return View(detailsViewModel);
         }
+        /// <summary>
+        /// Edit order
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator,Employee")]
         public IActionResult Edit(string id)
         {

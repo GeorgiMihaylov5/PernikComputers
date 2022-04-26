@@ -21,6 +21,10 @@ namespace PernikComputers.Controllers
             this.service = _service;
             this.productService = productService;
         }
+        /// <summary>
+        /// View all peripheries
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public IActionResult All()
         {
@@ -43,6 +47,15 @@ namespace PernikComputers.Controllers
 
             return View("~/Views/Products/All.cshtml", viewModels);
         }
+        /// <summary>
+        /// Search peripheries by params
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <param name="minPrice"></param>
+        /// <param name="maxPrice"></param>
+        /// <param name="manufacturers"></param>
+        /// <param name="models"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpPost]
         public IActionResult All(string filter, int minPrice, int maxPrice, List<string> manufacturers, List<string> models)
@@ -67,6 +80,7 @@ namespace PernikComputers.Controllers
 
             return View("~/Views/Products/All.cshtml", viewModels);
         }
+
         [AllowAnonymous]
         public IActionResult AllMonitors()
         {

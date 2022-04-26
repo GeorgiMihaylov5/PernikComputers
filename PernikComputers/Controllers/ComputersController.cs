@@ -23,6 +23,10 @@ namespace PernikComputers.Controllers
             this.productService = productService;
         }
 
+        /// <summary>
+        /// View all computers
+        /// </summary>
+        /// <returns></returns>
         public IActionResult All()
         {
             List<ProductAllViewModel> computerViewModel = productService.GetProducts<Computer>()
@@ -43,8 +47,16 @@ namespace PernikComputers.Controllers
             ViewBag.Models = computerViewModel.Select(x => x.Model).Distinct().ToList();
 
             return View("~/Views/Products/All.cshtml", computerViewModel);
-            //return RedirectToPage("All","Components", processorVM);
         }
+        /// <summary>
+        /// Search computers by params
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <param name="minPrice"></param>
+        /// <param name="maxPrice"></param>
+        /// <param name="manufacturers"></param>
+        /// <param name="models"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult All(string filter, int minPrice, int maxPrice, List<string> manufacturers, List<string> models)
         {
@@ -67,9 +79,12 @@ namespace PernikComputers.Controllers
             ViewBag.Models = oldProducts.Select(x => x.Model).Distinct().ToList();
 
             return View("~/Views/Products/All.cshtml", computerViewModel);
-            //return RedirectToPage("All","Components", processorVM);
         }
 
+        /// <summary>
+        /// Create computer. When the computer is set up, the components quantity decreases
+        /// </summary>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator")]
         public IActionResult CreateComputer()
         {
@@ -152,6 +167,12 @@ namespace PernikComputers.Controllers
 
         }
 
+        /// <summary>
+        /// Edit computer. The number of computers quantity can only increase
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="createVm"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]

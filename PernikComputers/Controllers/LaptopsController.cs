@@ -20,6 +20,10 @@ namespace PernikComputers.Controllers
             this.service = _service;
             this.productService = productService;
         }
+        /// <summary>
+        /// See all laptops
+        /// </summary>
+        /// <returns></returns>
         public IActionResult All()
         {
             List<ProductAllViewModel> laptopViewModel = productService.GetProducts<Laptop>()
@@ -41,6 +45,15 @@ namespace PernikComputers.Controllers
 
             return View("~/Views/Products/All.cshtml", laptopViewModel);
         }
+        /// <summary>
+        /// Search laptops by params
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <param name="minPrice"></param>
+        /// <param name="maxPrice"></param>
+        /// <param name="manufacturers"></param>
+        /// <param name="models"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult All(string filter, int minPrice, int maxPrice, List<string> manufacturers, List<string> models)
         {
@@ -70,7 +83,11 @@ namespace PernikComputers.Controllers
         {
             return View();
         }
-
+        /// <summary>
+        /// Create laptop
+        /// </summary>
+        /// <param name="createVm"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
@@ -90,7 +107,11 @@ namespace PernikComputers.Controllers
             }
             return View(createVm);
         }
-
+        /// <summary>
+        /// Edit laptop
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator")]
         public IActionResult EditLaptop(string id)
         {

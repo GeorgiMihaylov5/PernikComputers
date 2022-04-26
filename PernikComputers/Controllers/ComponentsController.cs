@@ -21,6 +21,10 @@ namespace PernikComputers.Controllers
             this.service = _service;
             this.productService = productService;
         }
+        /// <summary>
+        /// See all components
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public IActionResult All()
         {
@@ -44,6 +48,15 @@ namespace PernikComputers.Controllers
 
             return View("~/Views/Products/All.cshtml", componentVM);
         }
+        /// <summary>
+        /// Search components by params
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <param name="minPrice"></param>
+        /// <param name="maxPrice"></param>
+        /// <param name="manufacturers"></param>
+        /// <param name="models"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpPost]
         public IActionResult All(string filter, int minPrice, int maxPrice, List<string> manufacturers, List<string> models)

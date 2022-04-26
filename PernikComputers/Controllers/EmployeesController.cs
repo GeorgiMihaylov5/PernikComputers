@@ -32,6 +32,10 @@ namespace PernikComputers.Controllers
             this.signInManager = signInManager;
             this.logger = logger;
         }
+        /// <summary>
+        /// See all employees
+        /// </summary>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> All()
         {
@@ -58,7 +62,11 @@ namespace PernikComputers.Controllers
             employees = employees.OrderByDescending(x => x.IsAdmin).ThenBy(x => x.UserName).ToList();
             return View(employees);
         }
-
+        /// <summary>
+        /// Promote to administrator
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         [HttpPost]
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Promote(string userId)
@@ -77,6 +85,11 @@ namespace PernikComputers.Controllers
 
             return RedirectToAction("All");
         }
+        /// <summary>
+        /// Demote to employee
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         [HttpPost]
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Demote(string userId)
@@ -102,6 +115,11 @@ namespace PernikComputers.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Create employee
+        /// </summary>
+        /// <param name="employee"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
@@ -135,43 +153,10 @@ namespace PernikComputers.Controllers
             ModelState.AddModelError(string.Empty, "The user exists.");
             return View();
         }
-
-        //public IActionResult Delete(string id)
-        //{
-        //    var employee = service.GetEmployee(id);
-
-        //    if (employee == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    EmployeeListingModel employeeViewModel = new EmployeeListingModel
-        //    {
-        //        Id = employee.Id,
-        //        FirstName = employee.FirstName,
-        //        LastName = employee.LastName,
-        //        Phone = employee.Phone,
-        //        JobTitle = employee.JobTitle,
-        //        UserId = employee.UserId,
-        //        UserName = employee.User.UserName,
-        //        Email = employee.User.Email
-        //    };
-
-        //    return View(employeeViewModel);
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult Delete(string id)
-        //{
-        //    var isDeleted = service.Remove(id);
-        //    if (isDeleted)
-        //    {
-        //        return RedirectToAction("All", "Employees");
-        //    }
-
-        //    return RedirectToAction("Profile");
-        //}
+        /// <summary>
+        /// Edit current employee information
+        /// </summary>
+        /// <returns></returns>
         [Authorize(Roles = "Employee,Administrator")]
         public IActionResult Profile()
         {
@@ -214,7 +199,7 @@ namespace PernikComputers.Controllers
                 return RedirectToAction("Profile");
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Clients");
         }
     }
 }

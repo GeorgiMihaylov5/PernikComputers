@@ -8,16 +8,20 @@ namespace PernikComputers.Models
         public string Id { get; set; }
         [Required]
         [Display(Name = "First Name")]
+        [MinLength(2)]
         public string FirstName { get; set; }
         [Required]
         [Display(Name = "Last Name")]
+        [MinLength(2)]
         public string LastName { get; set; }
         [Required]
         [Display(Name = "Phone Number")]
-        [MaxLength(10)]
+        [StringLength(10, ErrorMessage = "The phone number must be 10 symbols.", MinimumLength = 10)]
         public string PhoneNumber { get; set; }
         [Display(Name = "Address")]
         [MaxLength(30)]
+        [Required]
+        [MinLength(3)]
         public string Address { get; set; }
         [Required]
         [EmailAddress]

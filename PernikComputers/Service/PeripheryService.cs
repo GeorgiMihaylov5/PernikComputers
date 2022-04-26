@@ -87,7 +87,7 @@ namespace PernikComputers.Service
         public List<Product> GetPeripheries()
         {
             return context.Products
-                .Where(x => x.Category == Category.Monitor || x.Category == Category.Keyboard || x.Category == Category.Mouse || x.IsRemoved != true)
+                .Where(x => (x.Category == Category.Monitor || x.Category == Category.Keyboard || x.Category == Category.Mouse) && x.IsRemoved != true)
                 .ToList();
         }
 

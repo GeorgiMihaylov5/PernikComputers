@@ -21,6 +21,10 @@ namespace PernikComputers.Controllers
             this.service = _service;
             this.productService = productService;
         }
+        /// <summary>
+        /// View all accessories
+        /// </summary>
+        /// <returns></returns>
         public IActionResult All()
         {
             List<ProductAllViewModel> viewModel = productService.GetProducts<Accessory>()
@@ -42,6 +46,15 @@ namespace PernikComputers.Controllers
 
             return View("~/Views/Products/All.cshtml", viewModel);
         }
+        /// <summary>
+        /// Search accessories by params
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <param name="minPrice"></param>
+        /// <param name="maxPrice"></param>
+        /// <param name="manufacturers"></param>
+        /// <param name="models"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult All(string filter, int minPrice, int maxPrice, List<string> manufacturers, List<string> models)
         {
@@ -72,6 +85,11 @@ namespace PernikComputers.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Create accessory
+        /// </summary>
+        /// <param name="createVm"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
@@ -116,7 +134,12 @@ namespace PernikComputers.Controllers
             return View(editModel);
 
         }
-
+        /// <summary>
+        /// Edit accessory
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="createVm"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]

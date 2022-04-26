@@ -19,25 +19,26 @@ namespace PernikComputers.Controllers
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IClientService service;
-        //private readonly IOrderService orderService;
         private readonly IProductService productService;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly ILogger<ChangePasswordModel> logger;
 
         public ClientsController(UserManager<ApplicationUser> userManager,
             IClientService service,
-            //IOrderService orderService,
             IProductService productService,
             SignInManager<ApplicationUser> signInManager,
              ILogger<ChangePasswordModel> logger)
         {
             this.userManager = userManager;
             this.service = service;
-           // this.orderService = orderService;
             this.productService = productService;
             this.signInManager = signInManager;
             this.logger = logger;
         }
+        /// <summary>
+        /// Home page
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public IActionResult Index()
         {
@@ -73,16 +74,28 @@ namespace PernikComputers.Controllers
 
             return View(productVm);
         }
+        /// <summary>
+        /// About us page
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public IActionResult AboutUs()
         {
             return View();
         }
+        /// <summary>
+        /// Contact page
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public IActionResult Contacts()
         {
             return View();
         }
+        /// <summary>
+        /// View all clients
+        /// </summary>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator")]
         public IActionResult All()
         {
@@ -102,6 +115,10 @@ namespace PernikComputers.Controllers
             employees = employees.OrderBy(x => x.UserName).ToList();
             return View(employees);
         }
+        /// <summary>
+        /// Register page for a new user
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public IActionResult Register()
         {
@@ -142,7 +159,10 @@ namespace PernikComputers.Controllers
             }
             return View();
         }
-
+        /// <summary>
+        /// Edit current user information
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Profile()
         {
             string userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -178,9 +198,13 @@ namespace PernikComputers.Controllers
                 return RedirectToAction("Profile");
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Clients");
         }
 
+        /// <summary>
+        /// Change password on current user
+        /// </summary>
+        /// <returns></returns>
         public IActionResult ChangePassword()
         {
             return View();
@@ -214,29 +238,5 @@ namespace PernikComputers.Controllers
 
             return RedirectToAction("Profile");
         }
-        [AllowAnonymous]
-        public IActionResult Home()
-        {
-            return View();
-        }
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Delete(string id)
-        //{
-        //    var isDeleted = service.Remove(id);
-        //    if (isDeleted)
-        //    {
-        //        if (!User.IsInRole("Administrator"))
-        //        {
-        //            await signInManager.SignOutAsync();
-        //            logger.LogInformation("User logged out.");
-        //        }
-
-        //        return RedirectToAction("All", "Clients");
-        //    }
-
-        //    return RedirectToAction("Profile");
-        //}
     }
 }

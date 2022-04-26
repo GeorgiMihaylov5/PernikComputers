@@ -17,6 +17,10 @@ namespace PernikComputers.Controllers
         {
             this.service = productService;
         }
+        /// <summary>
+        /// View all products
+        /// </summary>
+        /// <returns></returns>
         public IActionResult All()
         {
             List<ProductAllViewModel> productVm = service.GetAllProducts()
@@ -38,6 +42,15 @@ namespace PernikComputers.Controllers
 
             return View(productVm);
         }
+        /// <summary>
+        /// Search products by params
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <param name="minPrice"></param>
+        /// <param name="maxPrice"></param>
+        /// <param name="manufacturers"></param>
+        /// <param name="models"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult All(string filter, int minPrice, int maxPrice, List<string> manufacturers, List<string> models)
         {
@@ -61,6 +74,10 @@ namespace PernikComputers.Controllers
 
             return View(productVm);
         }
+        /// <summary>
+        /// View all products for control panel
+        /// </summary>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator")]
         public IActionResult AllTable()
         {
@@ -81,6 +98,11 @@ namespace PernikComputers.Controllers
 
             return View(productVm);
         }
+        /// <summary>
+        /// Remove product
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
@@ -101,6 +123,11 @@ namespace PernikComputers.Controllers
             }
             
         }
+        /// <summary>
+        /// Make discount by percentages
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator")]
         public IActionResult MakeDiscount(string id)
         {
@@ -126,6 +153,12 @@ namespace PernikComputers.Controllers
 
             return this.RedirectToAction("AllTable");
         }
+        /// <summary>
+        /// Remove discount
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="discount"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
@@ -135,6 +168,10 @@ namespace PernikComputers.Controllers
 
             return this.RedirectToAction("AllTable");
         }
+        /// <summary>
+        /// View all products on discount
+        /// </summary>
+        /// <returns></returns>
         public IActionResult AllDiscounts()
         {
             List<ProductAllViewModel> productVm = service.GetAllProducts()
@@ -181,6 +218,11 @@ namespace PernikComputers.Controllers
 
             return View("All", productVm);
         }
+        /// <summary>
+        /// Products details. In this view the user can order a product
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IActionResult Details(string id)
         {
             Product x = service.GetProduct(id);
