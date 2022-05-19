@@ -240,7 +240,7 @@ namespace PernikComputers.Controllers
                 Manufacturer = x.Manufacturer,
                 Discount = x.Discount,
                 Description = x.FullDescription.ToList(),
-                Category = Category.Processor,
+                Category = x.Category,
                 Price = x.Price,
                 Quantity = x.Quantity,
                 Image = x.Image,
