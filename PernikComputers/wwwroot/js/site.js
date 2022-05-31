@@ -85,5 +85,6 @@ function closeAlert(div) {
 function addAlert(product) {
     if (product != null) {
         document.getElementById('message-box').innerHTML += '<div class="p-3 rounded alert-success row justify-content-between align-items-center mb-1"><span>' + product.category + ' ' + product.manufacturer + ' ' + product.model + ' barcode is ' + product.barcode + '</span ><button type="button" class="btn" onclick="closeAlert(this.parentElement)">&times;</button></div > '
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
