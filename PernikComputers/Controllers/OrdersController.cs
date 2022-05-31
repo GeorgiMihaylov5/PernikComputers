@@ -139,10 +139,6 @@ namespace PernikComputers.Controllers
             var order = service.GetOrder(id);
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            if (userId != order.CustomerId)
-            {
-                return NotFound();
-            }
             var detailsViewModel = new OrderDetailsViewModel()
             {
                 Id = order.Id,
