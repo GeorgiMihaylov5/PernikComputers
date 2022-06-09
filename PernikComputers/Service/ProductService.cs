@@ -106,7 +106,11 @@ namespace PernikComputers.Service
             {
                 products = products.Where(x => x.Price >= minPrice && x.Price <= maxPrice).ToList();
             }
-            else if (minPrice > 0 && maxPrice <= minPrice)
+            else if (minPrice == maxPrice && minPrice > 0)
+            {
+                products = products.Where(x => x.Price == minPrice).ToList();
+            }
+            else if (minPrice > 0 && maxPrice < minPrice)
             {
                 products = products.Where(x => x.Price >= minPrice).ToList();
             }

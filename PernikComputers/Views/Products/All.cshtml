@@ -29,7 +29,7 @@
                 <h4 class="filter-titles">Price</h4>
                 <input type="number" placeholder="Min price" min="0" name="minPrice" max="@Model.Select(x => x.Price).Max()"/>
                 <span id="filter-dash">-</span>
-                <input type="number" placeholder="Max price" min="0" name="maxPrice" max="@Model.Select(x => x.Price).Max()"/>
+                <input type="number" placeholder="Max price" name="maxPrice" max="@Model.Select(x => x.Price).Max()" onchange="minInput()"/>
             </div>
             <div class="col-12 p-0 mb-3">
                 <h4 class="filter-titles">Manufacturer</h4>
@@ -105,3 +105,11 @@
         </ul>
     </div>
 </div>
+<script>
+    function minInput(){
+        var minPrice = document.getElementsByName('minPrice')[0]
+        var maxPrice = document.getElementsByName('maxPrice')[0]
+
+        maxPrice.min = minPrice.value
+    }
+</script>
