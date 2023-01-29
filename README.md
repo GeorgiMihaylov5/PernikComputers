@@ -31,3 +31,6 @@ There is a fixed administrator with username "admin" and password "123!@#qweQWE"
 
 ## Administrator page
 ![image](https://user-images.githubusercontent.com/68680691/215352427-85c246a2-b80a-4e4c-995f-02cfa7dfd57c.png)
+----------------------------------------------------------------------------------------------------------------------------------------
+![image](https://user-images.githubusercontent.com/68680691/215352516-f0f67fdd-620f-40a4-b7f0-4e4934c5956d.png)
+
