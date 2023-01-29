@@ -14,12 +14,20 @@ There is a fixed administrator with username "admin" and password "123!@#qweQWE"
 
 ![image](https://user-images.githubusercontent.com/68680691/215352229-3503c364-2c4d-472f-b886-5d30b28644ff.png)
 ![image](https://user-images.githubusercontent.com/68680691/215352242-dde9f268-3ef7-499b-8a78-41e5513b5ef5.png)
-
+  
+  
+  
 ## Products page
 ![image](https://user-images.githubusercontent.com/68680691/215352381-ea530036-7196-4158-a0c3-cea5f371ab2e.png)
 
+
+
+
 ## Login page
 ![image](https://user-images.githubusercontent.com/68680691/215352399-e38e0976-7b9c-4d71-8348-d3f43541179f.png)
+
+
+
 
 ## Administrator page
 ![image](https://user-images.githubusercontent.com/68680691/215352427-85c246a2-b80a-4e4c-995f-02cfa7dfd57c.png)
