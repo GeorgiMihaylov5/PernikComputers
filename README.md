@@ -9,4 +9,3 @@ There is a fixed administrator with username "admin" and password "123!@#qweQWE"
 - promote employees to administrators
 - make CRUD operations on products
 - add and remove discounts
-![image](https://user-images.githubusercontent.com/68680691/215351837-664417aa-a099-4975-b1a3-38d3d34e3371.png)
